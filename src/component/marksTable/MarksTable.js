@@ -6,7 +6,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Input from "@mui/material/Input";
 import './App.css';
 
 const classes = [
@@ -106,7 +105,7 @@ tabTitles.unshift("ФИО");
 console.log(tabTitles);
 //const rows = students.map ()
 
-const App = (props) => {
+const MarksTable = (props) => {
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -144,6 +143,29 @@ const App = (props) => {
       </TableContainer>
     </Paper>
   );
+  
 }
 
-export default App;
+{   
+  props.marks.map(m =>
+    <div>
+      {m.grade}
+      {m.student_id}
+      {m.journal_header_id}
+    </div>
+)}
+{   
+  props.dataLesson.map(m =>
+    <div>
+      {m.date_of_lesson}
+      {m.journal_header_id}
+    </div>
+)}
+{   
+  props.fio.map(m =>
+    <div>
+      {m.fio}
+      {m.student_id}
+    </div>
+)}
+export default MarksTable;
