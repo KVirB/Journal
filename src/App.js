@@ -130,7 +130,7 @@ const App = (props) => {
                       <input
                         class="myInput"
                         type="text"
-                        value={mark.grade}
+                        defaultValue={mark.grade}
                         onChange={(e) => console.log(mark)}
                       />
                       <button class="myButton">Edd</button>

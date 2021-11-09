@@ -12,6 +12,7 @@ class marksTableContainer extends React.Component{
     componentDidMount(){
         this.props.getMarksThunk();
         this.props.getFioThunk();
+        this.props.getDataLessonThunk();
     }
     componentWillUnmount(){
         window.location.reload();
