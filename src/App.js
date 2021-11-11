@@ -6,7 +6,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Input from "@mui/material/Input";
 import './App.css';
 
 const classes = [
@@ -110,11 +109,11 @@ const App = (props) => {
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table stickyHeader aria-label="sticky table" style={{ maxWidth: 0, minWidth: 0}}>
           <TableHead>
             <TableRow>
               {tabTitles.map((cl, i) => (
-                <TableCell key={i} style={{ minWidth: 20 }}>
+                <TableCell key={i}>
                   {cl}
                 </TableCell>
               ))}
@@ -126,14 +125,13 @@ const App = (props) => {
                 <TableRow key={i}>
                   <TableCell key={-1}>{student.fio}</TableCell>
                   {student.marks.map((mark, i) => (
-                    <TableCell key={i}>
+                    <TableCell key={i} >
                       <input
                         class="myInput"
                         type="text"
                         defaultValue={mark.grade}
-                        onChange={(e) => console.log(mark)}
+                        onFocus={e => e.target.select()}
                       />
-                      <button class="myButton">Edd</button>
                     </TableCell>
                   ))}
                 </TableRow>

@@ -38,11 +38,13 @@
 }
 .myInput
 {
-  width: 25px;
-  height: 25px;
+  background: transparent;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 2px solid lightgray;
+  outline:none;
+  width:65px;
+  text-align: center;
 }
-.myButton
-{
-  width: 40px;
-  height: 31px;
-}
+
