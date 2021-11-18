@@ -44,7 +44,7 @@
   border-right: 1px solid #fff;
   border-bottom: 1px solid #fff;
   outline:none;
-  width:40px;
+  width:25px;
   text-align: center;
 }
 hr 
@@ -62,11 +62,11 @@ hr
   writing-mode:vertical-rl;
   transform: rotate(-180deg);
   text-align:center;
-  margin-left:10px;
+  margin-left:5px;
   
 }
 .cellwidth
 {
-  width: 40px;
+  width: 25px;
 }
 

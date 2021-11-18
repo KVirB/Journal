@@ -110,25 +110,25 @@ const App = (props) => {
     <div>
       <hr/>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <table stickyHeader aria-label="sticky table" style={{ maxWidth: 0, minWidth: 0}}>
+        <Table stickyHeader aria-label="sticky table" style={{ maxWidth: 0, minWidth: 0}}>
           <TableHead>
-            <tr>
+            <TableRow>
               {tabTitles.map((cl, i) => (
-                <td key={i}>
+                <TableCell key={i}>
                   <div  class="vertical cellwidth">
                     {cl}
                   </div>
-                </td>
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           </TableHead>
           <TableBody>
             {students.map((student, i) => {
               return (
-                <tr key={i}>
-                  <td key={-1}>{student.fio}</td>
+                <TableRow key={i}>
+                  <TableCell key={-1}>{student.fio}</TableCell>
                   {student.marks.map((mark, i) => (
-                    <td key={i} >
+                    <TableCell key={i} >
                       <div class="cellwidth">
                       <input
                         class="myInput"
@@ -137,13 +137,13 @@ const App = (props) => {
                         onFocus={e => e.target.select()}
                       />
                       </div>
-                    </td>
+                    </TableCell>
                   ))}
-                </tr>
+                </TableRow>
               );
             })}
           </TableBody>
-        </table>
+        </Table>
       </TableContainer>
       <hr/>
      </div> 
