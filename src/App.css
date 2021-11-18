@@ -90,16 +90,15 @@ hr
   
   width: 228px;
   height: 30px;
-  margin-left: 5px;
-  margin-top:79px;
+ 
 
   font-family: 'Open Sans', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 13px;
   line-height: 18px;
-  
-  
+  margin-left: 5px;
+  margin-top: 22px;
 
 }
 .discipline-name
@@ -112,8 +111,10 @@ hr
   color: #BABABA;
 
   width: 180px;
-  padding-top: 84px;
+  padding-top: 27px;
   padding-left: 50px;
+  height: 20px;
+  
 
 }
 .display-flex
@@ -122,8 +123,9 @@ hr
 }
 .line-cell
 {
-  border-left: 1px solid #AFAFAF;
-  border-right: 1px solid #AFAFAF;
+  border-left: 1px solid rgba(224, 224, 224, 1);
+  border-right: 1px solid rgba(224, 224, 224, 1);
+  /* border: 1px solid #AFAFAF; */
 }
 .journal-name
 {
@@ -143,5 +145,120 @@ hr
 
   padding-top: 35px;
   padding-left: 50px;
-  
+}
+.special-name
+{
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  padding-top: 27px;
+  padding-left: 25px;
+  color: #BABABA;
+  height: 20px;
+}
+.line-up
+{
+  border-top: 1px solid rgba(224, 224, 224, 1);
+}
+.special-select
+{ 
+  font-family: 'Open Sans', sans-serif;
+  background: #FFFFFF;
+  border: 1px solid #BABABA;
+  box-sizing: border-box;
+  border-radius: 3px;
+
+  width: 228px;
+  height: 30px;
+
+  margin-left: 5px;
+  margin-top: 22px;
+}
+.course-name
+{
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+
+  width: 39px;
+  height: 20px;
+
+  color: #BABABA;
+  padding-left: 50px;
+  padding-top: 32px;
+}
+.course-input
+{ 
+  font-family: 'Open Sans', sans-serif;
+  background: #FFFFFF;
+  border: 1px solid #BABABA;
+  box-sizing: border-box;
+  border-radius: 3px;
+
+  width: 55px;
+  height: 30px;
+  margin-left: 5px;
+  margin-top: 27px;
+}
+.group-name
+{
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+
+  width: 58px;
+  height: 20px;
+
+  color: #BABABA;
+  padding-left: 25px;
+  padding-top: 32px;
+}
+.group-select
+{ 
+  font-family: 'Open Sans', sans-serif;
+  background: #FFFFFF;
+  border: 1px solid #BABABA;
+  box-sizing: border-box;
+  border-radius: 3px;
+
+  width: 77px;
+  height: 30px;
+
+  margin-left: 5px;
+  margin-top: 27px;
+}
+.view-name
+{
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+
+  width: 101px;
+  height: 20px;
+
+  color: #BABABA;
+  padding-left: 25px;
+  padding-top: 32px;
+}
+.view-input
+{ 
+  font-family: 'Open Sans', sans-serif;
+  width: 398px;
+  height: 30px;
+
+  background: #FFFFFF;
+  border: 1px solid #BABABA;
+  box-sizing: border-box;
+  border-radius: 3px;
+
+  margin-left: 5px;
+  margin-top: 27px;
 }

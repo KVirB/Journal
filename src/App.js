@@ -111,18 +111,57 @@ const App = (props) => {
       <div className="journal-name">
         Электронный журнал преподователя
       </div>
-      <div class="display-flex">
-      <div class="discipline-name">  
-        Название дисциплины:
-      </div>
-      <select class="discipline-select" name="lang">
-            <option class="lang__items" value="ru">
-               Физика
-            </option>
-            <option class="lang__items" value="ru">
-               Высшая математика
-            </option>
+      <div className="display-flex">
+        <div className="discipline-name">  
+          Название дисциплины:
+        </div>
+        <select className="discipline-select" name="discipline" title="Выберите дисциплину">
+              <option value="" selected hidden>Выберите дисциплину</option> 
+              <option className="lang__items">
+                Физика
+              </option>
+              <option className="lang__items">
+                Высшая математика
+              </option>
         </select>
+        <div className="special-name">
+          Специальность:
+        </div>
+        <select className="special-select" name="special" title="Выберите специальность">
+              <option value="" selected hidden>
+                Выберите специальность
+              </option> 
+              <option className="lang__items">
+                Дизайн
+              </option>
+              <option className="lang__items">
+                Технология машиностроения
+              </option>
+        </select>
+      </div>
+      <div className="display-flex">
+        <div className="course-name">  
+            Курс:
+        </div>
+        <input className="course-input"></input>
+        <div className="group-name">
+          Группа:
+        </div>
+        <select className="group-select" name="select" title="Выберите группу">
+              <option value="" selected hidden>
+                Выберите группу
+              </option> 
+              <option className="lang__items">
+                Ит-5
+              </option>
+              <option className="lang__items">
+                АЭ-21
+              </option>
+        </select>
+        <div className="view-name">
+          Вид занятий:
+        </div>
+        <input className="view-input"></input>
       </div>
       <hr/>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -130,8 +169,8 @@ const App = (props) => {
           <TableHead>
             <TableRow>
               {tabTitles.map((cl, i) => (
-                <TableCell className="line-cell" key={i}>
-                  <div  class="vertical cellwidth">
+                <TableCell className="line-cell line-up" key={i}>
+                  <div  className="vertical cellwidth">
                     {cl}
                   </div>
                 </TableCell>
@@ -145,9 +184,9 @@ const App = (props) => {
                   <TableCell className="line-cell" key={-1}>{student.fio}</TableCell>
                   {student.marks.map((mark, i) => (
                     <TableCell className="line-cell" key={i} >
-                      <div class="cellwidth">
+                      <div className="cellwidth">
                       <input
-                        class="myInput"
+                        className="myInput"
                         type="text"
                         defaultValue={mark.grade}
                         onFocus={e => e.target.select()}
