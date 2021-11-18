@@ -107,41 +107,46 @@ console.log(tabTitles);
 
 const App = (props) => {
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <div>
+      <hr/>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table" style={{ maxWidth: 0, minWidth: 0}}>
+        <table stickyHeader aria-label="sticky table" style={{ maxWidth: 0, minWidth: 0}}>
           <TableHead>
-            <TableRow>
+            <tr>
               {tabTitles.map((cl, i) => (
-                <TableCell key={i}>
-                  {cl}
-                </TableCell>
+                <td key={i}>
+                  <div  class="vertical cellwidth">
+                    {cl}
+                  </div>
+                </td>
               ))}
-            </TableRow>
+            </tr>
           </TableHead>
           <TableBody>
             {students.map((student, i) => {
               return (
-                <TableRow key={i}>
-                  <TableCell key={-1}>{student.fio}</TableCell>
+                <tr key={i}>
+                  <td key={-1}>{student.fio}</td>
                   {student.marks.map((mark, i) => (
-                    <TableCell key={i} >
+                    <td key={i} >
+                      <div class="cellwidth">
                       <input
                         class="myInput"
                         type="text"
                         defaultValue={mark.grade}
                         onFocus={e => e.target.select()}
                       />
-                    </TableCell>
+                      </div>
+                    </td>
                   ))}
-                </TableRow>
+                </tr>
               );
             })}
           </TableBody>
-        </Table>
+        </table>
       </TableContainer>
-    </Paper>
+      <hr/>
+     </div> 
   );
 }
-
 export default App;
