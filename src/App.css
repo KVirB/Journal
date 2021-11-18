@@ -52,7 +52,7 @@ hr
   border: none; /* Убираем границу */
   background-color: lightgray; /* Цвет линии */
   color: lightgray; /* Цвет линии для IE6-7 */
-  height: 2px; /* Толщина линии */
+  height: 2px; /* Толщина линии */  
 }
 
 .vertical
@@ -69,4 +69,79 @@ hr
 {
   width: 25px;
 }
+.nav
+{
+  background-color: blue;
+}
+.lang__switch {
+    font-size: 15px;
+    line-height: 18px;
+    border: none;
+    outline: none;
+    margin-left: 62px;
+    color: #1c305c;
+}
+.discipline-select
+{
+  background: #FFFFFF;
+  border: 1px solid #BABABA;
+  box-sizing: border-box;
+  border-radius: 3px;
+  
+  width: 228px;
+  height: 30px;
+  margin-left: 5px;
+  margin-top:79px;
 
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 18px;
+  
+  
+
+}
+.discipline-name
+{
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  color: #BABABA;
+
+  width: 180px;
+  padding-top: 84px;
+  padding-left: 50px;
+
+}
+.display-flex
+{
+  display: flex;
+}
+.line-cell
+{
+  border-left: 1px solid #AFAFAF;
+  border-right: 1px solid #AFAFAF;
+}
+.journal-name
+{
+  width:511px;
+  height: 22px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 110%;
+  /* identical to box height, or 22px */
+
+  text-transform: uppercase;
+
+  color: #393939;
+
+  padding-top: 35px;
+  padding-left: 50px;
+  
+}

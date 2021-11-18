@@ -1,5 +1,4 @@
 import * as React from "react";
-import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,6 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import './App.css';
+
 
 const classes = [
   {
@@ -108,13 +108,29 @@ console.log(tabTitles);
 const App = (props) => {
   return (
     <div>
+      <div className="journal-name">
+        Электронный журнал преподователя
+      </div>
+      <div class="display-flex">
+      <div class="discipline-name">  
+        Название дисциплины:
+      </div>
+      <select class="discipline-select" name="lang">
+            <option class="lang__items" value="ru">
+               Физика
+            </option>
+            <option class="lang__items" value="ru">
+               Высшая математика
+            </option>
+        </select>
+      </div>
       <hr/>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table" style={{ maxWidth: 0, minWidth: 0}}>
           <TableHead>
             <TableRow>
               {tabTitles.map((cl, i) => (
-                <TableCell key={i}>
+                <TableCell className="line-cell" key={i}>
                   <div  class="vertical cellwidth">
                     {cl}
                   </div>
@@ -126,9 +142,9 @@ const App = (props) => {
             {students.map((student, i) => {
               return (
                 <TableRow key={i}>
-                  <TableCell key={-1}>{student.fio}</TableCell>
+                  <TableCell className="line-cell" key={-1}>{student.fio}</TableCell>
                   {student.marks.map((mark, i) => (
-                    <TableCell key={i} >
+                    <TableCell className="line-cell" key={i} >
                       <div class="cellwidth">
                       <input
                         class="myInput"
