@@ -7,6 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import './App.css';
+import headerContainer from "../header/headerContainer";
 
 const classes = [
   {
@@ -107,7 +108,8 @@ console.log(tabTitles);
 
 const MarksTable = (props) => {
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <div>
+      <headerContainer/>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -141,7 +143,7 @@ const MarksTable = (props) => {
           </TableBody>
         </Table>
       </TableContainer>
-    </Paper>
+    </div>
   );
   
 }

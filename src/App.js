@@ -109,7 +109,7 @@ const App = (props) => {
   return (
     <div>
       <div className="journal-name">
-        Электронный журнал преподователя
+        Электронный журнал преподавателя
       </div>
       <div className="display-flex">
         <div className="discipline-name">  

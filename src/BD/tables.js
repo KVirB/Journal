@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 debugger;
 const baseRout = axios.create({
-    baseURL: "Ссылка на бд сюда"
+    baseURL: "http://192.168.11.252:8082/electronicjournal/"
     }
 )
 
@@ -13,4 +13,7 @@ export const getDataLesson = () => {
 }
 export const getFio = () => {
     return baseRout.get("fio").then(response => {return response.data})
+}
+export const getDiscipline = () => {
+    return baseRout.get("disciplines").then(response => {return response.data})
 }
