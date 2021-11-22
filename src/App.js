@@ -97,6 +97,8 @@ for (let st of students) {
 
 console.log(students);
 
+
+
 console.log(classes);
 const tabTitles = classes.map((cl) =>
   cl.date_of_lesson.toLocaleDateString("ru-RU")
@@ -105,9 +107,23 @@ tabTitles.unshift("ФИО");
 console.log(tabTitles);
 //const rows = students.map ()
 
-const App = (props) => {
+class App extends React.Component {
+  state = {
+    discipline:[]
+  };
+  
+  onDisciplineSelected = (e) => {
+    let { value } = e.target;
+    this.setState({
+      discipline: value,
+    });
+  };
+  
+  render(){
+    const {onDisciplineSelected} = this;
   return (
     <div>
+      {console.log(this.state.discipline)}
       <div className="journal-name">
         Электронный журнал преподавателя
       </div>
@@ -115,7 +131,7 @@ const App = (props) => {
         <div className="discipline-name">  
           Название дисциплины:
         </div>
-        <select className="discipline-select" name="discipline" title="Выберите дисциплину">
+        <select className="discipline-select" name="discipline" title="Выберите дисциплину" onChange={onDisciplineSelected}>
               <option value="" selected hidden>Выберите дисциплину</option> 
               <option className="lang__items">
                 Физика
@@ -203,5 +219,5 @@ const App = (props) => {
       <hr/>
      </div> 
   );
-}
+}};
 export default App;
