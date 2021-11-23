@@ -1,13 +1,13 @@
 import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+// import Table from "@mui/material/Table";
+// import TableBody from "@mui/material/TableBody";
+// import TableCell from "@mui/material/TableCell";
+// import TableContainer from "@mui/material/TableContainer";
+// import TableHead from "@mui/material/TableHead";
+// import TableRow from "@mui/material/TableRow";
 import "./App.css";
 import Header from "../header/headerContainer";
-import headerContainer from "../header/headerContainer";
+import MarksTable from "../marksTable/marksTableContainer";
 
 const classes = [
   {
@@ -107,25 +107,26 @@ console.log(tabTitles);
 //const rows = students.map ()
 
 export default class App extends React.Component {
-  state = {
-    discipline: [],
-  };
+  // state = {
+  //   discipline: [],
+  // };
 
-  onDisciplineSelected = (e) => {
-    let { value } = e.target;
-    this.setState({
-      discipline: value,
-    });
-  };
+  // onDisciplineSelected = (e) => {
+  //   let { value } = e.target;
+  //   this.setState({
+  //     discipline: value,
+  //   });
+  // };
 
   render() {
-    const { onDisciplineSelected } = this;
+    // const { onDisciplineSelected } = this;
     return (
       <div>
-        {console.log(this.state.discipline)}
+        {/* {console.log(this.state.discipline)} */}
         <Header />
         <hr />
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <MarksTable />
+        {/* <TableContainer sx={{ maxHeight: 440 }}>
           <Table
             stickyHeader
             aria-label="sticky table"
@@ -165,7 +166,7 @@ export default class App extends React.Component {
               })}
             </TableBody>
           </Table>
-        </TableContainer>
+        </TableContainer> */}
         <hr />
       </div>
     );
