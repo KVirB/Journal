@@ -31,7 +31,18 @@ export const getFio = () => {
 //     });
 // };
 export const getDiscipline = () => {
-  return baseRout.get("common-info/disciplines/").then((response) => {
-    return response.data;
-  });
+  return baseRout
+    .get("electronicjournal/disciplines/search?q")
+    .then((response) => {
+      return response.data;
+    });
+};
+export const getJournalsite = () => {
+  return baseRout
+    .get(
+      `electronicjournal/journal-sites/search?q=teacher.id==1;discipline.id==1;group.id==1`
+    )
+    .then((response) => {
+      return response.data;
+    });
 };

@@ -5,10 +5,12 @@ import dataLessonReducer from "./reducer/dataLessonReducer";
 import fioReducer from "./reducer/fioReducer";
 import marksReducer from "./reducer/marksReducer";
 import headerReducer from "./reducer/headerReducer";
+import journalsiteReducer from "./reducer/journalsiteReducer";
 
 let reducers = combineReducers({
   marksPage: marksReducer,
   fioPage: fioReducer,
+  journalsitePage: journalsiteReducer,
   dataLessonPage: dataLessonReducer,
   disciplinePage: headerReducer,
   form: formReducer,

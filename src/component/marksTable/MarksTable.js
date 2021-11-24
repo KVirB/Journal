@@ -105,6 +105,12 @@ tabTitles.unshift("ФИО");
 console.log(tabTitles);
 //const rows = students.map ()
 export default class MarksTable extends React.Component {
+  state = {};
+
+  componentDidMount() {
+    console.log(this.props.journalsite + "ureureorieorie");
+  }
+
   getData() {
     // () => this.props.dataLesson.map((m) => <div>{m}</div>)
     const { dataLesson } = this.props;
@@ -114,11 +120,78 @@ export default class MarksTable extends React.Component {
       return <div key={item.id}>{item.dateOfLesson}</div>;
     });
   }
+  //   render() {
+  //     return (
+  //       <div>
+  //         {/* <Header /> */}
+  //         <TableContainer sx={{ maxHeight: 440 }}>
+  //           <Table
+  //             stickyHeader
+  //             aria-label="sticky table"
+  //             style={{ maxWidth: 0, minWidth: 0 }}
+  //           >
+  //             <TableHead>
+  //               <TableRow>
+  //                 {/* {tabTitles.map((cl, i) => (
+  //                   <TableCell className="line-cell line-up" key={i}>
+  //                     <div className="vertical cellwidth">{cl}</div>
+  //                   </TableCell>
+  //                 ))} */}
+  //                 <TableCell className="line-cell line-up">
+  //                   <div>ФИО</div>
+  //                 </TableCell>
+  //                 {/* {this.getData().map((cl, i) => (
+  //                   <TableCell className="line-cell line-up" key={i}>
+  //                     <div className="vertical cellwidth">{cl}</div>
+  //                   </TableCell>
+  //                 ))} */}
+  //                 {this.props.dataLesson.map((m) => (
+  //                   <TableCell className="line-cell line-up">
+  //                     <div className="vertical cellwidth">{m.dateOfLesson}</div>
+  //                   </TableCell>
+  //                 ))}
+  //               </TableRow>
+  //             </TableHead>
+  //             <TableBody>
+  //               {students.map((student, i) => {
+  //                 return (
+  //                   <TableRow key={i}>
+  //                     <TableCell className="line-cell" key={-1}>
+  //                       {student.fio}
+  //                     </TableCell>
+  //                     {student.marks.map((mark, i) => (
+  //                       <TableCell className="line-cell" key={i}>
+  //                         <div className="cellwidth">
+  //                           <input
+  //                             className="myInput"
+  //                             type="text"
+  //                             // defaultValue={mark.grade}
+  //                             onBlur={(e) => console.log(e.target.value)}
+  //                             onFocus={(e) => e.target.select()}
+  //                           />
+  //                         </div>
+  //                       </TableCell>
+  //                     ))}
+  //                   </TableRow>
+  //                 );
+  //               })}
+  //             </TableBody>
+  //           </Table>
+  //         </TableContainer>
+  //         {/* journalHeaders.journalContents.student */}
+  //         {this.props.journalsite.map((m) => (
+  //           <div>{m.id}</div>
+  //         ))}
+  //         {this.props.dataLesson.map((m) => (
+  //           <div>{m.dateOfLesson}</div>
+  //         ))}
+  //       </div>
+  //     );
+  //   }
+  // }
   render() {
     return (
       <div>
-        {console.log(this.props.fio)}
-        {/* <Header /> */}
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table
             stickyHeader
@@ -127,25 +200,9 @@ export default class MarksTable extends React.Component {
           >
             <TableHead>
               <TableRow>
-                {/* {tabTitles.map((cl, i) => (
-                  <TableCell className="line-cell line-up" key={i}>
-                    <div className="vertical cellwidth">{cl}</div>
-                  </TableCell>
-                ))} */}
-                {/* {this.getData().unshift()} */}
                 <TableCell className="line-cell line-up">
                   <div>ФИО</div>
                 </TableCell>
-                {/* {this.getData().map((cl, i) => (
-                  <TableCell className="line-cell line-up" key={i}>
-                    <div className="vertical cellwidth">{cl}</div>
-                  </TableCell>
-                ))} */}
-                {this.props.dataLesson.map((m) => (
-                  <TableCell className="line-cell line-up">
-                    <div className="vertical cellwidth">{m.dateOfLesson}</div>
-                  </TableCell>
-                ))}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -161,7 +218,7 @@ export default class MarksTable extends React.Component {
                           <input
                             className="myInput"
                             type="text"
-                            // defaultValue={mark.grade}
+                            defaultValue={mark.grade}
                             onBlur={(e) => console.log(e.target.value)}
                             onFocus={(e) => e.target.select()}
                           />
@@ -175,12 +232,18 @@ export default class MarksTable extends React.Component {
           </Table>
         </TableContainer>
         {/* journalHeaders.journalContents.student */}
-        {this.props.fio.map((m) => (
-          <div>{m.id}</div>
-        ))}
-        {this.props.dataLesson.map((m) => (
+        {this.props.journalsite.map(
+          (m) =>
+            m.journalHeaders.map((item) => {
+              return <div>{item.dateOfLesson}</div>;
+            })
+          // forEach((item) => {
+          //   <div>{item.dateOfLesson}</div>;
+          // })
+        )}
+        {/* {this.props.dataLesson.map((m) => (
           <div>{m.dateOfLesson}</div>
-        ))}
+        ))} */}
       </div>
     );
   }
