@@ -18,7 +18,7 @@ export const getDataLesson = () => {
 };
 export const getFio = () => {
   return baseRout
-    .get("electronicjournal/journal-sites/search?q")
+    .get("electronicjournal/students/search?q")
     .then((response) => {
       return response.data;
     });
