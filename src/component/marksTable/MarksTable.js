@@ -145,6 +145,30 @@ export default class MarksTable extends React.Component {
       // },
     ],
   };
+  students = [
+  {
+      id: 1,
+      surname: "Седова",
+      name: "Мария",
+      patronymic: "Петровна",
+      subGroup: 1,
+    },
+    {
+      id: 2,
+      surname: "Липская",
+      name: "Анна",
+      patronymic: "Григорьевна",
+      subGroup: 1,
+    },
+    {
+      id: 3,
+      surname: "Цепото",
+      name: "Виктор",
+      patronymic: "Михайлович",
+      subGroup: 1,
+    },
+
+  ]
   sites = [
     {
       id: 1,
@@ -275,119 +299,153 @@ export default class MarksTable extends React.Component {
       ],
     },
   ];
-  render() {
-    return (
-      <div>
-        <Header />
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table
-            stickyHeader
-            aria-label="sticky table"
-            style={{ maxWidth: 0, minWidth: 0 }}
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell className="line-cell line-up">
-                  <div>ФИО</div>
-                </TableCell>
-                {/* {tabTitles.map((cl, i) => (
-                  <TableCell className="line-cell line-up" key={i}>
-                    <div className="vertical cellwidth">{cl}</div>
-                  </TableCell>
-                ))} */}
-                {/* {this.props.dataLesson.map((m) => (
-                    <TableCell className="line-cell line-up">
-                      <div className="vertical cellwidth">{m.dateOfLesson}</div>
-                    </TableCell>
-                  ))} */}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {students.map((student, i) => {
-                return (
-                  <TableRow key={i}>
-                    <TableCell className="line-cell" key={-1}>
-                      {student.name}
-                    </TableCell>
-                    {student.marks.map((mark, i) => (
-                      <TableCell className="line-cell" key={i}>
-                        <div className="cellwidth">
-                          <input
-                            className="myInput"
-                            type="text"
-                            defaultValue={mark.grade}
-                            onBlur={(e) => console.log(e.target.value)}
-                            onFocus={(e) => e.target.select()}
-                          />
-                        </div>
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        {/* journalHeaders.journalContents.student */}
-        {this.props.journalsite.map((m) => (
-          <div>{m.id}</div>
-        ))}
-        {this.props.dataLesson.map((m) => (
-          <div>{m.dateOfLesson}</div>
-        ))}
-      </div>
-    );
-  }
-}
-
 //   render() {
 //     return (
 //       <div>
+//         {/* <Header /> */}
 //         <TableContainer sx={{ maxHeight: 440 }}>
 //           <Table
 //             stickyHeader
 //             aria-label="sticky table"
 //             style={{ maxWidth: 0, minWidth: 0 }}
-//             className="disp"
 //           >
-//             {this.state.map((m) =>
-//               m.journalHeaders.map((item) => {
+//             <TableHead>
+//               <TableRow>
+//                 <TableCell className="line-cell line-up">
+//                   <div>ФИО</div>
+//                 </TableCell>
+//                 {/* {tabTitles.map((cl, i) => (
+//                   <TableCell className="line-cell line-up" key={i}>
+//                     <div className="vertical cellwidth">{cl}</div>
+//                   </TableCell>
+//                 ))} */}
+//                 {/* {this.props.dataLesson.map((m) => (
+//                     <TableCell className="line-cell line-up">
+//                       <div className="vertical cellwidth">{m.dateOfLesson}</div>
+//                     </TableCell>
+//                   ))} */}
+//               </TableRow>
+//             </TableHead>
+//             <TableBody>
+//               {students.map((student, i) => {
 //                 return (
-//                   <div>
-//                     <TableCell className="line-cell line-up">
-//                       <div>ФИО</div>
+//                   <TableRow key={i}>
+//                     <TableCell className="line-cell" key={-1}>
+//                       {student.name}
 //                     </TableCell>
-//                     <TableCell className="line-cell line-up">
-//                       <div className="vertical cellwidth">
-//                         {item.dateOfLesson}
-//                       </div>
-//                     </TableCell>
-
-//                     {item.journalContents.map((content, i) => (
-//                       <TableRow>
-//                         <TableCell className="line-cell">
-//                           <div className="cellwidth">
-//                             <input
-//                               className="myInput"
-//                               type="text"
-//                               defaultValue={content.grade}
-//                               onBlur={(e) => console.log(e.target.value)}
-//                               onFocus={(e) => e.target.select()}
-//                             />
-//                           </div>
-//                         </TableCell>
-//                       </TableRow>
+//                     {student.marks.map((mark, i) => (
+//                       <TableCell className="line-cell" key={i}>
+//                         <div className="cellwidth">
+//                           <input
+//                             className="myInput"
+//                             type="text"
+//                             defaultValue={mark.grade}
+//                             onBlur={(e) => console.log(e.target.value)}
+//                             onFocus={(e) => e.target.select()}
+//                           />
+//                         </div>
+//                       </TableCell>
 //                     ))}
-//                   </div>
+//                   </TableRow>
 //                 );
-//               })
-//             )}
+//               })}
+//             </TableBody>
 //           </Table>
 //         </TableContainer>
+//         {/* journalHeaders.journalContents.student */}
+//         {this.props.journalsite.map((m) => (
+//           <div>{m.id}</div>
+//         ))}
+//         {this.props.dataLesson.map((m) => (
+//           <div>{m.dateOfLesson}</div>
+//         ))}
 //       </div>
 //     );
 //   }
 // }
+
+  render() {
+    // let data = [
+    //   {id: 1, grade: 5, student:{id:1, fio: 'fioq'}},
+    //   {id: 2, grade: 9, student:{id:2, fio: 'fio2'}},
+    //   {id: 1, grade: 8, student:{id:1, fio: 'fioq'}},
+    //   {id: 2, grade: 9, student:{id:2, fio: 'fio2'}},
+    //   ];
+    //   data.sort(function (a, b) {
+    //     if (a.student.id > b.student.id) {
+    //       return 1;
+    //     }
+    //     if (a.student.id < b.student.id) {
+    //       return -1;
+    //     }
+    //     // a должно быть равным b
+    //     return 0;
+    //   });
+    //   let fios = [];
+    //   data.forEach(function(item){
+    //       fios.push(item.student.fio)
+    //   });
+    //   fios = fios.filter((v, i, a) => a.indexOf(v) === i);
+    //   console.log(fios);
+    //   data.forEach(el => console.log(el.id+':'+el.grade));
+    return (
+      
+      <div>
+        
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table
+            stickyHeader
+            aria-label="sticky table"
+            style={{ maxWidth: 0, minWidth: 0 }}
+            className="disp"
+          > 
+            {/* {this.students.map(student => (
+              <TableRow>
+                <TableCell className="line-cell" key={-1}>
+                  {student.name}
+                </TableCell>
+              </TableRow>
+            ))} */}
+            {this.sites.map((m) =>
+              m.journalHeaders.map((item) => {
+                return (
+                  <div>
+                    <TableCell className="line-cell line-up">
+                      <div>ФИО</div>
+                    </TableCell>
+                    <TableCell className="line-cell line-up">
+                      <div className="vertical cellwidth">
+                        {item.dateOfLesson}
+                      </div>
+                    </TableCell>
+                    {item.journalContents.map((content, i) => (
+                      <TableRow>
+                        <TableCell>
+                          <div>{content.student.name}</div>
+                        </TableCell>
+                        <TableCell className="line-cell">
+                          <div className="cellwidth">
+                            <input
+                              className="myInput"
+                              type="text"
+                              defaultValue={content.grade}
+                              onBlur={(e) => console.log(e.target.value)}
+                              onFocus={(e) => e.target.select()}
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </div>
+                );
+              })
+            )}
+          </Table>
+        </TableContainer>
+      </div>
+    );
+  }
+}
 
 // {
 //   props.marks.map((m) => (
