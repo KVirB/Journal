@@ -108,11 +108,10 @@ hr {
 .display-flex {
   display: flex;
 }
-.line-cell {
+/* .line-cell {
   border-left: 1px solid rgba(224, 224, 224, 1);
   border-right: 1px solid rgba(224, 224, 224, 1);
-  /* border: 1px solid #AFAFAF; */
-}
+} */
 .journal-name {
   width: 511px;
   height: 22px;
@@ -142,7 +141,27 @@ hr {
   color: #bababa;
   height: 20px;
 }
-.line-up {
+/* .line-up {
+  border-top: 1px solid rgba(224, 224, 224, 1);
+} */
+.line-data
+{
+  border-right: 1px solid rgba(224, 224, 224, 1);
+  border-top: 1px solid rgba(224, 224, 224, 1);
+}
+.line-grade
+{
+  border-right: 1px solid rgba(224, 224, 224, 1);
+}
+.line-stud
+{
+  border-left: 1px solid rgba(224, 224, 224, 1);
+  border-right: 1px solid rgba(224, 224, 224, 1);
+}
+.line-fio
+{
+  border-left: 1px solid rgba(224, 224, 224, 1);
+  border-right: 1px solid rgba(224, 224, 224, 1);
   border-top: 1px solid rgba(224, 224, 224, 1);
 }
 .special-select {
@@ -240,4 +259,30 @@ hr {
 }
 .disp {
   display: flex;
+}
+.govno
+{
+  width: 64;
+  height: 104.53;
+}
+.all-content
+{
+  padding-left: 50px;
+}
+
+.diagonal-line {
+  background-image: linear-gradient(to bottom left, transparent 49%, #bababa, transparent 50%);
+  background-repeat: no-repeat;
+}
+.dzs
+{
+  text-align: right;
+}
+.fios
+{
+  text-align: left;
+}
+.csn
+{
+  margin-left: 5px;
 }
