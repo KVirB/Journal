@@ -4,6 +4,7 @@ const SET_JOURNALSITE = "SET_JOURNALSITE";
 
 let initialState = {
   journalsite: [],
+  loading: true,
 };
 
 const journalsiteReducer = (state = initialState, action) => {
