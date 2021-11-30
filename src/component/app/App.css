@@ -144,22 +144,18 @@ hr {
 /* .line-up {
   border-top: 1px solid rgba(224, 224, 224, 1);
 } */
-.line-data
-{
+.line-data {
   border-right: 1px solid rgba(224, 224, 224, 1);
   border-top: 1px solid rgba(224, 224, 224, 1);
 }
-.line-grade
-{
+.line-grade {
   border-right: 1px solid rgba(224, 224, 224, 1);
 }
-.line-stud
-{
+.line-stud {
   border-left: 1px solid rgba(224, 224, 224, 1);
   border-right: 1px solid rgba(224, 224, 224, 1);
 }
-.line-fio
-{
+.line-fio {
   border-left: 1px solid rgba(224, 224, 224, 1);
   border-right: 1px solid rgba(224, 224, 224, 1);
   border-top: 1px solid rgba(224, 224, 224, 1);
@@ -260,29 +256,32 @@ hr {
 .disp {
   display: flex;
 }
-.govno
-{
+.govno {
   width: 64;
   height: 104.53;
 }
-.all-content
-{
+.all-content {
   padding-left: 50px;
 }
 
 .diagonal-line {
-  background-image: linear-gradient(to bottom left, transparent 49%, #bababa, transparent 50%);
+  background-image: linear-gradient(
+    to bottom left,
+    transparent 49%,
+    #bababa,
+    transparent 50%
+  );
   background-repeat: no-repeat;
 }
-.dzs
-{
+.dzs {
   text-align: right;
 }
-.fios
-{
+.fios {
   text-align: left;
 }
-.csn
-{
+.csn {
   margin-left: 5px;
+}
+.data_height {
+  height: max-content;
 }

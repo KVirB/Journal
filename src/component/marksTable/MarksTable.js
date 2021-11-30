@@ -510,7 +510,7 @@ export default class MarksTable extends React.Component {
               </TableRow>
             ))} */}
             <TableRow>
-              <TableCell height="71.58px" className="line-fio diagonal-line">
+              <TableCell height="75px" className="line-fio diagonal-line">
                 <div className="dzs">Дата</div>
                 <div className="fios">ФИО</div>
               </TableCell>
@@ -532,7 +532,7 @@ export default class MarksTable extends React.Component {
               m.journalHeaders.map((item) => {
                 return (
                   <div>
-                    <TableCell height="71.58px" className="line-data">
+                    <TableCell height="75px" className="line-data">
                       <div className="vertical cellwidth">
                         {item.dateOfLesson}
                       </div>
