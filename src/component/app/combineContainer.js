@@ -11,6 +11,7 @@ import {
   getDataLessonThunk,
 } from "../../reducer/dataLessonReducer";
 import MarksTable from "../marksTable/MarksTable";
+import Combine from "./Combine";
 
 class combineContainer extends React.Component {
   componentDidMount() {
@@ -25,7 +26,7 @@ class combineContainer extends React.Component {
   render() {
     return (
       <div>
-        <MarksTable
+        <Combine
           // marks={this.props.marks}
           journalsite={this.props.journalsite}
           fio={this.props.fio}

@@ -5,15 +5,26 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import App from "./component/app";
 import { Provider } from "react-redux";
 import store from "./store.js";
+import { BrowserRouter } from "react-router-dom";
 
-ReactDOM.render(
-  <StyledEngineProvider injectFirst>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </StyledEngineProvider>,
-  document.getElementById("root")
-);
+let rerender = () => {
+  ReactDOM.render(
+    <StyledEngineProvider injectFirst>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </StyledEngineProvider>,
+    document.getElementById("root")
+  );
+};
+
+rerender();
+
+store.subscribe(() => {
+  rerender();
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
