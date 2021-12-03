@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import "./App.css";
 import Header from "../header/headerContainer";
 import MarksTable from "../marksTable/marksTableContainer";
+import marksTableContainer from "../marksTable/marksTableContainer";
 
 const classes = [
   {

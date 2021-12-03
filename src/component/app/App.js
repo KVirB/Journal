@@ -11,7 +11,7 @@ const App = (props) => {
   return (
     <Router>
       {/* <div> */}
-      <Route exact path="/" component={marksTableContainer} />
+      <Route exact path="/" component={combineContainer} />
       {/* <Route exact path="/login" element={<Header />} /> */}
       {/* </div> */}
     </Router>

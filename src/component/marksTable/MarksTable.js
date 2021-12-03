@@ -514,7 +514,7 @@ export default class MarksTable extends React.Component {
                 <div className="dzs">Дата</div>
                 <div className="fios">ФИО</div>
               </TableCell>
-              {/* {this.props.journalsite[0].journalHeaders[0].journalContents.map(
+              {/* {this.sites[0].journalHeaders[0].journalContents.map(
                 (content, i) => {
                   return (
                     <TableRow>
@@ -526,22 +526,36 @@ export default class MarksTable extends React.Component {
                   );
                 }
               )} */}
-              {this.props.journalsite.map((m) =>
-                m.journalHeaders.map((item) => {
-                  return (
-                    <div>
-                      {item.journalContents.map((content, i) => (
-                        <TableRow>
-                          <TableCell height="20px" className="disp line-stud">
-                            <div>{content.student.surname}</div>
-                            <div className="csn">{content.student.name}</div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </div>
-                  );
+              {this.sites.map((m) =>
+                m.journalHeaders.map((item,i) => {
+                  if(i===0){
+                    return (
+                      item.journalContents.map((content) => (
+                          <TableRow>
+                            <TableCell height="20px" className="disp line-stud">
+                              <div>{content.student.surname}</div>
+                              <div className="csn">{content.student.name}</div>
+                            </TableCell>
+                          </TableRow>
+                      )) 
+                  ); 
+                  }
                 })
               )}
+                            {/* {this.sites.map((m) =>
+                m.journalHeaders[0].journalContents.map(
+                  (content, i) => {
+                    return (
+                      <TableRow>
+                        <TableCell height="20px" className="disp line-stud">
+                          <div>{content.student.surname}</div>
+                          <div className="csn">{content.student.name}</div>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  }
+                )
+              )} */}
             </TableRow>
 
             {this.props.journalsite.map((m) =>
