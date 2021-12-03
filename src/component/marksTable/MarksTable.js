@@ -526,6 +526,22 @@ export default class MarksTable extends React.Component {
                   );
                 }
               )} */}
+              {this.props.journalsite.map((m) =>
+                m.journalHeaders.map((item) => {
+                  return (
+                    <div>
+                      {item.journalContents.map((content, i) => (
+                        <TableRow>
+                          <TableCell height="20px" className="disp line-stud">
+                            <div>{content.student.surname}</div>
+                            <div className="csn">{content.student.name}</div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </div>
+                  );
+                })
+              )}
             </TableRow>
 
             {this.props.journalsite.map((m) =>
