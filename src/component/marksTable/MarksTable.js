@@ -362,7 +362,7 @@ export default class MarksTable extends React.Component {
           journalContents: [
             {
               id: 1,
-              presence: true,
+              presence: null,
               grade: 8,
               discription: null,
               student: {
@@ -375,7 +375,7 @@ export default class MarksTable extends React.Component {
             },
             {
               id: 2,
-              presence: false,
+              presence: null,
               grade: 7,
               discription: null,
               student: {
@@ -388,7 +388,7 @@ export default class MarksTable extends React.Component {
             },
             {
               id: 3,
-              presence: true,
+              presence: null,
               grade: 6,
               discription: null,
               student: {
@@ -532,7 +532,7 @@ export default class MarksTable extends React.Component {
                     return (
                       item.journalContents.map((content) => (
                           <TableRow>
-                            <TableCell height="20px" className="disp line-stud">
+                            <TableCell height="19px" className="disp line-stud">
                               <div>{content.student.surname}</div>
                               <div className="csn">{content.student.name}</div>
                             </TableCell>
@@ -558,7 +558,8 @@ export default class MarksTable extends React.Component {
               )} */}
             </TableRow>
 
-            {this.props.journalsite.map((m) =>
+            {
+            this.sites.map((m) =>
               m.journalHeaders.map((item) => {
                 return (
                   <div>
@@ -567,25 +568,57 @@ export default class MarksTable extends React.Component {
                         {item.dateOfLesson}
                       </div>
                     </TableCell>
-                    {item.journalContents.map((content, i) => (
-                      <TableRow key={i}>
-                        <TableCell className="line-grade">
-                          <div className="cellwidth">
-                            <input
-                              className="myInput"
-                              type="text"
-                              defaultValue={content.grade}
-                              onBlur={(e) =>
-                                console.log(
-                                  e.target.value + " : content-id=" + content.id
-                                )
-                              }
-                              onFocus={(e) => e.target.select()}
-                            />
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    {
+                      item.journalContents.map((content, i) => {
+                      if(content.presence===null) 
+                      {
+                        return <TableRow key={i}>
+                                  <TableCell className="line-grade">
+                                    <div className="cellwidth disp">
+                                      <input
+                                        className="myInput"
+                                        type="text"
+                                        defaultValue={content.grade}
+                                        onBlur={(e) =>
+                                          console.log(
+                                            e.target.value + " : content-id=" + content.id
+                                          )
+                                        }
+                                        onFocus={(e) => e.target.select()}
+                                      />
+                                      <input
+                                        type="checkbox"
+                                        defaultChecked={true}
+                                      />
+                                    </div>
+                                  </TableCell>
+                                </TableRow>
+                      }
+                      else
+                      {
+                        return <TableRow key={i}>
+                                  <TableCell className="line-grade">
+                                    <div className="cellwidth disp">
+                                      <input
+                                        className="myInput"
+                                        type="text"
+                                        defaultValue={content.grade}
+                                        onBlur={(e) =>
+                                          console.log(
+                                            e.target.value + " : content-id=" + content.id
+                                          )
+                                        }
+                                        onFocus={(e) => e.target.select()}
+                                      />
+                                      <input
+                                        type="checkbox"
+                                        defaultChecked={content.presence}
+                                      />
+                                    </div>
+                                  </TableCell>
+                                </TableRow>
+                      }
+                    })}
                   </div>
                 );
               })
