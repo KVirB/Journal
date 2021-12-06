@@ -16,9 +16,9 @@ import Combine from "./Combine";
 class combineContainer extends React.Component {
   componentDidMount() {
     // this.props.getMarksThunk();
-    this.props.getFioThunk();
-    this.props.getDataLessonThunk();
-    this.props.getJournalsiteThunk();
+    // this.props.getFioThunk();
+    // this.props.getDataLessonThunk();
+    // this.props.getJournalsiteThunk();
   }
   componentWillUnmount() {
     window.location.reload();
@@ -27,10 +27,10 @@ class combineContainer extends React.Component {
     return (
       <div>
         <Combine
-          // marks={this.props.marks}
-          journalsite={this.props.journalsite}
-          fio={this.props.fio}
-          dataLesson={this.props.dataLesson}
+        // marks={this.props.marks}
+        // journalsite={this.props.journalsite}
+        // fio={this.props.fio}
+        // dataLesson={this.props.dataLesson}
         />
       </div>
     );
@@ -39,9 +39,9 @@ class combineContainer extends React.Component {
 let mapStateToProps = (state) => {
   return {
     // marks: state.marksPage.marks,
-    journalsite: state.journalsitePage.journalsite,
-    fio: state.fioPage.fio,
-    dataLesson: state.dataLessonPage.dataLesson,
+    // journalsite: state.journalsitePage.journalsite,
+    // fio: state.fioPage.fio,
+    // dataLesson: state.dataLessonPage.dataLesson,
   };
 };
 

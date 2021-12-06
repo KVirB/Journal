@@ -1,9 +1,11 @@
 import React from "react";
 import "./Header.css";
-
-export default class Header extends React.Component {
+import { connect } from "react-redux";
+import { getJournalsiteThunk } from "../../reducer/journalsiteReducer";
+class Header extends React.Component {
   state = {
     discipline: [],
+    id: "",
   };
 
   onDisciplineSelected = (e) => {
@@ -24,7 +26,11 @@ export default class Header extends React.Component {
             className="discipline-select"
             name="discipline"
             title="Выберите дисциплину"
-            onChange={onDisciplineSelected}
+            // onChange={onDisciplineSelected}
+            onChange={() => {
+              this.props.getJournalsiteThunk(this.state.id);
+              // return window.location.reload();
+            }}
           >
             <option value="" selected hidden>
               Выберите дисциплину
@@ -68,3 +74,4 @@ export default class Header extends React.Component {
     );
   }
 }
+export default connect(null, { getJournalsiteThunk })(Header);

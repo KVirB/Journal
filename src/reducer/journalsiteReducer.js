@@ -3,8 +3,9 @@ import { getJournalsite } from "../BD/tables";
 const SET_JOURNALSITE = "SET_JOURNALSITE";
 
 let initialState = {
+  id: null,
   journalsite: [],
-  loading: true,
+  update: true,
 };
 
 const journalsiteReducer = (state = initialState, action) => {
@@ -12,6 +13,7 @@ const journalsiteReducer = (state = initialState, action) => {
     case SET_JOURNALSITE:
       return {
         ...state,
+        update: true,
         journalsite: [...state.journalsite, ...action.journalsite],
       };
     default:
@@ -19,15 +21,16 @@ const journalsiteReducer = (state = initialState, action) => {
   }
 };
 
-export const setJournalsite = (journalsite) => ({
+export const setJournalsite = (id, update) => ({
   type: SET_JOURNALSITE,
-  journalsite,
+  journalsite: { id },
+  update: update,
 });
 
-export const getJournalsiteThunk = () => {
+export const getJournalsiteThunk = (id) => {
   return (dispatch) => {
-    getJournalsite().then((data) => {
-      dispatch(setJournalsite(data));
+    getJournalsite(id).then((data) => {
+      dispatch(setJournalsite(id, data));
     });
   };
 };

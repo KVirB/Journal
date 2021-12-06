@@ -126,11 +126,7 @@ export default class Combine extends React.Component {
         {/* {console.log(this.state.discipline)} */}
         <Header />
         <hr />
-        <MarksTable
-          journalsite={this.props.journalsite}
-          fio={this.props.fio}
-          dataLesson={this.props.dataLesson}
-        />
+        <MarksTable />
         {/* <TableContainer sx={{ maxHeight: 440 }}>
           <Table
             stickyHeader
