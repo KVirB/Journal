@@ -4,21 +4,20 @@ import { connect } from "react-redux";
 import { getJournalsiteThunk } from "../../reducer/journalsiteReducer";
 class Header extends React.Component {
   state = {
-    discipline: [],
     id: "",
   };
 
-  onDisciplineSelected = (e) => {
-    let { value } = e.target;
+  getValue = (e) => {
+    const { value } = e.target;
     this.setState({
-      discipline: value,
+      id: value,
     });
   };
   render() {
-    const { onDisciplineSelected } = this;
+    const { getValue } = this;
     return (
       <div>
-        {console.log(this.state.discipline)}
+        {console.log(this.state.id)}
         <div className="journal-name">Электронный журнал преподователя</div>
         <div className="display-flex">
           <div className="discipline-name">Название дисциплины:</div>
@@ -26,17 +25,18 @@ class Header extends React.Component {
             className="discipline-select"
             name="discipline"
             title="Выберите дисциплину"
-            // onChange={onDisciplineSelected}
+            onBlur={getValue}
             onChange={() => {
-              this.props.getJournalsiteThunk(this.state.id);
-              // return window.location.reload();
+              this.props.getJournalsiteThunk();
             }}
           >
             <option value="" selected hidden>
               Выберите дисциплину
             </option>
             {this.props.discipline.map((m) => (
-              <option className="lang__items">{m.name}</option>
+              <option className="lang__items" value={m.id}>
+                {m.name}
+              </option>
             ))}
           </select>
           <div className="special-name">Специальность:</div>

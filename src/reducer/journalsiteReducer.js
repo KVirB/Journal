@@ -21,16 +21,16 @@ const journalsiteReducer = (state = initialState, action) => {
   }
 };
 
-export const setJournalsite = (id, update) => ({
+export const setJournalsite = (journalsite, update) => ({
   type: SET_JOURNALSITE,
-  journalsite: { id },
+  journalsite,
   update: update,
 });
 
-export const getJournalsiteThunk = (id) => {
+export const getJournalsiteThunk = () => {
   return (dispatch) => {
-    getJournalsite(id).then((data) => {
-      dispatch(setJournalsite(id, data));
+    getJournalsite().then((data) => {
+      dispatch(setJournalsite(data));
     });
   };
 };
