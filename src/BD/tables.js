@@ -37,10 +37,19 @@ export const getDiscipline = () => {
       return response.data;
     });
 };
-export function getJournalsite(id) {
+export const getGroup = (disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=teacher.id==1;discipline.id==${id};group.id==1`
+      `electronicjournal/journal-sites/search?q=teacher.id==1;discipline.id==${disciplineId}`
+    )
+    .then((response) => {
+      return response.data;
+    });
+};
+export function getJournalsite(groupId, disciplineId) {
+  return baseRout
+    .get(
+      `electronicjournal/journal-sites/search?q=teacher.id==1;discipline.id==${disciplineId};group.id==${groupId}`
     )
     .then((response) => {
       return response.data;

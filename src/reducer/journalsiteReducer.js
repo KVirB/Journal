@@ -27,9 +27,9 @@ export const setJournalsite = (journalsite, update) => ({
   update: update,
 });
 
-export const getJournalsiteThunk = (id) => {
+export const getJournalsiteThunk = (groupId, disciplineId) => {
   return (dispatch) => {
-    getJournalsite(id).then((data) => {
+    getJournalsite(groupId, disciplineId).then((data) => {
       dispatch(setJournalsite(data));
     });
   };

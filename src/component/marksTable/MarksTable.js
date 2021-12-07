@@ -4,14 +4,12 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import "../app/App.css";
-import { reduxForm, Field } from "redux-form";
 
 export default class MarksTable extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.journalsite !== prevProps.journalsite) {
     }
   }
-
   sites = [
     {
       id: 1,
@@ -312,7 +310,8 @@ export default class MarksTable extends React.Component {
                               <div className="cellwidth disp">
                                 <input
                                   className="myInput"
-                                  type="number"
+                                  type="text"
+                                  maxLength="2"
                                   defaultValue={content.grade}
                                   onBlur={(e) =>
                                     console.log(
@@ -335,7 +334,8 @@ export default class MarksTable extends React.Component {
                               <div className="cellwidth disp">
                                 <input
                                   className="myInput"
-                                  type="number"
+                                  type="text"
+                                  maxLength="2"
                                   defaultValue={content.grade}
                                   onBlur={(e) =>
                                     console.log(

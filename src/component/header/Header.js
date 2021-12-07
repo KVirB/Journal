@@ -4,27 +4,42 @@ import { connect } from "react-redux";
 import { getJournalsiteThunk } from "../../reducer/journalsiteReducer";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 import { getJournalsite } from "../../BD/tables";
+import { MenuList } from "@mui/material";
+import { getGroupThunk } from "../../reducer/headerReducer";
 class Header extends React.Component {
   state = {
-    id: "",
+    disciplineId: 0,
+    groupId: 0,
   };
   componentDidUpdate(prevProps, prevState) {
-    const { id } = this.state;
-    if (id !== prevState.id) {
-      this.props.getJournalsiteThunk(id);
+    const { disciplineId, groupId } = this.state;
+    if (disciplineId !== prevState.disciplineId) {
+      this.props.getGroupThunk(disciplineId);
+    }
+    console.log(prevState.disciplineId);
+    if (groupId !== prevState.groupId) {
+      console.log(999);
+      this.props.getJournalsiteThunk(disciplineId, groupId);
     }
   }
-  getValue = (e) => {
+  getValueDiscipline = (e) => {
     const { value } = e.target;
     this.setState({
-      id: value,
+      disciplineId: value,
+    });
+  };
+  getGroup = (e) => {
+    const { value } = e.target;
+    this.setState({
+      groupId: value,
     });
   };
   render() {
-    const { getValue } = this;
+    const { getValueDiscipline } = this;
+    const { getGroup } = this;
     return (
       <div>
-        {console.log(this.state.id)}
+        {console.log(this.state.disciplineId)}
         <div className="journal-name">Электронный журнал преподователя</div>
         <div className="display-flex">
           <div className="discipline-name">Название дисциплины:</div>
@@ -32,10 +47,7 @@ class Header extends React.Component {
             className="discipline-select"
             name="discipline"
             title="Выберите дисциплину"
-            onChange={getValue}
-            // onClick={() => {
-            //   this.props.getJournalsiteThunk();
-            // }}
+            onChange={getValueDiscipline}
           >
             <option value="" selected hidden>
               Выберите дисциплину
@@ -67,12 +79,16 @@ class Header extends React.Component {
             className="group-select"
             name="select"
             title="Выберите группу"
+            onChange={getGroup}
           >
             <option value="" selected hidden>
               Выберите группу
             </option>
-            <option className="lang__items">Ит-5</option>
-            <option className="lang__items">АЭ-21</option>
+            {this.props.group.map((m) => (
+              <option className="lang__items" value={m.group.id}>
+                {m.group.name}
+              </option>
+            ))}
           </select>
           <div className="view-name">Вид занятий:</div>
           <input className="view-input"></input>
@@ -81,4 +97,4 @@ class Header extends React.Component {
     );
   }
 }
-export default connect(null, { getJournalsiteThunk })(Header);
+export default connect(null, { getJournalsiteThunk, getGroupThunk })(Header);

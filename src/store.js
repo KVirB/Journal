@@ -13,6 +13,7 @@ let reducers = combineReducers({
   journalsitePage: journalsiteReducer,
   dataLessonPage: dataLessonReducer,
   disciplinePage: headerReducer,
+  groupPage: headerReducer,
   form: formReducer,
 });
 
