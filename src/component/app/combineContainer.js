@@ -44,14 +44,14 @@ let mapStateToProps = (state) => {
     // dataLesson: state.dataLessonPage.dataLesson,
   };
 };
-
-export default connect(mapStateToProps, {
-  //   setMarks,
-  //   getMarksThunk,
-  setJournalsite,
-  getJournalsiteThunk,
-  setFio,
-  getFioThunk,
-  setDataLesson,
-  getDataLessonThunk,
-})(combineContainer);
+// connect(mapStateToProps, {
+//   //   setMarks,
+//   //   getMarksThunk,
+//   setJournalsite,
+//   getJournalsiteThunk,
+//   setFio,
+//   getFioThunk,
+//   setDataLesson,
+//   getDataLessonThunk,
+// })
+export default combineContainer;

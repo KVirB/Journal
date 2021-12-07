@@ -37,12 +37,12 @@ export const getDiscipline = () => {
       return response.data;
     });
 };
-export const getJournalsite = () => {
+export function getJournalsite(id) {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=teacher.id==1;discipline.id==1;group.id==1`
+      `electronicjournal/journal-sites/search?q=teacher.id==1;discipline.id==${id};group.id==1`
     )
     .then((response) => {
       return response.data;
     });
-};
+}

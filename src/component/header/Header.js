@@ -2,11 +2,18 @@ import React from "react";
 import "./Header.css";
 import { connect } from "react-redux";
 import { getJournalsiteThunk } from "../../reducer/journalsiteReducer";
+import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
+import { getJournalsite } from "../../BD/tables";
 class Header extends React.Component {
   state = {
     id: "",
   };
-
+  componentDidUpdate(prevProps, prevState) {
+    const { id } = this.state;
+    if (id !== prevState.id) {
+      this.props.getJournalsiteThunk(id);
+    }
+  }
   getValue = (e) => {
     const { value } = e.target;
     this.setState({
@@ -25,10 +32,10 @@ class Header extends React.Component {
             className="discipline-select"
             name="discipline"
             title="Выберите дисциплину"
-            onBlur={getValue}
-            onChange={() => {
-              this.props.getJournalsiteThunk();
-            }}
+            onChange={getValue}
+            // onClick={() => {
+            //   this.props.getJournalsiteThunk();
+            // }}
           >
             <option value="" selected hidden>
               Выберите дисциплину
