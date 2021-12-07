@@ -248,20 +248,7 @@ export default class MarksTable extends React.Component {
       ],
     },
   ];
-  constructor(props) {
-    super(props);
-    this.state = {
-      financialGoal: "",
-    };
-  }
 
-  handleChange(evt) {
-    const financialGoal = evt.target.validity.valid
-      ? evt.target.value
-      : this.state.financialGoal;
-
-    this.setState({ financialGoal });
-  }
   render() {
     return (
       <div className="all-content">
