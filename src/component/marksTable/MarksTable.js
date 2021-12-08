@@ -246,6 +246,9 @@ export default class MarksTable extends React.Component {
       ],
     },
   ];
+  state = {
+    presence: null,
+  };
   getCheckBox = (e) => {
     const { value } = e.target;
     this.setState({
@@ -253,9 +256,10 @@ export default class MarksTable extends React.Component {
     });
   };
   render() {
+    const { getCheckBox } = this;
     return (
       <div className="all-content">
-        {console.log(this.props.journalsite + "jopa")}
+        {console.log(this.state.presence)}
         <TableContainer sx={{ maxHeight: 760 }}>
           <Table
             stickyHeader
@@ -308,58 +312,63 @@ export default class MarksTable extends React.Component {
                       </div>
                     </TableCell>
                     {item.journalContents.map((content, i) => {
-                      if (content.presence === null) {
-                        return (
-                          <TableRow key={i}>
-                            <TableCell className="line-grade">
-                              <div className="cellwidth disp">
-                                <input
-                                  className="myInput"
-                                  type="text"
-                                  maxLength="2"
-                                  defaultValue={content.grade}
-                                  onBlur={(e) =>
-                                    console.log(
-                                      e.target.value +
-                                        " : content-id=" +
-                                        content.id
-                                    )
-                                  }
-                                  onFocus={(e) => e.target.select()}
-                                />
-                                <input type="checkbox" defaultChecked={true} />
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      } else {
-                        return (
-                          <TableRow key={i}>
-                            <TableCell className="line-grade">
-                              <div className="cellwidth disp">
-                                <input
-                                  className="myInput"
-                                  type="text"
-                                  maxLength="2"
-                                  defaultValue={content.grade}
-                                  onBlur={(e) =>
-                                    console.log(
-                                      e.target.value +
-                                        " : content-id=" +
-                                        content.id
-                                    )
-                                  }
-                                  onFocus={(e) => e.target.select()}
-                                />
-                                <input
-                                  type="checkbox"
-                                  defaultChecked={content.presence}
-                                />
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      }
+                      // if (content.presence === null) {
+                      //   return (
+                      //     <TableRow key={i}>
+                      //       <TableCell className="line-grade">
+                      //         <div className="cellwidth disp">
+                      //           <input
+                      //             className="myInput"
+                      //             type="text"
+                      //             maxLength="2"
+                      //             defaultValue={content.grade}
+                      //             onBlur={(e) =>
+                      //               console.log(
+                      //                 e.target.value +
+                      //                   " : content-id=" +
+                      //                   content.id
+                      //               )
+                      //             }
+                      //             onFocus={(e) => e.target.select()}
+                      //           />
+                      //           <input
+                      //             type="checkbox"
+                      //             defaultChecked={true}
+                      //             onChange={getCheckBox}
+                      //           />
+                      //         </div>
+                      //       </TableCell>
+                      //     </TableRow>
+                      //   );
+                      // } else {
+                      return (
+                        <TableRow key={i}>
+                          <TableCell className="line-grade">
+                            <div className="cellwidth disp">
+                              <input
+                                className="myInput"
+                                type="text"
+                                maxLength="2"
+                                disabled={this.state.presence}
+                                defaultValue={content.grade}
+                                onBlur={(e) =>
+                                  console.log(
+                                    e.target.value +
+                                      " : content-id=" +
+                                      content.id
+                                  )
+                                }
+                                onFocus={(e) => e.target.select()}
+                              />
+                              <input
+                                type="checkbox"
+                                defaultChecked={content.presence}
+                                onChange={getCheckBox}
+                              />
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      );
                     })}
                   </div>
                 );
