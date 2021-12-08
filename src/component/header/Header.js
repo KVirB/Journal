@@ -59,21 +59,11 @@ class Header extends React.Component {
             ))}
           </select>
           <div className="special-name">Специальность:</div>
-          <select
-            className="special-select"
-            name="special"
-            title="Выберите специальность"
-          >
-            <option value="" selected hidden>
-              Выберите специальность
-            </option>
-            <option className="lang__items">Дизайн</option>
-            <option className="lang__items">Технология машиностроения</option>
-          </select>
+          <label className="special-select"></label>
         </div>
         <div className="display-flex">
           <div className="course-name">Курс:</div>
-          <input className="course-input"></input>
+          <label className="course-input"></label>
           <div className="group-name">Группа:</div>
           <select
             className="group-select"
@@ -91,7 +81,7 @@ class Header extends React.Component {
             ))}
           </select>
           <div className="view-name">Вид занятий:</div>
-          <input className="view-input"></input>
+          <label className="view-input"></label>
         </div>
       </div>
     );
