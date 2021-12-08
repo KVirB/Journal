@@ -1,11 +1,15 @@
 import React from "react";
 import "./Header.css";
 import { connect } from "react-redux";
-import { getJournalsiteThunk } from "../../reducer/journalsiteReducer";
-import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
-import { getJournalsite } from "../../BD/tables";
-import { MenuList } from "@mui/material";
-import { getGroupThunk } from "../../reducer/headerReducer";
+import {
+  getJournalsiteThunk,
+  clearJournalsite,
+} from "../../reducer/journalsiteReducer";
+import {
+  getGroupThunk,
+  getDisciplineThunk,
+  clearGroup,
+} from "../../reducer/headerReducer";
 class Header extends React.Component {
   state = {
     disciplineId: 0,
@@ -18,7 +22,6 @@ class Header extends React.Component {
     }
     console.log(prevState.disciplineId);
     if (groupId !== prevState.groupId) {
-      console.log(999);
       this.props.getJournalsiteThunk(disciplineId, groupId);
     }
   }
@@ -33,7 +36,9 @@ class Header extends React.Component {
     this.setState({
       groupId: value,
     });
+    this.props.clearGroup();
   };
+
   render() {
     const { getValueDiscipline } = this;
     const { getGroup } = this;
@@ -41,6 +46,9 @@ class Header extends React.Component {
       <div>
         {console.log(this.state.disciplineId)}
         <div className="journal-name">Электронный журнал преподователя</div>
+        {/* <button onClick={(this.props.getDisciplineThunk(), this.groupId === 0)}>
+          Сменить журнал
+        </button> */}
         <div className="display-flex">
           <div className="discipline-name">Название дисциплины:</div>
           <select
@@ -48,6 +56,9 @@ class Header extends React.Component {
             name="discipline"
             title="Выберите дисциплину"
             onChange={getValueDiscipline}
+            onBlur={() => {
+              this.props.clearJournalsite();
+            }}
           >
             <option value="" selected hidden>
               Выберите дисциплину
@@ -87,4 +98,10 @@ class Header extends React.Component {
     );
   }
 }
-export default connect(null, { getJournalsiteThunk, getGroupThunk })(Header);
+export default connect(null, {
+  getJournalsiteThunk,
+  getGroupThunk,
+  getDisciplineThunk,
+  clearJournalsite,
+  clearGroup,
+})(Header);

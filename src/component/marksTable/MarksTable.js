@@ -246,12 +246,17 @@ export default class MarksTable extends React.Component {
       ],
     },
   ];
-
+  getCheckBox = (e) => {
+    const { value } = e.target;
+    this.setState({
+      presence: value,
+    });
+  };
   render() {
     return (
       <div className="all-content">
         {console.log(this.props.journalsite + "jopa")}
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <TableContainer sx={{ maxHeight: 760 }}>
           <Table
             stickyHeader
             aria-label="sticky table"
@@ -360,48 +365,9 @@ export default class MarksTable extends React.Component {
                 );
               })
             )}
-            <div>
-              {/* <TableCell height="71.58px" className="line-data">
-                <div className="cellwidth">
-                  <input
-                    className="myInput"
-                    type="text"
-                    defaultValue="Vvedi datu"
-                    onBlur={(e) => console.log(e.target.value)}
-                    onFocus={(e) => e.target.select()}
-                  />
-                </div>
-              </TableCell> */}
-              {/* {this.sites[0].journalHeaders[0].journalContents.map(
-                (content, i) => (
-                  <div>
-                    <TableRow>
-                      <TableCell className="line-grade">
-                        <div className="cellwidth">
-                          <input
-                            className="myInput"
-                            type="text"
-                            onBlur={(e) =>
-                              console.log(
-                                e.target.value +
-                                  "student.id=" +
-                                  content.student.id
-                              )
-                            }
-                            onFocus={(e) => e.target.select()}
-                          />
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  </div>
-                )
-              )} */}
-            </div>
+            <div></div>
           </Table>
         </TableContainer>
-        {this.props.journalsite.map((m) =>
-          m.journalHeaders.map((item) => <div>{item.id}</div>)
-        )}
       </div>
     );
   }

@@ -11,6 +11,14 @@ let reducers = combineReducers({
   form: formReducer,
 });
 
+// const rootReducer = (state, action) => {
+//   if (action.type === "SET_JOURNALSITE") {
+//     const { routing } = state;
+//     state = { routing };
+//   }
+//   return reducers(state, action);
+// };
+
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export default store;

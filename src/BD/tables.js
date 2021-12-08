@@ -40,7 +40,7 @@ export const getDiscipline = () => {
 export const getGroup = (disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=teacher.id==1;discipline.id==${disciplineId}`
+      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId}`
     )
     .then((response) => {
       return response.data;

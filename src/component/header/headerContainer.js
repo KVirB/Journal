@@ -8,6 +8,7 @@ import {
 } from "../../reducer/headerReducer.js";
 import Header from "./Header.js";
 import { getJournalsiteThunk } from "../../reducer/journalsiteReducer";
+import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 
 class headerContainer extends React.Component {
   componentDidMount() {
