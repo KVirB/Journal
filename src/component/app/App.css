@@ -302,3 +302,8 @@ hr {
 .data_height {
   height: max-content;
 }
+.sel_grade {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

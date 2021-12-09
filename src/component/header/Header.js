@@ -19,10 +19,12 @@ class Header extends React.Component {
     const { disciplineId, groupId } = this.state;
     if (disciplineId !== prevState.disciplineId) {
       this.props.getGroupThunk(disciplineId);
+      this.props.clearGroup();
     }
     console.log(prevState.disciplineId);
     if (groupId !== prevState.groupId) {
       this.props.getJournalsiteThunk(disciplineId, groupId);
+      this.props.clearJournalsite();
     }
   }
   getValueDiscipline = (e) => {
@@ -36,7 +38,6 @@ class Header extends React.Component {
     this.setState({
       groupId: value,
     });
-    this.props.clearGroup();
   };
 
   render() {
@@ -56,9 +57,6 @@ class Header extends React.Component {
             name="discipline"
             title="Выберите дисциплину"
             onChange={getValueDiscipline}
-            onBlur={() => {
-              this.props.clearJournalsite();
-            }}
           >
             <option value="" selected hidden>
               Выберите дисциплину

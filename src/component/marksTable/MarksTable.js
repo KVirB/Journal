@@ -255,6 +255,15 @@ export default class MarksTable extends React.Component {
       presence: value,
     });
   };
+
+  changeInputHandler = (e) => {
+    console.log("name :", e.target.name);
+    console.log(e.target.checked);
+    this.setState((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
   render() {
     const { getCheckBox } = this;
     return (
@@ -343,9 +352,9 @@ export default class MarksTable extends React.Component {
                       // } else {
                       return (
                         <TableRow key={i}>
-                          <TableCell className="line-grade">
+                          <TableCell className="line-grade" height="20px">
                             <div className="cellwidth disp">
-                              <input
+                              {/* <input
                                 className="myInput"
                                 type="text"
                                 maxLength="2"
@@ -359,12 +368,40 @@ export default class MarksTable extends React.Component {
                                   )
                                 }
                                 onFocus={(e) => e.target.select()}
-                              />
-                              <input
+                              /> */}
+                              <select
+                                ket={content.id}
+                                className="sel_grade myInput"
+                                name="select"
+                              >
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option selected hidden>
+                                  {content.grade}
+                                </option>
+                              </select>
+                              {/* <input
                                 type="checkbox"
                                 defaultChecked={content.presence}
                                 onChange={getCheckBox}
-                              />
+                              /> */}
+                              <input
+                                key={content.id}
+                                type="checkbox"
+                                value=""
+                                id="flexCheckDefault"
+                                name="check"
+                                defaultChecked={content.presence}
+                                onChange={() => {}}
+                              ></input>
                             </div>
                           </TableCell>
                         </TableRow>
