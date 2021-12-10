@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import {
   setJournalsite,
   getJournalsiteThunk,
+  toggleJournalSitePresence,
+  setJournalSiteMark,
 } from "../../reducer/journalsiteReducer";
 import MarksTable from "../marksTable/MarksTable";
 
@@ -30,4 +32,6 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   setJournalsite,
   getJournalsiteThunk,
+  toggleJournalSitePresence,
+  setJournalSiteMark,
 })(marksTableContainer);

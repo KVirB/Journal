@@ -40,18 +40,25 @@ export const getDiscipline = () => {
 export const getGroup = (disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId}`
+      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId};teacher.id==2`
     )
     .then((response) => {
       return response.data;
     });
 };
-export function getJournalsite(groupId, disciplineId) {
+export const getJournalsite = (groupId, disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=teacher.id==1;discipline.id==${disciplineId};group.id==${groupId}`
+      `electronicjournal/journal-sites/search?q=teacher.id==2;discipline.id==${disciplineId};group.id==${groupId}`
     )
     .then((response) => {
       return response.data;
     });
-}
+};
+export const setServers = (lessons, id) => {
+  return baseRout
+    .patch(`/journal-contents/${id}`, { lessons })
+    .then((response) => {
+      return response.data;
+    });
+};

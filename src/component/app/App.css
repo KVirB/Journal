@@ -43,7 +43,7 @@
   border-right: 1px solid #fff;
   border-bottom: 2px solid lightgray;
   outline: none;
-  width: 15px;
+  width: 16px;
   text-align: center;
 }
 input[type="number"]::-webkit-outer-spin-button,
@@ -306,4 +306,60 @@ hr {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+.view-date-input {
+  font-family: "Open Sans", sans-serif;
+  width: 140px;
+  height: 30px;
+
+  background: #ffffff;
+  border: 1px solid #bababa;
+  box-sizing: border-box;
+  border-radius: 3px;
+
+  margin-left: 5px;
+  margin-top: 27px;
+}
+input[type="date"]::-webkit-datetime-edit,
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+  color: #fff;
+  position: relative;
+}
+
+input[type="date"]::-webkit-datetime-edit-year-field {
+  position: absolute !important;
+  border-left: 1px solid #8c8c8c;
+  padding: 2px;
+  color: #000;
+  left: 52px;
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field {
+  position: absolute !important;
+  border-left: 1px solid #8c8c8c;
+  padding: 2px;
+  color: #000;
+  left: 26px;
+}
+
+input[type="date"]::-webkit-datetime-edit-day-field {
+  position: absolute !important;
+  color: #000;
+  padding: 2px;
+  left: 4px;
+}
+.view-date-name {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+
+  width: 40px;
+  height: 20px;
+
+  color: #bababa;
+  padding-left: 25px;
+  padding-top: 32px;
 }

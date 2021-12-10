@@ -22,7 +22,11 @@ class headerContainer extends React.Component {
   }
   render() {
     return (
-      <Header discipline={this.props.discipline} group={this.props.group} />
+      <Header
+        discipline={this.props.discipline}
+        group={this.props.group}
+        journalsite={this.props.group}
+      />
     );
   }
 }
@@ -30,6 +34,7 @@ let mapStateToProps = (state) => {
   return {
     discipline: state.disciplinePage.discipline,
     group: state.groupPage.group,
+    journalsite: state.journalsitePage.journalsite,
   };
 };
 

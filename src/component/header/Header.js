@@ -14,6 +14,7 @@ class Header extends React.Component {
   state = {
     disciplineId: 0,
     groupId: 0,
+    date: null,
   };
   componentDidUpdate(prevProps, prevState) {
     const { disciplineId, groupId } = this.state;
@@ -39,13 +40,18 @@ class Header extends React.Component {
       groupId: value,
     });
   };
-
+  getDateBox = (e) => {
+    const { value } = e.target;
+    this.setState({
+      date: value,
+    });
+  };
   render() {
-    const { getValueDiscipline } = this;
-    const { getGroup } = this;
+    const { getValueDiscipline, getGroup, getDateBox } = this;
     return (
       <div>
         {console.log(this.state.disciplineId)}
+        {console.log(this.state.date)}
         <div className="journal-name">Электронный журнал преподователя</div>
         {/* <button onClick={(this.props.getDisciplineThunk(), this.groupId === 0)}>
           Сменить журнал
@@ -58,11 +64,11 @@ class Header extends React.Component {
             title="Выберите дисциплину"
             onChange={getValueDiscipline}
           >
-            <option value="" selected hidden>
+            <option defaultValue="" hidden>
               Выберите дисциплину
             </option>
-            {this.props.discipline.map((m) => (
-              <option className="lang__items" value={m.id}>
+            {this.props.discipline.map((m, i) => (
+              <option className="lang__items" value={m.id} key={i}>
                 {m.name}
               </option>
             ))}
@@ -80,17 +86,33 @@ class Header extends React.Component {
             title="Выберите группу"
             onChange={getGroup}
           >
-            <option value="" selected hidden>
+            <option defaultValue="" hidden>
               Выберите группу
             </option>
-            {this.props.group.map((m) => (
-              <option className="lang__items" value={m.group.id}>
+            {this.props.group.map((m, i) => (
+              <option className="lang__items" value={m.group.id} key={i}>
                 {m.group.name}
               </option>
             ))}
           </select>
           <div className="view-name">Вид занятий:</div>
-          <label className="view-input"></label>
+          {this.props.journalsite.map((m) =>
+            m.journalHeaders.map((item, i) => {
+              if (i === 0)
+                return (
+                  <label className="view-input" key={i}>
+                    {item.typeClass.name}
+                  </label>
+                );
+            })
+          )}
+          <div className="view-date-name">Дата:</div>
+          <input
+            className="view-date-input"
+            type="date"
+            title="Выберите дату"
+            onChange={getDateBox}
+          ></input>
         </div>
       </div>
     );

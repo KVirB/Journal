@@ -248,6 +248,7 @@ export default class MarksTable extends React.Component {
   ];
   state = {
     presence: null,
+    date: null,
   };
   getCheckBox = (e) => {
     const { value } = e.target;
@@ -255,7 +256,6 @@ export default class MarksTable extends React.Component {
       presence: value,
     });
   };
-
   changeInputHandler = (e) => {
     console.log("name :", e.target.name);
     console.log(e.target.checked);
@@ -265,7 +265,7 @@ export default class MarksTable extends React.Component {
     }));
   };
   render() {
-    const { getCheckBox } = this;
+    const { getCheckBox, getDateBox } = this;
     return (
       <div className="all-content">
         {console.log(this.state.presence)}
@@ -280,46 +280,46 @@ export default class MarksTable extends React.Component {
               {this.props.journalsite.map((m, i) => {
                 if (i === 0)
                   return (
-                    <div>
-                      <TableCell
-                        height="75px"
-                        className="line-fio diagonal-line"
-                        width="153.55px"
-                      >
-                        <div className="dzs">Дата</div>
-                        <div className="fios">ФИО</div>
-                      </TableCell>
-                    </div>
+                    <TableCell
+                      height="75px"
+                      className="line-fio diagonal-line"
+                      width="153.55px"
+                      key={m.id}
+                    >
+                      <div className="dzs">Дата</div>
+                      <div className="fios">ФИО</div>
+                    </TableCell>
                   );
               })}
               {this.props.journalsite.map((m) =>
                 m.journalHeaders.map((item, i) => {
                   if (i === 0) {
                     return item.journalContents.map((content) => (
-                      <TableRow>
-                        <TableCell
-                          height="20px"
-                          width="153.55px"
-                          className="disp line-stud"
-                        >
-                          <div>{content.student.surname}</div>
-                          <div className="csn">{content.student.name}</div>
-                        </TableCell>
-                      </TableRow>
+                      <TableCell
+                        height="20px"
+                        width="153.55px"
+                        className="disp line-stud"
+                        key={content.id}
+                      >
+                        <div>{content.student.surname}</div>
+                        <div className="csn">{content.student.name}</div>
+                      </TableCell>
                     ));
                   }
                 })
               )}
             </TableRow>
             {this.props.journalsite.map((m) =>
-              m.journalHeaders.map((item) => {
+              m.journalHeaders.map((item, i) => {
                 return (
-                  <div>
-                    <TableCell height="75px" className="line-data">
-                      <div className="vertical cellwidth">
-                        {item.dateOfLesson}
-                      </div>
-                    </TableCell>
+                  <tbody key={i}>
+                    <TableRow>
+                      <TableCell height="75px" className="line-data">
+                        <div className="vertical cellwidth">
+                          {item.dateOfLesson}
+                        </div>
+                      </TableCell>
+                    </TableRow>
                     {item.journalContents.map((content, i) => {
                       // if (content.presence === null) {
                       //   return (
@@ -354,64 +354,54 @@ export default class MarksTable extends React.Component {
                         <TableRow key={i}>
                           <TableCell className="line-grade" height="20px">
                             <div className="cellwidth disp">
-                              {/* <input
-                                className="myInput"
-                                type="text"
-                                maxLength="2"
-                                disabled={this.state.presence}
-                                defaultValue={content.grade}
-                                onBlur={(e) =>
-                                  console.log(
-                                    e.target.value +
-                                      " : content-id=" +
-                                      content.id
-                                  )
-                                }
-                                onFocus={(e) => e.target.select()}
-                              /> */}
-                              <select
-                                ket={content.id}
-                                className="sel_grade myInput"
-                                name="select"
-                              >
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option selected hidden>
-                                  {content.grade}
-                                </option>
-                              </select>
-                              {/* <input
-                                type="checkbox"
-                                defaultChecked={content.presence}
-                                onChange={getCheckBox}
-                              /> */}
+                              {content.presence && (
+                                <select
+                                  key={content.id}
+                                  className="sel_grade myInput"
+                                  name="select"
+                                  defaultValue={content.grade}
+                                  onChange={(e) => {
+                                    this.props.setJournalSiteMark(
+                                      item.id,
+                                      content.id,
+                                      e.target.value
+                                    );
+                                  }}
+                                >
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                  <option>5</option>
+                                  <option>6</option>
+                                  <option>7</option>
+                                  <option>8</option>
+                                  <option>9</option>
+                                  <option>10</option>
+                                </select>
+                              )}
                               <input
-                                key={content.id}
                                 type="checkbox"
                                 value=""
                                 id="flexCheckDefault"
                                 name="check"
                                 defaultChecked={content.presence}
-                                onChange={() => {}}
+                                onChange={() => {
+                                  this.props.toggleJournalSitePresence(
+                                    item.id,
+                                    content.id
+                                  );
+                                }}
                               ></input>
                             </div>
                           </TableCell>
                         </TableRow>
                       );
                     })}
-                  </div>
+                  </tbody>
                 );
               })
             )}
-            <div></div>
           </Table>
         </TableContainer>
       </div>
