@@ -117,7 +117,7 @@ class Header extends React.Component {
             title="Выберите дату"
             onChange={getDateBox}
           ></input>
-          <input type="submit" className="button-header" value="Выйти" onClick={Logout}/>
+          <input type="submit" className="button-header" name="commit" value="Выйти" onClick={Logout}/>
         </div>
       </div>
     );
