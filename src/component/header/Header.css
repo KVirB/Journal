@@ -177,3 +177,14 @@
   margin-left: 5px;
   margin-top: 27px;
 }
+.button-header
+{
+  font-family: 'Open Sans', sans-serif;
+  background: #FFFFFF;
+  border: 1px solid #BABABA;
+  box-sizing: border-box;
+  border-radius: 3px;
+  
+  margin-left: 638px;
+  margin-top: 27px;
+}

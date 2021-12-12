@@ -46,8 +46,12 @@ class Header extends React.Component {
       date: value,
     });
   };
+  Logout = () => {
+        window.close("/journal");
+        window.open("/")
+  }
   render() {
-    const { getValueDiscipline, getGroup, getDateBox } = this;
+    const { getValueDiscipline, getGroup, getDateBox, Logout} = this;
     return (
       <div>
         {console.log(this.state.disciplineId)}
@@ -113,6 +117,7 @@ class Header extends React.Component {
             title="Выберите дату"
             onChange={getDateBox}
           ></input>
+          <input type="submit" className="button-header" value="Выйти" onClick={Logout}/>
         </div>
       </div>
     );
