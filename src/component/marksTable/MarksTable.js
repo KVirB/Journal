@@ -268,7 +268,10 @@ export default class MarksTable extends React.Component {
     const { getCheckBox, getDateBox } = this;
     return (
       <div className="all-content">
-        {console.log(this.state.presence)}
+        {console.log(
+          this.state.presence +
+            "givno-----------------------------------------------------------------------------"
+        )}
         <TableContainer sx={{ maxHeight: 760 }}>
           <Table
             stickyHeader
@@ -352,15 +355,17 @@ export default class MarksTable extends React.Component {
                       // } else {
                       return (
                         <TableRow key={i}>
+                          {console.log(content.grade + "наш контент")}
                           <TableCell className="line-grade" height="20px">
                             <div className="cellwidth disp">
-                              {content.presence && (
+                              {content.presence === true && (
                                 <select
                                   key={content.id}
                                   className="sel_grade myInput"
                                   name="select"
                                   defaultValue={content.grade}
                                   onChange={(e) => {
+                                    console.log(item.id + "данные пришли");
                                     this.props.setJournalSiteMark(
                                       item.id,
                                       content.id,
@@ -368,6 +373,7 @@ export default class MarksTable extends React.Component {
                                     );
                                   }}
                                 >
+                                  <option hidden></option>
                                   <option>1</option>
                                   <option>2</option>
                                   <option>3</option>

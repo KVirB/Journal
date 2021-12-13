@@ -22,29 +22,41 @@ const journalsiteReducer = (state = initialState, action) => {
     // ------добавлено-----------
 
     case SET_JOURNALSITE_MARK:
-      var newJournalsiteMark = [...state.journalsite];
-      newJournalsiteMark[0].journalHeaders.forEach((lesson) => {
-        if (lesson.id === action.lesson_id) {
-          lesson.journalContents.forEach((line) => {
-            if (line.id === action.line_id) line.grade = action.grade;
-          });
-        }
-      });
+      let newJournalsiteMark = [...state.journalsite];
+      newJournalsiteMark.forEach((m) =>
+        m.journalHeaders.forEach((lesson) => {
+          if (lesson.id === action.lesson_id) {
+            lesson.journalContents.forEach((line) => {
+              if (line.id === action.line_id) {
+                line.grade = action.grade;
+              }
+            });
+          }
+        })
+      );
+
       return {
         ...state,
         journalsite: newJournalsiteMark,
       };
-
     case TOGGLE_JOURNALSITE_PRESENCE:
-      var newJournalsitePresence = [...state.journalsite];
+      let newJournalsitePresence = [...state.journalsite];
       console.log(state);
-      newJournalsitePresence[0].journalHeaders.forEach((lesson) => {
-        if (lesson.id === action.lesson_id) {
-          lesson.journalContents.forEach((line) => {
-            if (line.id === action.line_id) line.presence = !line.presence;
-          });
-        }
-      });
+      newJournalsitePresence.forEach((m) =>
+        m.journalHeaders.forEach((lesson) => {
+          if (lesson.id === action.lesson_id) {
+            lesson.journalContents.forEach((line) => {
+              if (line.id === action.line_id) {
+                line.presence = !line.presence;
+                if (!line.presence) {
+                  line.grade = null;
+                }
+              }
+            });
+          }
+        })
+      );
+
       return {
         ...state,
         journalsite: newJournalsitePresence,
@@ -65,7 +77,7 @@ export const toggleJournalSitePresence = (lesson_id, line_id) => ({
 });
 
 export const setJournalSiteMark = (lesson_id, line_id, grade) => ({
-  type: TOGGLE_JOURNALSITE_PRESENCE,
+  type: SET_JOURNALSITE_MARK,
   lesson_id,
   line_id,
   grade,

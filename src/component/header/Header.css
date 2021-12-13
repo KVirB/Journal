@@ -1,57 +1,49 @@
 .lang__switch {
-    font-size: 15px;
-    line-height: 18px;
-    border: none;
-    outline: none;
-    margin-left: 62px;
-    color: #1c305c;
+  font-size: 15px;
+  line-height: 18px;
+  border: none;
+  outline: none;
+  margin-left: 62px;
+  color: #1c305c;
 }
-.discipline-select
-{
-  background: #FFFFFF;
-  border: 1px solid #BABABA;
+.discipline-select {
+  background: #ffffff;
+  border: 1px solid #bababa;
   box-sizing: border-box;
   border-radius: 3px;
-  
+
   width: 228px;
   height: 30px;
- 
 
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 13px;
   line-height: 18px;
   margin-left: 5px;
   margin-top: 22px;
-
 }
-.discipline-name
-{
-  font-family: 'Open Sans', sans-serif;
+.discipline-name {
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
   line-height: 20px;
-  color: #BABABA;
+  color: #bababa;
 
   width: 180px;
   padding-top: 27px;
   padding-left: 50px;
   height: 20px;
-  
-
 }
-.display-flex
-{
+.display-flex {
   display: flex;
 }
-.journal-name
-{
-  width:511px;
+.journal-name {
+  width: 511px;
   height: 22px;
 
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -65,23 +57,21 @@
   padding-top: 35px;
   padding-left: 50px;
 }
-.special-name
-{
-  font-family: 'Open Sans', sans-serif;
+.special-name {
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
   line-height: 20px;
   padding-top: 27px;
   padding-left: 25px;
-  color: #BABABA;
+  color: #bababa;
   height: 20px;
 }
-.special-select
-{ 
-  font-family: 'Open Sans', sans-serif;
-  background: #FFFFFF;
-  border: 1px solid #BABABA;
+.special-select {
+  font-family: "Open Sans", sans-serif;
+  background: #ffffff;
+  border: 1px solid #bababa;
   box-sizing: border-box;
   border-radius: 3px;
 
@@ -91,9 +81,8 @@
   margin-left: 5px;
   margin-top: 22px;
 }
-.course-name
-{
-  font-family: 'Open Sans', sans-serif;
+.course-name {
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
@@ -102,15 +91,14 @@
   width: 39px;
   height: 20px;
 
-  color: #BABABA;
+  color: #bababa;
   padding-left: 50px;
   padding-top: 32px;
 }
-.course-input
-{ 
-  font-family: 'Open Sans', sans-serif;
-  background: #FFFFFF;
-  border: 1px solid #BABABA;
+.course-input {
+  font-family: "Open Sans", sans-serif;
+  background: #ffffff;
+  border: 1px solid #bababa;
   box-sizing: border-box;
   border-radius: 3px;
 
@@ -119,9 +107,8 @@
   margin-left: 5px;
   margin-top: 27px;
 }
-.group-name
-{
-  font-family: 'Open Sans', sans-serif;
+.group-name {
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
@@ -130,15 +117,14 @@
   width: 58px;
   height: 20px;
 
-  color: #BABABA;
+  color: #bababa;
   padding-left: 25px;
   padding-top: 32px;
 }
-.group-select
-{ 
-  font-family: 'Open Sans', sans-serif;
-  background: #FFFFFF;
-  border: 1px solid #BABABA;
+.group-select {
+  font-family: "Open Sans", sans-serif;
+  background: #ffffff;
+  border: 1px solid #bababa;
   box-sizing: border-box;
   border-radius: 3px;
 
@@ -148,9 +134,8 @@
   margin-left: 5px;
   margin-top: 27px;
 }
-.view-name
-{
-  font-family: 'Open Sans', sans-serif;
+.view-name {
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
@@ -159,30 +144,29 @@
   width: 101px;
   height: 20px;
 
-  color: #BABABA;
+  color: #bababa;
   padding-left: 25px;
   padding-top: 32px;
 }
-.view-input
-{ 
-  font-family: 'Open Sans', sans-serif;
+.view-input {
+  font-family: "Open Sans", sans-serif;
   width: 398px;
   height: 30px;
 
-  background: #FFFFFF;
-  border: 1px solid #BABABA;
+  background: #ffffff;
+  border: 1px solid #bababa;
   box-sizing: border-box;
   border-radius: 3px;
 
   margin-left: 5px;
   margin-top: 27px;
 }
-.button-header{
-  font-family: 'Open Sans', sans-serif;
-  margin-left: 638px;
-  margin-top: 27px;  
-  background: #FFFFFF;
-  border: 1px solid #BABABA;
+.button-header {
+  font-family: "Open Sans", sans-serif;
+  margin-left: 5px;
+  margin-top: 27px;
+  background: #ffffff;
+  border: 1px solid #bababa;
   box-sizing: border-box;
   border-radius: 3px;
   -webkit-box-sizing: content-box;
@@ -194,13 +178,13 @@
   -webkit-box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
 }
-.button-header:active
-{
+.button-header:active {
   background: #cde5ef;
   border-color: #9eb9c2 #b3c0c8 #b4ccce;
   -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
 }
-input[type="submit"]:hover, input[type="reset"]:hover {
+input[type="submit"]:hover,
+input[type="reset"]:hover {
   background-color: #cde5ef;
 }

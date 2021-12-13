@@ -18,7 +18,11 @@ class marksTableContainer extends React.Component {
   render() {
     return (
       <div>
-        <MarksTable journalsite={this.props.journalsite} />
+        <MarksTable
+          journalsite={this.props.journalsite}
+          toggleJournalSitePresence={this.props.toggleJournalSitePresence}
+          setJournalSiteMark={this.props.setJournalSiteMark}
+        />
       </div>
     );
   }

@@ -47,11 +47,11 @@ class Header extends React.Component {
     });
   };
   Logout = () => {
-        window.close("/journal");
-        window.open("/")
-  }
+    window.close("/journal");
+    window.open("/");
+  };
   render() {
-    const { getValueDiscipline, getGroup, getDateBox, Logout} = this;
+    const { getValueDiscipline, getGroup, getDateBox, Logout } = this;
     return (
       <div>
         {console.log(this.state.disciplineId)}
@@ -104,20 +104,29 @@ class Header extends React.Component {
             m.journalHeaders.map((item, i) => {
               if (i === 0)
                 return (
-                  <label className="view-input" key={i}>
-                    {item.typeClass.name}
-                  </label>
+                  <input
+                    className="view-input"
+                    key={i}
+                    value={item.typeClass.name}
+                    readOnly
+                  ></input>
                 );
             })
           )}
-          <div className="view-date-name">Дата:</div>
+          {/* <div className="view-date-name">Дата:</div>
           <input
             className="view-date-input"
             type="date"
             title="Выберите дату"
             onChange={getDateBox}
-          ></input>
-          <input type="submit" className="button-header" name="commit" value="Выйти" onClick={Logout}/>
+          ></input> */}
+          <input
+            type="submit"
+            className="button-header"
+            name="commit"
+            value="Выйти"
+            onClick={Logout}
+          />
         </div>
       </div>
     );
