@@ -23,17 +23,15 @@ const journalsiteReducer = (state = initialState, action) => {
 
     case SET_JOURNALSITE_MARK:
       let newJournalsiteMark = [...state.journalsite];
-      newJournalsiteMark.forEach((m) =>
-        m.journalHeaders.forEach((lesson) => {
-          if (lesson.id === action.lesson_id) {
-            lesson.journalContents.forEach((line) => {
-              if (line.id === action.line_id) {
-                line.grade = action.grade;
-              }
-            });
-          }
-        })
-      );
+      newJournalsiteMark[0].journalHeaders.forEach((lesson) => {
+        if (lesson.id === action.lesson_id) {
+          lesson.journalContents.forEach((line) => {
+            if (line.id === action.line_id) {
+              line.grade = action.grade;
+            }
+          });
+        }
+      });
 
       return {
         ...state,
@@ -42,20 +40,18 @@ const journalsiteReducer = (state = initialState, action) => {
     case TOGGLE_JOURNALSITE_PRESENCE:
       let newJournalsitePresence = [...state.journalsite];
       console.log(state);
-      newJournalsitePresence.forEach((m) =>
-        m.journalHeaders.forEach((lesson) => {
-          if (lesson.id === action.lesson_id) {
-            lesson.journalContents.forEach((line) => {
-              if (line.id === action.line_id) {
-                line.presence = !line.presence;
-                if (!line.presence) {
-                  line.grade = null;
-                }
+      newJournalsitePresence[0].journalHeaders.forEach((lesson) => {
+        if (lesson.id === action.lesson_id) {
+          lesson.journalContents.forEach((line) => {
+            if (line.id === action.line_id) {
+              line.presence = !line.presence;
+              if (!line.presence) {
+                line.grade = null;
               }
-            });
-          }
-        })
-      );
+            }
+          });
+        }
+      });
 
       return {
         ...state,

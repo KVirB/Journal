@@ -1,5 +1,7 @@
 import * as React from "react";
 import "./Login.css";
+import { connect } from "react-redux";
+import { getTeacherThunk } from "../reducer/teacherReducer";
 
 class Login extends React.Component {
   state = {
@@ -23,8 +25,7 @@ class Login extends React.Component {
   };
   Login = () => {
     if (this.state.login === "Абазовская" && this.state.password === "1") {
-      window.open("/journal");
-      window.close("/");
+      window.location.assign("/journal");
     } else {
       this.setState({ discription: "Введите верные данные" });
     }
@@ -68,7 +69,13 @@ class Login extends React.Component {
                 className="button"
                 name="commit"
                 value="Войти"
-                onClick={Login}
+                onClick={() => {
+                  Login();
+                  this.props.getTeacherThunk(
+                    this.state.login,
+                    this.state.password
+                  );
+                }}
               />
             </div>
           </div>
@@ -77,4 +84,12 @@ class Login extends React.Component {
     );
   }
 }
-export default Login;
+let mapStateToProps = (state) => {
+  return {
+    teacher: state.teacherPage.teacher,
+  };
+};
+
+export default connect(mapStateToProps, {
+  getTeacherThunk,
+})(Login);

@@ -47,8 +47,7 @@ class Header extends React.Component {
     });
   };
   Logout = () => {
-    window.close("/journal");
-    window.open("/");
+    window.location.assign("/");
   };
   render() {
     const { getValueDiscipline, getGroup, getDateBox, Logout } = this;

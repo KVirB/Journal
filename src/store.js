@@ -3,11 +3,13 @@ import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
 import headerReducer from "./reducer/headerReducer";
 import journalsiteReducer from "./reducer/journalsiteReducer";
+import teacherReducer from "./reducer/teacherReducer";
 
 let reducers = combineReducers({
   journalsitePage: journalsiteReducer,
   disciplinePage: headerReducer,
   groupPage: headerReducer,
+  teacherPage: teacherReducer,
   form: formReducer,
 });
 

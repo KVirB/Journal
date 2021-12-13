@@ -55,9 +55,9 @@ export const getJournalsite = (groupId, disciplineId) => {
       return response.data;
     });
 };
-export const setServers = (lessons, id) => {
+export const getTeacher = (surname, id) => {
   return baseRout
-    .patch(`/journal-contents/${id}`, { lessons })
+    .get(`electronicjournal/teachers/search?q=surname==${surname};id==${id}`)
     .then((response) => {
       return response.data;
     });
