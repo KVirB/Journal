@@ -10,6 +10,7 @@ import {
   getDisciplineThunk,
   clearGroup,
 } from "../../reducer/headerReducer";
+
 class Header extends React.Component {
   state = {
     disciplineId: 0,
@@ -55,6 +56,7 @@ class Header extends React.Component {
       <div>
         {console.log(this.state.disciplineId)}
         {console.log(this.state.date)}
+        {console.log(this.props.teacher + "gsdgsgsdgsgsgs")}
         <div className="journal-name">Электронный журнал преподователя</div>
         {/* <button onClick={(this.props.getDisciplineThunk(), this.groupId === 0)}>
           Сменить журнал
@@ -126,6 +128,13 @@ class Header extends React.Component {
             value="Выйти"
             onClick={Logout}
           />
+          {this.props.teacher.map((m) => {
+            return (
+              <div>
+                <input value={m.surname}></input>
+              </div>
+            );
+          })}
         </div>
       </div>
     );

@@ -15,10 +15,7 @@ const teacherReducer = (state = initialState, action) => {
         teacher: [...action.teacher],
       };
     case CLEAR_TEACHER:
-      return {
-        ...state,
-        teacher: [],
-      };
+      return initialState;
     default:
       return state;
   }

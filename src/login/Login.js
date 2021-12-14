@@ -5,10 +5,11 @@ import { getTeacherThunk } from "../reducer/teacherReducer";
 
 class Login extends React.Component {
   state = {
-    login: 0,
-    password: 0,
+    login: null,
+    password: null,
     discription: " ",
   };
+
   getLogin = (e) => {
     const { value } = e.target;
     this.setState({ discription: " " });
@@ -23,18 +24,26 @@ class Login extends React.Component {
       password: value,
     });
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.password !== prevState.password) {
+      this.props.getTeacherThunk(this.state.login, this.state.password);
+    }
+  }
+
   Login = () => {
-    if (this.state.login === "Абазовская" && this.state.password === "1") {
+    const { login, password } = this.state;
+    if (login === "Абазовская" && password === "1") {
       window.location.assign("/journal");
     } else {
       this.setState({ discription: "Введите верные данные" });
     }
   };
+
   render() {
     const { getPassword, getLogin, Login } = this;
     return (
       <div className="back">
-        {console.log(this.state.login)}
         <section className="container">
           <div className="login">
             <h1>Войти в электронный журнал</h1>
@@ -49,7 +58,7 @@ class Login extends React.Component {
             </p>
             <p>
               <input
-                type="password"
+                type="text"
                 name="password"
                 defaultValue=""
                 placeholder="Пароль"
@@ -71,12 +80,24 @@ class Login extends React.Component {
                 value="Войти"
                 onClick={() => {
                   Login();
-                  this.props.getTeacherThunk(
+                }}
+              />
+              {/* <input
+                type="submit"
+                className="button"
+                name="commit"
+                value="Войти"
+                onClick={() => {
+                  this.props.toggleTeacher(
                     this.state.login,
                     this.state.password
                   );
                 }}
               />
+              {this.props.teacher.map((m) => (
+                <label>{m.name}</label>
+              ))}
+              {console.log(this.props.teacher + "FAMILIYA")} */}
             </div>
           </div>
         </section>

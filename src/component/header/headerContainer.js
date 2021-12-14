@@ -5,6 +5,7 @@ import {
   getDisciplineThunk,
   setGroup,
   getGroupThunk,
+  getToggleTeacherThunk,
 } from "../../reducer/headerReducer.js";
 import Header from "./Header.js";
 import { getJournalsiteThunk } from "../../reducer/journalsiteReducer";
@@ -26,6 +27,7 @@ class headerContainer extends React.Component {
         discipline={this.props.discipline}
         group={this.props.group}
         journalsite={this.props.group}
+        teacher={this.props.teacher}
       />
     );
   }
@@ -35,6 +37,7 @@ let mapStateToProps = (state) => {
     discipline: state.disciplinePage.discipline,
     group: state.groupPage.group,
     journalsite: state.journalsitePage.journalsite,
+    teacher: state.teacherPage.teacher,
   };
 };
 
