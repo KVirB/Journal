@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   getJournalsiteThunk,
   clearJournalsite,
+  setJournalHeader,
 } from "../../reducer/journalsiteReducer";
 import {
   getGroupThunk,
@@ -57,7 +58,8 @@ class Header extends React.Component {
         {console.log(this.state.disciplineId)}
         {console.log(this.state.date)}
         {console.log(this.props.teacher + "gsdgsgsdgsgsgs")}
-        <div className="journal-name">Электронный журнал преподователя</div>
+
+        <div className="journal-name">Электронный журнал преподавателя</div>
         {/* <button onClick={(this.props.getDisciplineThunk(), this.groupId === 0)}>
           Сменить журнал
         </button> */}
@@ -146,4 +148,5 @@ export default connect(null, {
   getDisciplineThunk,
   clearJournalsite,
   clearGroup,
+  setJournalHeader,
 })(Header);

@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore, compose } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { reducer as formReducer } from "redux-form";
 import headerReducer from "./reducer/headerReducer";
@@ -21,6 +21,12 @@ let reducers = combineReducers({
 //   return reducers(state, action);
 // };
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+let store = createStore(
+  reducers,
+  compose(
+    applyMiddleware(thunkMiddleware),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
+);
 
 export default store;

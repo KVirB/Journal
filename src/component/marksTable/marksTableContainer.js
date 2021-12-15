@@ -5,7 +5,11 @@ import {
   getJournalsiteThunk,
   toggleJournalSitePresence,
   setJournalSiteMark,
+  clearJournalHeader,
+  getJournalHeaderThunk,
 } from "../../reducer/journalsiteReducer";
+import { patchJournalsite } from "../../BD/tables";
+import { setJournalHeader } from "../../reducer/journalsiteReducer";
 import MarksTable from "../marksTable/MarksTable";
 
 class marksTableContainer extends React.Component {
@@ -22,6 +26,11 @@ class marksTableContainer extends React.Component {
           journalsite={this.props.journalsite}
           toggleJournalSitePresence={this.props.toggleJournalSitePresence}
           setJournalSiteMark={this.props.setJournalSiteMark}
+          setJournalHeader={this.props.setJournalHeader}
+          journalHeader={this.props.journalHeader}
+          clclearJournalHeader={this.props.clclearJournalHeader}
+          getJournalHeaderThunk={this.props.getJournalHeaderThunk}
+          patchJournalsite={this.props.patchJournalsite}
         />
       </div>
     );
@@ -30,6 +39,7 @@ class marksTableContainer extends React.Component {
 let mapStateToProps = (state) => {
   return {
     journalsite: state.journalsitePage.journalsite,
+    journalHeader: state.journalsitePage.journalHeader,
   };
 };
 
@@ -38,4 +48,8 @@ export default connect(mapStateToProps, {
   getJournalsiteThunk,
   toggleJournalSitePresence,
   setJournalSiteMark,
+  setJournalHeader,
+  clearJournalHeader,
+  getJournalHeaderThunk,
+  patchJournalsite,
 })(marksTableContainer);

@@ -1,13 +1,15 @@
-import { getJournalsite } from "../BD/tables";
+import { getJournalsite, patchJournalsite } from "../BD/tables";
 
 const SET_JOURNALSITE = "SET_JOURNALSITE";
 const CLEAR_JOURNALSITE = "CLEAR_JOURNALSITE";
 const SET_JOURNALSITE_MARK = "SET_JOURNALSITE_MARK";
 const TOGGLE_JOURNALSITE_PRESENCE = "TOGGLE_JOURNALSITE_PRESENCE";
-
+const SET_JOURNAL_HEADER = "SET_JOURNAL_HEADER";
+const CLEAR_JOURNALHEADER = "CLEAR_JOURNALHEADER";
 let initialState = {
   id: null,
   journalsite: [],
+  journalHeader: [],
   update: true,
 };
 
@@ -20,7 +22,16 @@ const journalsiteReducer = (state = initialState, action) => {
         journalsite: [...action.journalsite],
       };
     // ------добавлено-----------
-
+    case SET_JOURNAL_HEADER:
+      let newJournalsite = [...state.journalsite];
+      let jHeader = [...state.journalHeader];
+      newJournalsite[0].journalHeaders.map((header) => {
+        jHeader.push(header);
+      });
+      return {
+        ...state,
+        journalHeader: jHeader,
+      };
     case SET_JOURNALSITE_MARK:
       let newJournalsiteMark = [...state.journalsite];
       newJournalsiteMark[0].journalHeaders.forEach((lesson) => {
@@ -61,6 +72,11 @@ const journalsiteReducer = (state = initialState, action) => {
     // ------добавлено-----------
     case CLEAR_JOURNALSITE:
       return initialState;
+    case CLEAR_JOURNALHEADER:
+      return {
+        ...state,
+        journalHeader: [],
+      };
     default:
       return state;
   }
@@ -79,6 +95,13 @@ export const setJournalSiteMark = (lesson_id, line_id, grade) => ({
   grade,
 });
 
+export function arrrarrr(obj) {}
+
+export const setJournalHeader = (journalHeader) => ({
+  type: SET_JOURNAL_HEADER,
+  journalHeader,
+});
+
 export const setJournalsite = (journalsite, update) => ({
   type: SET_JOURNALSITE,
   journalsite,
@@ -88,12 +111,25 @@ export const setJournalsite = (journalsite, update) => ({
 export const clearJournalsite = () => ({
   type: CLEAR_JOURNALSITE,
 });
+export const clearJournalHeader = () => ({
+  type: CLEAR_JOURNALHEADER,
+});
 
 export const getJournalsiteThunk = (groupId, disciplineId) => {
   return (dispatch) => {
     getJournalsite(groupId, disciplineId).then((data) => {
       console.log(data);
       dispatch(setJournalsite(data));
+    });
+  };
+};
+export const getJournalHeaderThunk = (journalHeader) => {
+  return (dispatch) => {
+    journalHeader.map((m) => {
+      patchJournalsite(m.id).then((data) => {
+        console.log(data);
+        dispatch(data);
+      });
     });
   };
 };

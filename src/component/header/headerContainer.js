@@ -28,6 +28,7 @@ class headerContainer extends React.Component {
         group={this.props.group}
         journalsite={this.props.group}
         teacher={this.props.teacher}
+        journalHeaders={this.props.journalHeaders}
       />
     );
   }
@@ -38,6 +39,7 @@ let mapStateToProps = (state) => {
     group: state.groupPage.group,
     journalsite: state.journalsitePage.journalsite,
     teacher: state.teacherPage.teacher,
+    journalHeaders: state.journalsitePage.journalHeaders,
   };
 };
 

@@ -257,8 +257,8 @@ export default class MarksTable extends React.Component {
     });
   };
   changeInputHandler = (e) => {
-    console.log("name :", e.target.name);
-    console.log(e.target.checked);
+    // console.log("name :", e.target.name);
+    // console.log(e.target.checked);
     this.setState((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -268,10 +268,10 @@ export default class MarksTable extends React.Component {
     const { getCheckBox, getDateBox } = this;
     return (
       <div className="all-content">
-        {console.log(
+        {/* {console.log(
           this.state.presence +
             "givno-----------------------------------------------------------------------------"
-        )}
+        )} */}
         <TableContainer sx={{ maxHeight: 760 }}>
           <Table
             stickyHeader
@@ -316,6 +316,17 @@ export default class MarksTable extends React.Component {
               m.journalHeaders.map((item, i) => {
                 return (
                   <tbody key={i}>
+                    <input
+                      type="submit"
+                      value="HEDER"
+                      onClick={() => {
+                        this.props.patchJournalsite(this.props.journalHeader);
+                        setTimeout(() => {
+                          console.log(this.props.journalHeader + "наш хидер");
+                        }, 200);
+                        // console.log(this.props.journalsite + "наш сит");
+                      }}
+                    />
                     <TableRow>
                       <TableCell height="75px" className="line-data">
                         <div className="vertical cellwidth">
@@ -355,7 +366,7 @@ export default class MarksTable extends React.Component {
                       // } else {
                       return (
                         <TableRow key={i}>
-                          {console.log(content.grade + "наш контент")}
+                          {/* {console.log(content.grade + "наш контент")} */}
                           <TableCell className="line-grade" height="20px">
                             <div className="cellwidth disp">
                               {content.presence === true && (
@@ -365,7 +376,7 @@ export default class MarksTable extends React.Component {
                                   name="select"
                                   defaultValue={content.grade}
                                   onChange={(e) => {
-                                    console.log(item.id + "данные пришли");
+                                    // console.log(item.id + "данные пришли");
                                     this.props.setJournalSiteMark(
                                       item.id,
                                       content.id,
@@ -397,6 +408,9 @@ export default class MarksTable extends React.Component {
                                     item.id,
                                     content.id
                                   );
+                                  // console.log(
+                                  //   this.props.journalHeader + "наш хидер"
+                                  // );
                                 }}
                               ></input>
                             </div>

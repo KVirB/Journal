@@ -62,3 +62,17 @@ export const getTeacher = (surname, id) => {
       return response.data;
     });
 };
+export const patchJournalsite = (bodyItems) => {
+  bodyItems.map((m) => {
+    let requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(m),
+    };
+    return baseRout
+      .patch(`electronicjournal/journal-headers/${m.id}`, requestOptions)
+      .then((response) => {
+        return response.data;
+      });
+  });
+};
