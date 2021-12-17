@@ -6,6 +6,7 @@ const SET_JOURNALSITE_MARK = "SET_JOURNALSITE_MARK";
 const TOGGLE_JOURNALSITE_PRESENCE = "TOGGLE_JOURNALSITE_PRESENCE";
 const SET_JOURNAL_HEADER = "SET_JOURNAL_HEADER";
 const CLEAR_JOURNALHEADER = "CLEAR_JOURNALHEADER";
+const SET_JOURNALHEADERPATCH = "SET_JOURNALHEADERPATCH";
 let initialState = {
   id: null,
   journalsite: [],
@@ -123,14 +124,15 @@ export const getJournalsiteThunk = (groupId, disciplineId) => {
     });
   };
 };
+
 export const getJournalHeaderThunk = (journalHeader) => {
   return (dispatch) => {
-    journalHeader.map((m) => {
-      patchJournalsite(m.id).then((data) => {
-        console.log(data);
-        dispatch(data);
-      });
-    });
+    patchJournalsite(journalHeader);
+    // .then((data) => {
+    //   console.log(data);
+    //   dispatch(setJournalHeader(data));
+    // })
+    // .catch((error) => alert(error));
   };
 };
 

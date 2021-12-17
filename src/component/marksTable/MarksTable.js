@@ -264,7 +264,11 @@ export default class MarksTable extends React.Component {
       [e.target.name]: e.target.value,
     }));
   };
+
   render() {
+    window.onbeforeunload = function (e) {
+      alert("yeees!");
+    };
     const { getCheckBox, getDateBox } = this;
     return (
       <div className="all-content">
@@ -320,9 +324,12 @@ export default class MarksTable extends React.Component {
                       type="submit"
                       value="HEDER"
                       onClick={() => {
-                        this.props.patchJournalsite(this.props.journalHeader);
+                        this.props.setJournalHeader();
                         setTimeout(() => {
+                          let header = this.props.journalHeader;
+                          this.props.getJournalHeaderThunk(header);
                           console.log(this.props.journalHeader + "наш хидер");
+                          this.props.clearJournalHeader();
                         }, 200);
                         // console.log(this.props.journalsite + "наш сит");
                       }}

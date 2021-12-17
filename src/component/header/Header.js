@@ -49,7 +49,7 @@ class Header extends React.Component {
     });
   };
   Logout = () => {
-    window.location.assign("/");
+    window.location.assign("/electronicaljournal-view");
   };
   render() {
     const { getValueDiscipline, getGroup, getDateBox, Logout } = this;
@@ -105,7 +105,7 @@ class Header extends React.Component {
           <div className="view-name">Вид занятий:</div>
           {this.props.journalsite.map((m) =>
             m.journalHeaders.map((item, i) => {
-              if (i === 0)
+              if (i === 0) {
                 return (
                   <input
                     className="view-input"
@@ -114,6 +114,7 @@ class Header extends React.Component {
                     readOnly
                   ></input>
                 );
+              }
             })
           )}
           {/* <div className="view-date-name">Дата:</div>

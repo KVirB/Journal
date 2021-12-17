@@ -34,7 +34,8 @@ class Login extends React.Component {
   Login = () => {
     const { login, password } = this.state;
     if (login === "Абазовская" && password === "1") {
-      window.location.assign("/journal");
+      window.location.assign("/electronicaljournal-view/journal");
+      this.setState({ login: null, password: null });
     } else {
       this.setState({ discription: "Введите верные данные" });
     }
@@ -44,6 +45,7 @@ class Login extends React.Component {
     const { getPassword, getLogin, Login } = this;
     return (
       <div className="back">
+        {console.log(this.state.login)}
         <section className="container">
           <div className="login">
             <h1>Войти в электронный журнал</h1>
@@ -51,7 +53,7 @@ class Login extends React.Component {
               <input
                 type="text"
                 name="login"
-                defaultValue=""
+                value={this.props.login}
                 placeholder="Логин"
                 onChange={getLogin}
               />
@@ -60,7 +62,7 @@ class Login extends React.Component {
               <input
                 type="text"
                 name="password"
-                defaultValue=""
+                value={this.props.password}
                 placeholder="Пароль"
                 onChange={getPassword}
               />

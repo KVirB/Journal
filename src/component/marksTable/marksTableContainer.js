@@ -7,6 +7,7 @@ import {
   setJournalSiteMark,
   clearJournalHeader,
   getJournalHeaderThunk,
+  setJournalHeaderPatch,
 } from "../../reducer/journalsiteReducer";
 import { patchJournalsite } from "../../BD/tables";
 import { setJournalHeader } from "../../reducer/journalsiteReducer";
@@ -28,9 +29,10 @@ class marksTableContainer extends React.Component {
           setJournalSiteMark={this.props.setJournalSiteMark}
           setJournalHeader={this.props.setJournalHeader}
           journalHeader={this.props.journalHeader}
-          clclearJournalHeader={this.props.clclearJournalHeader}
+          clearJournalHeader={this.props.clearJournalHeader}
           getJournalHeaderThunk={this.props.getJournalHeaderThunk}
           patchJournalsite={this.props.patchJournalsite}
+          setJournalHeaderPatch={this.props.setJournalHeaderPatch}
         />
       </div>
     );
