@@ -103,20 +103,15 @@ class Header extends React.Component {
             ))}
           </select>
           <div className="view-name">Вид занятий:</div>
-          {this.props.journalsite.map((m) =>
-            m.journalHeaders.map((item, i) => {
-              if (i === 0) {
-                return (
-                  <input
-                    className="view-input"
-                    key={i}
-                    value={item.typeClass.name}
-                    readOnly
-                  ></input>
-                );
-              }
-            })
-          )}
+          <input
+            className="view-input"
+            value={this.props.journalsite.map((m) =>
+              m.journalHeaders.map((item) => {
+                return item.typeClass.name;
+              })
+            )}
+            readOnly
+          ></input>
           {/* <div className="view-date-name">Дата:</div>
           <input
             className="view-date-input"
@@ -130,6 +125,20 @@ class Header extends React.Component {
             name="commit"
             value="Выйти"
             onClick={Logout}
+          />
+          <input
+            className="button-header"
+            type="submit"
+            value="ВНИМАНИЕ, СОХРАНИТЬ - КНОПКА КОТОРАЯ СОХРАНЯЕТ, ЕСЛИ НЕ НАЖАТЬ, НЕ СОХРАНИТ"
+            onClick={() => {
+              this.props.setJournalHeader();
+              setTimeout(() => {
+                let header = this.props.journalHeader;
+                this.props.getJournalHeaderThunk(header);
+                console.log(this.props.journalHeader + "наш хидер");
+                this.props.clearJournalHeader();
+              }, 300);
+            }}
           />
           {this.props.teacher.map((m) => {
             return (

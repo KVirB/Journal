@@ -267,8 +267,21 @@ export default class MarksTable extends React.Component {
 
   render() {
     window.onbeforeunload = function (e) {
-      alert("yeees!");
+      // let dialogText = "Вы точно нажали кнопку сохранить?";
+      // e.returnValue = dialogText;
+      // return dialogText;
+
+      let message =
+        "Document 'foo' is not saved. You will lost the changes if you leave the page.";
+      if (typeof e == "undefined") {
+        e = window.event;
+      }
+      if (e) {
+        e.returnValue = message;
+      }
+      return message;
     };
+
     const { getCheckBox, getDateBox } = this;
     return (
       <div className="all-content">
@@ -320,20 +333,6 @@ export default class MarksTable extends React.Component {
               m.journalHeaders.map((item, i) => {
                 return (
                   <tbody key={i}>
-                    <input
-                      type="submit"
-                      value="HEDER"
-                      onClick={() => {
-                        this.props.setJournalHeader();
-                        setTimeout(() => {
-                          let header = this.props.journalHeader;
-                          this.props.getJournalHeaderThunk(header);
-                          console.log(this.props.journalHeader + "наш хидер");
-                          this.props.clearJournalHeader();
-                        }, 200);
-                        // console.log(this.props.journalsite + "наш сит");
-                      }}
-                    />
                     <TableRow>
                       <TableCell height="75px" className="line-data">
                         <div className="vertical cellwidth">
@@ -374,53 +373,51 @@ export default class MarksTable extends React.Component {
                       return (
                         <TableRow key={i}>
                           {/* {console.log(content.grade + "наш контент")} */}
-                          <TableCell className="line-grade" height="20px">
-                            <div className="cellwidth disp">
-                              {content.presence === true && (
-                                <select
-                                  key={content.id}
-                                  className="sel_grade myInput"
-                                  name="select"
-                                  defaultValue={content.grade}
-                                  onChange={(e) => {
-                                    // console.log(item.id + "данные пришли");
-                                    this.props.setJournalSiteMark(
-                                      item.id,
-                                      content.id,
-                                      e.target.value
-                                    );
-                                  }}
-                                >
-                                  <option hidden></option>
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                  <option>6</option>
-                                  <option>7</option>
-                                  <option>8</option>
-                                  <option>9</option>
-                                  <option>10</option>
-                                </select>
-                              )}
-                              <input
-                                type="checkbox"
-                                value=""
-                                id="flexCheckDefault"
-                                name="check"
-                                defaultChecked={content.presence}
-                                onChange={() => {
-                                  this.props.toggleJournalSitePresence(
+                          <TableCell className="line-grade disp" height="20px">
+                            {content.presence === true && (
+                              <select
+                                key={content.id}
+                                className="sel_grade myInput"
+                                name="select"
+                                defaultValue={content.grade}
+                                onChange={(e) => {
+                                  // console.log(item.id + "данные пришли");
+                                  this.props.setJournalSiteMark(
                                     item.id,
-                                    content.id
+                                    content.id,
+                                    e.target.value
                                   );
-                                  // console.log(
-                                  //   this.props.journalHeader + "наш хидер"
-                                  // );
                                 }}
-                              ></input>
-                            </div>
+                              >
+                                <option hidden></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                              </select>
+                            )}
+                            <input
+                              type="checkbox"
+                              value=""
+                              id="flexCheckDefault"
+                              name="check"
+                              defaultChecked={content.presence}
+                              onChange={() => {
+                                this.props.toggleJournalSitePresence(
+                                  item.id,
+                                  content.id
+                                );
+                                // console.log(
+                                //   this.props.journalHeader + "наш хидер"
+                                // );
+                              }}
+                            ></input>
                           </TableCell>
                         </TableRow>
                       );

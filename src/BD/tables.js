@@ -40,7 +40,7 @@ export const getDiscipline = () => {
 export const getGroup = (disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId};teacher.id==1`
+      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId};teacher.id==2`
     )
     .then((response) => {
       return response.data;
@@ -49,7 +49,7 @@ export const getGroup = (disciplineId) => {
 export const getJournalsite = (groupId, disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=teacher.id==1;discipline.id==${disciplineId};group.id==${groupId}`
+      `electronicjournal/journal-sites/search?q=teacher.id==2;discipline.id==${disciplineId};group.id==${groupId}`
     )
     .then((response) => {
       return response.data;
@@ -62,17 +62,27 @@ export const getTeacher = (surname, id) => {
       return response.data;
     });
 };
-export const patchJournalsite = (bodyItems) => {
-  bodyItems.map((m) => {
+export const patchJournalsite = async (bodyItems) => {
+  await bodyItems.map((m) => {
+    console.log(m.content + "CONTENTISHE");
     let requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(m),
+      body: JSON.stringify(m.content),
     };
     return baseRout
-      .patch(`electronicjournal/journal-headers/${m.id}`, requestOptions)
+      .patch(
+        `electronicjournal/journal-headers/${m.id}/content`,
+        requestOptions
+      )
       .then((response) => {
         return response.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally((item) => {
+        console.log(requestOptions);
       });
   });
 };

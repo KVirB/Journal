@@ -8,12 +8,12 @@ const App = (props) => {
   return (
     <Router>
       {/* <div> */}
-      {/* <Route
+      <Route
         exact
         path="/"
         component={() => <Redirect to="/electronicaljournal-view" />}
-      /> */}
-      <Route exact path="/" component={Login} />
+      />
+      <Route exact path="/electronicaljournal-view" component={Login} />
       <Route
         exact
         path="/electronicaljournal-view/journal"

@@ -7,11 +7,14 @@ const TOGGLE_JOURNALSITE_PRESENCE = "TOGGLE_JOURNALSITE_PRESENCE";
 const SET_JOURNAL_HEADER = "SET_JOURNAL_HEADER";
 const CLEAR_JOURNALHEADER = "CLEAR_JOURNALHEADER";
 const SET_JOURNALHEADERPATCH = "SET_JOURNALHEADERPATCH";
+const SET_CLOSED_TRUE = "SET_CLOSED_TRUE";
+const SET_CLOSED_FALSE = "SET_CLOSED_FALSE";
 let initialState = {
   id: null,
   journalsite: [],
   journalHeader: [],
   update: true,
+  closed: false,
 };
 
 const journalsiteReducer = (state = initialState, action) => {
@@ -22,12 +25,23 @@ const journalsiteReducer = (state = initialState, action) => {
         update: true,
         journalsite: [...action.journalsite],
       };
+    case SET_CLOSED_TRUE:
+      return {
+        ...state,
+        closed: true,
+      };
+    case SET_CLOSED_FALSE:
+      return {
+        ...state,
+        closed: false,
+      };
     // ------добавлено-----------
     case SET_JOURNAL_HEADER:
       let newJournalsite = [...state.journalsite];
       let jHeader = [...state.journalHeader];
       newJournalsite[0].journalHeaders.map((header) => {
-        jHeader.push(header);
+        const obj = { id: header.id, content: header.journalContents };
+        jHeader.push(obj);
       });
       return {
         ...state,
@@ -88,7 +102,12 @@ export const toggleJournalSitePresence = (lesson_id, line_id) => ({
   lesson_id,
   line_id,
 });
-
+export const setClosedFalse = () => ({
+  type: SET_CLOSED_FALSE,
+});
+export const setClosedTrue = () => ({
+  type: SET_CLOSED_TRUE,
+});
 export const setJournalSiteMark = (lesson_id, line_id, grade) => ({
   type: SET_JOURNALSITE_MARK,
   lesson_id,

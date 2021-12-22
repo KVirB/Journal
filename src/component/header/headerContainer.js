@@ -5,18 +5,17 @@ import {
   getDisciplineThunk,
   setGroup,
   getGroupThunk,
-  getToggleTeacherThunk,
 } from "../../reducer/headerReducer.js";
 import Header from "./Header.js";
-import { getJournalsiteThunk } from "../../reducer/journalsiteReducer";
-import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
+import {
+  setJournalHeader,
+  clearJournalHeader,
+  getJournalHeaderThunk,
+} from "../../reducer/journalsiteReducer";
 
 class headerContainer extends React.Component {
   componentDidMount() {
-    // this.props.getMarksThunk();
-    // this.props.getFioThunk();
     this.props.getDisciplineThunk();
-    // this.props.getGroupThunk();
   }
   componentWillUnmount() {
     window.location.reload();
@@ -28,7 +27,10 @@ class headerContainer extends React.Component {
         group={this.props.group}
         journalsite={this.props.group}
         teacher={this.props.teacher}
-        journalHeaders={this.props.journalHeaders}
+        setJournalHeader={this.props.setJournalHeader}
+        journalHeader={this.props.journalHeader}
+        clearJournalHeader={this.props.clearJournalHeader}
+        getJournalHeaderThunk={this.props.getJournalHeaderThunk}
       />
     );
   }
@@ -39,7 +41,7 @@ let mapStateToProps = (state) => {
     group: state.groupPage.group,
     journalsite: state.journalsitePage.journalsite,
     teacher: state.teacherPage.teacher,
-    journalHeaders: state.journalsitePage.journalHeaders,
+    journalHeader: state.journalsitePage.journalHeader,
   };
 };
 
@@ -48,4 +50,7 @@ export default connect(mapStateToProps, {
   getDisciplineThunk,
   setGroup,
   getGroupThunk,
+  setJournalHeader,
+  clearJournalHeader,
+  getJournalHeaderThunk,
 })(headerContainer);
