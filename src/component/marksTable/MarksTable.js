@@ -256,6 +256,15 @@ export default class MarksTable extends React.Component {
       presence: value,
     });
   };
+  save = () => {
+    this.props.setJournalHeader();
+    setTimeout(() => {
+      let header = this.props.journalHeader;
+      this.props.getJournalHeaderThunk(header);
+      console.log(this.props.journalHeader + "наш хидер");
+      this.props.clearJournalHeader();
+    }, 300);
+  };
   changeInputHandler = (e) => {
     // console.log("name :", e.target.name);
     // console.log(e.target.checked);
@@ -267,24 +276,26 @@ export default class MarksTable extends React.Component {
 
   render() {
     window.onbeforeunload = function (e) {
-      // let dialogText = "Вы точно нажали кнопку сохранить?";
-      // e.returnValue = dialogText;
-      // return dialogText;
-
-      let message =
-        "Document 'foo' is not saved. You will lost the changes if you leave the page.";
-      if (typeof e == "undefined") {
-        e = window.event;
-      }
-      if (e) {
-        e.returnValue = message;
-      }
-      return message;
+      e.returnValue = "";
     };
+    // document.addEventListener("readystatechange", (event) => {
+    //   alert("Куда собрался?");
+    // });
+
+    // window.onload = function (event) {
+    //   console.log("All resources finished loading!");
+    // };
+    // document.addEventListener("visibilitychange", function logData() {
+    //   if (document.visibilityState === "visible") {
+    //     alert("Куда собрался?");
+    //   }
+    // });
 
     const { getCheckBox, getDateBox } = this;
     return (
       <div className="all-content">
+        {console.log(this.props.journalContent + "PUPA")}
+        {/* {alert("onbeforeunload" in window)} */}
         {/* {console.log(
           this.state.presence +
             "givno-----------------------------------------------------------------------------"
@@ -314,17 +325,19 @@ export default class MarksTable extends React.Component {
               {this.props.journalsite.map((m) =>
                 m.journalHeaders.map((item, i) => {
                   if (i === 0) {
-                    return item.journalContents.map((content) => (
-                      <TableCell
-                        height="20px"
-                        width="153.55px"
-                        className="disp line-stud"
-                        key={content.id}
-                      >
-                        <div>{content.student.surname}</div>
-                        <div className="csn">{content.student.name}</div>
-                      </TableCell>
-                    ));
+                    return item.journalContents
+                      .sort((a, b) => a.id - b.id)
+                      .map((content) => (
+                        <TableCell
+                          height="20px"
+                          width="153.55px"
+                          className="disp line-stud"
+                          key={content.id}
+                        >
+                          <div>{content.student.surname}</div>
+                          <div className="csn">{content.student.name}</div>
+                        </TableCell>
+                      ));
                   }
                 })
               )}
@@ -340,88 +353,93 @@ export default class MarksTable extends React.Component {
                         </div>
                       </TableCell>
                     </TableRow>
-                    {item.journalContents.map((content, i) => {
-                      // if (content.presence === null) {
-                      //   return (
-                      //     <TableRow key={i}>
-                      //       <TableCell className="line-grade">
-                      //         <div className="cellwidth disp">
-                      //           <input
-                      //             className="myInput"
-                      //             type="text"
-                      //             maxLength="2"
-                      //             defaultValue={content.grade}
-                      //             onBlur={(e) =>
-                      //               console.log(
-                      //                 e.target.value +
-                      //                   " : content-id=" +
-                      //                   content.id
-                      //               )
-                      //             }
-                      //             onFocus={(e) => e.target.select()}
-                      //           />
-                      //           <input
-                      //             type="checkbox"
-                      //             defaultChecked={true}
-                      //             onChange={getCheckBox}
-                      //           />
-                      //         </div>
-                      //       </TableCell>
-                      //     </TableRow>
-                      //   );
-                      // } else {
-                      return (
-                        <TableRow key={i}>
-                          {/* {console.log(content.grade + "наш контент")} */}
-                          <TableCell className="line-grade disp" height="20px">
-                            {content.presence === true && (
-                              <select
-                                key={content.id}
-                                className="sel_grade myInput"
-                                name="select"
-                                defaultValue={content.grade}
-                                onChange={(e) => {
-                                  // console.log(item.id + "данные пришли");
-                                  this.props.setJournalSiteMark(
+                    {item.journalContents
+                      .sort((a, b) => a.id - b.id)
+                      .map((content, i) => {
+                        // if (content.presence === null) {
+                        //   return (
+                        //     <TableRow key={i}>
+                        //       <TableCell className="line-grade">
+                        //         <div className="cellwidth disp">
+                        //           <input
+                        //             className="myInput"
+                        //             type="text"
+                        //             maxLength="2"
+                        //             defaultValue={content.grade}
+                        //             onBlur={(e) =>
+                        //               console.log(
+                        //                 e.target.value +
+                        //                   " : content-id=" +
+                        //                   content.id
+                        //               )
+                        //             }
+                        //             onFocus={(e) => e.target.select()}
+                        //           />
+                        //           <input
+                        //             type="checkbox"
+                        //             defaultChecked={true}
+                        //             onChange={getCheckBox}
+                        //           />
+                        //         </div>
+                        //       </TableCell>
+                        //     </TableRow>
+                        //   );
+                        // } else {
+                        return (
+                          <TableRow key={i}>
+                            {/* {console.log(content.grade + "наш контент")} */}
+                            <TableCell
+                              className="line-grade disp"
+                              height="20px"
+                            >
+                              {content.presence === true && (
+                                <select
+                                  key={content.id}
+                                  className="sel_grade myInput"
+                                  name="select"
+                                  defaultValue={content.grade}
+                                  onChange={(e) => {
+                                    // console.log(item.id + "данные пришли");
+                                    this.props.setJournalSiteMark(
+                                      item.id,
+                                      content.id,
+                                      e.target.value
+                                    );
+                                  }}
+                                >
+                                  <option hidden></option>
+                                  <option>1</option>
+                                  <option>2</option>
+                                  <option>3</option>
+                                  <option>4</option>
+                                  <option>5</option>
+                                  <option>6</option>
+                                  <option>7</option>
+                                  <option>8</option>
+                                  <option>9</option>
+                                  <option>10</option>
+                                </select>
+                              )}
+                              <input
+                                type="checkbox"
+                                value=""
+                                id="flexCheckDefault"
+                                name="check"
+                                defaultChecked={content.presence}
+                                onChange={() => {
+                                  this.props.toggleJournalSitePresence(
                                     item.id,
-                                    content.id,
-                                    e.target.value
+                                    content.id
                                   );
+                                  // console.log(
+                                  //   this.props.journalHeader + "наш хидер"
+                                  // );
                                 }}
-                              >
-                                <option hidden></option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                              </select>
-                            )}
-                            <input
-                              type="checkbox"
-                              value=""
-                              id="flexCheckDefault"
-                              name="check"
-                              defaultChecked={content.presence}
-                              onChange={() => {
-                                this.props.toggleJournalSitePresence(
-                                  item.id,
-                                  content.id
-                                );
-                                // console.log(
-                                //   this.props.journalHeader + "наш хидер"
-                                // );
-                              }}
-                            ></input>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
+                              ></input>
+                            </TableCell>
+                          </TableRow>
+                        );
+                      })}
                   </tbody>
                 );
               })

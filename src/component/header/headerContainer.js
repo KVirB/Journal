@@ -11,6 +11,7 @@ import {
   setJournalHeader,
   clearJournalHeader,
   getJournalHeaderThunk,
+  setJournalContent,
 } from "../../reducer/journalsiteReducer";
 
 class headerContainer extends React.Component {
@@ -31,6 +32,8 @@ class headerContainer extends React.Component {
         journalHeader={this.props.journalHeader}
         clearJournalHeader={this.props.clearJournalHeader}
         getJournalHeaderThunk={this.props.getJournalHeaderThunk}
+        closed={this.props.closed}
+        setJournalContent={this.props.setJournalContent}
       />
     );
   }
@@ -42,6 +45,7 @@ let mapStateToProps = (state) => {
     journalsite: state.journalsitePage.journalsite,
     teacher: state.teacherPage.teacher,
     journalHeader: state.journalsitePage.journalHeader,
+    closed: state.journalsitePage.closed,
   };
 };
 
@@ -53,4 +57,5 @@ export default connect(mapStateToProps, {
   setJournalHeader,
   clearJournalHeader,
   getJournalHeaderThunk,
+  setJournalContent,
 })(headerContainer);

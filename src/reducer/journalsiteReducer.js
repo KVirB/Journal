@@ -9,16 +9,33 @@ const CLEAR_JOURNALHEADER = "CLEAR_JOURNALHEADER";
 const SET_JOURNALHEADERPATCH = "SET_JOURNALHEADERPATCH";
 const SET_CLOSED_TRUE = "SET_CLOSED_TRUE";
 const SET_CLOSED_FALSE = "SET_CLOSED_FALSE";
+const SET_JOURNAL_CONTENT = "SET_JOURNAL_CONTENT";
 let initialState = {
   id: null,
   journalsite: [],
   journalHeader: [],
+  journalContent: [],
   update: true,
   closed: false,
 };
 
 const journalsiteReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_JOURNAL_CONTENT:
+      let newJSite = [...state.journalsite];
+      let jContent = [...state.journalContent];
+      newJSite[0].journalHeaders.map((header) => {
+        header.journalContents
+          .sort((a, b) => a.id - b.id)
+          .map((content) => {
+            console.log("content", content);
+            jContent.push(content);
+          });
+      });
+      return {
+        ...state,
+        journalContent: jContent,
+      };
     case SET_JOURNALSITE:
       return {
         ...state,
@@ -35,7 +52,7 @@ const journalsiteReducer = (state = initialState, action) => {
         ...state,
         closed: false,
       };
-    // ------добавлено-----------
+
     case SET_JOURNAL_HEADER:
       let newJournalsite = [...state.journalsite];
       let jHeader = [...state.journalHeader];
@@ -84,7 +101,6 @@ const journalsiteReducer = (state = initialState, action) => {
         journalsite: newJournalsitePresence,
       };
 
-    // ------добавлено-----------
     case CLEAR_JOURNALSITE:
       return initialState;
     case CLEAR_JOURNALHEADER:
@@ -120,6 +136,11 @@ export function arrrarrr(obj) {}
 export const setJournalHeader = (journalHeader) => ({
   type: SET_JOURNAL_HEADER,
   journalHeader,
+});
+
+export const setJournalContent = (journalContent) => ({
+  type: SET_JOURNAL_CONTENT,
+  journalContent,
 });
 
 export const setJournalsite = (journalsite, update) => ({

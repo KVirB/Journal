@@ -27,6 +27,9 @@ class Header extends React.Component {
     console.log(prevState.disciplineId);
     if (groupId !== prevState.groupId) {
       this.props.getJournalsiteThunk(disciplineId, groupId);
+      // setTimeout(() => {
+      //   this.props.setJournalContent();
+      // }, 2000);
       this.props.clearJournalsite();
     }
   }
@@ -48,6 +51,7 @@ class Header extends React.Component {
       date: value,
     });
   };
+
   Logout = () => {
     window.location.assign("/electronicaljournal-view");
   };
@@ -55,9 +59,33 @@ class Header extends React.Component {
     const { getValueDiscipline, getGroup, getDateBox, Logout } = this;
     return (
       <div>
-        {console.log(this.state.disciplineId)}
-        {console.log(this.state.date)}
-        {console.log(this.props.teacher + "gsdgsgsdgsgsgs")}
+        {
+          (console.log(
+            "%cProject by KVirB",
+            "color: red; font-family: sans-serif; font-size: 4.5em; font-weight: bolder; text-shadow: green 4px 3px;"
+          ),
+          (function (url) {
+            var image = new Image();
+            image.onload = function () {
+              var style = [
+                "font-size: 1px;",
+                "line-height: " + (this.height % 1) + "px;",
+                "padding: " +
+                  this.height * 0.5 +
+                  "px " +
+                  this.width * 0.5 +
+                  "px;",
+                "background-size: " + this.width + "px " + this.height + "px;",
+                "background: url(" + url + ");",
+              ].join(" ");
+              console.log("%c ", style);
+            };
+            image.src = url;
+          })(
+            "https://sun9-81.userapi.com/impf/c844722/v844722913/8551/Am47flPpzps.jpg?size=640x779&quality=96&sign=86355b3cd90677656fb561ed534e5a2b&type=album"
+          ))
+        }
+        {console.log(this.props.closed + "CLOSED")}
 
         <div className="journal-name">Электронный журнал преподавателя</div>
         {/* <button onClick={(this.props.getDisciplineThunk(), this.groupId === 0)}>

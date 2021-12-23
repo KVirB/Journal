@@ -40,7 +40,7 @@ export const getDiscipline = () => {
 export const getGroup = (disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId};teacher.id==2`
+      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId};teacher.id==1`
     )
     .then((response) => {
       return response.data;
@@ -49,7 +49,7 @@ export const getGroup = (disciplineId) => {
 export const getJournalsite = (groupId, disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=teacher.id==2;discipline.id==${disciplineId};group.id==${groupId}`
+      `electronicjournal/journal-sites/search?q=teacher.id==1;discipline.id==${disciplineId};group.id==${groupId}`
     )
     .then((response) => {
       return response.data;
@@ -68,11 +68,12 @@ export const patchJournalsite = async (bodyItems) => {
     let requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(m.content),
+      // body: JSON.stringify(m.content),
     };
     return baseRout
       .patch(
         `electronicjournal/journal-headers/${m.id}/content`,
+        JSON.stringify(m.content),
         requestOptions
       )
       .then((response) => {
