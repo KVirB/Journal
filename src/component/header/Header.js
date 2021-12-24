@@ -24,7 +24,6 @@ class Header extends React.Component {
       this.props.getGroupThunk(disciplineId);
       this.props.clearGroup();
     }
-    console.log(prevState.disciplineId);
     if (groupId !== prevState.groupId) {
       this.props.getJournalsiteThunk(disciplineId, groupId);
       // setTimeout(() => {
@@ -59,7 +58,7 @@ class Header extends React.Component {
     const { getValueDiscipline, getGroup, getDateBox, Logout } = this;
     return (
       <div>
-        {
+        {/* {
           (console.log(
             "%cProject by KVirB",
             "color: red; font-family: sans-serif; font-size: 4.5em; font-weight: bolder; text-shadow: green 4px 3px;"
@@ -84,8 +83,7 @@ class Header extends React.Component {
           })(
             "https://sun9-81.userapi.com/impf/c844722/v844722913/8551/Am47flPpzps.jpg?size=640x779&quality=96&sign=86355b3cd90677656fb561ed534e5a2b&type=album"
           ))
-        }
-        {console.log(this.props.closed + "CLOSED")}
+        } */}
 
         <div className="journal-name">Электронный журнал преподавателя</div>
         {/* <button onClick={(this.props.getDisciplineThunk(), this.groupId === 0)}>
@@ -155,19 +153,19 @@ class Header extends React.Component {
             onClick={Logout}
           />
           <input
-            className="button-header"
+            className="button-header bt_color"
             type="submit"
-            value="ВНИМАНИЕ, СОХРАНИТЬ - КНОПКА КОТОРАЯ СОХРАНЯЕТ, ЕСЛИ НЕ НАЖАТЬ, НЕ СОХРАНИТ"
+            value="СОХРАНИТЬ"
             onClick={() => {
               this.props.setJournalHeader();
               setTimeout(() => {
                 let header = this.props.journalHeader;
                 this.props.getJournalHeaderThunk(header);
-                console.log(this.props.journalHeader + "наш хидер");
                 this.props.clearJournalHeader();
               }, 300);
             }}
           />
+          {console.log(JSON.stringify(this.props.journalHeader) + "HEADERRRRR")}
           {this.props.teacher.map((m) => {
             return (
               <div>

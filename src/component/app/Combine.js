@@ -97,14 +97,10 @@ for (let st of students) {
   }
 }
 
-console.log(students);
-
-console.log(classes);
 const tabTitles = classes.map((cl) =>
   cl.date_of_lesson.toLocaleDateString("ru-RU")
 );
 tabTitles.unshift("ФИО");
-console.log(tabTitles);
 //const rows = students.map ()
 
 export default class Combine extends React.Component {

@@ -249,6 +249,7 @@ export default class MarksTable extends React.Component {
   state = {
     presence: null,
     date: null,
+    koko: [],
   };
   getCheckBox = (e) => {
     const { value } = e.target;
@@ -261,7 +262,6 @@ export default class MarksTable extends React.Component {
     setTimeout(() => {
       let header = this.props.journalHeader;
       this.props.getJournalHeaderThunk(header);
-      console.log(this.props.journalHeader + "наш хидер");
       this.props.clearJournalHeader();
     }, 300);
   };
@@ -273,11 +273,27 @@ export default class MarksTable extends React.Component {
       [e.target.name]: e.target.value,
     }));
   };
-
   render() {
     window.onbeforeunload = function (e) {
       e.returnValue = "";
     };
+    // let check =
+    //   localStorage.getItem("journalsite") === null
+    //     ? this.props.journalsite.map((m, i) => {
+    //         if (i === 0)
+    //           return (
+    //             <TableCell
+    //               height="75px"
+    //               className="line-fio diagonal-line"
+    //               width="153.55px"
+    //               key={m.id}
+    //             >
+    //               <div className="dzs">Дата</div>
+    //               <div className="fios">ФИО</div>
+    //             </TableCell>
+    //           );
+    //       })
+    //     : null;
     // document.addEventListener("readystatechange", (event) => {
     //   alert("Куда собрался?");
     // });
@@ -290,11 +306,28 @@ export default class MarksTable extends React.Component {
     //     alert("Куда собрался?");
     //   }
     // });
-
     const { getCheckBox, getDateBox } = this;
     return (
       <div className="all-content">
-        {console.log(this.props.journalContent + "PUPA")}
+        <button
+          onClick={() => {
+            this.state.koko.push(localStorage.getItem("journalsite"));
+            setTimeout(() => {
+              console.log(this.state.koko + "хеллоУ УБЛЮДКИ ");
+              console.log(this.props.journalsite);
+            }, 2000);
+          }}
+        >
+          STORADJE
+        </button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            localStorage.clear();
+          }}
+        >
+          STORADJE CLEAR
+        </button>
         {/* {alert("onbeforeunload" in window)} */}
         {/* {console.log(
           this.state.presence +
@@ -308,6 +341,7 @@ export default class MarksTable extends React.Component {
             className="disp"
           >
             <TableRow>
+              {/* {console.log(JSON.stringify(this.props.journalsite) + "site")} */}
               {this.props.journalsite.map((m, i) => {
                 if (i === 0)
                   return (
@@ -405,6 +439,13 @@ export default class MarksTable extends React.Component {
                                       content.id,
                                       e.target.value
                                     );
+                                    if (typeof Storage !== "undefined") {
+                                      // Store
+                                      localStorage.setItem(
+                                        "journalsite",
+                                        JSON.stringify(this.props.journalsite)
+                                      );
+                                    }
                                   }}
                                 >
                                   <option hidden></option>
@@ -431,6 +472,13 @@ export default class MarksTable extends React.Component {
                                     item.id,
                                     content.id
                                   );
+                                  if (typeof Storage !== "undefined") {
+                                    // Store
+                                    localStorage.setItem(
+                                      "journalsite",
+                                      JSON.stringify(this.props.journalsite)
+                                    );
+                                  }
                                   // console.log(
                                   //   this.props.journalHeader + "наш хидер"
                                   // );

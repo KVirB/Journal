@@ -28,7 +28,6 @@ const journalsiteReducer = (state = initialState, action) => {
         header.journalContents
           .sort((a, b) => a.id - b.id)
           .map((content) => {
-            console.log("content", content);
             jContent.push(content);
           });
       });
@@ -82,7 +81,6 @@ const journalsiteReducer = (state = initialState, action) => {
       };
     case TOGGLE_JOURNALSITE_PRESENCE:
       let newJournalsitePresence = [...state.journalsite];
-      console.log(state);
       newJournalsitePresence[0].journalHeaders.forEach((lesson) => {
         if (lesson.id === action.lesson_id) {
           lesson.journalContents.forEach((line) => {
@@ -159,7 +157,6 @@ export const clearJournalHeader = () => ({
 export const getJournalsiteThunk = (groupId, disciplineId) => {
   return (dispatch) => {
     getJournalsite(groupId, disciplineId).then((data) => {
-      console.log(data);
       dispatch(setJournalsite(data));
     });
   };

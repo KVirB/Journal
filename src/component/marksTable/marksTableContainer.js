@@ -13,12 +13,6 @@ import { setJournalHeader } from "../../reducer/journalsiteReducer";
 import MarksTable from "../marksTable/MarksTable";
 
 class marksTableContainer extends React.Component {
-  componentDidMount() {
-    console.group("Group:");
-    console.log("1");
-    console.log(2);
-    console.groupEnd();
-  }
   componentWillUnmount() {
     window.location.reload();
   }
