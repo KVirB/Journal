@@ -64,7 +64,6 @@ export const getTeacher = (surname, id) => {
 };
 export const patchJournalsite = async (bodyItems) => {
   await bodyItems.map((m) => {
-    console.log(m.content + "CONTENTISHE");
     let requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
