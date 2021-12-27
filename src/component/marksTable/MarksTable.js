@@ -273,10 +273,29 @@ export default class MarksTable extends React.Component {
       [e.target.name]: e.target.value,
     }));
   };
+  componentDidMount() {
+    if (localStorage.getItem("journalsite") !== null) {
+      let isBoss = window.confirm(
+        "С момента прошлой сессии у вас остались не сохраненные данные.Сохранить прошлые изменения?"
+      );
+      this.props.setJournalHeader();
+      if (isBoss === true) {
+        setTimeout(() => {
+          let header = this.props.journalHeader;
+          this.props.getJournalHeaderThunk(header);
+          this.props.clearJournalHeader();
+          console.log(JSON.stringify(header) + "all good");
+          alert("Сохранено");
+        }, 1);
+      } else {
+        localStorage.clear();
+      }
+    }
+  }
   render() {
-    window.onbeforeunload = function (e) {
-      e.returnValue = "";
-    };
+    // window.onbeforeunload = function (e) {
+    //   e.returnValue = "";
+    // };
     // let check =
     //   localStorage.getItem("journalsite") === null
     //     ? this.props.journalsite.map((m, i) => {
@@ -341,7 +360,8 @@ export default class MarksTable extends React.Component {
             className="disp"
           >
             <TableRow>
-              {/* {console.log(JSON.stringify(this.props.journalsite) + "site")} */}
+              {console.log(JSON.stringify(this.props.journalsite) + "site")}
+              {/* JSON.parse(localStorage.getItem("journalsite")) */}
               {this.props.journalsite.map((m, i) => {
                 if (i === 0)
                   return (

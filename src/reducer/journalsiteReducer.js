@@ -53,16 +53,30 @@ const journalsiteReducer = (state = initialState, action) => {
       };
 
     case SET_JOURNAL_HEADER:
-      let newJournalsite = [...state.journalsite];
-      let jHeader = [...state.journalHeader];
-      newJournalsite[0].journalHeaders.map((header) => {
-        const obj = { id: header.id, content: header.journalContents };
-        jHeader.push(obj);
-      });
-      return {
-        ...state,
-        journalHeader: jHeader,
-      };
+      if (localStorage.getItem("journalsite") !== null) {
+        let newJournalsite = JSON.parse(localStorage.getItem("journalsite"));
+        let jHeader = [...state.journalHeader];
+        newJournalsite[0].journalHeaders.map((header) => {
+          const obj = { id: header.id, content: header.journalContents };
+          jHeader.push(obj);
+        });
+        return {
+          ...state,
+          journalHeader: jHeader,
+        };
+      } else {
+        let newJournalsite = [...state.journalsite];
+        let jHeader = [...state.journalHeader];
+        newJournalsite[0].journalHeaders.map((header) => {
+          const obj = { id: header.id, content: header.journalContents };
+          jHeader.push(obj);
+        });
+        return {
+          ...state,
+          journalHeader: jHeader,
+        };
+      }
+
     case SET_JOURNALSITE_MARK:
       let newJournalsiteMark = [...state.journalsite];
       newJournalsiteMark[0].journalHeaders.forEach((lesson) => {

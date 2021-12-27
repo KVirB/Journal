@@ -37,6 +37,7 @@ class Header extends React.Component {
     this.setState({
       disciplineId: value,
     });
+    localStorage.clear();
   };
   getGroup = (e) => {
     const { value } = e.target;
@@ -163,9 +164,9 @@ class Header extends React.Component {
                 this.props.getJournalHeaderThunk(header);
                 this.props.clearJournalHeader();
               }, 300);
+              localStorage.clear();
             }}
           />
-          {console.log(JSON.stringify(this.props.journalHeader) + "HEADERRRRR")}
           {this.props.teacher.map((m) => {
             return (
               <div>
