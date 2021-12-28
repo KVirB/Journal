@@ -2,6 +2,7 @@ import * as React from "react";
 import "./Login.css";
 import { connect } from "react-redux";
 import { getTeacherThunk } from "../reducer/teacherReducer";
+import * as axios from "axios";
 
 class Login extends React.Component {
   state = {
@@ -31,12 +32,37 @@ class Login extends React.Component {
     }
   }
 
-  Login = () => {
+  // Login = () => {
+  //   const { login, password } = this.state;
+  //   if (login === "Абазовская" && password === "1") {
+  //     window.location.assign("/electronicaljournal-view/journal");
+  //     this.setState({ login: null, password: null });
+  //   } else {
+  //     this.setState({ discription: "Введите верные данные" });
+  //   }
+  // };
+
+  Login = async () => {
     const { login, password } = this.state;
-    if (login === "Абазовская" && password === "1") {
+
+    try {
+      const response = await axios({
+        method: "post",
+        url: "https://abitpriv.vstu.by:8080/api/uaa/token",
+        headers: {
+          Authorization:
+            "Basic SEVBRF9ERVBBUlRNRU5UX0NMSUVOVDpWWnZrZlR6eTVCZ1cybVJx",
+        },
+        withCredentials: true,
+        params: {
+          grant_type: "password",
+          username: login,
+          password: password,
+        },
+      });
       window.location.assign("/electronicaljournal-view/journal");
       this.setState({ login: null, password: null });
-    } else {
+    } catch (e) {
       this.setState({ discription: "Введите верные данные" });
     }
   };
