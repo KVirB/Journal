@@ -29,6 +29,7 @@ class Header extends React.Component {
       // setTimeout(() => {
       //   this.props.setJournalContent();
       // }, 2000);
+      console.log(disciplineId + groupId + "journalsite");
       this.props.clearJournalsite();
     }
   }
@@ -37,7 +38,27 @@ class Header extends React.Component {
     this.setState({
       disciplineId: value,
     });
-    localStorage.clear();
+    if (localStorage.getItem("journalsite") !== null) {
+      let dispConf = window.confirm(
+        "У вас остались не сохраненные изменения. Сохранить?"
+      );
+      this.props.setJournalHeader();
+      this.props.clearJournalsite();
+      this.state.groupId = 0;
+      this.state.disciplineId = 0;
+      if (dispConf === true) {
+        setTimeout(() => {
+          let header = this.props.journalHeader;
+          this.props.getJournalHeaderThunk(header);
+          this.props.clearJournalHeader();
+          console.log(JSON.stringify(header) + "all good");
+          alert("Сохранено");
+          localStorage.clear();
+        }, 1);
+      } else {
+        localStorage.clear();
+      }
+    }
   };
   getGroup = (e) => {
     const { value } = e.target;
@@ -82,7 +103,7 @@ class Header extends React.Component {
             };
             image.src = url;
           })(
-            "https://sun9-81.userapi.com/impf/c844722/v844722913/8551/Am47flPpzps.jpg?size=640x779&quality=96&sign=86355b3cd90677656fb561ed534e5a2b&type=album"
+            "http://risovach.ru/thumb/upload/200s400/2019/08/generator/i-tak-soydet_217015291_orig_.png?d9qg6"
           ))
         } */}
 
@@ -146,13 +167,7 @@ class Header extends React.Component {
             title="Выберите дату"
             onChange={getDateBox}
           ></input> */}
-          <input
-            type="submit"
-            className="button-header"
-            name="commit"
-            value="Выйти"
-            onClick={Logout}
-          />
+
           <input
             className="button-header bt_color"
             type="submit"
@@ -166,6 +181,13 @@ class Header extends React.Component {
               }, 300);
               localStorage.clear();
             }}
+          />
+          <input
+            type="submit"
+            className="button-header bt_left"
+            name="commit"
+            value="Выйти"
+            onClick={Logout}
           />
           {this.props.teacher.map((m) => {
             return (

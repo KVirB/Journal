@@ -286,6 +286,7 @@ export default class MarksTable extends React.Component {
           this.props.clearJournalHeader();
           console.log(JSON.stringify(header) + "all good");
           alert("Сохранено");
+          localStorage.clear();
         }, 1);
       } else {
         localStorage.clear();
@@ -328,25 +329,6 @@ export default class MarksTable extends React.Component {
     const { getCheckBox, getDateBox } = this;
     return (
       <div className="all-content">
-        <button
-          onClick={() => {
-            this.state.koko.push(localStorage.getItem("journalsite"));
-            setTimeout(() => {
-              console.log(this.state.koko + "хеллоУ УБЛЮДКИ ");
-              console.log(this.props.journalsite);
-            }, 2000);
-          }}
-        >
-          STORADJE
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            localStorage.clear();
-          }}
-        >
-          STORADJE CLEAR
-        </button>
         {/* {alert("onbeforeunload" in window)} */}
         {/* {console.log(
           this.state.presence +

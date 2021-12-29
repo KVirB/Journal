@@ -192,3 +192,7 @@ input[type="submit"]:hover,
 input[type="reset"]:hover {
   background-color: #cde5ef;
 }
+.bt_left {
+  margin-left: auto;
+  margin-right: 50px;
+}
