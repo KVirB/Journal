@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import { clearJournalHeader } from "../reducer/journalsiteReducer";
 
 const baseRout = axios.create({
   baseURL: "http://192.168.11.252:8082/",

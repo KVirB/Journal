@@ -436,6 +436,7 @@ export default class MarksTable extends React.Component {
                                   defaultValue={content.grade}
                                   onChange={(e) => {
                                     // console.log(item.id + "данные пришли");
+
                                     this.props.setJournalSiteMark(
                                       item.id,
                                       content.id,

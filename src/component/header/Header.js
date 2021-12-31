@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./Header.css";
 import { connect } from "react-redux";
 import {
@@ -18,34 +18,33 @@ class Header extends React.Component {
     groupId: 0,
     date: null,
   };
+
   componentDidUpdate(prevProps, prevState) {
     const { disciplineId, groupId } = this.state;
     if (disciplineId !== prevState.disciplineId) {
       this.props.getGroupThunk(disciplineId);
       this.props.clearGroup();
     }
-    if (groupId !== prevState.groupId) {
+    if (
+      groupId !== prevState.groupId ||
+      disciplineId !== prevState.disciplineId
+    ) {
       this.props.getJournalsiteThunk(disciplineId, groupId);
-      // setTimeout(() => {
-      //   this.props.setJournalContent();
-      // }, 2000);
       console.log(disciplineId + groupId + "journalsite");
-      this.props.clearJournalsite();
     }
   }
+
   getValueDiscipline = (e) => {
     const { value } = e.target;
     this.setState({
       disciplineId: value,
     });
+    this.state.groupId = 0;
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
         "У вас остались не сохраненные изменения. Сохранить?"
       );
       this.props.setJournalHeader();
-      this.props.clearJournalsite();
-      this.state.groupId = 0;
-      this.state.disciplineId = 0;
       if (dispConf === true) {
         setTimeout(() => {
           let header = this.props.journalHeader;
@@ -72,7 +71,6 @@ class Header extends React.Component {
       date: value,
     });
   };
-
   Logout = () => {
     window.location.assign("/electronicaljournal-view");
   };
@@ -178,7 +176,8 @@ class Header extends React.Component {
                 let header = this.props.journalHeader;
                 this.props.getJournalHeaderThunk(header);
                 this.props.clearJournalHeader();
-              }, 300);
+                console.log(this.props.journalHeader + "KNOPKA");
+              }, 1);
               localStorage.clear();
             }}
           />
