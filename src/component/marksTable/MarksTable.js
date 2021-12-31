@@ -436,7 +436,7 @@ export default class MarksTable extends React.Component {
                                   defaultValue={content.grade}
                                   onChange={(e) => {
                                     // console.log(item.id + "данные пришли");
-
+                                    this.props.setBtnFalse();
                                     this.props.setJournalSiteMark(
                                       item.id,
                                       content.id,
@@ -471,6 +471,10 @@ export default class MarksTable extends React.Component {
                                 name="check"
                                 defaultChecked={content.presence}
                                 onChange={() => {
+                                  this.props.setBtnFalse();
+                                  console.log(
+                                    this.props.disabled + "DISABBLE F MARKS"
+                                  );
                                   this.props.toggleJournalSitePresence(
                                     item.id,
                                     content.id

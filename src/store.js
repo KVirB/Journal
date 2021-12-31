@@ -4,12 +4,14 @@ import { reducer as formReducer } from "redux-form";
 import headerReducer from "./reducer/headerReducer";
 import journalsiteReducer from "./reducer/journalsiteReducer";
 import teacherReducer from "./reducer/teacherReducer";
+import btnReducer from "./reducer/btnReducer";
 
 let reducers = combineReducers({
   journalsitePage: journalsiteReducer,
   disciplinePage: headerReducer,
   groupPage: headerReducer,
   teacherPage: teacherReducer,
+  btnPage: btnReducer,
   form: formReducer,
 });
 

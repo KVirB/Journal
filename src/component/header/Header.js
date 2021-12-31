@@ -11,6 +11,8 @@ import {
   getDisciplineThunk,
   clearGroup,
 } from "../../reducer/headerReducer";
+import { Collapse } from "bootstrap";
+import { Hidden } from "@mui/material";
 
 class Header extends React.Component {
   state = {
@@ -74,6 +76,7 @@ class Header extends React.Component {
   Logout = () => {
     window.location.assign("/electronicaljournal-view");
   };
+
   render() {
     const { getValueDiscipline, getGroup, getDateBox, Logout } = this;
     return (
@@ -165,11 +168,11 @@ class Header extends React.Component {
             title="Выберите дату"
             onChange={getDateBox}
           ></input> */}
-
           <input
             className="button-header bt_color"
             type="submit"
             value="СОХРАНИТЬ"
+            disabled={this.props.disabled}
             onClick={() => {
               this.props.setJournalHeader();
               setTimeout(() => {
@@ -178,7 +181,9 @@ class Header extends React.Component {
                 this.props.clearJournalHeader();
                 console.log(this.props.journalHeader + "KNOPKA");
               }, 1);
-              localStorage.clear();
+              this.props.setBtnTrue();
+              console.log(this.props.disabled + "DISABLEDFAK");
+              localStorage.removeItem("journalsite");
             }}
           />
           <input

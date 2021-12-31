@@ -13,7 +13,7 @@ import {
   getJournalHeaderThunk,
   setJournalContent,
 } from "../../reducer/journalsiteReducer";
-
+import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
 class headerContainer extends React.Component {
   componentDidMount() {
     this.props.getDisciplineThunk();
@@ -34,6 +34,9 @@ class headerContainer extends React.Component {
         getJournalHeaderThunk={this.props.getJournalHeaderThunk}
         closed={this.props.closed}
         setJournalContent={this.props.setJournalContent}
+        disabled={this.props.disabled}
+        setBtnTrue={this.props.setBtnTrue}
+        setBtnFalse={this.props.setBtnFalse}
       />
     );
   }
@@ -45,7 +48,7 @@ let mapStateToProps = (state) => {
     journalsite: state.journalsitePage.journalsite,
     teacher: state.teacherPage.teacher,
     journalHeader: state.journalsitePage.journalHeader,
-    closed: state.journalsitePage.closed,
+    disabled: state.btnPage.disabled,
   };
 };
 
@@ -58,4 +61,6 @@ export default connect(mapStateToProps, {
   clearJournalHeader,
   getJournalHeaderThunk,
   setJournalContent,
+  setBtnTrue,
+  setBtnFalse,
 })(headerContainer);
