@@ -6,7 +6,6 @@ const SET_JOURNALSITE_MARK = "SET_JOURNALSITE_MARK";
 const TOGGLE_JOURNALSITE_PRESENCE = "TOGGLE_JOURNALSITE_PRESENCE";
 const SET_JOURNAL_HEADER = "SET_JOURNAL_HEADER";
 const CLEAR_JOURNALHEADER = "CLEAR_JOURNALHEADER";
-const SET_JOURNALHEADERPATCH = "SET_JOURNALHEADERPATCH";
 const SET_CLOSED_TRUE = "SET_CLOSED_TRUE";
 const SET_CLOSED_FALSE = "SET_CLOSED_FALSE";
 const SET_JOURNAL_CONTENT = "SET_JOURNAL_CONTENT";
@@ -142,8 +141,6 @@ export const setJournalSiteMark = (lesson_id, line_id, grade) => ({
   line_id,
   grade,
 });
-
-export function arrrarrr(obj) {}
 
 export const setJournalHeader = (journalHeader) => ({
   type: SET_JOURNAL_HEADER,

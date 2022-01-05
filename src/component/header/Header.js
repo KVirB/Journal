@@ -152,15 +152,14 @@ class Header extends React.Component {
             ))}
           </select>
           <div className="view-name">Вид занятий:</div>
-          <input
-            className="view-input"
-            value={this.props.journalsite.map((m) =>
-              m.journalHeaders.map((item) => {
-                return item.typeClass.name;
-              })
-            )}
-            readOnly
-          ></input>
+          <select className="view-input">
+            <option defaultValue="" hidden>
+              Выберите вид
+            </option>
+            <option>Лекция</option>
+            <option>Практическая работа</option>
+            <option>Лабораторная работа</option>
+          </select>
           {/* <div className="view-date-name">Дата:</div>
           <input
             className="view-date-input"

@@ -348,7 +348,7 @@ export default class MarksTable extends React.Component {
                 if (i === 0)
                   return (
                     <TableCell
-                      height="75px"
+                      height="100px"
                       className="line-fio diagonal-line"
                       width="153.55px"
                       key={m.id}
@@ -383,9 +383,11 @@ export default class MarksTable extends React.Component {
                 return (
                   <tbody key={i}>
                     <TableRow>
-                      <TableCell height="75px" className="line-data">
+                      <TableCell height="100px" className="line-data">
                         <div className="vertical cellwidth">
                           {item.dateOfLesson}
+                          <br />
+                          {item.typeClass.name}
                         </div>
                       </TableCell>
                     </TableRow>
@@ -469,6 +471,7 @@ export default class MarksTable extends React.Component {
                                 value=""
                                 id="flexCheckDefault"
                                 name="check"
+                                className="CHECK"
                                 defaultChecked={content.presence}
                                 onChange={() => {
                                   this.props.setBtnFalse();
