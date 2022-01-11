@@ -10,246 +10,11 @@ export default class MarksTable extends React.Component {
     if (this.props.journalsite !== prevProps.journalsite) {
     }
   }
-  sites = [
-    {
-      id: 1,
-      discipline: {
-        id: 1,
-        name: "Автоматизация информационного обеспечения",
-        idFromSource: 3,
-      },
-      teacher: {
-        id: 1,
-        surname: "Абазовская",
-        name: "Наталья",
-        patronymic: "Викторовна",
-        idFromSource: 3,
-      },
-      group: {
-        id: 1,
-        name: "Дзк-19",
-      },
-      streamId: null,
-      journalHeaders: [
-        {
-          id: 1,
-          subGroup: 1,
-          classTopic: null,
-          discription: null,
-          dateOfLesson: "10.12.2021",
-          hoursCount: null,
-          typeClass: {
-            id: 1,
-            name: "Лабораторная работа",
-          },
-          journalContents: [
-            {
-              id: 1,
-              presence: true,
-              grade: 6,
-              discription: null,
-              student: {
-                id: 1,
-                surname: "Седова",
-                name: "Мария",
-                patronymic: "Петровна",
-                subGroup: 1,
-              },
-            },
-            {
-              id: 2,
-              presence: false,
-              grade: 8,
-              discription: null,
-              student: {
-                id: 2,
-                surname: "Липская",
-                name: "Анна",
-                patronymic: "Григорьевна",
-                subGroup: 1,
-              },
-            },
-            {
-              id: 3,
-              presence: true,
-              grade: 7,
-              discription: null,
-              student: {
-                id: 3,
-                surname: "Цепото",
-                name: "Виктор",
-                patronymic: "Михайлович",
-                subGroup: 1,
-              },
-            },
-          ],
-        },
-        {
-          id: 2,
-          subGroup: 1,
-          classTopic: null,
-          discription: null,
-          dateOfLesson: "11.12.2021",
-          hoursCount: null,
-          typeClass: {
-            id: 1,
-            name: "Лабораторная работа",
-          },
-          journalContents: [
-            {
-              id: 1,
-              presence: true,
-              grade: 4,
-              discription: null,
-              student: {
-                id: 1,
-                surname: "Седова",
-                name: "Мария",
-                patronymic: "Петровна",
-                subGroup: 1,
-              },
-            },
-            {
-              id: 2,
-              presence: false,
-              grade: 2,
-              discription: null,
-              student: {
-                id: 2,
-                surname: "Липская",
-                name: "Анна",
-                patronymic: "Григорьевна",
-                subGroup: 1,
-              },
-            },
-            {
-              id: 3,
-              presence: true,
-              grade: 9,
-              discription: null,
-              student: {
-                id: 3,
-                surname: "Цепото",
-                name: "Виктор",
-                patronymic: "Михайлович",
-                subGroup: 1,
-              },
-            },
-          ],
-        },
-        {
-          id: 3,
-          subGroup: 1,
-          classTopic: null,
-          discription: null,
-          dateOfLesson: "12.12.2021",
-          hoursCount: null,
-          typeClass: {
-            id: 1,
-            name: "Лабораторная работа",
-          },
-          journalContents: [
-            {
-              id: 1,
-              presence: true,
-              grade: 8,
-              discription: null,
-              student: {
-                id: 1,
-                surname: "Седова",
-                name: "Мария",
-                patronymic: "Петровна",
-                subGroup: 1,
-              },
-            },
-            {
-              id: 2,
-              presence: false,
-              grade: 5,
-              discription: null,
-              student: {
-                id: 2,
-                surname: "Липская",
-                name: "Анна",
-                patronymic: "Григорьевна",
-                subGroup: 1,
-              },
-            },
-            {
-              id: 3,
-              presence: true,
-              grade: 10,
-              discription: null,
-              student: {
-                id: 3,
-                surname: "Цепото",
-                name: "Виктор",
-                patronymic: "Михайлович",
-                subGroup: 1,
-              },
-            },
-          ],
-        },
-        {
-          id: 4,
-          subGroup: 1,
-          classTopic: null,
-          discription: null,
-          dateOfLesson: "13.12.2021",
-          hoursCount: null,
-          typeClass: {
-            id: 1,
-            name: "Лабораторная работа",
-          },
-          journalContents: [
-            {
-              id: 1,
-              presence: null,
-              grade: 8,
-              discription: null,
-              student: {
-                id: 1,
-                surname: "Седова",
-                name: "Мария",
-                patronymic: "Петровна",
-                subGroup: 1,
-              },
-            },
-            {
-              id: 2,
-              presence: null,
-              grade: 7,
-              discription: null,
-              student: {
-                id: 2,
-                surname: "Липская",
-                name: "Анна",
-                patronymic: "Григорьевна",
-                subGroup: 1,
-              },
-            },
-            {
-              id: 3,
-              presence: null,
-              grade: 6,
-              discription: null,
-              student: {
-                id: 3,
-                surname: "Цепото",
-                name: "Виктор",
-                patronymic: "Михайлович",
-                subGroup: 1,
-              },
-            },
-          ],
-        },
-      ],
-    },
-  ];
   state = {
     presence: null,
     date: null,
     koko: [],
+    x: null,
   };
   getCheckBox = (e) => {
     const { value } = e.target;
@@ -266,8 +31,6 @@ export default class MarksTable extends React.Component {
     }, 300);
   };
   changeInputHandler = (e) => {
-    // console.log("name :", e.target.name);
-    // console.log(e.target.checked);
     this.setState((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -287,53 +50,18 @@ export default class MarksTable extends React.Component {
           console.log(JSON.stringify(header) + "all good");
           alert("Сохранено");
           localStorage.clear();
+          this.props.clearTP();
         }, 1);
       } else {
         localStorage.clear();
+        this.props.clearTP();
       }
     }
   }
   render() {
-    // window.onbeforeunload = function (e) {
-    //   e.returnValue = "";
-    // };
-    // let check =
-    //   localStorage.getItem("journalsite") === null
-    //     ? this.props.journalsite.map((m, i) => {
-    //         if (i === 0)
-    //           return (
-    //             <TableCell
-    //               height="75px"
-    //               className="line-fio diagonal-line"
-    //               width="153.55px"
-    //               key={m.id}
-    //             >
-    //               <div className="dzs">Дата</div>
-    //               <div className="fios">ФИО</div>
-    //             </TableCell>
-    //           );
-    //       })
-    //     : null;
-    // document.addEventListener("readystatechange", (event) => {
-    //   alert("Куда собрался?");
-    // });
-
-    // window.onload = function (event) {
-    //   console.log("All resources finished loading!");
-    // };
-    // document.addEventListener("visibilitychange", function logData() {
-    //   if (document.visibilityState === "visible") {
-    //     alert("Куда собрался?");
-    //   }
-    // });
     const { getCheckBox, getDateBox } = this;
     return (
       <div className="all-content">
-        {/* {alert("onbeforeunload" in window)} */}
-        {/* {console.log(
-          this.state.presence +
-            "givno-----------------------------------------------------------------------------"
-        )} */}
         <TableContainer sx={{ maxHeight: 760 }}>
           <Table
             stickyHeader
@@ -342,9 +70,7 @@ export default class MarksTable extends React.Component {
             className="disp"
           >
             <TableRow>
-              {console.log(JSON.stringify(this.props.journalsite) + "site")}
-              {/* JSON.parse(localStorage.getItem("journalsite")) */}
-              {this.props.journalsite.map((m, i) => {
+              {this.props.jh.map((m, i) => {
                 if (i === 0)
                   return (
                     <TableCell
@@ -358,150 +84,123 @@ export default class MarksTable extends React.Component {
                     </TableCell>
                   );
               })}
-              {this.props.journalsite.map((m) =>
-                m.journalHeaders.map((item, i) => {
-                  if (i === 0) {
-                    return item.journalContents
-                      .sort((a, b) => a.id - b.id)
-                      .map((content) => (
-                        <TableCell
-                          height="20px"
-                          width="153.55px"
-                          className="disp line-stud"
-                          key={content.id}
-                        >
-                          <div>{content.student.surname}</div>
-                          <div className="csn">{content.student.name}</div>
-                        </TableCell>
-                      ));
-                  }
-                })
-              )}
-            </TableRow>
-            {this.props.journalsite.map((m) =>
-              m.journalHeaders.map((item, i) => {
-                return (
-                  <tbody key={i}>
-                    <TableRow>
-                      <TableCell height="100px" className="line-data">
-                        <div className="vertical cellwidth">
-                          {item.dateOfLesson}
-                          <br />
-                          {item.typeClass.name}
-                        </div>
+              {/* {this.props.journalsite.map((m) => */}
+              {this.props.jh.map((item, i) => {
+                if (i === 0) {
+                  return item.content
+                    .sort((a, b) => a.id - b.id)
+                    .map((content) => (
+                      <TableCell
+                        height="20px"
+                        width="153.55px"
+                        className="disp line-stud"
+                        key={content.id}
+                      >
+                        <div>{content.student.surname}</div>
+                        <div className="csn">{content.student.name}</div>
                       </TableCell>
-                    </TableRow>
-                    {item.journalContents
-                      .sort((a, b) => a.id - b.id)
-                      .map((content, i) => {
-                        // if (content.presence === null) {
-                        //   return (
-                        //     <TableRow key={i}>
-                        //       <TableCell className="line-grade">
-                        //         <div className="cellwidth disp">
-                        //           <input
-                        //             className="myInput"
-                        //             type="text"
-                        //             maxLength="2"
-                        //             defaultValue={content.grade}
-                        //             onBlur={(e) =>
-                        //               console.log(
-                        //                 e.target.value +
-                        //                   " : content-id=" +
-                        //                   content.id
-                        //               )
-                        //             }
-                        //             onFocus={(e) => e.target.select()}
-                        //           />
-                        //           <input
-                        //             type="checkbox"
-                        //             defaultChecked={true}
-                        //             onChange={getCheckBox}
-                        //           />
-                        //         </div>
-                        //       </TableCell>
-                        //     </TableRow>
-                        //   );
-                        // } else {
-                        return (
-                          <TableRow key={i}>
-                            {/* {console.log(content.grade + "наш контент")} */}
-                            <TableCell
-                              className="line-grade disp"
-                              height="20px"
-                            >
-                              {content.presence === true && (
-                                <select
-                                  key={content.id}
-                                  className="sel_grade myInput"
-                                  name="select"
-                                  defaultValue={content.grade}
-                                  onChange={(e) => {
-                                    // console.log(item.id + "данные пришли");
-                                    this.props.setBtnFalse();
-                                    this.props.setJournalSiteMark(
-                                      item.id,
-                                      content.id,
-                                      e.target.value
-                                    );
-                                    if (typeof Storage !== "undefined") {
-                                      // Store
-                                      localStorage.setItem(
-                                        "journalsite",
-                                        JSON.stringify(this.props.journalsite)
-                                      );
-                                    }
-                                  }}
-                                >
-                                  <option hidden></option>
-                                  <option>1</option>
-                                  <option>2</option>
-                                  <option>3</option>
-                                  <option>4</option>
-                                  <option>5</option>
-                                  <option>6</option>
-                                  <option>7</option>
-                                  <option>8</option>
-                                  <option>9</option>
-                                  <option>10</option>
-                                </select>
-                              )}
-                              <input
-                                type="checkbox"
-                                value=""
-                                id="flexCheckDefault"
-                                name="check"
-                                className="CHECK"
-                                defaultChecked={content.presence}
-                                onChange={() => {
+                    ));
+                }
+              })}
+              {/* )} */}
+            </TableRow>
+            {/* {this.props.journalsite.map((m) => */}
+            {this.props.jh.map((item, i) => {
+              return (
+                <tbody key={i}>
+                  <TableRow>
+                    <TableCell height="100px" className="line-data">
+                      <div className="vertical cellwidth">
+                        <p>
+                          {item.data[0] < 10
+                            ? (this.state.x = "0" + item.data[0])
+                            : item.data[0]}
+                          .
+                          {item.data[1] < 10
+                            ? (this.state.x = "0" + item.data[1])
+                            : item.data[1]}
+                          .
+                          {item.data[2] < 10
+                            ? (this.state.x = "0" + item.data[2])
+                            : item.data[2]}
+                          <br />
+                          {item.typeClass}
+                        </p>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                  {item.content
+                    .sort((a, b) => a.id - b.id)
+                    .map((content, i) => {
+                      return (
+                        <TableRow key={i}>
+                          <TableCell className="line-grade disp" height="20px">
+                            {content.presence === true && (
+                              <select
+                                key={content.id}
+                                className="sel_grade myInput"
+                                name="select"
+                                defaultValue={content.grade}
+                                onChange={(e) => {
                                   this.props.setBtnFalse();
-                                  console.log(
-                                    this.props.disabled + "DISABBLE F MARKS"
-                                  );
-                                  this.props.toggleJournalSitePresence(
+                                  this.props.setJournalSiteMark(
                                     item.id,
-                                    content.id
+                                    content.id,
+                                    e.target.value
                                   );
                                   if (typeof Storage !== "undefined") {
-                                    // Store
                                     localStorage.setItem(
                                       "journalsite",
                                       JSON.stringify(this.props.journalsite)
                                     );
                                   }
-                                  // console.log(
-                                  //   this.props.journalHeader + "наш хидер"
-                                  // );
                                 }}
-                              ></input>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })}
-                  </tbody>
-                );
-              })
-            )}
+                              >
+                                <option hidden></option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                              </select>
+                            )}
+                            <input
+                              type="checkbox"
+                              value=""
+                              id="flexCheckDefault"
+                              name="check"
+                              className="CHECK"
+                              defaultChecked={content.presence}
+                              onChange={() => {
+                                this.props.setBtnFalse();
+                                console.log(
+                                  this.props.disabled + "DISABBLE F MARKS"
+                                );
+                                this.props.toggleJournalSitePresence(
+                                  item.id,
+                                  content.id
+                                );
+                                if (typeof Storage !== "undefined") {
+                                  localStorage.setItem(
+                                    "journalsite",
+                                    JSON.stringify(this.props.journalsite)
+                                  );
+                                }
+                              }}
+                            ></input>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                </tbody>
+              );
+            })}
+            {/* )} */}
           </Table>
         </TableContainer>
       </div>

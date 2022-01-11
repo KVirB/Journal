@@ -9,17 +9,80 @@ const CLEAR_JOURNALHEADER = "CLEAR_JOURNALHEADER";
 const SET_CLOSED_TRUE = "SET_CLOSED_TRUE";
 const SET_CLOSED_FALSE = "SET_CLOSED_FALSE";
 const SET_JOURNAL_CONTENT = "SET_JOURNAL_CONTENT";
+const SET_JH = "SET_JH";
+const CLEAR_JH = "CLEAR_JH";
+const SET_TP = "SET_TP";
+const CLEAR_TP = "CLEAR_TP";
 let initialState = {
   id: null,
   journalsite: [],
   journalHeader: [],
   journalContent: [],
-  update: true,
+  update: false,
   closed: false,
+  jh: [],
+  typeClass: [
+    {
+      id: 1,
+      typeClass: "Лекция",
+    },
+    {
+      id: 2,
+      typeClass: "Лабораторная работа",
+    },
+    {
+      id: 3,
+      typeClass: "Практическая работа",
+    },
+  ],
+  tp: [],
 };
 
 const journalsiteReducer = (state = initialState, action) => {
   switch (action.type) {
+    //test
+    case SET_JH:
+      let newJournalsite = [...state.journalsite];
+      let jH = [...state.jh];
+      console.log("HUILO" + JSON.stringify([...state.jh]));
+      newJournalsite[0].journalHeaders.map((header) => {
+        const obj = {
+          id: header.id,
+          typeClass: header.typeClass.name,
+          content: header.journalContents,
+          data: header.dateOfLesson,
+        };
+        console.log(header.typeClass.id);
+        console.log(action.typeClass);
+        if (header.typeClass.id === Number(action.typeClass)) {
+          jH.push(obj);
+        }
+      });
+      return {
+        ...state,
+        jh: jH,
+      };
+    case CLEAR_JH:
+      return {
+        ...state,
+        jh: [],
+      };
+    case SET_TP:
+      let newTypeClass = [...state.typeClass];
+      let tP = [...state.tp];
+      newTypeClass.map((item) => {
+        tP.push(item);
+      });
+      return {
+        ...state,
+        tp: tP,
+      };
+    case CLEAR_TP:
+      return {
+        ...state,
+        tp: [],
+      };
+    //test
     case SET_JOURNAL_CONTENT:
       let newJSite = [...state.journalsite];
       let jContent = [...state.journalContent];
@@ -37,8 +100,8 @@ const journalsiteReducer = (state = initialState, action) => {
     case SET_JOURNALSITE:
       return {
         ...state,
-        update: true,
         journalsite: [...action.journalsite],
+        update: true,
       };
     case SET_CLOSED_TRUE:
       return {
@@ -141,7 +204,23 @@ export const setJournalSiteMark = (lesson_id, line_id, grade) => ({
   line_id,
   grade,
 });
-
+//test
+export const setJH = (typeClass, jh) => ({
+  type: SET_JH,
+  typeClass,
+  jh,
+});
+export const setTP = (tp) => ({
+  type: SET_TP,
+  tp,
+});
+export const clearTP = () => ({
+  type: CLEAR_TP,
+});
+export const clearJH = () => ({
+  type: CLEAR_JH,
+});
+//test
 export const setJournalHeader = (journalHeader) => ({
   type: SET_JOURNAL_HEADER,
   journalHeader,

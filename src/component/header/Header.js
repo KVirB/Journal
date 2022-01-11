@@ -5,6 +5,7 @@ import {
   getJournalsiteThunk,
   clearJournalsite,
   setJournalHeader,
+  setJH,
 } from "../../reducer/journalsiteReducer";
 import {
   getGroupThunk,
@@ -18,7 +19,7 @@ class Header extends React.Component {
   state = {
     disciplineId: 0,
     groupId: 0,
-    date: null,
+    typeClass: 0,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -26,13 +27,15 @@ class Header extends React.Component {
     if (disciplineId !== prevState.disciplineId) {
       this.props.getGroupThunk(disciplineId);
       this.props.clearGroup();
+      this.props.clearJH();
+      this.props.clearTP();
     }
-    if (
-      groupId !== prevState.groupId ||
-      disciplineId !== prevState.disciplineId
-    ) {
+    if (groupId !== prevState.groupId) {
       this.props.getJournalsiteThunk(disciplineId, groupId);
       console.log(disciplineId + groupId + "journalsite");
+      (async () => {
+        await this.props.setTP();
+      })();
     }
   }
 
@@ -48,16 +51,27 @@ class Header extends React.Component {
       );
       this.props.setJournalHeader();
       if (dispConf === true) {
-        setTimeout(() => {
+        // setTimeout(() => {
+        //   let header = this.props.journalHeader;
+        //   this.props.getJournalHeaderThunk(header);
+        //   this.props.clearJournalHeader();
+        //   console.log(JSON.stringify(header) + "all good");
+        //   alert("Сохранено");
+        //   localStorage.clear();
+        // }, 1);
+        (async () => {
+          await localStorage.clear();
+          await this.props.clearJH();
+          await this.props.clearTP();
           let header = this.props.journalHeader;
           this.props.getJournalHeaderThunk(header);
           this.props.clearJournalHeader();
           console.log(JSON.stringify(header) + "all good");
           alert("Сохранено");
-          localStorage.clear();
-        }, 1);
+        })();
       } else {
         localStorage.clear();
+        this.props.clearTP();
       }
     }
   };
@@ -66,11 +80,23 @@ class Header extends React.Component {
     this.setState({
       groupId: value,
     });
+    // setTimeout(this.props.setJournalHeader(), 1000);
   };
-  getDateBox = (e) => {
+  getTypeClass = (e) => {
+    // setTimeout(() => {
+    //   this.props.clearJH();
+    //   this.props.setJH(this.state.typeClass);
+    //   console.log(this.state.typeClass + "SKOTINA");
+    // }, 1);
+    (async () => {
+      await this.props.clearJH();
+      await this.props.setJH(this.state.typeClass);
+      console.log(this.state.typeClass + "SKOTINA");
+    })();
+    // call();
     const { value } = e.target;
     this.setState({
-      date: value,
+      typeClass: value,
     });
   };
   Logout = () => {
@@ -78,9 +104,10 @@ class Header extends React.Component {
   };
 
   render() {
-    const { getValueDiscipline, getGroup, getDateBox, Logout } = this;
+    const { getValueDiscipline, getGroup, getTypeClass, Logout } = this;
     return (
       <div>
+        {console.log(this.state.typeClass)}
         {/* {
           (console.log(
             "%cProject by KVirB",
@@ -152,13 +179,14 @@ class Header extends React.Component {
             ))}
           </select>
           <div className="view-name">Вид занятий:</div>
-          <select className="view-input">
-            <option defaultValue="" hidden>
+          <select id="select" className="view-input" onChange={getTypeClass}>
+            <option value={this.state.typeClass} hidden>
               Выберите вид
             </option>
-            <option>Лекция</option>
-            <option>Практическая работа</option>
-            <option>Лабораторная работа</option>
+            {console.log(JSON.stringify(this.props.tp) + " ТИпы")}
+            {this.props.tp.map((item) => (
+              <option value={item.id}>{item.typeClass}</option>
+            ))}
           </select>
           {/* <div className="view-date-name">Дата:</div>
           <input
