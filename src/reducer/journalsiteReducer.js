@@ -1,3 +1,4 @@
+import { act } from "react-dom/cjs/react-dom-test-utils.production.min";
 import { getJournalsite, patchJournalsite } from "../BD/tables";
 
 const SET_JOURNALSITE = "SET_JOURNALSITE";
@@ -13,6 +14,8 @@ const SET_JH = "SET_JH";
 const CLEAR_JH = "CLEAR_JH";
 const SET_TP = "SET_TP";
 const CLEAR_TP = "CLEAR_TP";
+const SET_SB = "SET_SB";
+const CLEAR_SB = "CLEAR_SB";
 let initialState = {
   id: null,
   journalsite: [],
@@ -36,6 +39,29 @@ let initialState = {
     },
   ],
   tp: [],
+  subGroup: [
+    {
+      id: 1,
+      subGroup: "Все",
+    },
+    {
+      id: 2,
+      subGroup: "1",
+    },
+    {
+      id: 3,
+      subGroup: "2",
+    },
+    {
+      id: 4,
+      subGroup: "3",
+    },
+    {
+      id: 5,
+      subGroup: "4",
+    },
+  ],
+  sb: [],
 };
 
 const journalsiteReducer = (state = initialState, action) => {
@@ -44,17 +70,26 @@ const journalsiteReducer = (state = initialState, action) => {
     case SET_JH:
       let newJournalsite = [...state.journalsite];
       let jH = [...state.jh];
-      console.log("HUILO" + JSON.stringify([...state.jh]));
+      console.log(JSON.stringify([...state.jh]));
       newJournalsite[0].journalHeaders.map((header) => {
         const obj = {
           id: header.id,
           typeClass: header.typeClass.name,
           content: header.journalContents,
           data: header.dateOfLesson,
+          subGroup: header.subGroup,
         };
         console.log(header.typeClass.id);
         console.log(action.typeClass);
-        if (header.typeClass.id === Number(action.typeClass)) {
+        console.log(header.subGroup + "---------");
+        console.log(String(action.subGroup) + "=========");
+        if (
+          header.typeClass.id === Number(action.typeClass) &&
+          header.subGroup === Number(action.subGroup)
+        ) {
+          jH.push(obj);
+        }
+        if (action.subGroup === "Все") {
           jH.push(obj);
         }
       });
@@ -81,6 +116,21 @@ const journalsiteReducer = (state = initialState, action) => {
       return {
         ...state,
         tp: [],
+      };
+    case SET_SB:
+      let newSubGroup = [...state.subGroup];
+      let sB = [...state.sb];
+      newSubGroup.map((item) => {
+        sB.push(item);
+      });
+      return {
+        ...state,
+        sb: sB,
+      };
+    case CLEAR_SB:
+      return {
+        ...state,
+        sb: [],
       };
     //test
     case SET_JOURNAL_CONTENT:
@@ -205,9 +255,10 @@ export const setJournalSiteMark = (lesson_id, line_id, grade) => ({
   grade,
 });
 //test
-export const setJH = (typeClass, jh) => ({
+export const setJH = (typeClass, subGroup, jh) => ({
   type: SET_JH,
   typeClass,
+  subGroup,
   jh,
 });
 export const setTP = (tp) => ({
@@ -216,6 +267,13 @@ export const setTP = (tp) => ({
 });
 export const clearTP = () => ({
   type: CLEAR_TP,
+});
+export const setSB = (sb) => ({
+  type: SET_SB,
+  sb,
+});
+export const clearSB = () => ({
+  type: CLEAR_SB,
 });
 export const clearJH = () => ({
   type: CLEAR_JH,

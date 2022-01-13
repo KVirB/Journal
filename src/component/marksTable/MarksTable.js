@@ -51,6 +51,7 @@ export default class MarksTable extends React.Component {
           alert("Сохранено");
           localStorage.clear();
           this.props.clearTP();
+          window.location.reload();
         }, 1);
       } else {
         localStorage.clear();
@@ -124,7 +125,7 @@ export default class MarksTable extends React.Component {
                             ? (this.state.x = "0" + item.data[2])
                             : item.data[2]}
                           <br />
-                          {item.typeClass}
+                          {/* {item.typeClass} */}
                         </p>
                       </div>
                     </TableCell>

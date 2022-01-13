@@ -20,21 +20,32 @@ class Header extends React.Component {
     disciplineId: 0,
     groupId: 0,
     typeClass: 0,
+    subGroup: 0,
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const { disciplineId, groupId } = this.state;
+    const { disciplineId, groupId, subGroup, typeClass } = this.state;
     if (disciplineId !== prevState.disciplineId) {
       this.props.getGroupThunk(disciplineId);
       this.props.clearGroup();
       this.props.clearJH();
       this.props.clearTP();
+      this.props.clearSB();
     }
     if (groupId !== prevState.groupId) {
       this.props.getJournalsiteThunk(disciplineId, groupId);
       console.log(disciplineId + groupId + "journalsite");
+      this.props.clearSB();
       (async () => {
         await this.props.setTP();
+        // await this.props.setSB();
+      })();
+    }
+    if (typeClass !== prevState.typeClass) {
+      (async () => {
+        await this.props.clearSB();
+        await this.props.clearJH();
+        this.props.setSB();
       })();
     }
   }
@@ -63,6 +74,7 @@ class Header extends React.Component {
           await localStorage.clear();
           await this.props.clearJH();
           await this.props.clearTP();
+          await this.props.clearSB();
           let header = this.props.journalHeader;
           this.props.getJournalHeaderThunk(header);
           this.props.clearJournalHeader();
@@ -72,6 +84,7 @@ class Header extends React.Component {
       } else {
         localStorage.clear();
         this.props.clearTP();
+        this.props.clearSB();
       }
     }
   };
@@ -90,7 +103,7 @@ class Header extends React.Component {
     // }, 1);
     (async () => {
       await this.props.clearJH();
-      await this.props.setJH(this.state.typeClass);
+      this.props.setJH(this.state.typeClass);
       console.log(this.state.typeClass + "SKOTINA");
     })();
     // call();
@@ -99,15 +112,28 @@ class Header extends React.Component {
       typeClass: value,
     });
   };
+  getSubGroup = (e) => {
+    (async () => {
+      await this.props.clearJH();
+      await this.props.setJH(this.state.typeClass, this.state.subGroup);
+      console.log(this.state.subGroup + "OH SHIT");
+    })();
+    const { value } = e.target;
+    this.setState({
+      subGroup: value,
+    });
+  };
   Logout = () => {
     window.location.assign("/electronicaljournal-view");
   };
 
   render() {
-    const { getValueDiscipline, getGroup, getTypeClass, Logout } = this;
+    const { getValueDiscipline, getGroup, getTypeClass, Logout, getSubGroup } =
+      this;
     return (
       <div>
         {console.log(this.state.typeClass)}
+        {console.log(this.state.subGroup + "SB")}
         {/* {
           (console.log(
             "%cProject by KVirB",
@@ -186,6 +212,16 @@ class Header extends React.Component {
             {console.log(JSON.stringify(this.props.tp) + " ТИпы")}
             {this.props.tp.map((item) => (
               <option value={item.id}>{item.typeClass}</option>
+            ))}
+          </select>
+          <div className="pgroup-name">Подгруппа:</div>
+          <select id="select" className="group-select" onChange={getSubGroup}>
+            <option value={this.state.subGroup} hidden>
+              Выберите подгруппу
+            </option>
+            {console.log(JSON.stringify(this.props.sb) + " ТИпы")}
+            {this.props.sb.map((item) => (
+              <option value={item.subGroup}>{item.subGroup}</option>
             ))}
           </select>
           {/* <div className="view-date-name">Дата:</div>

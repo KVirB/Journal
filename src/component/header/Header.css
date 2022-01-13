@@ -121,6 +121,20 @@
   padding-left: 25px;
   padding-top: 32px;
 }
+.pgroup-name {
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+
+  width: 88px;
+  height: 20px;
+
+  color: #bababa;
+  padding-left: 25px;
+  padding-top: 32px;
+}
 .group-select {
   font-family: "Open Sans", sans-serif;
   background: #ffffff;
