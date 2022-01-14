@@ -2,7 +2,7 @@ const SET_BTN_FALSE = "SET_BTN_FALSE";
 const SET_BTN_TRUE = "SET_BTN_TRUE";
 
 let initialState = {
-  disabled: false,
+  disabled: true,
 };
 
 const btnReducer = (state = initialState, action) => {

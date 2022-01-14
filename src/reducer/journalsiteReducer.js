@@ -84,14 +84,17 @@ const journalsiteReducer = (state = initialState, action) => {
         console.log(header.subGroup + "---------");
         console.log(String(action.subGroup) + "=========");
         if (
-          header.typeClass.id === Number(action.typeClass) &&
-          header.subGroup === Number(action.subGroup)
+          (header.typeClass.id === Number(action.typeClass) &&
+            header.subGroup === Number(action.subGroup)) ||
+          (header.typeClass.id === Number(action.typeClass) &&
+            action.subGroup === "Все")
         ) {
           jH.push(obj);
         }
-        if (action.subGroup === "Все") {
-          jH.push(obj);
-        }
+        // if (action.subGroup === "Все") {
+        //   console.log(action.subGroup + "234e");
+        //   jH.push(obj);
+        // }
       });
       return {
         ...state,

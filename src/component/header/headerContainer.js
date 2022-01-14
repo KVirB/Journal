@@ -23,7 +23,6 @@ import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
 class headerContainer extends React.Component {
   componentDidMount() {
     this.props.getDisciplineThunk();
-    this.props.setSB();
   }
   componentWillUnmount() {
     window.location.reload();

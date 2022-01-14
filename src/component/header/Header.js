@@ -39,14 +39,17 @@ class Header extends React.Component {
       (async () => {
         await this.props.setTP();
         // await this.props.setSB();
+        this.props.clearSB();
       })();
     }
     if (typeClass !== prevState.typeClass) {
       (async () => {
-        await this.props.clearSB();
-        await this.props.clearJH();
-        this.props.setSB();
+        this.props.clearSB();
+        this.props.clearJH();
       })();
+      if (subGroup !== prevState.subGroup) {
+        this.props.setBtnFalse();
+      }
     }
   }
 
@@ -103,8 +106,10 @@ class Header extends React.Component {
     // }, 1);
     (async () => {
       await this.props.clearJH();
-      this.props.setJH(this.state.typeClass);
+      // this.props.setJH(this.state.typeClass, this.state.subGroup);
+      this.props.setSB();
       console.log(this.state.typeClass + "SKOTINA");
+      console.log(this.state.subGroup + "SKOTINA 2");
     })();
     // call();
     const { value } = e.target;
@@ -123,6 +128,7 @@ class Header extends React.Component {
       subGroup: value,
     });
   };
+
   Logout = () => {
     window.location.assign("/electronicaljournal-view");
   };
