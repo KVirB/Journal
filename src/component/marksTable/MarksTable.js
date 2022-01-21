@@ -170,6 +170,7 @@ export default class MarksTable extends React.Component {
                                 <option>10</option>
                               </select>
                             )}
+
                             <input
                               type="checkbox"
                               value=""

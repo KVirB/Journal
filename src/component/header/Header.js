@@ -166,70 +166,95 @@ class Header extends React.Component {
             "http://risovach.ru/thumb/upload/200s400/2019/08/generator/i-tak-soydet_217015291_orig_.png?d9qg6"
           ))
         } */}
+        <header className="head display-flex">
+          <h1 className="journal-name ">
+            Электронный журнал преподавателя УО «ВГТУ»
+          </h1>
+          <div>
+            <input
+              type="submit"
+              className="bth_exit"
+              value="Выйти"
+              onClick={Logout}
+            />
+          </div>
+        </header>
 
-        <div className="journal-name">Электронный журнал преподавателя</div>
         {/* <button onClick={(this.props.getDisciplineThunk(), this.groupId === 0)}>
           Сменить журнал
         </button> */}
         <div className="display-flex">
-          <div className="discipline-name">Название дисциплины:</div>
-          <select
-            className="discipline-select"
-            name="discipline"
-            title="Выберите дисциплину"
-            onChange={getValueDiscipline}
-          >
-            <option defaultValue="" hidden>
-              Выберите дисциплину
-            </option>
-            {this.props.discipline.map((m, i) => (
-              <option className="lang__items" value={m.id} key={i}>
-                {m.name}
+          <div>
+            <div className="discipline-name">Название дисциплины</div>
+            <select
+              className="discipline-select"
+              name="discipline"
+              title="Выберите дисциплину"
+              onChange={getValueDiscipline}
+            >
+              <option defaultValue="" hidden>
+                Выберите дисциплину
               </option>
-            ))}
-          </select>
-          <div className="special-name">Специальность:</div>
-          <label className="special-select"></label>
+              {this.props.discipline.map((m, i) => (
+                <option className="lang__items" value={m.id} key={i}>
+                  {m.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <div className="special-name">Специальность</div>
+            <div className="special-select"></div>
+          </div>
         </div>
+        <div className="headHr" />
         <div className="display-flex">
-          <div className="course-name">Курс:</div>
-          <label className="course-input"></label>
-          <div className="group-name">Группа:</div>
-          <select
-            className="group-select"
-            name="select"
-            title="Выберите группу"
-            onChange={getGroup}
-          >
-            <option defaultValue="" hidden>
-              Выберите группу
-            </option>
-            {this.props.group.map((m, i) => (
-              <option className="lang__items" value={m.group.id} key={i}>
-                {m.group.name}
+          <div>
+            <div className="course-name">Курс</div>
+            <div className="course-input"></div>
+          </div>
+          <div>
+            <div className="group-name">Группа</div>
+            <select
+              className="group-select"
+              name="select"
+              title="Выберите группу"
+              onChange={getGroup}
+            >
+              <option defaultValue="" hidden>
+                Выберите группу
               </option>
-            ))}
-          </select>
-          <div className="view-name">Вид занятий:</div>
-          <select id="select" className="view-input" onChange={getTypeClass}>
-            <option value={this.state.typeClass} hidden>
-              Выберите вид
-            </option>
-            {console.log(JSON.stringify(this.props.tp) + " ТИпы")}
-            {this.props.tp.map((item) => (
-              <option value={item.id}>{item.typeClass}</option>
-            ))}
-          </select>
-          <div className="pgroup-name">Подгруппа:</div>
-          <select id="select" className="group-select" onChange={getSubGroup}>
-            <option value={this.state.subGroup} hidden>
-              Выберите подгруппу
-            </option>
-            {console.log(JSON.stringify(this.props.sb) + " ТИпы")}
-            {this.props.sb.map((item) => (
-              <option value={item.subGroup}>{item.subGroup}</option>
-            ))}
-          </select>
+              {this.props.group.map((m, i) => (
+                <option className="lang__items" value={m.group.id} key={i}>
+                  {m.group.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <div className="view-name">Вид занятий:</div>
+            <select id="select" className="view-input" onChange={getTypeClass}>
+              <option value={this.state.typeClass} hidden>
+                Выберите вид
+              </option>
+              {console.log(JSON.stringify(this.props.tp) + " ТИпы")}
+              {this.props.tp.map((item) => (
+                <option value={item.id}>{item.typeClass}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <div className="pgroup-name">Подгруппа:</div>
+            <select id="select" className="group-select" onChange={getSubGroup}>
+              <option value={this.state.subGroup} hidden>
+                Выберите подгруппу
+              </option>
+              {console.log(JSON.stringify(this.props.sb) + " ТИпы")}
+              {this.props.sb.map((item) => (
+                <option value={item.subGroup}>{item.subGroup}</option>
+              ))}
+            </select>
+          </div>
           {/* <div className="view-date-name">Дата:</div>
           <input
             className="view-date-input"
@@ -255,13 +280,7 @@ class Header extends React.Component {
               localStorage.removeItem("journalsite");
             }}
           />
-          <input
-            type="submit"
-            className="button-header bt_left"
-            name="commit"
-            value="Выйти"
-            onClick={Logout}
-          />
+
           {this.props.teacher.map((m) => {
             return (
               <div>
