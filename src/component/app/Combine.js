@@ -9,10 +9,8 @@ export default class Combine extends React.Component {
     return (
       <div>
         <Header />
-        <hr />
         <MarksTable />
-        <hr />
-        <Plans />
+        {/* <Plans /> */}
       </div>
     );
   }
