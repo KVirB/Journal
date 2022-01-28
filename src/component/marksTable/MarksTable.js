@@ -23,12 +23,12 @@ export default class MarksTable extends React.Component {
     });
   };
   save = () => {
-    this.props.setJournalHeader();
-    setTimeout(() => {
+    (async () => {
+      await this.props.clearJournalHeader();
+      this.props.setJournalHeader();
       let header = this.props.journalHeader;
       this.props.getJournalHeaderThunk(header);
-      this.props.clearJournalHeader();
-    }, 300);
+    })();
   };
   changeInputHandler = (e) => {
     this.setState((prev) => ({
@@ -63,6 +63,7 @@ export default class MarksTable extends React.Component {
     const { getCheckBox, getDateBox } = this;
     return (
       <div>
+        {console.log(this.state.present + "present")}
         <div className="headHr" />
         <div className="all-content">
           <TableContainer sx={{ maxHeight: 760 }}>
@@ -82,20 +83,19 @@ export default class MarksTable extends React.Component {
                       </div>
                     );
                 })}
-                {/* {this.props.journalsite.map((m) => */}
                 {this.props.jh.map((item, i) => {
                   if (i === 0) {
                     return item.content
                       .sort((a, b) => a.id - b.id)
-                      .map((content) => (
+                      .map((content, i) => (
                         <TableCell
                           height="19px"
-                          width="153.55px"
+                          width="186px"
                           className="disp line-stud"
                           key={content.id}
                         >
                           <div className="surname">
-                            {content.student.surname}
+                            {i + 1 + ". " + content.student.surname}
                           </div>
                           <div className="csn surname">
                             {content.student.name}
@@ -104,9 +104,21 @@ export default class MarksTable extends React.Component {
                       ));
                   }
                 })}
-                {/* )} */}
+
+                {/* {this.props.jh.map((m, i) => {
+                  if (i === 0)
+                    return (
+                      <TableCell
+                        className="line_itogo"
+                        height="19px"
+                        width="186px"
+                        key={m.id}
+                      >
+                        <div className="pris">Присутствующих</div>
+                      </TableCell>
+                    );
+                })} */}
               </TableRow>
-              {/* {this.props.journalsite.map((m) => */}
               {this.props.jh.map((item, i) => {
                 return (
                   <tbody key={i}>
@@ -183,6 +195,10 @@ export default class MarksTable extends React.Component {
                                     name={content.id}
                                     defaultChecked={content.presence}
                                     onChange={() => {
+                                      (async () => {
+                                        await this.props.clearPresent();
+                                        this.props.setPresent();
+                                      })();
                                       this.props.setBtnFalse();
                                       console.log(
                                         this.props.disabled + "DISABBLE F MARKS"
@@ -206,10 +222,53 @@ export default class MarksTable extends React.Component {
                           </TableRow>
                         );
                       })}
+                    {/* <TableRow>
+                      <TableCell
+                        className="line_itogo_col"
+                        height="26px"
+                        // key={item.id}
+                      >
+                        <div className="">{item.counter}</div>
+                      </TableCell>
+                    </TableRow> */}
                   </tbody>
                 );
               })}
-              {/* )} */}
+              {/* <tbody>
+                {this.props.present.map((item, i) => {
+                  return (
+                    <TableRow className="disp">
+                      <TableCell
+                        className="line_itogo_col disp"
+                        height="26px"
+                        key={item.id}
+                      >
+                        <div className="">{item}</div>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </tbody> */}
+            </Table>
+            <Table
+              stickyHeader
+              aria-label="sticky table"
+              style={{ maxWidth: 0, minWidth: 0 }}
+            >
+              <tbody>
+                <TableRow>
+                  <TableCell className="line_itogo">
+                    <div className="pris">Присутствующих</div>
+                  </TableCell>
+                  {this.props.present.map((item, i) => {
+                    return (
+                      <TableCell key={i} className="line_itogo_col">
+                        <div className="pris_col">{item}</div>
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              </tbody>
             </Table>
           </TableContainer>
         </div>

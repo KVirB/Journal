@@ -16,6 +16,8 @@ const SET_TP = "SET_TP";
 const CLEAR_TP = "CLEAR_TP";
 const SET_SB = "SET_SB";
 const CLEAR_SB = "CLEAR_SB";
+const SET_PRESENT = "SET_PRESENT";
+const CLEAR_PRESENT = "CLEAR_PRESENT";
 let initialState = {
   id: null,
   journalsite: [],
@@ -62,39 +64,68 @@ let initialState = {
     },
   ],
   sb: [],
+  present: [],
 };
 
 const journalsiteReducer = (state = initialState, action) => {
   switch (action.type) {
-    //test
+    case SET_PRESENT:
+      let newJournalsitePresent = [...state.journalsite];
+      let presenT = [...state.present];
+      let counter = 0;
+      newJournalsitePresent[0].journalHeaders.map((header, i) => {
+        header.journalContents.map((content, i) => {
+          if (content.presence === true) {
+            counter = counter + 1;
+          }
+        });
+        (async () => {
+          presenT.push(counter);
+        })();
+        counter = 0;
+        console.log(presenT + "karaul");
+      });
+      return {
+        ...state,
+        present: presenT,
+      };
+    case CLEAR_PRESENT:
+      return {
+        ...state,
+        present: [],
+      };
+
     case SET_JH:
       let newJournalsite = [...state.journalsite];
       let jH = [...state.jh];
+      let count = 0;
       console.log(JSON.stringify([...state.jh]));
       newJournalsite[0].journalHeaders.map((header) => {
-        const obj = {
-          id: header.id,
-          typeClass: header.typeClass.name,
-          content: header.journalContents,
-          data: header.dateOfLesson,
-          subGroup: header.subGroup,
-        };
-        console.log(header.typeClass.id);
-        console.log(action.typeClass);
-        console.log(header.subGroup + "---------");
-        console.log(String(action.subGroup) + "=========");
-        if (
-          (header.typeClass.id === Number(action.typeClass) &&
-            header.subGroup === Number(action.subGroup)) ||
-          (header.typeClass.id === Number(action.typeClass) &&
-            action.subGroup === "Все")
-        ) {
-          jH.push(obj);
-        }
-        // if (action.subGroup === "Все") {
-        //   console.log(action.subGroup + "234e");
-        //   jH.push(obj);
-        // }
+        header.journalContents.map((content) => {
+          if (content.presence === true) {
+            count = count + 1;
+          }
+        });
+
+        (async () => {
+          const obj = {
+            id: header.id,
+            typeClass: header.typeClass.name,
+            content: header.journalContents,
+            data: header.dateOfLesson,
+            subGroup: header.subGroup,
+            counter: count,
+          };
+          if (
+            (header.typeClass.id === Number(action.typeClass) &&
+              header.subGroup === Number(action.subGroup)) ||
+            (header.typeClass.id === Number(action.typeClass) &&
+              action.subGroup === "Все")
+          ) {
+            jH.push(obj);
+          }
+        })();
+        count = 0;
       });
       return {
         ...state,
@@ -135,7 +166,7 @@ const journalsiteReducer = (state = initialState, action) => {
         ...state,
         sb: [],
       };
-    //test
+
     case SET_JOURNAL_CONTENT:
       let newJSite = [...state.journalsite];
       let jContent = [...state.journalContent];
@@ -257,7 +288,10 @@ export const setJournalSiteMark = (lesson_id, line_id, grade) => ({
   line_id,
   grade,
 });
-//test
+export const setPresent = (present) => ({
+  type: SET_PRESENT,
+  present,
+});
 export const setJH = (typeClass, subGroup, jh) => ({
   type: SET_JH,
   typeClass,
@@ -271,6 +305,9 @@ export const setTP = (tp) => ({
 export const clearTP = () => ({
   type: CLEAR_TP,
 });
+export const clearPresent = () => ({
+  type: CLEAR_PRESENT,
+});
 export const setSB = (sb) => ({
   type: SET_SB,
   sb,
@@ -281,7 +318,6 @@ export const clearSB = () => ({
 export const clearJH = () => ({
   type: CLEAR_JH,
 });
-//test
 export const setJournalHeader = (journalHeader) => ({
   type: SET_JOURNAL_HEADER,
   journalHeader,

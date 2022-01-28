@@ -18,6 +18,7 @@ import {
   clearTP,
   setSB,
   clearSB,
+  setPresent,
 } from "../../reducer/journalsiteReducer";
 import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
 class headerContainer extends React.Component {
@@ -54,6 +55,8 @@ class headerContainer extends React.Component {
         setSB={this.props.setSB}
         clearSB={this.props.clearSB}
         sb={this.props.sb}
+        setPresent={this.props.setPresent}
+        present={this.props.present}
       />
     );
   }
@@ -71,6 +74,7 @@ let mapStateToProps = (state) => {
     typeClass: state.journalsitePage.typeClass,
     tp: state.journalsitePage.tp,
     sb: state.journalsitePage.sb,
+    present: state.journalsitePage.present,
   };
 };
 
@@ -91,4 +95,5 @@ export default connect(mapStateToProps, {
   clearTP,
   setSB,
   clearSB,
+  setPresent,
 })(headerContainer);

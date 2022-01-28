@@ -15,7 +15,9 @@ import {
 import { Collapse } from "bootstrap";
 import { Hidden } from "@mui/material";
 import profile from "../../profile.png";
-
+import mech from "../../Vector.png";
+import col from "../../Col.png";
+import que from "../../Que.png";
 class Header extends React.Component {
   state = {
     disciplineId: 0,
@@ -121,7 +123,8 @@ class Header extends React.Component {
   getSubGroup = (e) => {
     (async () => {
       await this.props.clearJH();
-      await this.props.setJH(this.state.typeClass, this.state.subGroup);
+      this.props.setJH(this.state.typeClass, this.state.subGroup);
+      this.props.setPresent();
       console.log(this.state.subGroup + "OH SHIT");
     })();
     const { value } = e.target;
@@ -168,10 +171,27 @@ class Header extends React.Component {
           ))
         } */}
         <header className="head display-flex">
-          <h1 className="journal-name ">
-            Электронный журнал преподавателя УО «ВГТУ»
+          <h1 className="journal-name">
+            <a className="j_name" href="/electronicaljournal-view/journal">
+              Электронный журнал преподавателя УО «ВГТУ»
+            </a>
           </h1>
           <div className="disp">
+            <div className="icons_que">
+              <a href="/electronicaljournal-view/journal">
+                <img src={que}></img>
+              </a>
+            </div>
+            <div className="icons_col">
+              <a href="/electronicaljournal-view/journal">
+                <img src={col}></img>
+              </a>
+            </div>
+            <div className="icons_mech">
+              <a href="/electronicaljournal-view/journal">
+                <img src={mech}></img>
+              </a>
+            </div>
             <div>
               <img className="profile_pic" src={profile}></img>
             </div>
@@ -186,7 +206,7 @@ class Header extends React.Component {
             </div>
           </div>
         </header>
-
+        {/* <button onClick={this.props.setPresent()}>ADDD</button> */}
         {/* <button onClick={(this.props.getDisciplineThunk(), this.groupId === 0)}>
           Сменить журнал
         </button> */}
@@ -212,6 +232,9 @@ class Header extends React.Component {
           <div>
             <div className="special-name">Специальность</div>
             <div className="special-select">Test</div>
+          </div>
+          <div>
+            <img className="points"></img>
           </div>
         </div>
         <div className="headHr" />
@@ -250,8 +273,10 @@ class Header extends React.Component {
                   Тип
                 </option>
                 {console.log(JSON.stringify(this.props.tp) + " ТИпы")}
-                {this.props.tp.map((item) => (
-                  <option value={item.id}>{item.typeClass}</option>
+                {this.props.tp.map((item, i) => (
+                  <option value={item.id} key={i}>
+                    {item.typeClass}
+                  </option>
                 ))}
               </select>
             </div>
@@ -266,8 +291,10 @@ class Header extends React.Component {
                   Подгруппа
                 </option>
                 {console.log(JSON.stringify(this.props.sb) + " ТИпы")}
-                {this.props.sb.map((item) => (
-                  <option value={item.subGroup}>{item.subGroup}</option>
+                {this.props.sb.map((item, i) => (
+                  <option value={item.subGroup} key={i}>
+                    {item.subGroup}
+                  </option>
                 ))}
               </select>
             </div>

@@ -38,6 +38,7 @@
   display: flex;
 }
 .journal-name {
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 23px;
@@ -211,6 +212,7 @@ select {
   outline: none;
   border: none;
 }
+
 input[type="submit"]:hover,
 input[type="reset"]:hover {
   background-color: #353f57;
@@ -276,4 +278,33 @@ input[type="submit"].button-header:disabled {
 .profile_pic {
   margin-right: 12px;
   margin-top: 25px;
+}
+.icons_mech {
+  width: 20px;
+  height: 20px;
+  margin-right: 42.5px;
+  margin-top: 37px;
+}
+.icons_col {
+  width: 20px;
+  height: 20px;
+  margin-right: 25px;
+  margin-top: 37px;
+}
+.icons_que {
+  width: 20px;
+  height: 20px;
+  margin-right: 25px;
+  margin-top: 37px;
+}
+.j_name {
+  text-decoration: none;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 23px;
+  line-height: 120%;
+  text-align: center;
+  color: #ffffff;
 }

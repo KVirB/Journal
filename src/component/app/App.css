@@ -136,7 +136,7 @@ hr {
   border-top: 1px solid rgba(224, 224, 224, 1);
   border-bottom: 1px solid rgba(224, 224, 224, 1);
   height: 158px;
-  width: 185.55px;
+  width: 218px;
 }
 
 .disp {
@@ -256,6 +256,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
   line-height: 15px;
   color: #d7d7d7;
   text-align: center;
+  padding-left: 3.5px;
 }
 .day_mount {
   font-family: "Roboto", sans-serif;
@@ -274,8 +275,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
   line-height: 19px;
   color: #212323;
   text-align: center;
-  height: 19px;
-  margin-top: 3.5px;
+  align-items: center;
 }
 section h2 {
   font-size: 2rem;
@@ -368,4 +368,31 @@ section div {
   margin-top: 3.5px;
   margin-right: auto;
   margin-left: auto;
+}
+.line_itogo {
+  border-left: 1px solid rgba(224, 224, 224, 1);
+  border-right: 1px solid rgba(224, 224, 224, 1);
+  height: 26px;
+}
+.line_itogo_col {
+  border-right: 1px solid rgba(224, 224, 224, 1);
+  text-align: center;
+}
+.pris {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #9a9c9c;
+  width: 186px;
+}
+.pris_col {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #212323;
+  width: 47px;
 }

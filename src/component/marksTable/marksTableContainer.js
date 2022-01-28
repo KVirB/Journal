@@ -10,6 +10,8 @@ import {
   setJournalContent,
   setJH,
   clearTP,
+  setPresent,
+  clearPresent,
 } from "../../reducer/journalsiteReducer";
 import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
 import { setJournalHeader } from "../../reducer/journalsiteReducer";
@@ -39,6 +41,9 @@ class marksTableContainer extends React.Component {
           jh={this.props.jh}
           setJH={this.props.setJH}
           clearTP={this.props.clearTP}
+          present={this.props.present}
+          setPresent={this.props.setPresent}
+          clearPresent={this.props.clearPresent}
         />
       </div>
     );
@@ -51,6 +56,7 @@ let mapStateToProps = (state) => {
     journalContent: state.journalsitePage.journalContent,
     disabled: state.btnPage.disabled,
     jh: state.journalsitePage.jh,
+    present: state.journalsitePage.present,
   };
 };
 
@@ -67,4 +73,6 @@ export default connect(mapStateToProps, {
   setBtnFalse,
   setJH,
   clearTP,
+  setPresent,
+  clearPresent,
 })(marksTableContainer);
