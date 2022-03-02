@@ -10,6 +10,8 @@ import {
 import {
   getGroupThunk,
   getDisciplineThunk,
+  getTypeClassThunk,
+  clearTypeClass,
   clearGroup,
 } from "../../reducer/headerReducer";
 import { Collapse } from "bootstrap";
@@ -18,6 +20,7 @@ import profile from "../../profile.png";
 import mech from "../../Vector.png";
 import col from "../../Col.png";
 import que from "../../Que.png";
+import points from "../../points.png";
 class Header extends React.Component {
   state = {
     disciplineId: 0,
@@ -40,9 +43,8 @@ class Header extends React.Component {
       console.log(disciplineId + groupId + "journalsite");
       this.props.clearSB();
       (async () => {
-        await this.props.setTP();
-        // await this.props.setSB();
-        this.props.clearSB();
+        await this.props.getTypeClassThunk();
+        this.props.clearTypeClass();
       })();
     }
     if (typeClass !== prevState.typeClass) {
@@ -68,19 +70,14 @@ class Header extends React.Component {
       );
       this.props.setJournalHeader();
       if (dispConf === true) {
-        // setTimeout(() => {
-        //   let header = this.props.journalHeader;
-        //   this.props.getJournalHeaderThunk(header);
-        //   this.props.clearJournalHeader();
-        //   console.log(JSON.stringify(header) + "all good");
-        //   alert("Сохранено");
-        //   localStorage.clear();
-        // }, 1);
         (async () => {
           await localStorage.clear();
           await this.props.clearJH();
-          await this.props.clearTP();
-          await this.props.clearSB();
+          // await this.props.clearTP();
+          // await this.props.clearSB();
+          // await this.props.clearDiscipline();
+          this.props.setBtnTrue();
+          this.props.getDisciplineThunk();
           let header = this.props.journalHeader;
           this.props.getJournalHeaderThunk(header);
           this.props.clearJournalHeader();
@@ -107,6 +104,40 @@ class Header extends React.Component {
     //   this.props.setJH(this.state.typeClass);
     //   console.log(this.state.typeClass + "SKOTINA");
     // }, 1);
+    if (localStorage.getItem("journalsite") !== null) {
+      let dispConf = window.confirm(
+        "У вас остались не сохраненные изменения. Сохранить?"
+      );
+      this.props.setJournalHeader();
+      if (dispConf === true) {
+        (async () => {
+          await localStorage.clear();
+          await this.props.clearJH();
+          // await this.props.clearTP();
+          // await this.props.clearSB();
+          // await this.props.clearDiscipline();
+          // await this.props.clearGroup();
+          this.props.setBtnTrue();
+          this.props.getDisciplineThunk();
+          this.props.getGroupThunk(this.state.disciplineId);
+          let header = this.props.journalHeader;
+          this.props.getJournalHeaderThunk(header);
+          this.props.clearJournalHeader();
+          console.log(JSON.stringify(header) + "all good");
+          alert("Сохранено");
+        })();
+      } else {
+        (async () => {
+          // await this.props.clearDiscipline();
+          // await this.props.clearGroup();
+          this.props.getDisciplineThunk();
+          this.props.getGroupThunk(this.state.disciplineId);
+        })();
+        localStorage.clear();
+        // this.props.clearTP();
+        // this.props.clearSB();
+      }
+    }
     (async () => {
       await this.props.clearJH();
       // this.props.setJH(this.state.typeClass, this.state.subGroup);
@@ -121,8 +152,44 @@ class Header extends React.Component {
     });
   };
   getSubGroup = (e) => {
+    if (localStorage.getItem("journalsite") !== null) {
+      let dispConf = window.confirm(
+        "У вас остались не сохраненные изменения. Сохранить?"
+      );
+      this.props.setJournalHeader();
+      if (dispConf === true) {
+        (async () => {
+          await localStorage.clear();
+          await this.props.clearJH();
+          // await this.props.clearTP();
+          // await this.props.clearSB();
+          // await this.props.clearDiscipline();
+          // await this.props.clearGroup();
+          this.props.setBtnTrue();
+          this.props.getDisciplineThunk();
+          this.props.getGroupThunk(this.state.disciplineId);
+          let header = this.props.journalHeader;
+          this.props.getJournalHeaderThunk(header);
+          this.props.clearJournalHeader();
+          console.log(JSON.stringify(header) + "all good");
+          alert("Сохранено");
+          // window.location.reload();
+        })();
+      } else {
+        (async () => {
+          // await this.props.clearDiscipline();
+          // await this.props.clearGroup();
+          this.props.getDisciplineThunk();
+          this.props.getGroupThunk(this.state.disciplineId);
+        })();
+        localStorage.clear();
+        // this.props.clearTP();
+        // this.props.clearSB();
+      }
+    }
     (async () => {
       await this.props.clearJH();
+      await this.props.clearPresent();
       this.props.setJH(this.state.typeClass, this.state.subGroup);
       this.props.setPresent();
       console.log(this.state.subGroup + "OH SHIT");
@@ -210,31 +277,35 @@ class Header extends React.Component {
         {/* <button onClick={(this.props.getDisciplineThunk(), this.groupId === 0)}>
           Сменить журнал
         </button> */}
-        <div className="display-flex">
-          <div>
-            <div className="discipline-name">Название дисциплины</div>
-            <select
-              className="discipline-select"
-              name="discipline"
-              title="Выберите дисциплину"
-              onChange={getValueDiscipline}
-            >
-              <option defaultValue="" hidden>
-                Дисциплина
-              </option>
-              {this.props.discipline.map((m, i) => (
-                <option className="lang__items" value={m.id} key={i}>
-                  {m.name}
+        <div className="display-flex pointer">
+          <div className="display-flex">
+            <div>
+              <div className="discipline-name">Название дисциплины</div>
+              <select
+                className="discipline-select"
+                name="discipline"
+                title="Выберите дисциплину"
+                onChange={getValueDiscipline}
+              >
+                <option defaultValue="" hidden>
+                  Дисциплина
                 </option>
-              ))}
-            </select>
+                {this.props.discipline.map((m, i) => (
+                  <option className="lang__items" value={m.id} key={i}>
+                    {m.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <div className="special-name">Специальность</div>
+              <div className="special-select">Test</div>
+            </div>
           </div>
           <div>
-            <div className="special-name">Специальность</div>
-            <div className="special-select">Test</div>
-          </div>
-          <div>
-            <img className="points"></img>
+            <a href="/electronicaljournal-view/journal">
+              <img className="points" src={points}></img>
+            </a>
           </div>
         </div>
         <div className="headHr" />
@@ -255,6 +326,7 @@ class Header extends React.Component {
                 <option defaultValue="" hidden>
                   Группа
                 </option>
+                {console.log(this.props.typeClass + "PIPIPUPU CHECK")}
                 {this.props.group.map((m, i) => (
                   <option className="lang__items" value={m.group.id} key={i}>
                     {m.group.name}
@@ -269,13 +341,13 @@ class Header extends React.Component {
                 className="view-input"
                 onChange={getTypeClass}
               >
-                <option value={this.state.typeClass} hidden>
+                <option defaultValue="" hidden>
                   Тип
                 </option>
                 {console.log(JSON.stringify(this.props.tp) + " ТИпы")}
-                {this.props.tp.map((item, i) => (
+                {this.props.typeClass.map((item, i) => (
                   <option value={item.id} key={i}>
-                    {item.typeClass}
+                    {item.name}
                   </option>
                 ))}
               </select>
@@ -341,6 +413,8 @@ export default connect(null, {
   getJournalsiteThunk,
   getGroupThunk,
   getDisciplineThunk,
+  getTypeClassThunk,
+  clearTypeClass,
   clearJournalsite,
   clearGroup,
   setJournalHeader,

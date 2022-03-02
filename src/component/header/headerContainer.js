@@ -5,6 +5,8 @@ import {
   getDisciplineThunk,
   setGroup,
   getGroupThunk,
+  setTypeClass,
+  clearDiscipline,
 } from "../../reducer/headerReducer.js";
 import Header from "./Header.js";
 import {
@@ -14,11 +16,12 @@ import {
   setJournalContent,
   setJH,
   clearJH,
-  setTP,
+  // setTP,
   clearTP,
   setSB,
   clearSB,
   setPresent,
+  clearPresent,
 } from "../../reducer/journalsiteReducer";
 import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
 class headerContainer extends React.Component {
@@ -33,6 +36,7 @@ class headerContainer extends React.Component {
       <Header
         discipline={this.props.discipline}
         group={this.props.group}
+        typeClass={this.props.typeClass}
         journalsite={this.props.group}
         teacher={this.props.teacher}
         setJournalHeader={this.props.setJournalHeader}
@@ -48,7 +52,7 @@ class headerContainer extends React.Component {
         setJH={this.props.setJH}
         update={this.props.update}
         clearJH={this.props.clearJH}
-        typeClass={this.props.typeClass}
+        // typeClass={this.props.typeClass}
         setTP={this.props.setTP}
         clearTP={this.props.clearTP}
         tp={this.props.tp}
@@ -57,6 +61,8 @@ class headerContainer extends React.Component {
         sb={this.props.sb}
         setPresent={this.props.setPresent}
         present={this.props.present}
+        clearPresent={this.props.clearPresent}
+        clearDiscipline={this.props.clearDiscipline}
       />
     );
   }
@@ -65,13 +71,14 @@ let mapStateToProps = (state) => {
   return {
     discipline: state.disciplinePage.discipline,
     group: state.groupPage.group,
+    typeClass: state.typeClassPage.typeClass,
     journalsite: state.journalsitePage.journalsite,
     teacher: state.teacherPage.teacher,
     journalHeader: state.journalsitePage.journalHeader,
     disabled: state.btnPage.disabled,
     jh: state.journalsitePage.jh,
     update: state.journalsitePage.update,
-    typeClass: state.journalsitePage.typeClass,
+    // typeClass: state.journalsitePage.typeClass,
     tp: state.journalsitePage.tp,
     sb: state.journalsitePage.sb,
     present: state.journalsitePage.present,
@@ -82,6 +89,7 @@ export default connect(mapStateToProps, {
   setDiscipline,
   getDisciplineThunk,
   setGroup,
+  setTypeClass,
   getGroupThunk,
   setJournalHeader,
   clearJournalHeader,
@@ -91,9 +99,11 @@ export default connect(mapStateToProps, {
   setBtnFalse,
   setJH,
   clearJH,
-  setTP,
+  // setTP,
   clearTP,
   setSB,
   clearSB,
   setPresent,
+  clearPresent,
+  clearDiscipline,
 })(headerContainer);

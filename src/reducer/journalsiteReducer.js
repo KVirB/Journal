@@ -12,7 +12,7 @@ const SET_CLOSED_FALSE = "SET_CLOSED_FALSE";
 const SET_JOURNAL_CONTENT = "SET_JOURNAL_CONTENT";
 const SET_JH = "SET_JH";
 const CLEAR_JH = "CLEAR_JH";
-const SET_TP = "SET_TP";
+// const SET_TP = "SET_TP";
 const CLEAR_TP = "CLEAR_TP";
 const SET_SB = "SET_SB";
 const CLEAR_SB = "CLEAR_SB";
@@ -26,21 +26,21 @@ let initialState = {
   update: false,
   closed: false,
   jh: [],
-  typeClass: [
-    {
-      id: 1,
-      typeClass: "Лекция",
-    },
-    {
-      id: 2,
-      typeClass: "Лабораторная работа",
-    },
-    {
-      id: 3,
-      typeClass: "Практическая работа",
-    },
-  ],
-  tp: [],
+  // typeClass: [
+  //   {
+  //     id: 1,
+  //     typeClass: "Лекция",
+  //   },
+  //   {
+  //     id: 2,
+  //     typeClass: "Лабораторная работа",
+  //   },
+  //   {
+  //     id: 3,
+  //     typeClass: "Практическая работа",
+  //   },
+  // ],
+  // tp: [],
   subGroup: [
     {
       id: 1,
@@ -136,16 +136,16 @@ const journalsiteReducer = (state = initialState, action) => {
         ...state,
         jh: [],
       };
-    case SET_TP:
-      let newTypeClass = [...state.typeClass];
-      let tP = [...state.tp];
-      newTypeClass.map((item) => {
-        tP.push(item);
-      });
-      return {
-        ...state,
-        tp: tP,
-      };
+    // case SET_TP:
+    //   let newTypeClass = [...state.typeClass];
+    //   let tP = [...state.tp];
+    //   newTypeClass.map((item) => {
+    //     tP.push(item);
+    //   });
+    //   return {
+    //     ...state,
+    //     tp: tP,
+    //   };
     case CLEAR_TP:
       return {
         ...state,
@@ -298,10 +298,10 @@ export const setJH = (typeClass, subGroup, jh) => ({
   subGroup,
   jh,
 });
-export const setTP = (tp) => ({
-  type: SET_TP,
-  tp,
-});
+// export const setTP = (tp) => ({
+//   type: SET_TP,
+//   tp,
+// });
 export const clearTP = () => ({
   type: CLEAR_TP,
 });

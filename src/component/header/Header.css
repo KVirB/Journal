@@ -308,3 +308,10 @@ input[type="submit"].button-header:disabled {
   text-align: center;
   color: #ffffff;
 }
+.points {
+  margin-top: 98px;
+}
+.pointer {
+  justify-content: space-between;
+  margin-right: 92px;
+}

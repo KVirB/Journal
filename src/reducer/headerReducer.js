@@ -1,13 +1,18 @@
 import { getDiscipline } from "../BD/tables";
 import { getGroup } from "../BD/tables";
+import { getTypeClass } from "../BD/tables";
 
 const SET_DISCIPLINE = "SET_DISCIPLINE";
+const CLEAR_DISCIPLINE = "CLEAR_DISCIPLINE";
 const SET_GROUP = "SET_GROUP";
 const CLEAR_GROUP = "CLEAR_GROUP";
+const SET_TYPECLASS = "SET_TYPECLASS";
+const CLEAR_TYPECLASS = "CLEAR_TYPECLASS";
 
 let initialState = {
   discipline: [],
   group: [],
+  typeClass: [],
 };
 
 const headerReducer = (state = initialState, action) => {
@@ -22,10 +27,25 @@ const headerReducer = (state = initialState, action) => {
         ...state,
         group: [...action.group],
       };
+    case SET_TYPECLASS:
+      return {
+        ...state,
+        typeClass: [...action.typeClass],
+      };
     case CLEAR_GROUP:
       return {
         ...state,
         group: [],
+      };
+    case CLEAR_DISCIPLINE:
+      return {
+        ...state,
+        discipline: [],
+      };
+    case CLEAR_TYPECLASS:
+      return {
+        ...state,
+        typeClass: [],
       };
     default:
       return state;
@@ -41,11 +61,19 @@ export const setGroup = (group) => ({
   type: SET_GROUP,
   group,
 });
-
+export const setTypeClass = (typeClass) => ({
+  type: SET_TYPECLASS,
+  typeClass,
+});
 export const clearGroup = () => ({
   type: CLEAR_GROUP,
 });
-
+export const clearDiscipline = () => ({
+  type: CLEAR_DISCIPLINE,
+});
+export const clearTypeClass = () => ({
+  type: CLEAR_TYPECLASS,
+});
 export const getGroupThunk = (disciplineId) => {
   return (dispatch) => {
     getGroup(disciplineId).then((data) => {
@@ -58,6 +86,14 @@ export const getDisciplineThunk = () => {
   return (dispatch) => {
     getDiscipline().then((data) => {
       dispatch(setDiscipline(data));
+    });
+  };
+};
+
+export const getTypeClassThunk = () => {
+  return (dispatch) => {
+    getTypeClass().then((data) => {
+      dispatch(setTypeClass(data));
     });
   };
 };

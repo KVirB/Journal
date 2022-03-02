@@ -10,6 +10,7 @@ let reducers = combineReducers({
   journalsitePage: journalsiteReducer,
   disciplinePage: headerReducer,
   groupPage: headerReducer,
+  typeClassPage: headerReducer,
   teacherPage: teacherReducer,
   btnPage: btnReducer,
   form: formReducer,

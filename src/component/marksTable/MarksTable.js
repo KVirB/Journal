@@ -257,15 +257,25 @@ export default class MarksTable extends React.Component {
             >
               <tbody>
                 <TableRow>
-                  <TableCell className="line_itogo">
-                    <div className="pris">Присутствующих</div>
-                  </TableCell>
-                  {this.props.present.map((item, i) => {
-                    return (
-                      <TableCell key={i} className="line_itogo_col">
-                        <div className="pris_col">{item}</div>
-                      </TableCell>
-                    );
+                  {this.props.jh.map((item, i) => {
+                    if (i === 0) {
+                      return (
+                        <TableCell className="line_itogo">
+                          <div className="pris">Присутствующих</div>
+                        </TableCell>
+                      );
+                    }
+                  })}
+                  {this.props.jh.map((item, i) => {
+                    if (i === 0) {
+                      return this.props.present.map((item, i) => {
+                        return (
+                          <TableCell key={i} className="line_itogo_col">
+                            <div className="pris_col">{item}</div>
+                          </TableCell>
+                        );
+                      });
+                    }
                   })}
                 </TableRow>
               </tbody>
