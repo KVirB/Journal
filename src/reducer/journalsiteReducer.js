@@ -1,4 +1,3 @@
-import { act } from "react-dom/cjs/react-dom-test-utils.production.min";
 import { getJournalsite, patchJournalsite } from "../BD/tables";
 
 const SET_JOURNALSITE = "SET_JOURNALSITE";
@@ -9,11 +8,8 @@ const SET_JOURNAL_HEADER = "SET_JOURNAL_HEADER";
 const CLEAR_JOURNALHEADER = "CLEAR_JOURNALHEADER";
 const SET_CLOSED_TRUE = "SET_CLOSED_TRUE";
 const SET_CLOSED_FALSE = "SET_CLOSED_FALSE";
-const SET_JOURNAL_CONTENT = "SET_JOURNAL_CONTENT";
 const SET_JH = "SET_JH";
 const CLEAR_JH = "CLEAR_JH";
-// const SET_TP = "SET_TP";
-const CLEAR_TP = "CLEAR_TP";
 const SET_SB = "SET_SB";
 const CLEAR_SB = "CLEAR_SB";
 const SET_PRESENT = "SET_PRESENT";
@@ -26,25 +22,10 @@ let initialState = {
   update: false,
   closed: false,
   jh: [],
-  // typeClass: [
-  //   {
-  //     id: 1,
-  //     typeClass: "Лекция",
-  //   },
-  //   {
-  //     id: 2,
-  //     typeClass: "Лабораторная работа",
-  //   },
-  //   {
-  //     id: 3,
-  //     typeClass: "Практическая работа",
-  //   },
-  // ],
-  // tp: [],
   subGroup: [
     {
       id: 1,
-      subGroup: "Все",
+      subGroup: "0",
     },
     {
       id: 2,
@@ -73,8 +54,8 @@ const journalsiteReducer = (state = initialState, action) => {
       let newJournalsitePresent = [...state.journalsite];
       let presenT = [...state.present];
       let counter = 0;
-      newJournalsitePresent[0].journalHeaders.map((header, i) => {
-        header.journalContents.map((content, i) => {
+      newJournalsitePresent[0].journalHeaders.forEach((header, i) => {
+        header.journalContents.forEach((content, i) => {
           if (content.presence === true) {
             counter = counter + 1;
           }
@@ -83,7 +64,6 @@ const journalsiteReducer = (state = initialState, action) => {
           presenT.push(counter);
         })();
         counter = 0;
-        console.log(presenT + "karaul");
       });
       return {
         ...state,
@@ -99,9 +79,8 @@ const journalsiteReducer = (state = initialState, action) => {
       let newJournalsite = [...state.journalsite];
       let jH = [...state.jh];
       let count = 0;
-      console.log(JSON.stringify([...state.jh]));
-      newJournalsite[0].journalHeaders.map((header) => {
-        header.journalContents.map((content) => {
+      newJournalsite[0].journalHeaders.forEach((header) => {
+        header.journalContents.forEach((content) => {
           if (content.presence === true) {
             count = count + 1;
           }
@@ -136,26 +115,15 @@ const journalsiteReducer = (state = initialState, action) => {
         ...state,
         jh: [],
       };
-    // case SET_TP:
-    //   let newTypeClass = [...state.typeClass];
-    //   let tP = [...state.tp];
-    //   newTypeClass.map((item) => {
-    //     tP.push(item);
-    //   });
-    //   return {
-    //     ...state,
-    //     tp: tP,
-    //   };
-    case CLEAR_TP:
-      return {
-        ...state,
-        tp: [],
-      };
     case SET_SB:
       let newSubGroup = [...state.subGroup];
       let sB = [...state.sb];
-      newSubGroup.map((item) => {
-        sB.push(item);
+      newSubGroup.forEach((item) => {
+        if (item.subGroup === "0") {
+          sB.push({ id: 1, subGroup: "Все" });
+        } else {
+          sB.push(item);
+        }
       });
       return {
         ...state,
@@ -167,20 +135,6 @@ const journalsiteReducer = (state = initialState, action) => {
         sb: [],
       };
 
-    case SET_JOURNAL_CONTENT:
-      let newJSite = [...state.journalsite];
-      let jContent = [...state.journalContent];
-      newJSite[0].journalHeaders.map((header) => {
-        header.journalContents
-          .sort((a, b) => a.id - b.id)
-          .map((content) => {
-            jContent.push(content);
-          });
-      });
-      return {
-        ...state,
-        journalContent: jContent,
-      };
     case SET_JOURNALSITE:
       return {
         ...state,
@@ -202,7 +156,7 @@ const journalsiteReducer = (state = initialState, action) => {
       if (localStorage.getItem("journalsite") !== null) {
         let newJournalsite = JSON.parse(localStorage.getItem("journalsite"));
         let jHeader = [...state.journalHeader];
-        newJournalsite[0].journalHeaders.map((header) => {
+        newJournalsite[0].journalHeaders.forEach((header) => {
           const obj = { id: header.id, content: header.journalContents };
           jHeader.push(obj);
         });
@@ -213,7 +167,7 @@ const journalsiteReducer = (state = initialState, action) => {
       } else {
         let newJournalsite = [...state.journalsite];
         let jHeader = [...state.journalHeader];
-        newJournalsite[0].journalHeaders.map((header) => {
+        newJournalsite[0].journalHeaders.forEach((header) => {
           const obj = { id: header.id, content: header.journalContents };
           jHeader.push(obj);
         });
@@ -298,13 +252,6 @@ export const setJH = (typeClass, subGroup, jh) => ({
   subGroup,
   jh,
 });
-// export const setTP = (tp) => ({
-//   type: SET_TP,
-//   tp,
-// });
-export const clearTP = () => ({
-  type: CLEAR_TP,
-});
 export const clearPresent = () => ({
   type: CLEAR_PRESENT,
 });
@@ -321,11 +268,6 @@ export const clearJH = () => ({
 export const setJournalHeader = (journalHeader) => ({
   type: SET_JOURNAL_HEADER,
   journalHeader,
-});
-
-export const setJournalContent = (journalContent) => ({
-  type: SET_JOURNAL_CONTENT,
-  journalContent,
 });
 
 export const setJournalsite = (journalsite, update) => ({
@@ -352,11 +294,6 @@ export const getJournalsiteThunk = (groupId, disciplineId) => {
 export const getJournalHeaderThunk = (journalHeader) => {
   return (dispatch) => {
     patchJournalsite(journalHeader);
-    // .then((data) => {
-    //   console.log(data);
-    //   dispatch(setJournalHeader(data));
-    // })
-    // .catch((error) => alert(error));
   };
 };
 

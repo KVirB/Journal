@@ -7,7 +7,6 @@ import Login from "../../login/Login";
 const App = (props) => {
   return (
     <Router>
-      {/* <div> */}
       <Route
         exact
         path="/"
@@ -19,8 +18,6 @@ const App = (props) => {
         path="/electronicaljournal-view/journal"
         component={Combine}
       />
-      {/* <Route exact path="/login" element={<Header />} /> */}
-      {/* </div> */}
     </Router>
   );
 };

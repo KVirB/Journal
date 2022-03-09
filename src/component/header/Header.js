@@ -1,11 +1,10 @@
-import React, { useCallback } from "react";
+import React from "react";
 import "./Header.css";
 import { connect } from "react-redux";
 import {
   getJournalsiteThunk,
   clearJournalsite,
   setJournalHeader,
-  setJH,
 } from "../../reducer/journalsiteReducer";
 import {
   getGroupThunk,
@@ -14,8 +13,6 @@ import {
   clearTypeClass,
   clearGroup,
 } from "../../reducer/headerReducer";
-import { Collapse } from "bootstrap";
-import { Hidden } from "@mui/material";
 import profile from "../../profile.png";
 import mech from "../../Vector.png";
 import col from "../../Col.png";
@@ -30,17 +27,17 @@ class Header extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
+    console.log;
     const { disciplineId, groupId, subGroup, typeClass } = this.state;
     if (disciplineId !== prevState.disciplineId) {
       this.props.getGroupThunk(disciplineId);
       this.props.clearGroup();
       this.props.clearJH();
-      this.props.clearTP();
+      this.props.clearTypeClass();
       this.props.clearSB();
     }
     if (groupId !== prevState.groupId) {
       this.props.getJournalsiteThunk(disciplineId, groupId);
-      console.log(disciplineId + groupId + "journalsite");
       this.props.clearSB();
       (async () => {
         await this.props.getTypeClassThunk();
@@ -63,7 +60,10 @@ class Header extends React.Component {
     this.setState({
       disciplineId: value,
     });
-    this.state.groupId = 0;
+    this.setState({
+      groupId: 0,
+    });
+    // this.state.groupId = 0;
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
         "У вас остались не сохраненные изменения. Сохранить?"
@@ -73,20 +73,16 @@ class Header extends React.Component {
         (async () => {
           await localStorage.clear();
           await this.props.clearJH();
-          // await this.props.clearTP();
-          // await this.props.clearSB();
-          // await this.props.clearDiscipline();
           this.props.setBtnTrue();
           this.props.getDisciplineThunk();
           let header = this.props.journalHeader;
           this.props.getJournalHeaderThunk(header);
           this.props.clearJournalHeader();
-          console.log(JSON.stringify(header) + "all good");
           alert("Сохранено");
         })();
       } else {
         localStorage.clear();
-        this.props.clearTP();
+        this.props.clearTypeClass();
         this.props.clearSB();
       }
     }
@@ -96,14 +92,8 @@ class Header extends React.Component {
     this.setState({
       groupId: value,
     });
-    // setTimeout(this.props.setJournalHeader(), 1000);
   };
   getTypeClass = (e) => {
-    // setTimeout(() => {
-    //   this.props.clearJH();
-    //   this.props.setJH(this.state.typeClass);
-    //   console.log(this.state.typeClass + "SKOTINA");
-    // }, 1);
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
         "У вас остались не сохраненные изменения. Сохранить?"
@@ -113,43 +103,31 @@ class Header extends React.Component {
         (async () => {
           await localStorage.clear();
           await this.props.clearJH();
-          // await this.props.clearTP();
-          // await this.props.clearSB();
-          // await this.props.clearDiscipline();
-          // await this.props.clearGroup();
           this.props.setBtnTrue();
           this.props.getDisciplineThunk();
           this.props.getGroupThunk(this.state.disciplineId);
           let header = this.props.journalHeader;
           this.props.getJournalHeaderThunk(header);
           this.props.clearJournalHeader();
-          console.log(JSON.stringify(header) + "all good");
           alert("Сохранено");
         })();
       } else {
         (async () => {
-          // await this.props.clearDiscipline();
-          // await this.props.clearGroup();
           this.props.getDisciplineThunk();
           this.props.getGroupThunk(this.state.disciplineId);
         })();
         localStorage.clear();
-        // this.props.clearTP();
-        // this.props.clearSB();
       }
     }
     (async () => {
       await this.props.clearJH();
-      // this.props.setJH(this.state.typeClass, this.state.subGroup);
       this.props.setSB();
-      console.log(this.state.typeClass + "SKOTINA");
-      console.log(this.state.subGroup + "SKOTINA 2");
     })();
-    // call();
     const { value } = e.target;
     this.setState({
       typeClass: value,
     });
+    this.props.setType(this.state.typeClass);
   };
   getSubGroup = (e) => {
     if (localStorage.getItem("journalsite") !== null) {
@@ -161,30 +139,20 @@ class Header extends React.Component {
         (async () => {
           await localStorage.clear();
           await this.props.clearJH();
-          // await this.props.clearTP();
-          // await this.props.clearSB();
-          // await this.props.clearDiscipline();
-          // await this.props.clearGroup();
           this.props.setBtnTrue();
           this.props.getDisciplineThunk();
           this.props.getGroupThunk(this.state.disciplineId);
           let header = this.props.journalHeader;
           this.props.getJournalHeaderThunk(header);
           this.props.clearJournalHeader();
-          console.log(JSON.stringify(header) + "all good");
           alert("Сохранено");
-          // window.location.reload();
         })();
       } else {
         (async () => {
-          // await this.props.clearDiscipline();
-          // await this.props.clearGroup();
           this.props.getDisciplineThunk();
           this.props.getGroupThunk(this.state.disciplineId);
         })();
         localStorage.clear();
-        // this.props.clearTP();
-        // this.props.clearSB();
       }
     }
     (async () => {
@@ -192,7 +160,6 @@ class Header extends React.Component {
       await this.props.clearPresent();
       this.props.setJH(this.state.typeClass, this.state.subGroup);
       this.props.setPresent();
-      console.log(this.state.subGroup + "OH SHIT");
     })();
     const { value } = e.target;
     this.setState({
@@ -209,8 +176,6 @@ class Header extends React.Component {
       this;
     return (
       <div>
-        {console.log(this.state.typeClass)}
-        {console.log(this.state.subGroup + "SB")}
         {/* {
           (console.log(
             "%cProject by KVirB",
@@ -246,21 +211,25 @@ class Header extends React.Component {
           <div className="disp">
             <div className="icons_que">
               <a href="/electronicaljournal-view/journal">
-                <img src={que}></img>
+                <img src={que} alt="description"></img>
               </a>
             </div>
             <div className="icons_col">
               <a href="/electronicaljournal-view/journal">
-                <img src={col}></img>
+                <img src={col} alt="description"></img>
               </a>
             </div>
             <div className="icons_mech">
               <a href="/electronicaljournal-view/journal">
-                <img src={mech}></img>
+                <img src={mech} alt="description"></img>
               </a>
             </div>
             <div>
-              <img className="profile_pic" src={profile}></img>
+              <img
+                className="profile_pic"
+                src={profile}
+                alt="description"
+              ></img>
             </div>
             <div>
               <label className="name_of_teacher">Абазовская Н.К.</label>
@@ -273,10 +242,6 @@ class Header extends React.Component {
             </div>
           </div>
         </header>
-        {/* <button onClick={this.props.setPresent()}>ADDD</button> */}
-        {/* <button onClick={(this.props.getDisciplineThunk(), this.groupId === 0)}>
-          Сменить журнал
-        </button> */}
         <div className="display-flex pointer">
           <div className="display-flex">
             <div>
@@ -304,7 +269,7 @@ class Header extends React.Component {
           </div>
           <div>
             <a href="/electronicaljournal-view/journal">
-              <img className="points" src={points}></img>
+              <img className="points" src={points} alt="description"></img>
             </a>
           </div>
         </div>
@@ -326,7 +291,6 @@ class Header extends React.Component {
                 <option defaultValue="" hidden>
                   Группа
                 </option>
-                {console.log(this.props.typeClass + "PIPIPUPU CHECK")}
                 {this.props.group.map((m, i) => (
                   <option className="lang__items" value={m.group.id} key={i}>
                     {m.group.name}
@@ -344,7 +308,6 @@ class Header extends React.Component {
                 <option defaultValue="" hidden>
                   Тип
                 </option>
-                {console.log(JSON.stringify(this.props.tp) + " ТИпы")}
                 {this.props.typeClass.map((item, i) => (
                   <option value={item.id} key={i}>
                     {item.name}
@@ -362,7 +325,6 @@ class Header extends React.Component {
                 <option value={this.state.subGroup} hidden>
                   Подгруппа
                 </option>
-                {console.log(JSON.stringify(this.props.sb) + " ТИпы")}
                 {this.props.sb.map((item, i) => (
                   <option value={item.subGroup} key={i}>
                     {item.subGroup}
@@ -371,14 +333,6 @@ class Header extends React.Component {
               </select>
             </div>
           </div>
-          {/* <div className="view-date-name">Дата:</div>
-          <input
-            className="view-date-input"
-            type="date"
-            title="Выберите дату"
-            onChange={getDateBox}
-          ></input> */}
-
           <input
             className="button-header bt_color"
             type="submit"
@@ -390,10 +344,8 @@ class Header extends React.Component {
                 let header = this.props.journalHeader;
                 this.props.getJournalHeaderThunk(header);
                 this.props.clearJournalHeader();
-                console.log(this.props.journalHeader + "KNOPKA");
               }, 1);
               this.props.setBtnTrue();
-              console.log(this.props.disabled + "DISABLEDFAK");
               localStorage.removeItem("journalsite");
             }}
           />
