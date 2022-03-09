@@ -27,7 +27,6 @@ class Header extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    console.log;
     const { disciplineId, groupId, subGroup, typeClass } = this.state;
     if (disciplineId !== prevState.disciplineId) {
       this.props.getGroupThunk(disciplineId);
@@ -123,11 +122,13 @@ class Header extends React.Component {
       await this.props.clearJH();
       this.props.setSB();
     })();
-    const { value } = e.target;
-    this.setState({
-      typeClass: value,
-    });
-    this.props.setType(this.state.typeClass);
+    (async () => {
+      const { value } = e.target;
+      await this.setState({
+        typeClass: value,
+      });
+      this.props.setType(this.state.typeClass);
+    })();
   };
   getSubGroup = (e) => {
     if (localStorage.getItem("journalsite") !== null) {
@@ -176,6 +177,7 @@ class Header extends React.Component {
       this;
     return (
       <div>
+        {console.log(this.state.typeClass + "TypeClass")}
         {/* {
           (console.log(
             "%cProject by KVirB",
@@ -246,21 +248,23 @@ class Header extends React.Component {
           <div className="display-flex">
             <div>
               <div className="discipline-name">Название дисциплины</div>
-              <select
-                className="discipline-select"
-                name="discipline"
-                title="Выберите дисциплину"
-                onChange={getValueDiscipline}
-              >
-                <option defaultValue="" hidden>
-                  Дисциплина
-                </option>
-                {this.props.discipline.map((m, i) => (
-                  <option className="lang__items" value={m.id} key={i}>
-                    {m.name}
+              <div className="select">
+                <select
+                  className="discipline-select"
+                  name="discipline"
+                  title="Выберите дисциплину"
+                  onChange={getValueDiscipline}
+                >
+                  <option defaultValue="" hidden>
+                    Дисциплина
                   </option>
-                ))}
-              </select>
+                  {this.props.discipline.map((m, i) => (
+                    <option className="lang__items" value={m.id} key={i}>
+                      {m.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
             <div>
               <div className="special-name">Специальность</div>

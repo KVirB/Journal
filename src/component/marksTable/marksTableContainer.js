@@ -42,6 +42,7 @@ class marksTableContainer extends React.Component {
           setPresent={this.props.setPresent}
           clearPresent={this.props.clearPresent}
           clearTypeClass={this.props.clearTypeClass}
+          typeC={this.props.typeC}
         />
       </div>
     );
@@ -55,6 +56,7 @@ let mapStateToProps = (state) => {
     disabled: state.btnPage.disabled,
     jh: state.journalsitePage.jh,
     present: state.journalsitePage.present,
+    typeC: state.typePage.typeC,
   };
 };
 

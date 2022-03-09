@@ -302,8 +302,8 @@ input[type="submit"].button-header:disabled {
   color: white;
   font-family: "Roboto", sans-serif;
   font-style: normal;
-  font-weight: normal;
-  font-size: 23px;
+  font-weight: 400;
+  font-size: 20px;
   line-height: 120%;
   text-align: center;
   color: #ffffff;

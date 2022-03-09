@@ -2,7 +2,7 @@ const SET_TYPE = "SET_TYPE";
 const CLEAR_TYPE = "CLEAR_TYPE";
 
 let initialState = {
-  typeC: null,
+  typeC: 2,
 };
 
 const typeReducer = (state = initialState, action) => {
