@@ -13,17 +13,15 @@ import {
   setJournalHeader,
   clearJournalHeader,
   getJournalHeaderThunk,
-  setJournalContent,
   setJH,
   clearJH,
-  // setTP,
-  clearTP,
   setSB,
   clearSB,
   setPresent,
   clearPresent,
 } from "../../reducer/journalsiteReducer";
 import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
+import { setType, clearType } from "../../reducer/typeReducer";
 class headerContainer extends React.Component {
   componentDidMount() {
     this.props.getDisciplineThunk();
@@ -44,7 +42,6 @@ class headerContainer extends React.Component {
         clearJournalHeader={this.props.clearJournalHeader}
         getJournalHeaderThunk={this.props.getJournalHeaderThunk}
         closed={this.props.closed}
-        setJournalContent={this.props.setJournalContent}
         disabled={this.props.disabled}
         setBtnTrue={this.props.setBtnTrue}
         setBtnFalse={this.props.setBtnFalse}
@@ -52,9 +49,6 @@ class headerContainer extends React.Component {
         setJH={this.props.setJH}
         update={this.props.update}
         clearJH={this.props.clearJH}
-        // typeClass={this.props.typeClass}
-        setTP={this.props.setTP}
-        clearTP={this.props.clearTP}
         tp={this.props.tp}
         setSB={this.props.setSB}
         clearSB={this.props.clearSB}
@@ -63,6 +57,8 @@ class headerContainer extends React.Component {
         present={this.props.present}
         clearPresent={this.props.clearPresent}
         clearDiscipline={this.props.clearDiscipline}
+        setType={this.props.setType}
+        clearType={this.props.clearType}
       />
     );
   }
@@ -78,10 +74,9 @@ let mapStateToProps = (state) => {
     disabled: state.btnPage.disabled,
     jh: state.journalsitePage.jh,
     update: state.journalsitePage.update,
-    // typeClass: state.journalsitePage.typeClass,
-    tp: state.journalsitePage.tp,
     sb: state.journalsitePage.sb,
     present: state.journalsitePage.present,
+    typeC: state.typePage.typeC,
   };
 };
 
@@ -94,16 +89,14 @@ export default connect(mapStateToProps, {
   setJournalHeader,
   clearJournalHeader,
   getJournalHeaderThunk,
-  setJournalContent,
   setBtnTrue,
   setBtnFalse,
   setJH,
   clearJH,
-  // setTP,
-  clearTP,
   setSB,
   clearSB,
   setPresent,
   clearPresent,
   clearDiscipline,
+  setType,
 })(headerContainer);

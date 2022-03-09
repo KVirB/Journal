@@ -1,5 +1,4 @@
 import * as axios from "axios";
-import { clearJournalHeader } from "../reducer/journalsiteReducer";
 
 const baseRout = axios.create({
   baseURL: "http://192.168.11.252:8082/",
@@ -24,13 +23,7 @@ export const getFio = () => {
       return response.data;
     });
 };
-// export const getDiscipline = () => {
-//   return baseRout
-//     .get("electronicjournal/disciplines/search?q")
-//     .then((response) => {
-//       return response.data;
-//     });
-// };
+
 export const getDiscipline = () => {
   return baseRout
     .get("electronicjournal/disciplines/search?q")
@@ -75,7 +68,6 @@ export const patchJournalsite = async (bodyItems) => {
     let requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      // body: JSON.stringify(m.content),
     };
     return baseRout
       .patch(

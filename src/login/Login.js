@@ -32,21 +32,11 @@ class Login extends React.Component {
     }
   }
 
-  // Login = () => {
-  //   const { login, password } = this.state;
-  //   if (login === "Абазовская" && password === "1") {
-  //     window.location.assign("/electronicaljournal-view/journal");
-  //     this.setState({ login: null, password: null });
-  //   } else {
-  //     this.setState({ discription: "Введите верные данные" });
-  //   }
-  // };
-
   Login = async () => {
     const { login, password } = this.state;
 
     try {
-      const response = await axios({
+      await axios({
         method: "post",
         url: "https://abitpriv.vstu.by:8080/api/uaa/token",
         headers: {
@@ -71,7 +61,6 @@ class Login extends React.Component {
     const { getPassword, getLogin, Login } = this;
     return (
       <div className="back">
-        {console.log(this.state.login)}
         <section className="container">
           <div className="login">
             <h1>Войти в электронный журнал</h1>
@@ -110,22 +99,6 @@ class Login extends React.Component {
                   Login();
                 }}
               />
-              {/* <input
-                type="submit"
-                className="button"
-                name="commit"
-                value="Войти"
-                onClick={() => {
-                  this.props.toggleTeacher(
-                    this.state.login,
-                    this.state.password
-                  );
-                }}
-              />
-              {this.props.teacher.map((m) => (
-                <label>{m.name}</label>
-              ))}
-              {console.log(this.props.teacher + "FAMILIYA")} */}
             </div>
           </div>
         </section>

@@ -46,7 +46,7 @@
   border-top: 1px solid #fff;
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
-  border-bottom: 1.3px solid #e0e0e0;
+  border-bottom: 1.3px solid #b4b4b4;
   outline: none;
   width: 20px;
   height: 19px;
@@ -137,6 +137,7 @@ hr {
   border-bottom: 1px solid rgba(224, 224, 224, 1);
   height: 158px;
   width: 218px;
+  display: block;
 }
 
 .disp {

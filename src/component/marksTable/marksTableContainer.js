@@ -7,12 +7,11 @@ import {
   setJournalSiteMark,
   clearJournalHeader,
   getJournalHeaderThunk,
-  setJournalContent,
   setJH,
-  clearTP,
   setPresent,
   clearPresent,
 } from "../../reducer/journalsiteReducer";
+import { clearTypeClass } from "../../reducer/headerReducer";
 import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
 import { setJournalHeader } from "../../reducer/journalsiteReducer";
 import MarksTable from "../marksTable/MarksTable";
@@ -34,16 +33,15 @@ class marksTableContainer extends React.Component {
           getJournalHeaderThunk={this.props.getJournalHeaderThunk}
           setClosedTrue={this.props.setClosedTrue}
           journalContent={this.props.journalContent}
-          setJournalContent={this.props.setJournalContent}
           setBtnTrue={this.props.setBtnTrue}
           setBtnFalse={this.props.setBtnFalse}
           disabled={this.props.disabled}
           jh={this.props.jh}
           setJH={this.props.setJH}
-          clearTP={this.props.clearTP}
           present={this.props.present}
           setPresent={this.props.setPresent}
           clearPresent={this.props.clearPresent}
+          clearTypeClass={this.props.clearTypeClass}
         />
       </div>
     );
@@ -68,11 +66,10 @@ export default connect(mapStateToProps, {
   setJournalHeader,
   clearJournalHeader,
   getJournalHeaderThunk,
-  setJournalContent,
   setBtnTrue,
   setBtnFalse,
   setJH,
-  clearTP,
+  clearTypeClass,
   setPresent,
   clearPresent,
 })(marksTableContainer);
