@@ -42,8 +42,8 @@ class Header extends React.Component {
     }
     if (typeClass !== prevState.typeClass) {
       (async () => {
-        this.props.clearSB();
-        this.props.clearJH();
+        // this.props.clearSB();
+        // this.props.clearJH();
       })();
       if (subGroup !== prevState.subGroup) {
         this.props.setBtnFalse();
@@ -206,7 +206,7 @@ class Header extends React.Component {
           <div className="display-flex">
             <div>
               <div className="discipline-name">Название дисциплины</div>
-              <div className="select">
+              <div className="styled-select-disс">
                 <select
                   className="discipline-select"
                   name="discipline"
