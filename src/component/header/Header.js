@@ -14,7 +14,6 @@ import {
   clearGroup,
 } from "../../reducer/headerReducer";
 import points from "../../points.png";
-import MainHeader from "../header/MainHeader";
 class Header extends React.Component {
   state = {
     disciplineId: 0,
@@ -201,7 +200,6 @@ class Header extends React.Component {
             "http://risovach.ru/thumb/upload/200s400/2019/08/generator/i-tak-soydet_217015291_orig_.png?d9qg6"
           ))
         } */}
-        <MainHeader />
         <div className="display-flex pointer">
           <div className="display-flex">
             <div>
