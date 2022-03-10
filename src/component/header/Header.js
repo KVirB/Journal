@@ -206,7 +206,7 @@ class Header extends React.Component {
           <div className="display-flex">
             <div>
               <div className="discipline-name">Название дисциплины</div>
-              <div className="select">
+              <div class="styled-select-disp">
                 <select
                   className="discipline-select"
                   name="discipline"
@@ -225,8 +225,10 @@ class Header extends React.Component {
               </div>
             </div>
             <div>
-              <div className="special-name">Специальность</div>
-              <div className="special-select">Test</div>
+              <div class="styled-select">
+                <div className="special-name">Специальность</div>
+                <div className="special-select">Test</div>
+              </div>
             </div>
           </div>
           <div>
