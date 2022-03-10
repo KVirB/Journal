@@ -12,6 +12,8 @@ import {
   getTypeClassThunk,
   clearTypeClass,
   clearGroup,
+  getSubGroupThunk,
+  clearSubGroup,
 } from "../../reducer/headerReducer";
 import points from "../../points.png";
 import MainHeader from "../header/MainHeader";
@@ -42,6 +44,8 @@ class Header extends React.Component {
     }
     if (typeClass !== prevState.typeClass) {
       (async () => {
+        await this.props.getSubGroupThunk();
+        this.props.clearSubGroup();
         // this.props.clearSB();
         // this.props.clearJH();
       })();
@@ -174,7 +178,9 @@ class Header extends React.Component {
       this;
     return (
       <div>
-        {console.log(this.state.typeClass + "TypeClass")}
+        {console.log(
+          this.state.disciplineId + "discipline" + this.state.groupId + "group"
+        )}
         {/* {
           (console.log(
             "%cProject by KVirB",
@@ -287,9 +293,10 @@ class Header extends React.Component {
                 <option value={this.state.subGroup} hidden>
                   Подгруппа
                 </option>
-                {this.props.sb.map((item, i) => (
-                  <option value={item.subGroup} key={i}>
-                    {item.subGroup}
+
+                {this.props.subGroup.map((item, i) => (
+                  <option value={item.subGroupNumber} key={i}>
+                    {item.subGroupNumber === 0 ? "Все" : item.subGroupNumber}
                   </option>
                 ))}
               </select>
@@ -328,6 +335,8 @@ export default connect(null, {
   getGroupThunk,
   getDisciplineThunk,
   getTypeClassThunk,
+  getSubGroupThunk,
+  clearSubGroup,
   clearTypeClass,
   clearJournalsite,
   clearGroup,

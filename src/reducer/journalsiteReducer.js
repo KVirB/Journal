@@ -79,32 +79,33 @@ const journalsiteReducer = (state = initialState, action) => {
       let newJournalsite = [...state.journalsite];
       let jH = [...state.jh];
       let count = 0;
-      newJournalsite[0].journalHeaders.forEach((header) => {
-        header.journalContents.forEach((content) => {
-          if (content.presence === true) {
-            count = count + 1;
-          }
+      newJournalsite.forEach((site) => {
+        site.journalHeaders.forEach((header) => {
+          header.journalContents.forEach((content) => {
+            if (content.presence === true) {
+              count = count + 1;
+            }
+          });
+          (async () => {
+            const obj = {
+              id: header.id,
+              typeClass: header.typeClass.name,
+              content: header.journalContents,
+              data: header.dateOfLesson,
+              subGroup: header.subGroup,
+              counter: count,
+            };
+            if (
+              (header.typeClass.id === Number(action.typeClass) &&
+                header.subGroup === Number(action.subGroup)) ||
+              (header.typeClass.id === Number(action.typeClass) &&
+                action.subGroup === "0")
+            ) {
+              jH.push(obj);
+            }
+          })();
+          count = 0;
         });
-
-        (async () => {
-          const obj = {
-            id: header.id,
-            typeClass: header.typeClass.name,
-            content: header.journalContents,
-            data: header.dateOfLesson,
-            subGroup: header.subGroup,
-            counter: count,
-          };
-          if (
-            (header.typeClass.id === Number(action.typeClass) &&
-              header.subGroup === Number(action.subGroup)) ||
-            (header.typeClass.id === Number(action.typeClass) &&
-              action.subGroup === "Все")
-          ) {
-            jH.push(obj);
-          }
-        })();
-        count = 0;
       });
       return {
         ...state,

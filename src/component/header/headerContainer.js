@@ -22,6 +22,7 @@ import {
 } from "../../reducer/journalsiteReducer";
 import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
 import { setType, clearType } from "../../reducer/typeReducer";
+import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
 class headerContainer extends React.Component {
   componentDidMount() {
     this.props.getDisciplineThunk();
@@ -59,6 +60,7 @@ class headerContainer extends React.Component {
         clearDiscipline={this.props.clearDiscipline}
         setType={this.props.setType}
         clearType={this.props.clearType}
+        subGroup={this.props.subGroup}
       />
     );
   }
@@ -68,6 +70,7 @@ let mapStateToProps = (state) => {
     discipline: state.disciplinePage.discipline,
     group: state.groupPage.group,
     typeClass: state.typeClassPage.typeClass,
+    subGroup: state.typeClassPage.subGroup,
     journalsite: state.journalsitePage.journalsite,
     teacher: state.teacherPage.teacher,
     journalHeader: state.journalsitePage.journalHeader,

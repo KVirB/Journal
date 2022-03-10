@@ -48,7 +48,7 @@ export const getSubGroup = () => {
 export const getGroup = (disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId};teacher.id==2`
+      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId};teacher.id==4`
     )
     .then((response) => {
       return response.data;
@@ -57,7 +57,7 @@ export const getGroup = (disciplineId) => {
 export const getJournalsite = (groupId, disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=teacher.id==2;discipline.id==${disciplineId};group.id==${groupId}`
+      `electronicjournal/journal-sites/search?q=teacher.id==4;discipline.id==${disciplineId};group.id==${groupId}`
     )
     .then((response) => {
       return response.data;
