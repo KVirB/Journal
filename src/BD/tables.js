@@ -38,6 +38,13 @@ export const getTypeClass = () => {
       return response.data;
     });
 };
+export const getSubGroup = () => {
+  return baseRout
+    .get("electronicjournal/sub_groups/search?q=")
+    .then((response) => {
+      return response.data;
+    });
+};
 export const getGroup = (disciplineId) => {
   return baseRout
     .get(

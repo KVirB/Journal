@@ -298,7 +298,8 @@ export default class MarksTable extends React.Component {
                           })}
                       </tbody>
                     );
-                  } else {
+                  }
+                  if (this.props.typeC === "3") {
                     return (
                       <tbody key={i}>
                         <TableRow>

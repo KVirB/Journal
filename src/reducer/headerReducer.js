@@ -1,4 +1,4 @@
-import { getDiscipline } from "../BD/tables";
+import { getDiscipline, getSubGroup } from "../BD/tables";
 import { getGroup } from "../BD/tables";
 import { getTypeClass } from "../BD/tables";
 
@@ -7,12 +7,14 @@ const CLEAR_DISCIPLINE = "CLEAR_DISCIPLINE";
 const SET_GROUP = "SET_GROUP";
 const CLEAR_GROUP = "CLEAR_GROUP";
 const SET_TYPECLASS = "SET_TYPECLASS";
+const SET_SUBGROUP = "SET_SUBGROUP";
 const CLEAR_TYPECLASS = "CLEAR_TYPECLASS";
-
+const CLEAR_SUBGROUP = "CLEAR_SUBGROUP";
 let initialState = {
   discipline: [],
   group: [],
   typeClass: [],
+  subGroup: [],
 };
 
 const headerReducer = (state = initialState, action) => {
@@ -32,6 +34,11 @@ const headerReducer = (state = initialState, action) => {
         ...state,
         typeClass: [...action.typeClass],
       };
+    case SET_SUBGROUP:
+      return {
+        ...state,
+        subGroup: [...action.subGroup],
+      };
     case CLEAR_GROUP:
       return {
         ...state,
@@ -46,6 +53,11 @@ const headerReducer = (state = initialState, action) => {
       return {
         ...state,
         typeClass: [],
+      };
+    case CLEAR_SUBGROUP:
+      return {
+        ...state,
+        subGroup: [],
       };
     default:
       return state;
@@ -65,6 +77,10 @@ export const setTypeClass = (typeClass) => ({
   type: SET_TYPECLASS,
   typeClass,
 });
+export const setSubGroup = (subGroup) => ({
+  type: SET_SUBGROUP,
+  subGroup,
+});
 export const clearGroup = () => ({
   type: CLEAR_GROUP,
 });
@@ -73,6 +89,9 @@ export const clearDiscipline = () => ({
 });
 export const clearTypeClass = () => ({
   type: CLEAR_TYPECLASS,
+});
+export const clearSubGroup = () => ({
+  type: CLEAR_SUBGROUP,
 });
 export const getGroupThunk = (disciplineId) => {
   return (dispatch) => {
@@ -94,6 +113,13 @@ export const getTypeClassThunk = () => {
   return (dispatch) => {
     getTypeClass().then((data) => {
       dispatch(setTypeClass(data));
+    });
+  };
+};
+export const getSubGroupThunk = () => {
+  return (dispatch) => {
+    getSubGroup().then((data) => {
+      dispatch(setSubGroup(data));
     });
   };
 };
