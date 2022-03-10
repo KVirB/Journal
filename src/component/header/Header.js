@@ -13,11 +13,8 @@ import {
   clearTypeClass,
   clearGroup,
 } from "../../reducer/headerReducer";
-import profile from "../../profile.png";
-import mech from "../../Vector.png";
-import col from "../../Col.png";
-import que from "../../Que.png";
 import points from "../../points.png";
+import MainHeader from "../header/MainHeader";
 class Header extends React.Component {
   state = {
     disciplineId: 0,
@@ -204,46 +201,7 @@ class Header extends React.Component {
             "http://risovach.ru/thumb/upload/200s400/2019/08/generator/i-tak-soydet_217015291_orig_.png?d9qg6"
           ))
         } */}
-        <header className="head display-flex">
-          <h1 className="journal-name">
-            <a className="j_name" href="/electronicaljournal-view/journal">
-              Электронный журнал преподавателя УО «ВГТУ»
-            </a>
-          </h1>
-          <div className="disp">
-            <div className="icons_que">
-              <a href="/electronicaljournal-view/journal">
-                <img src={que} alt="description"></img>
-              </a>
-            </div>
-            <div className="icons_col">
-              <a href="/electronicaljournal-view/journal">
-                <img src={col} alt="description"></img>
-              </a>
-            </div>
-            <div className="icons_mech">
-              <a href="/electronicaljournal-view/journal">
-                <img src={mech} alt="description"></img>
-              </a>
-            </div>
-            <div>
-              <img
-                className="profile_pic"
-                src={profile}
-                alt="description"
-              ></img>
-            </div>
-            <div>
-              <label className="name_of_teacher">Абазовская Н.К.</label>
-              <input
-                type="submit"
-                className="bth_exit"
-                value="Выйти"
-                onClick={Logout}
-              />
-            </div>
-          </div>
-        </header>
+        <MainHeader />
         <div className="display-flex pointer">
           <div className="display-flex">
             <div>
