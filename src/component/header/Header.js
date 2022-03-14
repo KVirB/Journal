@@ -5,6 +5,7 @@ import {
   getJournalsiteThunk,
   clearJournalsite,
   setJournalHeader,
+  setJournalsite,
 } from "../../reducer/journalsiteReducer";
 import {
   getGroupThunk,
@@ -17,41 +18,31 @@ import {
 } from "../../reducer/headerReducer";
 import points from "../../points.png";
 import MainHeader from "../header/MainHeader";
+import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
 class Header extends React.Component {
   state = {
     disciplineId: 0,
     groupId: 0,
     typeClass: 0,
-    subGroup: 0,
+    subGroup: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
     const { disciplineId, groupId, subGroup, typeClass } = this.state;
     if (disciplineId !== prevState.disciplineId) {
       this.props.getGroupThunk(disciplineId);
-      this.props.clearGroup();
-      this.props.clearJH();
       this.props.clearTypeClass();
-      this.props.clearSB();
+      this.props.clearSubGroup();
+      this.props.clearJournalsite();
     }
     if (groupId !== prevState.groupId) {
-      this.props.getJournalsiteThunk(disciplineId, groupId);
-      this.props.clearSB();
-      (async () => {
-        await this.props.getTypeClassThunk();
-        this.props.clearTypeClass();
-      })();
     }
     if (typeClass !== prevState.typeClass) {
-      (async () => {
-        await this.props.getSubGroupThunk();
-        this.props.clearSubGroup();
-        // this.props.clearSB();
-        // this.props.clearJH();
-      })();
-      if (subGroup !== prevState.subGroup) {
-        this.props.setBtnFalse();
-      }
+      this.props.clearJournalsite();
+    }
+    if (subGroup !== prevState.subGroup) {
+      this.props.setBtnFalse();
+      this.props.clearJournalsite();
     }
   }
 
@@ -63,7 +54,6 @@ class Header extends React.Component {
     this.setState({
       groupId: 0,
     });
-    // this.state.groupId = 0;
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
         "У вас остались не сохраненные изменения. Сохранить?"
@@ -92,6 +82,8 @@ class Header extends React.Component {
     this.setState({
       groupId: value,
     });
+    this.props.clearJournalsite();
+    this.props.getTypeClassThunk();
   };
   getTypeClass = (e) => {
     if (localStorage.getItem("journalsite") !== null) {
@@ -119,19 +111,31 @@ class Header extends React.Component {
         localStorage.clear();
       }
     }
-    (async () => {
-      await this.props.clearJH();
-      this.props.setSB();
-    })();
+
     (async () => {
       const { value } = e.target;
       await this.setState({
         typeClass: value,
       });
       this.props.setType(this.state.typeClass);
+      await this.props.clearSubGroup();
+      this.props.getSubGroupThunk();
     })();
   };
   getSubGroup = (e) => {
+    const { value } = e.target;
+    this.setState({
+      subGroup: value,
+    });
+    (async () => {
+      await this.props.setPresent();
+      this.props.getJournalsiteThunk(
+        this.state.disciplineId,
+        this.state.groupId,
+        this.state.typeClass,
+        this.state.subGroup
+      );
+    })();
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
         "У вас остались не сохраненные изменения. Сохранить?"
@@ -157,16 +161,6 @@ class Header extends React.Component {
         localStorage.clear();
       }
     }
-    (async () => {
-      await this.props.clearJH();
-      await this.props.clearPresent();
-      this.props.setJH(this.state.typeClass, this.state.subGroup);
-      this.props.setPresent();
-    })();
-    const { value } = e.target;
-    this.setState({
-      subGroup: value,
-    });
   };
 
   Logout = () => {
@@ -178,8 +172,16 @@ class Header extends React.Component {
       this;
     return (
       <div>
+        {}
         {console.log(
-          this.state.disciplineId + "discipline" + this.state.groupId + "group"
+          this.state.disciplineId +
+            "disc" +
+            this.state.groupId +
+            "group" +
+            this.state.typeClass +
+            "type" +
+            this.state.subGroup +
+            "sub"
         )}
         {/* {
           (console.log(
@@ -209,6 +211,9 @@ class Header extends React.Component {
         } */}
         <MainHeader />
         <div className="display-flex pointer">
+          {console.log(
+            JSON.stringify(JSON.stringify(this.props.journalSite) + "content")
+          )}
           <div className="display-flex">
             <div>
               <div className="discipline-name">Название дисциплины</div>
@@ -341,4 +346,5 @@ export default connect(null, {
   clearJournalsite,
   clearGroup,
   setJournalHeader,
+  setJournalsite,
 })(Header);

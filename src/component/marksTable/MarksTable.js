@@ -62,7 +62,6 @@ export default class MarksTable extends React.Component {
     {
       return (
         <div>
-          {console.log(this.props.typeC + "TypeC")}
           <div className="headHr" />
           <div className="all-content">
             <TableContainer sx={{ maxHeight: 760 }}>
@@ -74,7 +73,7 @@ export default class MarksTable extends React.Component {
               >
                 <tbody>
                   <TableRow>
-                    {this.props.jh.map((m, i) => {
+                    {this.props.journalsite.map((m, i) => {
                       if (i === 0)
                         return (
                           <td className="line-fio diagonal-line" key={i}>
@@ -83,55 +82,60 @@ export default class MarksTable extends React.Component {
                           </td>
                         );
                     })}
-                    {this.props.jh.map((item, i) => {
-                      if (i === 0) {
-                        return item.content
-                          .sort((a, b) => a.id - b.id)
-                          .map((content, i) => (
-                            <TableCell
-                              height="19px"
-                              width="186px"
-                              className="disp line-stud"
-                              key={content.id}
-                            >
-                              <div className="surname">
-                                {i + 1 + ". " + content.student.surname}
-                              </div>
-                              <div className="csn surname">
-                                {content.student.name}
-                              </div>
-                            </TableCell>
-                          ));
-                      }
-                    })}
+                    {this.props.journalsite.map((item, i) =>
+                      item.journalHeaders.map((header, i) => {
+                        if (i === 0) {
+                          return header.journalContents
+                            .sort((a, b) => a.id - b.id)
+                            .map((content, i) => (
+                              <TableCell
+                                height="19px"
+                                width="186px"
+                                className="disp line-stud"
+                                key={content.id}
+                              >
+                                <div className="surname">
+                                  {i + 1 + ". " + content.student.surname}
+                                </div>
+                                <div className="csn surname">
+                                  {content.student.name}
+                                </div>
+                              </TableCell>
+                            ));
+                        }
+                      })
+                    )}
                   </TableRow>
                 </tbody>
-                {this.props.jh.map((item, i) => {
-                  if (this.props.typeC === "1") {
+                {this.props.journalsite.map((item, i) =>
+                  item.journalHeaders.map((header, i) => {
                     return (
                       <tbody key={i}>
                         <TableRow>
                           <TableCell height="126px" className="line-data">
                             <div className="">
                               <p className="day_mount">
-                                {item.data[2] < 10
-                                  ? String(this.state.x) + item.data[2]
-                                  : item.data[2]}
+                                {header.dateOfLesson[2] < 10
+                                  ? String(this.state.x) +
+                                    header.dateOfLesson[2]
+                                  : header.dateOfLesson[2]}
                                 .
-                                {item.data[1] < 10
-                                  ? String(this.state.x) + item.data[1]
-                                  : item.data[1]}
+                                {header.dateOfLesson[1] < 10
+                                  ? String(this.state.x) +
+                                    header.dateOfLesson[1]
+                                  : header.dateOfLesson[1]}
                                 <br />
                               </p>
                               <p className="year">
-                                {item.data[0] < 10
-                                  ? String(this.state.x) + item.data[0]
-                                  : item.data[0]}
+                                {header.dateOfLesson[0] < 10
+                                  ? String(this.state.x) +
+                                    header.dateOfLesson[0]
+                                  : header.dateOfLesson[0]}
                               </p>
                             </div>
                           </TableCell>
                         </TableRow>
-                        {item.content
+                        {header.journalContents
                           .sort((a, b) => a.id - b.id)
                           .map((content, j) => {
                             if (content.presence === false) {
@@ -144,197 +148,6 @@ export default class MarksTable extends React.Component {
                                   >
                                     <div className="std_cell">
                                       {/* {content.presence === true && ( */}
-                                      {/* <select
-                                          key={content.id}
-                                          className="sel_grade myInput"
-                                          name="select"
-                                          disabled
-                                          defaultValue={content.grade}
-                                          onChange={(e) => {
-                                            this.props.setBtnFalse();
-                                            this.props.setJournalSiteMark(
-                                              item.id,
-                                              content.id,
-                                              e.target.value
-                                            );
-                                            if (typeof Storage !== "undefined") {
-                                              localStorage.setItem(
-                                                "journalsite",
-                                                JSON.stringify(
-                                                  this.props.journalsite
-                                                )
-                                              );
-                                            }
-                                          }}
-                                        >
-                                          <option hidden></option>
-                                          <option>1</option>
-                                          <option>2</option>
-                                          <option>3</option>
-                                          <option>4</option>
-                                          <option>5</option>
-                                          <option>6</option>
-                                          <option>7</option>
-                                          <option>8</option>
-                                          <option>9</option>
-                                          <option>10</option>
-                                        </select> */}
-                                      {/* )} */}
-                                      <div className="checkbox">
-                                        <input
-                                          className="custom-checkbox top"
-                                          type="checkbox"
-                                          id={content.id}
-                                          name={content.id}
-                                          defaultChecked={content.presence}
-                                          onChange={() => {
-                                            (async () => {
-                                              await this.props.clearPresent();
-                                              this.props.setPresent();
-                                            })();
-                                            this.props.setBtnFalse();
-                                            this.props.toggleJournalSitePresence(
-                                              item.id,
-                                              content.id
-                                            );
-                                            if (
-                                              typeof Storage !== "undefined"
-                                            ) {
-                                              localStorage.setItem(
-                                                "journalsite",
-                                                JSON.stringify(
-                                                  this.props.journalsite
-                                                )
-                                              );
-                                            }
-                                          }}
-                                        />
-                                        <label htmlFor={content.id}></label>
-                                      </div>
-                                    </div>
-                                  </TableCell>
-                                </TableRow>
-                              );
-                            } else {
-                              return (
-                                <TableRow key={j}>
-                                  <TableCell
-                                    className="line-grade disp"
-                                    height="26px"
-                                  >
-                                    <div className="std_cell">
-                                      {/* {content.presence === true && ( */}
-                                      {/* <select
-                                          key={content.id}
-                                          className="sel_grade myInput"
-                                          name="select"
-                                          defaultValue={content.grade}
-                                          onChange={(e) => {
-                                            this.props.setBtnFalse();
-                                            this.props.setJournalSiteMark(
-                                              item.id,
-                                              content.id,
-                                              e.target.value
-                                            );
-                                            if (typeof Storage !== "undefined") {
-                                              localStorage.setItem(
-                                                "journalsite",
-                                                JSON.stringify(
-                                                  this.props.journalsite
-                                                )
-                                              );
-                                            }
-                                          }}
-                                        >
-                                          <option hidden></option>
-                                          <option>1</option>
-                                          <option>2</option>
-                                          <option>3</option>
-                                          <option>4</option>
-                                          <option>5</option>
-                                          <option>6</option>
-                                          <option>7</option>
-                                          <option>8</option>
-                                          <option>9</option>
-                                          <option>10</option>
-                                        </select> */}
-                                      {/* )} */}
-                                      <div className="checkbox">
-                                        <input
-                                          className="custom-checkbox top"
-                                          type="checkbox"
-                                          id={content.id}
-                                          name={content.id}
-                                          defaultChecked={content.presence}
-                                          onChange={() => {
-                                            (async () => {
-                                              await this.props.clearPresent();
-                                              this.props.setPresent();
-                                            })();
-                                            this.props.setBtnFalse();
-                                            this.props.toggleJournalSitePresence(
-                                              item.id,
-                                              content.id
-                                            );
-                                            if (
-                                              typeof Storage !== "undefined"
-                                            ) {
-                                              localStorage.setItem(
-                                                "journalsite",
-                                                JSON.stringify(
-                                                  this.props.journalsite
-                                                )
-                                              );
-                                            }
-                                          }}
-                                        />
-                                        <label htmlFor={content.id}></label>
-                                      </div>
-                                    </div>
-                                  </TableCell>
-                                </TableRow>
-                              );
-                            }
-                          })}
-                      </tbody>
-                    );
-                  }
-                  if (this.props.typeC === "3") {
-                    return (
-                      <tbody key={i}>
-                        <TableRow>
-                          <TableCell height="126px" className="line-data">
-                            <div className="">
-                              <p className="day_mount">
-                                {item.data[2] < 10
-                                  ? String(this.state.x) + item.data[2]
-                                  : item.data[2]}
-                                .
-                                {item.data[1] < 10
-                                  ? String(this.state.x) + item.data[1]
-                                  : item.data[1]}
-                                <br />
-                              </p>
-                              <p className="year">
-                                {item.data[0] < 10
-                                  ? String(this.state.x) + item.data[0]
-                                  : item.data[0]}
-                              </p>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                        {item.content
-                          .sort((a, b) => a.id - b.id)
-                          .map((content, j) => {
-                            if (content.presence === false) {
-                              return (
-                                <TableRow key={j}>
-                                  <TableCell
-                                    className="line-grade disp"
-                                    height="26px"
-                                  >
-                                    <div className="std_cell">
-                                      {/* {content.presence === true && ( */}
                                       <select
                                         key={content.id}
                                         className="sel_grade myInput"
@@ -344,7 +157,7 @@ export default class MarksTable extends React.Component {
                                         onChange={(e) => {
                                           this.props.setBtnFalse();
                                           this.props.setJournalSiteMark(
-                                            item.id,
+                                            header.id,
                                             content.id,
                                             e.target.value
                                           );
@@ -370,7 +183,7 @@ export default class MarksTable extends React.Component {
                                         <option>9</option>
                                         <option>10</option>
                                       </select>
-                                      {/* )} */}
+                                      {/* // )} */}
                                       <div className="checkbox">
                                         <input
                                           className="custom-checkbox top"
@@ -385,7 +198,7 @@ export default class MarksTable extends React.Component {
                                             })();
                                             this.props.setBtnFalse();
                                             this.props.toggleJournalSitePresence(
-                                              item.id,
+                                              header.id,
                                               content.id
                                             );
                                             if (
@@ -423,7 +236,7 @@ export default class MarksTable extends React.Component {
                                         onChange={(e) => {
                                           this.props.setBtnFalse();
                                           this.props.setJournalSiteMark(
-                                            item.id,
+                                            header.id,
                                             content.id,
                                             e.target.value
                                           );
@@ -464,7 +277,7 @@ export default class MarksTable extends React.Component {
                                             })();
                                             this.props.setBtnFalse();
                                             this.props.toggleJournalSitePresence(
-                                              item.id,
+                                              header.id,
                                               content.id
                                             );
                                             if (
@@ -489,8 +302,8 @@ export default class MarksTable extends React.Component {
                           })}
                       </tbody>
                     );
-                  }
-                })}
+                  })
+                )}
               </Table>
               <Table
                 stickyHeader
@@ -499,7 +312,7 @@ export default class MarksTable extends React.Component {
               >
                 <tbody>
                   <TableRow>
-                    {this.props.jh.map((item, i) => {
+                    {this.props.journalsite.map((item, i) => {
                       if (i === 0) {
                         return (
                           <TableCell className="line_itogo" key={i}>
@@ -508,7 +321,7 @@ export default class MarksTable extends React.Component {
                         );
                       }
                     })}
-                    {this.props.jh.map((item, i) => {
+                    {this.props.journalsite.map((item, i) => {
                       if (i === 0) {
                         return this.props.present.map((item, i) => {
                           return (

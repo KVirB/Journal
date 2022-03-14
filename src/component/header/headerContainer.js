@@ -22,7 +22,6 @@ import {
 } from "../../reducer/journalsiteReducer";
 import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
 import { setType, clearType } from "../../reducer/typeReducer";
-import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
 class headerContainer extends React.Component {
   componentDidMount() {
     this.props.getDisciplineThunk();

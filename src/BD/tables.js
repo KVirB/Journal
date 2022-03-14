@@ -40,7 +40,7 @@ export const getTypeClass = () => {
 };
 export const getSubGroup = () => {
   return baseRout
-    .get("electronicjournal/sub_groups/search?q=")
+    .get(`electronicjournal/sub_groups/search?q=`)
     .then((response) => {
       return response.data;
     });
@@ -48,16 +48,16 @@ export const getSubGroup = () => {
 export const getGroup = (disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId};teacher.id==4`
+      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId};teacher.id==2`
     )
     .then((response) => {
       return response.data;
     });
 };
-export const getJournalsite = (groupId, disciplineId) => {
+export const getJournalsite = (disciplineId, groupId, typeClass, subGroup) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=teacher.id==4;discipline.id==${disciplineId};group.id==${groupId}`
+      `electronicjournal/journal-sites/filter?teacher_id=2&group_id=${groupId}&discipline_id=${disciplineId}&type_class_id=${typeClass}&sub_group_number=${subGroup}`
     )
     .then((response) => {
       return response.data;
