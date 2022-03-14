@@ -275,6 +275,11 @@ input[type="submit"].button-header:disabled {
   color: #ffffff;
   margin-right: 40px;
 }
+
+.user-info__div {
+  display: flex;
+}
+
 .profile_pic {
   margin-right: 12px;
   margin-top: 25px;

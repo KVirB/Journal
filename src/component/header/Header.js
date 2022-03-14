@@ -18,7 +18,7 @@ import {
 } from "../../reducer/headerReducer";
 import points from "../../points.png";
 import MainHeader from "../header/MainHeader";
-import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
+
 class Header extends React.Component {
   state = {
     disciplineId: 0,
@@ -209,7 +209,6 @@ class Header extends React.Component {
             "http://risovach.ru/thumb/upload/200s400/2019/08/generator/i-tak-soydet_217015291_orig_.png?d9qg6"
           ))
         } */}
-        <MainHeader />
         <div className="display-flex pointer">
           {console.log(
             JSON.stringify(JSON.stringify(this.props.journalSite) + "content")
