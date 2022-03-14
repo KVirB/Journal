@@ -54,16 +54,18 @@ const journalsiteReducer = (state = initialState, action) => {
       let newJournalsitePresent = [...state.journalsite];
       let presenT = [...state.present];
       let counter = 0;
-      newJournalsitePresent[0].journalHeaders.forEach((header, i) => {
-        header.journalContents.forEach((content, i) => {
-          if (content.presence === true) {
-            counter = counter + 1;
-          }
+      newJournalsitePresent.forEach((site, i) => {
+        site.journalHeaders.forEach((header, i) => {
+          header.journalContents.forEach((content, i) => {
+            if (content.presence === true) {
+              counter = counter + 1;
+            }
+          });
+          (async () => {
+            presenT.push(counter);
+          })();
+          counter = 0;
         });
-        (async () => {
-          presenT.push(counter);
-        })();
-        counter = 0;
       });
       return {
         ...state,
@@ -79,32 +81,26 @@ const journalsiteReducer = (state = initialState, action) => {
       let newJournalsite = [...state.journalsite];
       let jH = [...state.jh];
       let count = 0;
-      newJournalsite[0].journalHeaders.forEach((header) => {
-        header.journalContents.forEach((content) => {
-          if (content.presence === true) {
-            count = count + 1;
-          }
-        });
-
-        (async () => {
-          const obj = {
-            id: header.id,
-            typeClass: header.typeClass.name,
-            content: header.journalContents,
-            data: header.dateOfLesson,
-            subGroup: header.subGroup,
-            counter: count,
-          };
-          if (
-            (header.typeClass.id === Number(action.typeClass) &&
-              header.subGroup === Number(action.subGroup)) ||
-            (header.typeClass.id === Number(action.typeClass) &&
-              action.subGroup === "Все")
-          ) {
+      newJournalsite.forEach((site) => {
+        return site.journalHeaders.forEach((header) => {
+          header.journalContents.forEach((content) => {
+            if (content.presence === true) {
+              count = count + 1;
+            }
+          });
+          (async () => {
+            const obj = {
+              id: header.id,
+              typeClass: header.typeClass.name,
+              content: header.journalContents,
+              data: header.dateOfLesson,
+              subGroup: header.subGroup,
+              counter: count,
+            };
             jH.push(obj);
-          }
-        })();
-        count = 0;
+          })();
+          count = 0;
+        });
       });
       return {
         ...state,
@@ -138,7 +134,7 @@ const journalsiteReducer = (state = initialState, action) => {
     case SET_JOURNALSITE:
       return {
         ...state,
-        journalsite: [...action.journalsite],
+        journalsite: [{ ...action.journalsite }],
         update: true,
       };
     case SET_CLOSED_TRUE:
@@ -179,14 +175,16 @@ const journalsiteReducer = (state = initialState, action) => {
 
     case SET_JOURNALSITE_MARK:
       let newJournalsiteMark = [...state.journalsite];
-      newJournalsiteMark[0].journalHeaders.forEach((lesson) => {
-        if (lesson.id === action.lesson_id) {
-          lesson.journalContents.forEach((line) => {
-            if (line.id === action.line_id) {
-              line.grade = action.grade;
-            }
-          });
-        }
+      newJournalsiteMark.forEach((site) => {
+        site.journalHeaders.forEach((lesson) => {
+          if (lesson.id === action.lesson_id) {
+            lesson.journalContents.forEach((line) => {
+              if (line.id === action.line_id) {
+                line.grade = action.grade;
+              }
+            });
+          }
+        });
       });
 
       return {
@@ -246,11 +244,8 @@ export const setPresent = (present) => ({
   type: SET_PRESENT,
   present,
 });
-export const setJH = (typeClass, subGroup, jh) => ({
+export const setJH = () => ({
   type: SET_JH,
-  typeClass,
-  subGroup,
-  jh,
 });
 export const clearPresent = () => ({
   type: CLEAR_PRESENT,
@@ -283,9 +278,14 @@ export const clearJournalHeader = () => ({
   type: CLEAR_JOURNALHEADER,
 });
 
-export const getJournalsiteThunk = (groupId, disciplineId) => {
+export const getJournalsiteThunk = (
+  disciplineId,
+  groupId,
+  typeClass,
+  subGroup
+) => {
   return (dispatch) => {
-    getJournalsite(groupId, disciplineId).then((data) => {
+    getJournalsite(disciplineId, groupId, typeClass, subGroup).then((data) => {
       dispatch(setJournalsite(data));
     });
   };

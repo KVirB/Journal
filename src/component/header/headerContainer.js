@@ -59,6 +59,7 @@ class headerContainer extends React.Component {
         clearDiscipline={this.props.clearDiscipline}
         setType={this.props.setType}
         clearType={this.props.clearType}
+        subGroup={this.props.subGroup}
       />
     );
   }
@@ -68,6 +69,7 @@ let mapStateToProps = (state) => {
     discipline: state.disciplinePage.discipline,
     group: state.groupPage.group,
     typeClass: state.typeClassPage.typeClass,
+    subGroup: state.typeClassPage.subGroup,
     journalsite: state.journalsitePage.journalsite,
     teacher: state.teacherPage.teacher,
     journalHeader: state.journalsitePage.journalHeader,
