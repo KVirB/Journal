@@ -17,7 +17,6 @@ import {
   clearSubGroup,
 } from "../../reducer/headerReducer";
 import points from "../../points.png";
-import MainHeader from "../header/MainHeader";
 
 class Header extends React.Component {
   state = {
@@ -30,12 +29,17 @@ class Header extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const { disciplineId, groupId, subGroup, typeClass } = this.state;
     if (disciplineId !== prevState.disciplineId) {
-      this.props.getGroupThunk(disciplineId);
-      this.props.clearTypeClass();
-      this.props.clearSubGroup();
-      this.props.clearJournalsite();
+      (async () => {
+        this.props.getGroupThunk(disciplineId);
+        await this.props.clearGroup();
+        this.props.clearTypeClass();
+        this.props.clearSubGroup();
+        this.props.clearJournalsite();
+      })();
     }
     if (groupId !== prevState.groupId) {
+      this.props.clearJournalsite();
+      this.props.getCourseSpecThunk(this.state.groupId);
     }
     if (typeClass !== prevState.typeClass) {
       this.props.clearJournalsite();
@@ -61,19 +65,18 @@ class Header extends React.Component {
       this.props.setJournalHeader();
       if (dispConf === true) {
         (async () => {
-          await localStorage.clear();
-          await this.props.clearJH();
+          await localStorage.removeItem("journalsite");
+          await this.props.clearJournalHeader();
           this.props.setBtnTrue();
           this.props.getDisciplineThunk();
           let header = this.props.journalHeader;
           this.props.getJournalHeaderThunk(header);
-          this.props.clearJournalHeader();
           alert("Сохранено");
         })();
       } else {
-        localStorage.clear();
+        localStorage.removeItem("journalsite");
         this.props.clearTypeClass();
-        this.props.clearSB();
+        this.props.clearSubGroup();
       }
     }
   };
@@ -93,7 +96,7 @@ class Header extends React.Component {
       this.props.setJournalHeader();
       if (dispConf === true) {
         (async () => {
-          await localStorage.clear();
+          await localStorage.removeItem("journalsite");
           await this.props.clearJH();
           this.props.setBtnTrue();
           this.props.getDisciplineThunk();
@@ -108,7 +111,7 @@ class Header extends React.Component {
           this.props.getDisciplineThunk();
           this.props.getGroupThunk(this.state.disciplineId);
         })();
-        localStorage.clear();
+        localStorage.removeItem("journalsite");
       }
     }
 
@@ -143,7 +146,7 @@ class Header extends React.Component {
       this.props.setJournalHeader();
       if (dispConf === true) {
         (async () => {
-          await localStorage.clear();
+          await localStorage.removeItem("journalsite");
           await this.props.clearJH();
           this.props.setBtnTrue();
           this.props.getDisciplineThunk();
@@ -158,7 +161,7 @@ class Header extends React.Component {
           this.props.getDisciplineThunk();
           this.props.getGroupThunk(this.state.disciplineId);
         })();
-        localStorage.clear();
+        localStorage.removeItem("journalsite");
       }
     }
   };
@@ -211,7 +214,7 @@ class Header extends React.Component {
         } */}
         <div className="display-flex pointer">
           {console.log(
-            JSON.stringify(JSON.stringify(this.props.journalSite) + "content")
+            JSON.stringify(JSON.stringify(this.props.courseSpec) + "spec")
           )}
           <div className="display-flex">
             <div>
@@ -227,8 +230,12 @@ class Header extends React.Component {
                     Дисциплина
                   </option>
                   {this.props.discipline.map((m, i) => (
-                    <option className="lang__items" value={m.id} key={i}>
-                      {m.name}
+                    <option
+                      className="lang__items"
+                      value={m.discipline.id}
+                      key={i}
+                    >
+                      {m.discipline.name}
                     </option>
                   ))}
                 </select>
@@ -236,7 +243,11 @@ class Header extends React.Component {
             </div>
             <div>
               <div className="special-name">Специальность</div>
-              <div className="special-select">Test</div>
+              <div className="special-select">
+                {this.props.courseSpec.map(
+                  (courseSpec) => courseSpec.specialty.name
+                )}
+              </div>
             </div>
           </div>
           <div>
@@ -250,7 +261,9 @@ class Header extends React.Component {
           <div className="buki">
             <div>
               <div className="course-name">Курс</div>
-              <div className="course-input">Test</div>
+              <div className="course-input">
+                {this.props.courseSpec.map((courseSpec) => courseSpec.сourse)}
+              </div>
             </div>
             <div>
               <div className="group-name">Группа</div>
@@ -264,7 +277,7 @@ class Header extends React.Component {
                   Группа
                 </option>
                 {this.props.group.map((m, i) => (
-                  <option className="lang__items" value={m.group.id} key={i}>
+                  <option className="lang__items" value={m.group.name} key={i}>
                     {m.group.name}
                   </option>
                 ))}

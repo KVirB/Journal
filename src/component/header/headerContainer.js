@@ -7,6 +7,7 @@ import {
   getGroupThunk,
   setTypeClass,
   clearDiscipline,
+  getCourseSpecThunk,
 } from "../../reducer/headerReducer.js";
 import Header from "./Header.js";
 import {
@@ -41,6 +42,7 @@ class headerContainer extends React.Component {
         journalHeader={this.props.journalHeader}
         clearJournalHeader={this.props.clearJournalHeader}
         getJournalHeaderThunk={this.props.getJournalHeaderThunk}
+        getCourseSpecThunk={this.props.getCourseSpecThunk}
         closed={this.props.closed}
         disabled={this.props.disabled}
         setBtnTrue={this.props.setBtnTrue}
@@ -60,6 +62,7 @@ class headerContainer extends React.Component {
         setType={this.props.setType}
         clearType={this.props.clearType}
         subGroup={this.props.subGroup}
+        courseSpec={this.props.courseSpec}
       />
     );
   }
@@ -71,6 +74,7 @@ let mapStateToProps = (state) => {
     typeClass: state.typeClassPage.typeClass,
     subGroup: state.typeClassPage.subGroup,
     journalsite: state.journalsitePage.journalsite,
+    courseSpec: state.courseSpecPage.journalsite,
     teacher: state.teacherPage.teacher,
     journalHeader: state.journalsitePage.journalHeader,
     disabled: state.btnPage.disabled,
@@ -79,6 +83,7 @@ let mapStateToProps = (state) => {
     sb: state.journalsitePage.sb,
     present: state.journalsitePage.present,
     typeC: state.typePage.typeC,
+    courseSpec: state.courseSpecPage.courseSpec,
   };
 };
 
@@ -101,4 +106,5 @@ export default connect(mapStateToProps, {
   clearPresent,
   clearDiscipline,
   setType,
+  getCourseSpecThunk,
 })(headerContainer);

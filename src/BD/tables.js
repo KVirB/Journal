@@ -26,7 +26,11 @@ export const getFio = () => {
 
 export const getDiscipline = () => {
   return baseRout
-    .get("electronicjournal/disciplines/search?q")
+    .get(
+      `electronicjournal/journal-sites/searchWithoutDublicate?q=teacher.id==${
+        JSON.parse(localStorage.getItem("user")).password
+      }`
+    )
     .then((response) => {
       return response.data;
     });
@@ -34,6 +38,13 @@ export const getDiscipline = () => {
 export const getTypeClass = () => {
   return baseRout
     .get("electronicjournal/type-classes/search?q")
+    .then((response) => {
+      return response.data;
+    });
+};
+export const getCourseSpec = (groupId) => {
+  return baseRout
+    .get(`common-info/groups/search?q=name==${groupId}`)
     .then((response) => {
       return response.data;
     });
@@ -48,7 +59,9 @@ export const getSubGroup = () => {
 export const getGroup = (disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/search?q=discipline.id==${disciplineId};teacher.id==2`
+      `electronicjournal/journal-sites/searchByTeacherAndDiscipline?q=discipline.id==${disciplineId};teacher.id==${
+        JSON.parse(localStorage.getItem("user")).password
+      }`
     )
     .then((response) => {
       return response.data;
@@ -57,7 +70,9 @@ export const getGroup = (disciplineId) => {
 export const getJournalsite = (disciplineId, groupId, typeClass, subGroup) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/filter?teacher_id=2&group_id=${groupId}&discipline_id=${disciplineId}&type_class_id=${typeClass}&sub_group_number=${subGroup}`
+      `electronicjournal/journal-sites/filter?teacher_id=${
+        JSON.parse(localStorage.getItem("user")).password
+      }&group_name=${groupId}&discipline_id=${disciplineId}&type_class_id=${typeClass}&sub_group_number=${subGroup}`
     )
     .then((response) => {
       return response.data;

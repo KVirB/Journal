@@ -11,6 +11,7 @@ let reducers = combineReducers({
   journalsitePage: journalsiteReducer,
   disciplinePage: headerReducer,
   groupPage: headerReducer,
+  courseSpecPage: headerReducer,
   typeClassPage: headerReducer,
   teacherPage: teacherReducer,
   btnPage: btnReducer,
@@ -29,8 +30,8 @@ let reducers = combineReducers({
 let store = createStore(
   reducers,
   compose(
-    applyMiddleware(thunkMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(thunkMiddleware)
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 

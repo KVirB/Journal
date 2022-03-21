@@ -15,6 +15,16 @@ export default class MarksTable extends React.Component {
     date: null,
     koko: [],
     x: 0,
+    inputs: {},
+    lessonHours: {
+      1: "8:00",
+      2: "9:50",
+      3: "11:40",
+      4: "14:00",
+      5: "15:45",
+      6: "17:30",
+      7: "19:15",
+    },
   };
   getCheckBox = (e) => {
     const { value } = e.target;
@@ -22,6 +32,30 @@ export default class MarksTable extends React.Component {
       presence: value,
     });
   };
+
+  handleKeyPress(event) {
+    const invalidChars = ["-", "+", "e", ".", "E"];
+    if (invalidChars.indexOf(event.key) !== -1) {
+      event.preventDefault();
+    }
+  }
+  getInputValue = (e, inputId) => {
+    let value = e.target.value;
+    if (value.length <= 3 && Number.isInteger(+value)) {
+      if (value <= 120) {
+        this.setState({
+          ...this.state,
+          inputs: {
+            ...this.state.inputs,
+            [inputId]: +value,
+          },
+        });
+      }
+    } else {
+      return;
+    }
+  };
+
   save = () => {
     (async () => {
       await this.props.clearJournalHeader();
@@ -49,11 +83,11 @@ export default class MarksTable extends React.Component {
           let header = this.props.journalHeader;
           this.props.getJournalHeaderThunk(header);
           alert("Сохранено");
-          await localStorage.clear();
+          await localStorage.removeItem("journalsite");
           await this.props.clearTypeClass();
         })();
       } else {
-        localStorage.clear();
+        localStorage.removeItem("journalsite");
         this.props.clearTypeClass();
       }
     }
@@ -90,7 +124,7 @@ export default class MarksTable extends React.Component {
                             .map((content, i) => (
                               <TableCell
                                 height="19px"
-                                width="186px"
+                                width="270px"
                                 className="disp line-stud"
                                 key={content.id}
                               >
@@ -108,43 +142,56 @@ export default class MarksTable extends React.Component {
                   </TableRow>
                 </tbody>
                 {this.props.journalsite.map((item, i) =>
-                  item.journalHeaders.map((header, i) => {
-                    return (
-                      <tbody key={i}>
-                        <TableRow>
-                          <TableCell height="126px" className="line-data">
-                            <div className="">
-                              <p className="day_mount">
-                                {header.dateOfLesson[2] < 10
-                                  ? String(this.state.x) +
-                                    header.dateOfLesson[2]
-                                  : header.dateOfLesson[2]}
-                                .
-                                {header.dateOfLesson[1] < 10
-                                  ? String(this.state.x) +
-                                    header.dateOfLesson[1]
-                                  : header.dateOfLesson[1]}
-                                <br />
-                              </p>
-                              <p className="year">
-                                {header.dateOfLesson[0] < 10
-                                  ? String(this.state.x) +
-                                    header.dateOfLesson[0]
-                                  : header.dateOfLesson[0]}
-                              </p>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                        {header.journalContents
-                          .sort((a, b) => a.id - b.id)
-                          .map((content, j) => {
-                            if (content.presence === false) {
+                  item.journalHeaders
+                    .sort((a, b) => a.id - b.id)
+                    .map((header, i) => {
+                      return (
+                        <tbody key={i}>
+                          <TableRow>
+                            <TableCell height="126px" className="line-data">
+                              <div className="">
+                                <p className="day_mount">
+                                  {header.dateOfLesson !== null
+                                    ? header.dateOfLesson[2] < 10
+                                      ? String(this.state.x) +
+                                        header.dateOfLesson[2]
+                                      : header.dateOfLesson[2]
+                                    : "No date"}
+                                  .
+                                  {header.dateOfLesson !== null
+                                    ? header.dateOfLesson[1] < 10
+                                      ? String(this.state.x) +
+                                        header.dateOfLesson[1]
+                                      : header.dateOfLesson[1]
+                                    : console.log("kiki")}
+                                  <br />
+                                </p>
+                                <p className="year">
+                                  {header.dateOfLesson !== null
+                                    ? header.dateOfLesson[0] < 10
+                                      ? String(this.state.x) +
+                                        header.dateOfLesson[0]
+                                      : header.dateOfLesson[0]
+                                    : console.log("kaki")}
+                                </p>
+                                <p className="day_mount">
+                                  {this.state.lessonHours[header.hoursCount]}
+                                </p>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                          {header.journalContents
+                            .sort((a, b) => a.id - b.id)
+                            .map((content, j) => {
+                              // if (content.presence === false) {
                               return (
                                 <TableRow key={j}>
                                   <TableCell
                                     className="line-grade disp"
                                     height="26px"
-                                    width="47px"
+                                    width={
+                                      this.props.typeC === "2" ? "65px" : "47px"
+                                    }
                                   >
                                     <div className="std_cell">
                                       {/* {content.presence === true && ( */}
@@ -152,7 +199,20 @@ export default class MarksTable extends React.Component {
                                         key={content.id}
                                         className="sel_grade myInput"
                                         name="select"
-                                        disabled
+                                        disabled={
+                                          content.presence === false
+                                            ? true
+                                            : false
+                                        }
+                                        hidden={
+                                          this.props.typeC === "2" //Лекция
+                                            ? true
+                                            : this.props.typeC === "3" //Лабораторная
+                                            ? true
+                                            : this.props.typeC === "1" //Практическая
+                                            ? false
+                                            : console.log("Error with hidden")
+                                        }
                                         defaultValue={content.grade}
                                         onChange={(e) => {
                                           this.props.setBtnFalse();
@@ -215,94 +275,44 @@ export default class MarksTable extends React.Component {
                                         />
                                         <label htmlFor={content.id}></label>
                                       </div>
-                                    </div>
-                                  </TableCell>
-                                </TableRow>
-                              );
-                            } else {
-                              return (
-                                <TableRow key={j}>
-                                  <TableCell
-                                    className="line-grade disp"
-                                    height="26px"
-                                  >
-                                    <div className="std_cell">
-                                      {/* {content.presence === true && ( */}
-                                      <select
-                                        key={content.id}
-                                        className="sel_grade myInput"
-                                        name="select"
-                                        defaultValue={content.grade}
-                                        onChange={(e) => {
-                                          this.props.setBtnFalse();
-                                          this.props.setJournalSiteMark(
-                                            header.id,
-                                            content.id,
-                                            e.target.value
-                                          );
-                                          if (typeof Storage !== "undefined") {
-                                            localStorage.setItem(
-                                              "journalsite",
-                                              JSON.stringify(
-                                                this.props.journalsite
-                                              )
-                                            );
-                                          }
-                                        }}
-                                      >
-                                        <option hidden></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                      </select>
-                                      {/* )} */}
-                                      <div className="checkbox">
+                                      <div className="lateness">
                                         <input
-                                          className="custom-checkbox top"
-                                          type="checkbox"
-                                          id={content.id}
-                                          name={content.id}
-                                          defaultChecked={content.presence}
-                                          onChange={() => {
-                                            (async () => {
-                                              await this.props.clearPresent();
-                                              this.props.setPresent();
-                                            })();
-                                            this.props.setBtnFalse();
-                                            this.props.toggleJournalSitePresence(
-                                              header.id,
-                                              content.id
-                                            );
-                                            if (
-                                              typeof Storage !== "undefined"
-                                            ) {
-                                              localStorage.setItem(
-                                                "journalsite",
-                                                JSON.stringify(
-                                                  this.props.journalsite
-                                                )
-                                              );
-                                            }
-                                          }}
+                                          value={this.state.inputs[content.id]}
+                                          type="number"
+                                          step="1"
+                                          // onKeyPress={() => {
+                                          //   return false;
+                                          // }}
+                                          onKeyPress={this.handleKeyPress}
+                                          maxLength="2"
+                                          onChange={(e) =>
+                                            this.getInputValue(e, content.id)
+                                          }
+                                          className="sel_grade myInputMin"
+                                          hidden={
+                                            this.props.typeC === "2"
+                                              ? false
+                                              : true
+                                          }
                                         />
-                                        <label htmlFor={content.id}></label>
+                                        <label
+                                          hidden={
+                                            this.props.typeC === "2"
+                                              ? false
+                                              : true
+                                          }
+                                        >
+                                          Мин.
+                                        </label>
                                       </div>
                                     </div>
                                   </TableCell>
                                 </TableRow>
                               );
-                            }
-                          })}
-                      </tbody>
-                    );
-                  })
+                            })}
+                        </tbody>
+                      );
+                    })
                 )}
               </Table>
               <Table
@@ -338,6 +348,7 @@ export default class MarksTable extends React.Component {
             </TableContainer>
           </div>
           <div className="headHrDown" />
+          {console.log(this.state.inputs)}
         </div>
       );
     }
