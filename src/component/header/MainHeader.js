@@ -50,9 +50,7 @@ function MainHeader() {
                 ></img>
               </div>
               <div>
-                <label className="name_of_teacher">
-                  {user.email}, {user.password}
-                </label>
+                <label className="name_of_teacher">{user.fio}</label>
                 <input
                   type="submit"
                   className="bth_exit"
