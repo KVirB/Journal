@@ -14,6 +14,7 @@ const SET_SB = "SET_SB";
 const CLEAR_SB = "CLEAR_SB";
 const SET_PRESENT = "SET_PRESENT";
 const CLEAR_PRESENT = "CLEAR_PRESENT";
+const SET_LATENESS = "SET_LATENESS";
 let initialState = {
   id: null,
   journalsite: [],
@@ -78,34 +79,14 @@ const journalsiteReducer = (state = initialState, action) => {
       };
 
     case SET_JH:
-      let newJournalsite = [...state.journalsite];
-      let jH = [...state.jh];
-      let count = 0;
-      newJournalsite.forEach((site) => {
-        return site.journalHeaders.forEach((header) => {
-          header.journalContents.forEach((content) => {
-            if (content.presence === true) {
-              count = count + 1;
-            }
-          });
-          (async () => {
-            const obj = {
-              id: header.id,
-              typeClass: header.typeClass.name,
-              content: header.journalContents,
-              data: header.dateOfLesson,
-              subGroup: header.subGroup,
-              counter: count,
-            };
-            jH.push(obj);
-          })();
-          count = 0;
-        });
-      });
+      // let newJournalsiteCheck = [localStorage.getItem("journalsite")];
+      // let jH = [...state.jh];
+      // jH.push(newJournalsiteCheck);
       return {
         ...state,
-        jh: jH,
+        jh: [{ ...action.journalsite }],
       };
+
     case CLEAR_JH:
       return {
         ...state,
@@ -172,7 +153,24 @@ const journalsiteReducer = (state = initialState, action) => {
           journalHeader: jHeader,
         };
       }
+    case SET_LATENESS:
+      let newJournalsiteLateness = [...state.journalsite];
+      newJournalsiteLateness.forEach((site) => {
+        site.journalHeaders.forEach((lesson) => {
+          if (lesson.id === action.lesson_id) {
+            lesson.journalContents.forEach((line) => {
+              if (line.id === action.line_id) {
+                if (action.lateness <= 120) line.lateness = action.lateness;
+              }
+            });
+          }
+        });
+      });
 
+      return {
+        ...state,
+        journalsite: newJournalsiteLateness,
+      };
     case SET_JOURNALSITE_MARK:
       let newJournalsiteMark = [...state.journalsite];
       newJournalsiteMark.forEach((site) => {
@@ -240,12 +238,19 @@ export const setJournalSiteMark = (lesson_id, line_id, grade) => ({
   line_id,
   grade,
 });
+export const setJournalSiteLateness = (lesson_id, line_id, lateness) => ({
+  type: SET_LATENESS,
+  lesson_id,
+  line_id,
+  lateness,
+});
 export const setPresent = (present) => ({
   type: SET_PRESENT,
   present,
 });
-export const setJH = () => ({
+export const setJH = (journalsite) => ({
   type: SET_JH,
+  journalsite,
 });
 export const clearPresent = () => ({
   type: CLEAR_PRESENT,

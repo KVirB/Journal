@@ -5,6 +5,7 @@ import {
   getJournalsiteThunk,
   toggleJournalSitePresence,
   setJournalSiteMark,
+  setJournalSiteLateness,
   clearJournalHeader,
   getJournalHeaderThunk,
   setJH,
@@ -27,6 +28,7 @@ class marksTableContainer extends React.Component {
           journalsite={this.props.journalsite}
           toggleJournalSitePresence={this.props.toggleJournalSitePresence}
           setJournalSiteMark={this.props.setJournalSiteMark}
+          setJournalSiteLateness={this.props.setJournalSiteLateness}
           setJournalHeader={this.props.setJournalHeader}
           journalHeader={this.props.journalHeader}
           clearJournalHeader={this.props.clearJournalHeader}
@@ -43,6 +45,7 @@ class marksTableContainer extends React.Component {
           clearPresent={this.props.clearPresent}
           clearTypeClass={this.props.clearTypeClass}
           typeC={this.props.typeC}
+          setCheckData={this.props.setCheckData}
         />
       </div>
     );
@@ -65,6 +68,7 @@ export default connect(mapStateToProps, {
   getJournalsiteThunk,
   toggleJournalSitePresence,
   setJournalSiteMark,
+  setJournalSiteLateness,
   setJournalHeader,
   clearJournalHeader,
   getJournalHeaderThunk,

@@ -10,6 +10,7 @@ export default class MarksTable extends React.Component {
     if (this.props.journalsite !== prevProps.journalsite) {
     }
   }
+
   state = {
     presence: null,
     date: null,
@@ -26,6 +27,7 @@ export default class MarksTable extends React.Component {
       7: "19:15",
     },
   };
+
   getCheckBox = (e) => {
     const { value } = e.target;
     this.setState({
@@ -72,30 +74,35 @@ export default class MarksTable extends React.Component {
   };
   componentDidMount() {
     if (localStorage.getItem("journalsite") !== null) {
-      let isBoss = window.confirm(
-        "С момента прошлой сессии у вас остались не сохраненные данные.Сохранить прошлые изменения?"
-      );
-      this.props.setJournalHeader();
-      if (isBoss === true) {
-        (async () => {
-          await this.props.clearJournalHeader();
-          this.props.setJournalHeader();
-          let header = this.props.journalHeader;
-          this.props.getJournalHeaderThunk(header);
-          alert("Сохранено");
-          await localStorage.removeItem("journalsite");
-          await this.props.clearTypeClass();
-        })();
-      } else {
-        localStorage.removeItem("journalsite");
-        this.props.clearTypeClass();
-      }
+      this.props.setJH(JSON.parse(localStorage.getItem("journalsite")));
     }
+
+    // if (localStorage.getItem("journalsite") !== null) {
+    //   let isBoss = window.confirm(
+    //     "С момента прошлой сессии у вас остались не сохраненные данные.Сохранить прошлые изменения?"
+    //   );
+    //   this.props.setJournalHeader();
+    //   if (isBoss === true) {
+    //     (async () => {
+    //       await this.props.clearJournalHeader();
+    //       this.props.setJournalHeader();
+    //       let header = this.props.journalHeader;
+    //       this.props.getJournalHeaderThunk(header);
+    //       alert("Сохранено");
+    //       await localStorage.removeItem("journalsite");
+    //       await this.props.clearTypeClass();
+    //     })();
+    //   } else {
+    //     localStorage.removeItem("journalsite");
+    //     this.props.clearTypeClass();
+    //   }
+    // }
   }
   render() {
     {
       return (
         <div>
+          {console.log(this.props.jh + "JH")}
           <div className="headHr" />
           <div className="all-content">
             <TableContainer sx={{ maxHeight: 760 }}>
@@ -107,16 +114,40 @@ export default class MarksTable extends React.Component {
               >
                 <tbody>
                   <TableRow>
-                    {this.props.journalsite.map((m, i) => {
-                      if (i === 0)
-                        return (
-                          <td className="line-fio diagonal-line" key={i}>
-                            <label className="dzs">Дата</label>
-                            <label className="fios">ФИО</label>
-                          </td>
-                        );
-                    })}
-                    {this.props.journalsite.map((item, i) =>
+                    {
+                      /* {localStorage.getItem("journalsite") !== null
+                      ? JSON.parse(localStorage.getItem("journalsite")).map(
+                          (m, i) => {
+                            if (i === 0)
+                              return (
+                                <td className="line-fio diagonal-line" key={i}>
+                                  <label className="dzs">Дата</label>
+                                  <label className="fios">ФИО</label>
+                                </td>
+                              );
+                          }
+                        )
+                      : this.props.journalsite.map((m, i) => {
+                          if (i === 0)
+                            return (
+                              <td className="line-fio diagonal-line" key={i}>
+                                <label className="dzs">Дата</label>
+                                <label className="fios">ФИО</label>
+                              </td>
+                            );
+                        })} */
+
+                      this.props.jh.map((m, i) => {
+                        if (i === 0)
+                          return (
+                            <td className="line-fio diagonal-line" key={i}>
+                              <label className="dzs">Дата</label>
+                              <label className="fios">ФИО</label>
+                            </td>
+                          );
+                      })
+                    }
+                    {this.props.journalsite.map((item, i) => {
                       item.journalHeaders.map((header, i) => {
                         if (i === 0) {
                           return header.journalContents
@@ -137,8 +168,8 @@ export default class MarksTable extends React.Component {
                               </TableCell>
                             ));
                         }
-                      })
-                    )}
+                      });
+                    })}
                   </TableRow>
                 </tbody>
                 {this.props.journalsite.map((item, i) =>
@@ -205,11 +236,11 @@ export default class MarksTable extends React.Component {
                                             : false
                                         }
                                         hidden={
-                                          this.props.typeC === "2" //Лекция
+                                          this.props.typeC === "1" //Лекция
                                             ? true
-                                            : this.props.typeC === "3" //Лабораторная
+                                            : this.props.typeC === "2" //Лабораторная
                                             ? true
-                                            : this.props.typeC === "1" //Практическая
+                                            : this.props.typeC === "3" //Практическая
                                             ? false
                                             : console.log("Error with hidden")
                                         }
@@ -279,15 +310,29 @@ export default class MarksTable extends React.Component {
                                         <input
                                           value={this.state.inputs[content.id]}
                                           type="number"
-                                          step="1"
-                                          // onKeyPress={() => {
-                                          //   return false;
-                                          // }}
+                                          // step="1"
                                           onKeyPress={this.handleKeyPress}
-                                          maxLength="2"
-                                          onChange={(e) =>
-                                            this.getInputValue(e, content.id)
-                                          }
+                                          // maxLength="2"
+                                          defaultValue={content.lateness}
+                                          onChange={(e) => {
+                                            this.getInputValue(e, content.id);
+                                            this.props.setBtnFalse();
+                                            this.props.setJournalSiteLateness(
+                                              header.id,
+                                              content.id,
+                                              e.target.value
+                                            );
+                                            if (
+                                              typeof Storage !== "undefined"
+                                            ) {
+                                              localStorage.setItem(
+                                                "journalsite",
+                                                JSON.stringify(
+                                                  this.props.journalsite
+                                                )
+                                              );
+                                            }
+                                          }}
                                           className="sel_grade myInputMin"
                                           hidden={
                                             this.props.typeC === "2"

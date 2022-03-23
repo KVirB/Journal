@@ -45,7 +45,6 @@ class Header extends React.Component {
       this.props.clearJournalsite();
     }
     if (subGroup !== prevState.subGroup) {
-      this.props.setBtnFalse();
       this.props.clearJournalsite();
     }
   }
@@ -132,12 +131,13 @@ class Header extends React.Component {
     });
     (async () => {
       await this.props.setPresent();
-      this.props.getJournalsiteThunk(
+      await this.props.getJournalsiteThunk(
         this.state.disciplineId,
         this.state.groupId,
         this.state.typeClass,
         this.state.subGroup
       );
+      this.props.setJH();
     })();
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
