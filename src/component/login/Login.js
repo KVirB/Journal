@@ -7,10 +7,11 @@ import { useAuth } from "../../hooks/useAuth";
 
 import schema from "./validation";
 import "./Login.css";
+import { getToken } from "./axios";
 
 function Login() {
   const navigate = useNavigate();
-  const { user, signIn } = useAuth();
+  const { signIn } = useAuth();
 
   const { register, handleSubmit, reset } = useForm({
     resolver: yupResolver(schema),
@@ -24,12 +25,24 @@ function Login() {
     }
   }, []);
 
+  function getFormData(object) {
+    let formData = new FormData();
+    Object.keys(object).forEach((key) => {
+      formData.append(key, object[key]);
+    });
+    return formData;
+  }
+
   const onSubmit = (data) => {
-    localStorage.setItem("user", JSON.stringify(data));
-    reset();
-    signIn(data, () =>
-      navigate("/electronicaljournal-view/journal", { replace: true })
-    );
+    getToken(getFormData(data))
+      .then((data) => {
+        localStorage.setItem("user", JSON.stringify(data));
+        reset();
+        signIn(data, () =>
+          navigate("/electronicaljournal-view/journal", { replace: true })
+        );
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
@@ -40,7 +53,7 @@ function Login() {
           <label className="login-form__input">Имя пользователя:</label>
           <input
             className="form-input"
-            {...register("email")}
+            {...register("username")}
             type="email"
             placeholder="Введите имя пользователя"
             required
