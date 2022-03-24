@@ -74,7 +74,7 @@ export default class MarksTable extends React.Component {
   };
   componentDidMount() {
     if (localStorage.getItem("journalsite") !== null) {
-      this.props.setJH(JSON.parse(localStorage.getItem("journalsite")));
+      this.props.setJH();
     }
 
     // if (localStorage.getItem("journalsite") !== null) {
@@ -98,14 +98,230 @@ export default class MarksTable extends React.Component {
     //   }
     // }
   }
+
+  mapDate = (mapArr) =>
+    mapArr.map((m, i) => {
+      if (i === 0)
+        return (
+          <td className="line-fio diagonal-line" key={i}>
+            <label className="dzs">Дата</label>
+            <label className="fios">ФИО</label>
+          </td>
+        );
+    });
+
+  mapStudents(mapArr) {
+    return mapArr.map((item, i) =>
+      item.journalHeaders.map((header, i) => {
+        if (i === 0) {
+          return header.journalContents
+            .sort((a, b) => a.id - b.id)
+            .map((content, i) => (
+              <TableCell
+                height="19px"
+                width="270px"
+                className="disp line-stud"
+                key={content.id}
+              >
+                <div className="surname">
+                  {i + 1 + ". " + content.student.surname}
+                </div>
+                <div className="csn surname">{content.student.name}</div>
+              </TableCell>
+            ));
+        }
+      })
+    );
+  }
+  mapContent(mapArr) {
+    return mapArr.map((item, i) =>
+      item.journalHeaders
+        .sort((a, b) => a.id - b.id)
+        .map((header, i) => {
+          return (
+            <tbody key={i}>
+              <TableRow>
+                <TableCell height="126px" className="line-data">
+                  <div className="">
+                    <p className="day_mount">
+                      {header.dateOfLesson !== null
+                        ? header.dateOfLesson[2] < 10
+                          ? String(this.state.x) + header.dateOfLesson[2]
+                          : header.dateOfLesson[2]
+                        : "No date"}
+                      .
+                      {header.dateOfLesson !== null
+                        ? header.dateOfLesson[1] < 10
+                          ? String(this.state.x) + header.dateOfLesson[1]
+                          : header.dateOfLesson[1]
+                        : console.log("kiki")}
+                      <br />
+                    </p>
+                    <p className="year">
+                      {header.dateOfLesson !== null
+                        ? header.dateOfLesson[0] < 10
+                          ? String(this.state.x) + header.dateOfLesson[0]
+                          : header.dateOfLesson[0]
+                        : console.log("kaki")}
+                    </p>
+                    <p className="day_mount">
+                      {this.state.lessonHours[header.hoursCount]}
+                    </p>
+                  </div>
+                </TableCell>
+              </TableRow>
+              {header.journalContents
+                .sort((a, b) => a.id - b.id)
+                .map((content, j) => {
+                  // if (content.presence === false) {
+                  return (
+                    <TableRow key={j}>
+                      <TableCell
+                        className="line-grade disp"
+                        height="26px"
+                        width={
+                          localStorage.getItem("typeC") === "2"
+                            ? "65px"
+                            : "47px"
+                        }
+                      >
+                        <div className="std_cell">
+                          {/* {content.presence === true && ( */}
+                          <select
+                            key={content.id}
+                            className="sel_grade myInput"
+                            name="select"
+                            disabled={content.presence === false ? true : false}
+                            hidden={
+                              localStorage.getItem("typeC") === "1" //Лекция
+                                ? true
+                                : localStorage.getItem("typeC") === "2" //Лабораторная
+                                ? true
+                                : localStorage.getItem("typeC") === "3" //Практическая
+                                ? false
+                                : localStorage.getItem("typeC") === "4" // Экзамен
+                                ? false
+                                : console.log("Error with hidden")
+                            }
+                            defaultValue={content.grade}
+                            onChange={(e) => {
+                              this.props.setBtnFalse();
+                              this.props.setJournalSiteMark(
+                                header.id,
+                                content.id,
+                                e.target.value
+                              );
+                              if (typeof Storage !== "undefined") {
+                                localStorage.setItem(
+                                  "journalsite",
+                                  JSON.stringify(this.props.journalsite)
+                                );
+                              }
+                            }}
+                          >
+                            <option hidden></option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                          </select>
+                          {/* // )} */}
+                          <div className="checkbox">
+                            <input
+                              className="custom-checkbox top"
+                              type="checkbox"
+                              id={content.id}
+                              name={content.id}
+                              defaultChecked={content.presence}
+                              onChange={() => {
+                                (async () => {
+                                  await this.props.clearPresent();
+                                  this.props.setPresent();
+                                  this.props.setBtnFalse();
+                                  await this.props.toggleJournalSitePresence(
+                                    header.id,
+                                    content.id
+                                  );
+                                  if (typeof Storage !== "undefined") {
+                                    localStorage.setItem(
+                                      "journalsite",
+                                      JSON.stringify(this.props.journalsite)
+                                    );
+                                  }
+                                })();
+
+                                // if (typeof Storage !== "undefined") {
+
+                                // }
+                              }}
+                            />
+                            <label htmlFor={content.id}></label>
+                          </div>
+                          <div className="lateness">
+                            <input
+                              value={this.state.inputs[content.id]}
+                              type="number"
+                              // step="1"
+                              onKeyPress={this.handleKeyPress}
+                              // maxLength="2"
+                              defaultValue={content.lateness}
+                              onChange={(e) => {
+                                this.getInputValue(e, content.id);
+                                this.props.setBtnFalse();
+                                this.props.setJournalSiteLateness(
+                                  header.id,
+                                  content.id,
+                                  e.target.value
+                                );
+                                if (typeof Storage !== "undefined") {
+                                  localStorage.setItem(
+                                    "journalsite",
+                                    JSON.stringify(this.props.journalsite)
+                                  );
+                                }
+                              }}
+                              className="sel_grade myInputMin"
+                              hidden={
+                                localStorage.getItem("typeC") === "2"
+                                  ? false
+                                  : true
+                              }
+                            />
+                            <label
+                              hidden={
+                                localStorage.getItem("typeC") === "2"
+                                  ? false
+                                  : true
+                              }
+                            >
+                              Мин.
+                            </label>
+                          </div>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+            </tbody>
+          );
+        })
+    );
+  }
+
   render() {
     {
       return (
         <div>
-          {console.log(this.props.jh + "JH")}
           <div className="headHr" />
+          {console.log(JSON.stringify(this.props.journalsite) + "site")}
           <div className="all-content">
-            <TableContainer sx={{ maxHeight: 760 }}>
+            <TableContainer>
               <Table
                 stickyHeader
                 aria-label="sticky table"
@@ -114,6 +330,11 @@ export default class MarksTable extends React.Component {
               >
                 <tbody>
                   <TableRow>
+                    {localStorage.getItem("journalsite") !== null
+                      ? this.mapDate(
+                          JSON.parse(localStorage.getItem("journalsite"))
+                        )
+                      : this.mapDate(this.props.journalsite)}
                     {
                       /* {localStorage.getItem("journalsite") !== null
                       ? JSON.parse(localStorage.getItem("journalsite")).map(
@@ -136,229 +357,28 @@ export default class MarksTable extends React.Component {
                               </td>
                             );
                         })} */
-
-                      this.props.jh.map((m, i) => {
-                        if (i === 0)
-                          return (
-                            <td className="line-fio diagonal-line" key={i}>
-                              <label className="dzs">Дата</label>
-                              <label className="fios">ФИО</label>
-                            </td>
-                          );
-                      })
+                      // this.props.jh.map((m, i) => {
+                      //   if (i === 0)
+                      //     return (
+                      //       <td className="line-fio diagonal-line" key={i}>
+                      //         <label className="dzs">Дата</label>
+                      //         <label className="fios">ФИО</label>
+                      //       </td>
+                      //     );
+                      // })
                     }
-                    {this.props.journalsite.map((item, i) => {
-                      item.journalHeaders.map((header, i) => {
-                        if (i === 0) {
-                          return header.journalContents
-                            .sort((a, b) => a.id - b.id)
-                            .map((content, i) => (
-                              <TableCell
-                                height="19px"
-                                width="270px"
-                                className="disp line-stud"
-                                key={content.id}
-                              >
-                                <div className="surname">
-                                  {i + 1 + ". " + content.student.surname}
-                                </div>
-                                <div className="csn surname">
-                                  {content.student.name}
-                                </div>
-                              </TableCell>
-                            ));
-                        }
-                      });
-                    })}
+                    {localStorage.getItem("journalsite") !== null
+                      ? this.mapStudents(
+                          JSON.parse(localStorage.getItem("journalsite"))
+                        )
+                      : this.mapStudents(this.props.journalsite)}
                   </TableRow>
                 </tbody>
-                {this.props.journalsite.map((item, i) =>
-                  item.journalHeaders
-                    .sort((a, b) => a.id - b.id)
-                    .map((header, i) => {
-                      return (
-                        <tbody key={i}>
-                          <TableRow>
-                            <TableCell height="126px" className="line-data">
-                              <div className="">
-                                <p className="day_mount">
-                                  {header.dateOfLesson !== null
-                                    ? header.dateOfLesson[2] < 10
-                                      ? String(this.state.x) +
-                                        header.dateOfLesson[2]
-                                      : header.dateOfLesson[2]
-                                    : "No date"}
-                                  .
-                                  {header.dateOfLesson !== null
-                                    ? header.dateOfLesson[1] < 10
-                                      ? String(this.state.x) +
-                                        header.dateOfLesson[1]
-                                      : header.dateOfLesson[1]
-                                    : console.log("kiki")}
-                                  <br />
-                                </p>
-                                <p className="year">
-                                  {header.dateOfLesson !== null
-                                    ? header.dateOfLesson[0] < 10
-                                      ? String(this.state.x) +
-                                        header.dateOfLesson[0]
-                                      : header.dateOfLesson[0]
-                                    : console.log("kaki")}
-                                </p>
-                                <p className="day_mount">
-                                  {this.state.lessonHours[header.hoursCount]}
-                                </p>
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                          {header.journalContents
-                            .sort((a, b) => a.id - b.id)
-                            .map((content, j) => {
-                              // if (content.presence === false) {
-                              return (
-                                <TableRow key={j}>
-                                  <TableCell
-                                    className="line-grade disp"
-                                    height="26px"
-                                    width={
-                                      this.props.typeC === "2" ? "65px" : "47px"
-                                    }
-                                  >
-                                    <div className="std_cell">
-                                      {/* {content.presence === true && ( */}
-                                      <select
-                                        key={content.id}
-                                        className="sel_grade myInput"
-                                        name="select"
-                                        disabled={
-                                          content.presence === false
-                                            ? true
-                                            : false
-                                        }
-                                        hidden={
-                                          this.props.typeC === "1" //Лекция
-                                            ? true
-                                            : this.props.typeC === "2" //Лабораторная
-                                            ? true
-                                            : this.props.typeC === "3" //Практическая
-                                            ? false
-                                            : console.log("Error with hidden")
-                                        }
-                                        defaultValue={content.grade}
-                                        onChange={(e) => {
-                                          this.props.setBtnFalse();
-                                          this.props.setJournalSiteMark(
-                                            header.id,
-                                            content.id,
-                                            e.target.value
-                                          );
-                                          if (typeof Storage !== "undefined") {
-                                            localStorage.setItem(
-                                              "journalsite",
-                                              JSON.stringify(
-                                                this.props.journalsite
-                                              )
-                                            );
-                                          }
-                                        }}
-                                      >
-                                        <option hidden></option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                        <option>7</option>
-                                        <option>8</option>
-                                        <option>9</option>
-                                        <option>10</option>
-                                      </select>
-                                      {/* // )} */}
-                                      <div className="checkbox">
-                                        <input
-                                          className="custom-checkbox top"
-                                          type="checkbox"
-                                          id={content.id}
-                                          name={content.id}
-                                          defaultChecked={content.presence}
-                                          onChange={() => {
-                                            (async () => {
-                                              await this.props.clearPresent();
-                                              this.props.setPresent();
-                                            })();
-                                            this.props.setBtnFalse();
-                                            this.props.toggleJournalSitePresence(
-                                              header.id,
-                                              content.id
-                                            );
-                                            if (
-                                              typeof Storage !== "undefined"
-                                            ) {
-                                              localStorage.setItem(
-                                                "journalsite",
-                                                JSON.stringify(
-                                                  this.props.journalsite
-                                                )
-                                              );
-                                            }
-                                          }}
-                                        />
-                                        <label htmlFor={content.id}></label>
-                                      </div>
-                                      <div className="lateness">
-                                        <input
-                                          value={this.state.inputs[content.id]}
-                                          type="number"
-                                          // step="1"
-                                          onKeyPress={this.handleKeyPress}
-                                          // maxLength="2"
-                                          defaultValue={content.lateness}
-                                          onChange={(e) => {
-                                            this.getInputValue(e, content.id);
-                                            this.props.setBtnFalse();
-                                            this.props.setJournalSiteLateness(
-                                              header.id,
-                                              content.id,
-                                              e.target.value
-                                            );
-                                            if (
-                                              typeof Storage !== "undefined"
-                                            ) {
-                                              localStorage.setItem(
-                                                "journalsite",
-                                                JSON.stringify(
-                                                  this.props.journalsite
-                                                )
-                                              );
-                                            }
-                                          }}
-                                          className="sel_grade myInputMin"
-                                          hidden={
-                                            this.props.typeC === "2"
-                                              ? false
-                                              : true
-                                          }
-                                        />
-                                        <label
-                                          hidden={
-                                            this.props.typeC === "2"
-                                              ? false
-                                              : true
-                                          }
-                                        >
-                                          Мин.
-                                        </label>
-                                      </div>
-                                    </div>
-                                  </TableCell>
-                                </TableRow>
-                              );
-                            })}
-                        </tbody>
-                      );
-                    })
-                )}
+                {localStorage.getItem("journalsite") !== null
+                  ? this.mapContent(
+                      JSON.parse(localStorage.getItem("journalsite"))
+                    )
+                  : this.mapContent(this.props.journalsite)}
               </Table>
               <Table
                 stickyHeader
@@ -381,7 +401,15 @@ export default class MarksTable extends React.Component {
                         return this.props.present.map((item, i) => {
                           return (
                             <TableCell className="line_itogo_col" key={i}>
-                              <div className="pris_col">{item}</div>
+                              <div
+                                className={
+                                  localStorage.getItem("typeC") === "2"
+                                    ? "pris_col_lecture"
+                                    : "pris_col"
+                                }
+                              >
+                                {item}
+                              </div>
                             </TableCell>
                           );
                         });

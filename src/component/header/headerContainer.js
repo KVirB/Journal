@@ -63,6 +63,7 @@ class headerContainer extends React.Component {
         clearType={this.props.clearType}
         subGroup={this.props.subGroup}
         courseSpec={this.props.courseSpec}
+        typeC={this.props.typeC}
       />
     );
   }

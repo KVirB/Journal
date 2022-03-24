@@ -57,6 +57,7 @@ class Header extends React.Component {
     this.setState({
       groupId: 0,
     });
+    //------------------------------------------------------------------------------------------НЕ РАБОТАЕТ-----------------------------------------------------------------
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
         "У вас остались не сохраненные изменения. Сохранить?"
@@ -137,6 +138,7 @@ class Header extends React.Component {
         this.state.typeClass,
         this.state.subGroup
       );
+      localStorage.setItem("typeC", this.state.typeClass);
       this.props.setJH();
     })();
     if (localStorage.getItem("journalsite") !== null) {
@@ -175,7 +177,7 @@ class Header extends React.Component {
       this;
     return (
       <div>
-        {}
+        {console.log(this.props.typeC + "TYPE CCCCC")}
         {console.log(
           this.state.disciplineId +
             "disc" +
@@ -213,9 +215,7 @@ class Header extends React.Component {
           ))
         } */}
         <div className="display-flex pointer">
-          {console.log(
-            JSON.stringify(JSON.stringify(this.props.courseSpec) + "spec")
-          )}
+          {console.log(JSON.stringify(this.props.courseSpec) + "spec")}
           <div className="display-flex">
             <div>
               <div className="discipline-name">Название дисциплины</div>

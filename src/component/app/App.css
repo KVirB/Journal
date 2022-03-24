@@ -143,7 +143,6 @@ hr {
 } */
 .line-data {
   border-right: 1px solid rgba(224, 224, 224, 1);
-  border-top: 1px solid rgba(224, 224, 224, 1);
 }
 .line-grade {
   border-right: 1px solid rgba(224, 224, 224, 1);
@@ -156,7 +155,6 @@ hr {
 .line-fio {
   border-left: 1px solid rgba(224, 224, 224, 1);
   border-right: 1px solid rgba(224, 224, 224, 1);
-  border-top: 1px solid rgba(224, 224, 224, 1);
   border-bottom: 1px solid rgba(224, 224, 224, 1);
   height: 158px;
   width: 302px;
@@ -419,6 +417,15 @@ section div {
   line-height: 19px;
   color: #212323;
   width: 47px;
+}
+.pris_col_lecture {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #212323;
+  width: 65px;
 }
 
 /* .select {

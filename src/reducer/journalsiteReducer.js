@@ -79,12 +79,12 @@ const journalsiteReducer = (state = initialState, action) => {
       };
 
     case SET_JH:
-      // let newJournalsiteCheck = [localStorage.getItem("journalsite")];
-      // let jH = [...state.jh];
-      // jH.push(newJournalsiteCheck);
+      let newJournalsiteCheck = [localStorage.getItem("journalsite")];
+      let jH = [{ ...state.jh }];
+      jH.push(newJournalsiteCheck);
       return {
         ...state,
-        jh: [{ ...action.journalsite }],
+        jh: jH,
       };
 
     case CLEAR_JH:
@@ -190,24 +190,51 @@ const journalsiteReducer = (state = initialState, action) => {
         journalsite: newJournalsiteMark,
       };
     case TOGGLE_JOURNALSITE_PRESENCE:
-      let newJournalsitePresence = [...state.journalsite];
-      newJournalsitePresence[0].journalHeaders.forEach((lesson) => {
-        if (lesson.id === action.lesson_id) {
-          lesson.journalContents.forEach((line) => {
-            if (line.id === action.line_id) {
-              line.presence = !line.presence;
-              if (!line.presence) {
-                line.grade = null;
-              }
-            }
-          });
-        }
-      });
+      if (state.journalsite.length === 0) {
+        let newJournalsitePresence = JSON.parse(
+          localStorage.getItem("journalsite")
+        );
 
-      return {
-        ...state,
-        journalsite: newJournalsitePresence,
-      };
+        newJournalsitePresence.forEach((site, i) =>
+          site.journalHeaders.forEach((lesson) => {
+            if (lesson.id === action.lesson_id) {
+              lesson.journalContents.forEach((line) => {
+                if (line.id === action.line_id) {
+                  line.presence = !line.presence;
+                  if (!line.presence) {
+                    line.grade = null;
+                  }
+                }
+              });
+            }
+          })
+        );
+
+        return {
+          ...state,
+          journalsite: newJournalsitePresence,
+        };
+      } else {
+        let newJournalsitePresence = [...state.journalsite];
+        newJournalsitePresence.forEach((site, i) =>
+          site.journalHeaders.forEach((lesson) => {
+            if (lesson.id === action.lesson_id) {
+              lesson.journalContents.forEach((line) => {
+                if (line.id === action.line_id) {
+                  line.presence = !line.presence;
+                  if (!line.presence) {
+                    line.grade = null;
+                  }
+                }
+              });
+            }
+          })
+        );
+        return {
+          ...state,
+          journalsite: newJournalsitePresence,
+        };
+      }
 
     case CLEAR_JOURNALSITE:
       return initialState;
@@ -248,9 +275,8 @@ export const setPresent = (present) => ({
   type: SET_PRESENT,
   present,
 });
-export const setJH = (journalsite) => ({
+export const setJH = () => ({
   type: SET_JH,
-  journalsite,
 });
 export const clearPresent = () => ({
   type: CLEAR_PRESENT,

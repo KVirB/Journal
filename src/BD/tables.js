@@ -27,8 +27,8 @@ export const getFio = () => {
 export const getDiscipline = () => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/searchWithoutDublicate?q=teacher.id==${
-        JSON.parse(localStorage.getItem("user")).password
+      `electronicjournal/journal-sites/searchWithoutDublicate?q=teacher.idFromSource==${
+        JSON.parse(localStorage.getItem("user")).id_from_source
       }`
     )
     .then((response) => {
@@ -59,8 +59,8 @@ export const getSubGroup = () => {
 export const getGroup = (disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/searchByTeacherAndDiscipline?q=discipline.id==${disciplineId};teacher.id==${
-        JSON.parse(localStorage.getItem("user")).password
+      `electronicjournal/journal-sites/searchByTeacherAndDiscipline?q=discipline.id==${disciplineId};teacher.idFromSource==${
+        JSON.parse(localStorage.getItem("user")).id_from_source
       }`
     )
     .then((response) => {
@@ -70,17 +70,19 @@ export const getGroup = (disciplineId) => {
 export const getJournalsite = (disciplineId, groupId, typeClass, subGroup) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/filter?teacher_id=${
-        JSON.parse(localStorage.getItem("user")).password
+      `electronicjournal/journal-sites/filter?teacher_idFromSource=${
+        JSON.parse(localStorage.getItem("user")).id_from_source
       }&group_name=${groupId}&discipline_id=${disciplineId}&type_class_id=${typeClass}&sub_group_number=${subGroup}`
     )
     .then((response) => {
       return response.data;
     });
 };
-export const getTeacher = (surname, id) => {
+export const getTeacher = (surname, teacherId) => {
   return baseRout
-    .get(`electronicjournal/teachers/search?q=surname==${surname};id==${id}`)
+    .get(
+      `electronicjournal/teachers/search?q=surname==${surname};id==${teacherId}`
+    )
     .then((response) => {
       return response.data;
     });
