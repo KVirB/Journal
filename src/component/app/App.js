@@ -1,28 +1,15 @@
-import { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Layout from "../Layout";
 import Combine from "./Combine";
 import Login from "../login/Login";
-
+import Statistics from "../Stats/statisticsContainer";
 import RequireAuth from "../../hoc/RequireAuth";
 import AuthProvider from "../../hoc/AuthProvider";
-// import { useAuth } from "../../hooks/useAuth";
 
 import "./App.css";
 
 const App = () => {
-  // const { signIn } = useAuth();
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (localStorage.getItem("user")) {
-  //     signIn(localStorage.getItem("user"), () =>
-  //       navigate("/electronicaljournal-view/journal", { replace: true })
-  //     );
-  //   }
-  // }, []);
-
   return (
     <AuthProvider>
       <Routes>
@@ -35,6 +22,10 @@ const App = () => {
                 <Combine />
               </RequireAuth>
             }
+          />
+          <Route
+            path="/electronicaljournal-view/statistics"
+            element={<Statistics />}
           />
         </Route>
       </Routes>

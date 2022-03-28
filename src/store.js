@@ -6,6 +6,7 @@ import journalsiteReducer from "./reducer/journalsiteReducer";
 import teacherReducer from "./reducer/teacherReducer";
 import btnReducer from "./reducer/btnReducer";
 import typeReducer from "./reducer/typeReducer";
+import statisticsReducer from "./reducer/statisticsReducer";
 
 let reducers = combineReducers({
   journalsitePage: journalsiteReducer,
@@ -16,6 +17,7 @@ let reducers = combineReducers({
   teacherPage: teacherReducer,
   btnPage: btnReducer,
   typePage: typeReducer,
+  generalStatisticPage: statisticsReducer,
   form: formReducer,
 });
 
