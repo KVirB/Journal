@@ -17,7 +17,7 @@ import {
   clearSubGroup,
 } from "../../reducer/headerReducer";
 import points from "../../points.png";
-
+import Select from "react-select";
 class Header extends React.Component {
   state = {
     disciplineId: 0,
@@ -40,9 +40,12 @@ class Header extends React.Component {
     if (groupId !== prevState.groupId) {
       this.props.clearJournalsite();
       this.props.getCourseSpecThunk(this.state.groupId);
+      this.props.clearTypeClass();
+      this.props.clearSubGroup();
     }
     if (typeClass !== prevState.typeClass) {
       this.props.clearJournalsite();
+      this.props.clearSubGroup();
     }
     if (subGroup !== prevState.subGroup) {
       this.props.clearJournalsite();
@@ -57,26 +60,31 @@ class Header extends React.Component {
     this.setState({
       groupId: 0,
     });
-    //------------------------------------------------------------------------------------------НЕ РАБОТАЕТ-----------------------------------------------------------------
+
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
         "У вас остались не сохраненные изменения. Сохранить?"
       );
-      this.props.setJournalHeader();
+
       if (dispConf === true) {
         (async () => {
-          await localStorage.removeItem("journalsite");
+          await this.props.setJournalHeader();
           await this.props.clearJournalHeader();
           this.props.setBtnTrue();
           this.props.getDisciplineThunk();
           let header = this.props.journalHeader;
           this.props.getJournalHeaderThunk(header);
           alert("Сохранено");
+          localStorage.removeItem("journalsite");
+          this.props.clearJournalsite();
         })();
       } else {
         localStorage.removeItem("journalsite");
+        this.props.clearGroup();
         this.props.clearTypeClass();
         this.props.clearSubGroup();
+        this.props.clearJournalsite();
+        this.props.setBtnTrue();
       }
     }
   };
@@ -87,16 +95,39 @@ class Header extends React.Component {
     });
     this.props.clearJournalsite();
     this.props.getTypeClassThunk();
+    if (localStorage.getItem("journalsite") !== null) {
+      let dispConf = window.confirm(
+        "У вас остались не сохраненные изменения. Сохранить?"
+      );
+      if (dispConf === true) {
+        (async () => {
+          await this.props.setJournalHeader();
+          await this.props.clearJournalHeader();
+          this.props.setJournalHeader();
+          let header = this.props.journalHeader;
+          this.props.getJournalHeaderThunk(header);
+          alert("Сохранено");
+          localStorage.removeItem("journalsite");
+          this.props.clearJournalsite();
+        })();
+      } else {
+        localStorage.removeItem("journalsite");
+        this.props.clearTypeClass();
+        this.props.clearSubGroup();
+        this.props.clearJournalsite();
+        this.props.setBtnTrue();
+      }
+    }
   };
   getTypeClass = (e) => {
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
         "У вас остались не сохраненные изменения. Сохранить?"
       );
-      this.props.setJournalHeader();
+
       if (dispConf === true) {
         (async () => {
-          await localStorage.removeItem("journalsite");
+          await this.props.setJournalHeader();
           await this.props.clearJH();
           this.props.setBtnTrue();
           this.props.getDisciplineThunk();
@@ -105,6 +136,9 @@ class Header extends React.Component {
           this.props.getJournalHeaderThunk(header);
           this.props.clearJournalHeader();
           alert("Сохранено");
+          localStorage.removeItem("journalsite");
+          this.props.clearSubGroup();
+          this.props.clearJournalsite();
         })();
       } else {
         (async () => {
@@ -112,6 +146,9 @@ class Header extends React.Component {
           this.props.getGroupThunk(this.state.disciplineId);
         })();
         localStorage.removeItem("journalsite");
+        this.props.clearJournalsite();
+        this.props.clearSubGroup();
+        this.props.setBtnTrue();
       }
     }
 
@@ -145,10 +182,10 @@ class Header extends React.Component {
       let dispConf = window.confirm(
         "У вас остались не сохраненные изменения. Сохранить?"
       );
-      this.props.setJournalHeader();
+
       if (dispConf === true) {
         (async () => {
-          await localStorage.removeItem("journalsite");
+          await this.props.setJournalHeader();
           await this.props.clearJH();
           this.props.setBtnTrue();
           this.props.getDisciplineThunk();
@@ -157,6 +194,7 @@ class Header extends React.Component {
           this.props.getJournalHeaderThunk(header);
           this.props.clearJournalHeader();
           alert("Сохранено");
+          localStorage.removeItem("journalsite");
         })();
       } else {
         (async () => {
@@ -164,8 +202,13 @@ class Header extends React.Component {
           this.props.getGroupThunk(this.state.disciplineId);
         })();
         localStorage.removeItem("journalsite");
+        this.props.setBtnTrue();
       }
     }
+  };
+
+  href = (e) => {
+    window.location.assign(e);
   };
 
   Logout = () => {
@@ -173,8 +216,14 @@ class Header extends React.Component {
   };
 
   render() {
-    const { getValueDiscipline, getGroup, getTypeClass, Logout, getSubGroup } =
-      this;
+    const {
+      getValueDiscipline,
+      getGroup,
+      getTypeClass,
+      Logout,
+      getSubGroup,
+      href,
+    } = this;
     return (
       <div>
         {console.log(this.props.typeC + "TYPE CCCCC")}
@@ -319,6 +368,24 @@ class Header extends React.Component {
               </select>
             </div>
           </div>
+          <div>
+            <div className="pgroup-name">Статистика</div>
+            <Select
+              className="statistic-select"
+              onChange={(e) => href(e.value)}
+              options={[
+                {
+                  value: `/electronicaljournal-view/statistics`,
+                  label: "Статистика по группе",
+                },
+                {
+                  value: `/electronicaljournal-view/statisticsstudent`,
+                  label: "Статистика по студенету",
+                },
+              ]}
+            />
+          </div>
+
           <input
             className="button-header bt_color"
             type="submit"

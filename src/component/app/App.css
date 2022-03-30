@@ -470,7 +470,7 @@ select {
   background-position-y: calc(100% - 20px);
 }
 .graph {
-  margin-left: 100px;
-  margin-right: 100px;
-  height: auto;
+  margin-left: 56px;
+  margin-right: 56px;
+  width: auto;
 }

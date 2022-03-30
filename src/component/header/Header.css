@@ -320,3 +320,33 @@ input[type="submit"].button-header:disabled {
   justify-content: space-between;
   margin-right: 92px;
 }
+.group-select-statistic {
+  background: #ffffff;
+  box-sizing: border-box;
+  width: 144px;
+  height: 38px;
+  margin-left: 30px;
+  margin-top: 15px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #212323;
+  text-indent: 20px;
+}
+.statistic-select {
+  background: #ffffff;
+  box-sizing: border-box;
+  width: 250px;
+  height: 38px;
+  margin-left: 30px;
+  margin-top: 15px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #212323;
+  text-indent: 20px;
+}

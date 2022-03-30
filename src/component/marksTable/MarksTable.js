@@ -6,11 +6,6 @@ import TableRow from "@mui/material/TableRow";
 import "../app/App.css";
 
 export default class MarksTable extends React.Component {
-  componentDidUpdate(prevProps) {
-    if (this.props.journalsite !== prevProps.journalsite) {
-    }
-  }
-
   state = {
     presence: null,
     date: null,
@@ -75,6 +70,8 @@ export default class MarksTable extends React.Component {
   componentDidMount() {
     if (localStorage.getItem("journalsite") !== null) {
       this.props.setJH();
+      this.props.setBtnFalse();
+      this.state.inputs = {};
     }
 
     // if (localStorage.getItem("journalsite") !== null) {
@@ -102,12 +99,15 @@ export default class MarksTable extends React.Component {
   mapDate = (mapArr) =>
     mapArr.map((m, i) => {
       if (i === 0)
-        return (
-          <td className="line-fio diagonal-line" key={i}>
-            <label className="dzs">Дата</label>
-            <label className="fios">ФИО</label>
-          </td>
-        );
+        if (this.props.disabled === true) {
+          this.state.inputs = {};
+        }
+      return (
+        <td className="line-fio diagonal-line" key={i}>
+          <label className="dzs">Дата</label>
+          <label className="fios">ФИО</label>
+        </td>
+      );
     });
 
   mapStudents(mapArr) {
@@ -205,18 +205,20 @@ export default class MarksTable extends React.Component {
                             }
                             defaultValue={content.grade}
                             onChange={(e) => {
-                              this.props.setBtnFalse();
-                              this.props.setJournalSiteMark(
-                                header.id,
-                                content.id,
-                                e.target.value
-                              );
-                              if (typeof Storage !== "undefined") {
-                                localStorage.setItem(
-                                  "journalsite",
-                                  JSON.stringify(this.props.journalsite)
+                              (async () => {
+                                this.props.setBtnFalse();
+                                await this.props.setJournalSiteMark(
+                                  header.id,
+                                  content.id,
+                                  e.target.value
                                 );
-                              }
+                                if (typeof Storage !== "undefined") {
+                                  localStorage.setItem(
+                                    "journalsite",
+                                    JSON.stringify(this.props.journalsite)
+                                  );
+                                }
+                              })();
                             }}
                           >
                             <option hidden></option>
@@ -272,19 +274,21 @@ export default class MarksTable extends React.Component {
                               // maxLength="2"
                               defaultValue={content.lateness}
                               onChange={(e) => {
-                                this.getInputValue(e, content.id);
-                                this.props.setBtnFalse();
-                                this.props.setJournalSiteLateness(
-                                  header.id,
-                                  content.id,
-                                  e.target.value
-                                );
-                                if (typeof Storage !== "undefined") {
-                                  localStorage.setItem(
-                                    "journalsite",
-                                    JSON.stringify(this.props.journalsite)
+                                (async () => {
+                                  this.getInputValue(e, content.id);
+                                  this.props.setBtnFalse();
+                                  await this.props.setJournalSiteLateness(
+                                    header.id,
+                                    content.id,
+                                    e.target.value
                                   );
-                                }
+                                  if (typeof Storage !== "undefined") {
+                                    localStorage.setItem(
+                                      "journalsite",
+                                      JSON.stringify(this.props.journalsite)
+                                    );
+                                  }
+                                })();
                               }}
                               className="sel_grade myInputMin"
                               hidden={

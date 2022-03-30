@@ -154,23 +154,46 @@ const journalsiteReducer = (state = initialState, action) => {
         };
       }
     case SET_LATENESS:
-      let newJournalsiteLateness = [...state.journalsite];
-      newJournalsiteLateness.forEach((site) => {
-        site.journalHeaders.forEach((lesson) => {
-          if (lesson.id === action.lesson_id) {
-            lesson.journalContents.forEach((line) => {
-              if (line.id === action.line_id) {
-                if (action.lateness <= 120) line.lateness = action.lateness;
-              }
-            });
-          }
-        });
-      });
+      if (state.journalsite.length === 0) {
+        let newJournalsiteLateness = JSON.parse(
+          localStorage.getItem("journalsite")
+        );
 
-      return {
-        ...state,
-        journalsite: newJournalsiteLateness,
-      };
+        newJournalsiteLateness.forEach((site) => {
+          site.journalHeaders.forEach((lesson) => {
+            if (lesson.id === action.lesson_id) {
+              lesson.journalContents.forEach((line) => {
+                if (line.id === action.line_id) {
+                  if (action.lateness <= 120) line.lateness = action.lateness;
+                }
+              });
+            }
+          });
+        });
+
+        return {
+          ...state,
+          journalsite: newJournalsiteLateness,
+        };
+      } else {
+        let newJournalsiteLateness = [...state.journalsite];
+        newJournalsiteLateness.forEach((site) => {
+          site.journalHeaders.forEach((lesson) => {
+            if (lesson.id === action.lesson_id) {
+              lesson.journalContents.forEach((line) => {
+                if (line.id === action.line_id) {
+                  if (action.lateness <= 120) line.lateness = action.lateness;
+                }
+              });
+            }
+          });
+        });
+        return {
+          ...state,
+          journalsite: newJournalsiteLateness,
+        };
+      }
+
     case SET_JOURNALSITE_MARK:
       let newJournalsiteMark = [...state.journalsite];
       newJournalsiteMark.forEach((site) => {
@@ -185,10 +208,45 @@ const journalsiteReducer = (state = initialState, action) => {
         });
       });
 
-      return {
-        ...state,
-        journalsite: newJournalsiteMark,
-      };
+      if (state.journalsite.length === 0) {
+        let newJournalsiteMark = JSON.parse(
+          localStorage.getItem("journalsite")
+        );
+
+        newJournalsiteMark.forEach((site) => {
+          site.journalHeaders.forEach((lesson) => {
+            if (lesson.id === action.lesson_id) {
+              lesson.journalContents.forEach((line) => {
+                if (line.id === action.line_id) {
+                  line.grade = action.grade;
+                }
+              });
+            }
+          });
+        });
+
+        return {
+          ...state,
+          journalsite: newJournalsiteMark,
+        };
+      } else {
+        let newJournalsiteMark = [...state.journalsite];
+        newJournalsiteMark.forEach((site) => {
+          site.journalHeaders.forEach((lesson) => {
+            if (lesson.id === action.lesson_id) {
+              lesson.journalContents.forEach((line) => {
+                if (line.id === action.line_id) {
+                  line.grade = action.grade;
+                }
+              });
+            }
+          });
+        });
+        return {
+          ...state,
+          journalsite: newJournalsiteMark,
+        };
+      }
     case TOGGLE_JOURNALSITE_PRESENCE:
       if (state.journalsite.length === 0) {
         let newJournalsitePresence = JSON.parse(
