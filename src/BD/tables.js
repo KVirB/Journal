@@ -82,6 +82,15 @@ export const getGroups = () => {
     return response.data;
   });
 };
+
+export const getDisciplinesStatistic = (groupsId) => {
+  return baseRout
+    .get(`electronicjournal/journal-sites/search?q=group.id==${groupsId}`)
+    .then((response) => {
+      return response.data;
+    });
+};
+
 export const getJournalsite = (disciplineId, groupId, typeClass, subGroup) => {
   return baseRout
     .get(

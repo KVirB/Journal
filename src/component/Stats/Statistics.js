@@ -92,6 +92,7 @@ class Statistics extends React.Component {
     ],
     passes: [],
     groupsId: 0,
+    disciplineId: 0,
   };
   componentDidMount() {
     (async () => {
@@ -101,8 +102,16 @@ class Statistics extends React.Component {
     this.averageMark();
   }
   getGroups = (e) => {
+    (async () => {
+      await this.setState({
+        groupsId: e,
+      });
+      this.props.getDisciplinesStatisticThunk(this.state.groupsId);
+    })();
+  };
+  getValueDiscipline = (e) => {
     this.setState({
-      groupsId: e,
+      disciplineId: e,
     });
   };
   // **/node_modules
@@ -118,16 +127,18 @@ class Statistics extends React.Component {
     });
   };
   render() {
-    const { getGroups } = this;
+    const { getGroups, getValueDiscipline } = this;
     const { generalStatistics } = this.props;
     const { isLoading } = this.props;
     return isLoading ? (
       <div>LOADING...</div>
     ) : (
       <div>
-        {console.log(JSON.stringify(this.props.groups))}
-        {console.log(this.props.generalStatistics.length)}
+        {/* {console.log(JSON.stringify(this.props.groups))}
+        {console.log(this.props.generalStatistics.length)} */}
         {console.log(this.state.groupsId)}
+        {console.log(this.state.disciplineId)}
+        {console.log(JSON.stringify(this.props.disciplinesStatistic))}
         <div>
           <div className="group-name">Группа</div>
           <div className="group-select-statistic">
@@ -140,7 +151,17 @@ class Statistics extends React.Component {
             />
           </div>
         </div>
-
+        <div>
+          <div className="group-name">Группа</div>
+          <Select
+            className="group-select"
+            onChange={(e) => getValueDiscipline(e.value)}
+            options={this.props.disciplinesStatistic.map((m, i) => ({
+              value: m.discipline.id,
+              label: m.discipline.name,
+            }))}
+          />
+        </div>
         <div>
           <Bar
             className="graph"

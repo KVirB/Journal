@@ -1,14 +1,19 @@
-import { getGeneralStatistics } from "../BD/tables";
-import { getGroups } from "../BD/tables";
+import {
+  getGeneralStatistics,
+  getDisciplinesStatistic,
+  getGroups,
+} from "../BD/tables";
 
 const SET_GENERALSTATISTICS = "SET_GENERALSTATISTICS";
 const SET_GROUPS = "SET_GROUPS";
+const SET_DISCIPLINESTATISTICS = "SET_DISCIPLINESTATISTICS";
 const SET_LOADER_TRUE = "SET_LOADER_TRUE";
 const SET_LOADER_FALSE = "SET_LOADER_FALSE";
 const CLEAR_GROUPS = "CLEAR_GROUPS";
 let initialState = {
   generalStatistics: [],
   groups: [],
+  disciplinesStatistic: [],
   isLoading: false,
 };
 
@@ -29,6 +34,11 @@ const statisticsReducer = (state = initialState, action) => {
         ...state,
         generalStatistics: [...action.generalStatistics],
       };
+    case SET_DISCIPLINESTATISTICS:
+      return {
+        ...state,
+        disciplinesStatistic: [...action.disciplinesStatistic],
+      };
     case SET_GROUPS:
       return {
         ...state,
@@ -42,6 +52,11 @@ const statisticsReducer = (state = initialState, action) => {
 export const setGroups = (groups) => ({
   type: SET_GROUPS,
   groups,
+});
+
+export const setDisciplinesStatistics = (disciplinesStatistic) => ({
+  type: SET_DISCIPLINESTATISTICS,
+  disciplinesStatistic,
 });
 
 export const setLoaderFalse = () => ({
@@ -61,6 +76,14 @@ export const getGroupsThunk = () => {
   return (dispatch) => {
     getGroups().then((data) => {
       dispatch(setGroups(data));
+    });
+  };
+};
+
+export const getDisciplinesStatisticThunk = (groupsId) => {
+  return (dispatch) => {
+    getDisciplinesStatistic(groupsId).then((data) => {
+      dispatch(setDisciplinesStatistics(data));
     });
   };
 };

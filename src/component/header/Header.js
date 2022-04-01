@@ -20,9 +20,9 @@ import points from "../../points.png";
 import Select from "react-select";
 class Header extends React.Component {
   state = {
-    disciplineId: 0,
-    groupId: 0,
-    typeClass: 0,
+    disciplineId: null,
+    groupId: null,
+    typeClass: null,
     subGroup: null,
   };
 
@@ -87,12 +87,30 @@ class Header extends React.Component {
         this.props.setBtnTrue();
       }
     }
+    (async () => {
+      await this.props.setPresent();
+      if (
+        this.state.disciplineId !== null &&
+        this.state.groupId !== null &&
+        this.state.typeClass !== null &&
+        this.state.subGroup !== null
+      ) {
+        await this.props.getJournalsiteThunk(
+          this.state.disciplineId,
+          this.state.groupId,
+          this.state.typeClass,
+          this.state.subGroup
+        );
+      }
+      localStorage.setItem("typeC", this.state.typeClass);
+      this.props.setJH();
+    })();
   };
   getGroup = (e) => {
-    const { value } = e.target;
     this.setState({
-      groupId: value,
+      groupId: e,
     });
+
     this.props.clearJournalsite();
     this.props.getTypeClassThunk();
     if (localStorage.getItem("journalsite") !== null) {
@@ -118,6 +136,24 @@ class Header extends React.Component {
         this.props.setBtnTrue();
       }
     }
+    (async () => {
+      await this.props.setPresent();
+      if (
+        this.state.disciplineId !== null &&
+        this.state.groupId !== null &&
+        this.state.typeClass !== null &&
+        this.state.subGroup !== null
+      ) {
+        await this.props.getJournalsiteThunk(
+          this.state.disciplineId,
+          this.state.groupId,
+          this.state.typeClass,
+          this.state.subGroup
+        );
+      }
+      localStorage.setItem("typeC", this.state.typeClass);
+      this.props.setJH();
+    })();
   };
   getTypeClass = (e) => {
     if (localStorage.getItem("journalsite") !== null) {
@@ -153,28 +189,51 @@ class Header extends React.Component {
     }
 
     (async () => {
-      const { value } = e.target;
       await this.setState({
-        typeClass: value,
+        typeClass: e,
       });
       this.props.setType(this.state.typeClass);
       await this.props.clearSubGroup();
       this.props.getSubGroupThunk();
     })();
+    (async () => {
+      await this.props.setPresent();
+      if (
+        this.state.disciplineId !== null &&
+        this.state.groupId !== null &&
+        this.state.typeClass !== null &&
+        this.state.subGroup !== null
+      ) {
+        await this.props.getJournalsiteThunk(
+          this.state.disciplineId,
+          this.state.groupId,
+          this.state.typeClass,
+          this.state.subGroup
+        );
+      }
+      localStorage.setItem("typeC", this.state.typeClass);
+      this.props.setJH();
+    })();
   };
   getSubGroup = (e) => {
-    const { value } = e.target;
     this.setState({
-      subGroup: value,
+      subGroup: e,
     });
     (async () => {
       await this.props.setPresent();
-      await this.props.getJournalsiteThunk(
-        this.state.disciplineId,
-        this.state.groupId,
-        this.state.typeClass,
-        this.state.subGroup
-      );
+      if (
+        this.state.disciplineId !== null &&
+        this.state.groupId !== null &&
+        this.state.typeClass !== null &&
+        this.state.subGroup !== null
+      ) {
+        await this.props.getJournalsiteThunk(
+          this.state.disciplineId,
+          this.state.groupId,
+          this.state.typeClass,
+          this.state.subGroup
+        );
+      }
       localStorage.setItem("typeC", this.state.typeClass);
       this.props.setJH();
     })();
@@ -316,56 +375,41 @@ class Header extends React.Component {
             </div>
             <div>
               <div className="group-name">Группа</div>
-              <select
+              <Select
                 className="group-select"
-                name="select"
-                title="Выберите группу"
-                onChange={getGroup}
-              >
-                <option defaultValue="" hidden>
-                  Группа
-                </option>
-                {this.props.group.map((m, i) => (
-                  <option className="lang__items" value={m.group.name} key={i}>
-                    {m.group.name}
-                  </option>
-                ))}
-              </select>
+                onChange={(e) => getGroup(e.value)}
+                options={this.props.group.map((m, i) => ({
+                  value: m.group.name,
+                  label: m.group.name,
+                }))}
+              />
             </div>
             <div>
               <div className="view-name">Тип занятия</div>
-              <select
-                id="select"
+              <Select
                 className="view-input"
-                onChange={getTypeClass}
-              >
-                <option defaultValue="" hidden>
-                  Тип
-                </option>
-                {this.props.typeClass.map((item, i) => (
-                  <option value={item.id} key={i}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
+                onChange={(e) => getTypeClass(e.value)}
+                options={
+                  this.props.typeClass !== null
+                    ? this.props.typeClass.map((item, i) => ({
+                        value: item.id,
+                        label: item.name,
+                      }))
+                    : { value: null, label: null }
+                }
+              />
             </div>
             <div>
               <div className="pgroup-name">Подгруппа</div>
-              <select
-                id="select"
+              <Select
                 className="group-select"
-                onChange={getSubGroup}
-              >
-                <option value={this.state.subGroup} hidden>
-                  Подгруппа
-                </option>
-
-                {this.props.subGroup.map((item, i) => (
-                  <option value={item.subGroupNumber} key={i}>
-                    {item.subGroupNumber === 0 ? "Все" : item.subGroupNumber}
-                  </option>
-                ))}
-              </select>
+                onChange={(e) => getSubGroup(e.value)}
+                options={this.props.subGroup.map((item, i) => ({
+                  value: item.subGroupNumber,
+                  label:
+                    item.subGroupNumber === 0 ? "Все" : item.subGroupNumber,
+                }))}
+              />
             </div>
           </div>
           <div>
