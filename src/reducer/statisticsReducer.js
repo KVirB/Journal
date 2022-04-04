@@ -88,10 +88,10 @@ export const getDisciplinesStatisticThunk = (groupsId) => {
   };
 };
 
-export const getGeneralStatisticsThunk = () => {
+export const getGeneralStatisticsThunk = (groupsId, disciplineId) => {
   return (dispatch) => {
     dispatch(setLoaderTrue());
-    getGeneralStatistics()
+    getGeneralStatistics(groupsId, disciplineId)
       .then((data) => {
         dispatch(setGeneralStatistics(data));
         dispatch(setLoaderFalse());

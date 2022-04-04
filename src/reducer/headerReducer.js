@@ -7,6 +7,8 @@ import {
 } from "../BD/tables";
 
 const SET_DISCIPLINE = "SET_DISCIPLINE";
+const SET_GR = "SET_GR";
+const SET_DISC = "SET_DISC";
 const CLEAR_DISCIPLINE = "CLEAR_DISCIPLINE";
 const SET_GROUP = "SET_GROUP";
 const CLEAR_GROUP = "CLEAR_GROUP";
@@ -26,6 +28,16 @@ let initialState = {
 
 const headerReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_DISC:
+      return {
+        ...state,
+        discipline: JSON.parse(localStorage.getItem("discipline")),
+      };
+    case SET_GR:
+      return {
+        ...state,
+        group: JSON.parse(localStorage.getItem("group")),
+      };
     case SET_COURSESPEC:
       return {
         ...state,
@@ -75,6 +87,14 @@ const headerReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const setGr = () => ({
+  type: SET_GR,
+});
+
+export const setDisc = () => ({
+  type: SET_DISC,
+});
 
 export const setDiscipline = (discipline) => ({
   type: SET_DISCIPLINE,

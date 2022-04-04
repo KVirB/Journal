@@ -6,100 +6,12 @@ import Select from "react-select";
 
 class Statistics extends React.Component {
   state = {
-    averageMarks: [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      // "6",
-      // "7",
-      // "8",
-      // "9",
-      // "10",
-      // "1",
-      // "2",
-      // "3",
-      // "4",
-      // "5",
-      // "6",
-      // "7",
-      // "8",
-      // "9",
-      // "10",
-      // "1",
-      // "2",
-      // "3",
-      // "4",
-      // "5",
-      // "6",
-      // "7",
-      // "8",
-      // "9",
-      // "10",
-      // "1",
-      // "2",
-      // "3",
-      // "4",
-      // "5",
-      // "6",
-      // "7",
-      // "8",
-      // "9",
-      // "10",
-    ],
-    studentNames: [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      // "6",
-      // "7",
-      // "8",
-      // "9",
-      // "10",
-      // "1",
-      // "2",
-      // "3",
-      // "4",
-      // "5",
-      // "6",
-      // "7",
-      // "8",
-      // "9",
-      // "10",
-      // "1",
-      // "2",
-      // "3",
-      // "4",
-      // "5",
-      // "6",
-      // "7",
-      // "8",
-      // "9",
-      // "10",
-      // "1",
-      // "2",
-      // "3",
-      // "4",
-      // "5",
-      // "6",
-      // "7",
-      // "8",
-      // "9",
-      // "10",
-    ],
     passes: [],
     groupsId: 0,
     disciplineId: 0,
   };
   componentDidMount() {
-    (async () => {
-      this.props.getGeneralStatisticsThunk();
-      this.props.getGroupsThunk();
-    })();
-    this.averageMark();
+    this.props.getGroupsThunk();
   }
   getGroups = (e) => {
     (async () => {
@@ -110,21 +22,15 @@ class Statistics extends React.Component {
     })();
   };
   getValueDiscipline = (e) => {
-    this.setState({
-      disciplineId: e,
-    });
-  };
-  // **/node_modules
-  averageMark = () => {
-    return this.props.generalStatistics.map((statistic, i) => {
-      this.state.averageMarks.push(statistic.studentPerformanceDTO.overallGPA);
-      this.state.studentNames.push(
-        statistic.studentPerformanceDTO.studentDTO.surname +
-          " " +
-          statistic.studentPerformanceDTO.studentDTO.name
+    (async () => {
+      await this.setState({
+        disciplineId: e,
+      });
+      this.props.getGeneralStatisticsThunk(
+        this.state.groupsId,
+        this.state.disciplineId
       );
-      this.state.passes.push(statistic.totalNumberPasses);
-    });
+    })();
   };
   render() {
     const { getGroups, getValueDiscipline } = this;
@@ -139,28 +45,30 @@ class Statistics extends React.Component {
         {console.log(this.state.groupsId)}
         {console.log(this.state.disciplineId)}
         {console.log(JSON.stringify(this.props.disciplinesStatistic))}
-        <div>
-          <div className="group-name">Группа</div>
-          <div className="group-select-statistic">
+        <div className="display-flex">
+          <div>
+            <div className="group-name">Группа</div>
+            <div className="group-select-statistic">
+              <Select
+                onChange={(e) => getGroups(e.value)}
+                options={this.props.groups.map((m) => ({
+                  value: m.id,
+                  label: m.name,
+                }))}
+              />
+            </div>
+          </div>
+          <div>
+            <div className="group-name">Дисциплина</div>
             <Select
-              onChange={(e) => getGroups(e.value)}
-              options={this.props.groups.map((m) => ({
+              className="group-select-statistics"
+              onChange={(e) => getValueDiscipline(e.value)}
+              options={this.props.disciplinesStatistic.map((m, i) => ({
                 value: m.id,
                 label: m.name,
               }))}
             />
           </div>
-        </div>
-        <div>
-          <div className="group-name">Группа</div>
-          <Select
-            className="group-select"
-            onChange={(e) => getValueDiscipline(e.value)}
-            options={this.props.disciplinesStatistic.map((m, i) => ({
-              value: m.discipline.id,
-              label: m.discipline.name,
-            }))}
-          />
         </div>
         <div>
           <Bar

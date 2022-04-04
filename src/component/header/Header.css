@@ -366,3 +366,19 @@ input[type="submit"].button-header:disabled {
   color: #212323;
   text-indent: 20px;
 }
+.group-select-statistics {
+  background: #ffffff;
+  box-sizing: border-box;
+  border-radius: 7px;
+  width: 500px;
+  height: 38px;
+  margin-left: 30px;
+  margin-top: 15px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: #212323;
+  text-indent: 20px;
+}

@@ -8,6 +8,8 @@ import {
   setTypeClass,
   clearDiscipline,
   getCourseSpecThunk,
+  setGr,
+  setDisc,
 } from "../../reducer/headerReducer.js";
 import Header from "./Header.js";
 import {
@@ -25,12 +27,12 @@ import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
 import { setType, clearType } from "../../reducer/typeReducer";
 import { getGroupsThunk } from "../../reducer/statisticsReducer";
 class headerContainer extends React.Component {
-  componentDidMount() {
-    this.props.getDisciplineThunk();
-  }
   // componentWillUnmount() {
   //   window.location.reload();
   // }
+  componentDidMount() {
+    this.props.getDisciplineThunk();
+  }
   render() {
     return (
       <Header
@@ -66,6 +68,8 @@ class headerContainer extends React.Component {
         subGroup={this.props.subGroup}
         courseSpec={this.props.courseSpec}
         typeC={this.props.typeC}
+        setGr={this.props.setGr}
+        setDisc={this.props.setDisc}
       />
     );
   }
@@ -111,4 +115,6 @@ export default connect(mapStateToProps, {
   setType,
   getCourseSpecThunk,
   getGroupsThunk,
+  setGr,
+  setDisc,
 })(headerContainer);

@@ -79,12 +79,9 @@ const journalsiteReducer = (state = initialState, action) => {
       };
 
     case SET_JH:
-      let newJournalsiteCheck = [localStorage.getItem("journalsite")];
-      let jH = [{ ...state.jh }];
-      jH.push(newJournalsiteCheck);
       return {
         ...state,
-        jh: jH,
+        journalsite: JSON.parse(localStorage.getItem("journalsite")),
       };
 
     case CLEAR_JH:
@@ -306,10 +303,11 @@ const journalsiteReducer = (state = initialState, action) => {
   }
 };
 
-export const toggleJournalSitePresence = (lesson_id, line_id) => ({
+export const toggleJournalSitePresence = (lesson_id, line_id, grade) => ({
   type: TOGGLE_JOURNALSITE_PRESENCE,
   lesson_id,
   line_id,
+  grade,
 });
 export const setClosedFalse = () => ({
   type: SET_CLOSED_FALSE,
@@ -339,9 +337,8 @@ export const setJH = () => ({
 export const clearPresent = () => ({
   type: CLEAR_PRESENT,
 });
-export const setSB = (sb) => ({
+export const setSB = () => ({
   type: SET_SB,
-  sb,
 });
 export const clearSB = () => ({
   type: CLEAR_SB,

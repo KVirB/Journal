@@ -4,10 +4,10 @@ const baseRout = axios.create({
   baseURL: "http://192.168.11.252:8082/",
 });
 
-export const getGeneralStatistics = () => {
+export const getGeneralStatistics = (groupsId, disciplineId) => {
   return baseRout
     .get(
-      "electronicjournal/journal-sites/getAcademicPerformanceByGroupAndDicsipline?q=discipline.id==777;group.id==168"
+      `electronicjournal/journal-sites/getAcademicPerformanceByGroupAndDicsipline?q=discipline.id==${disciplineId};group.id==${groupsId}`
     )
     .then((response) => {
       return response.data;
@@ -85,7 +85,7 @@ export const getGroups = () => {
 
 export const getDisciplinesStatistic = (groupsId) => {
   return baseRout
-    .get(`electronicjournal/journal-sites/search?q=group.id==${groupsId}`)
+    .get(`electronicjournal/disciplines/searchByGroup?q=group.id==${groupsId}`)
     .then((response) => {
       return response.data;
     });

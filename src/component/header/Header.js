@@ -57,9 +57,6 @@ class Header extends React.Component {
     this.setState({
       disciplineId: value,
     });
-    this.setState({
-      groupId: 0,
-    });
 
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
@@ -103,13 +100,33 @@ class Header extends React.Component {
         );
       }
       localStorage.setItem("typeC", this.state.typeClass);
-      this.props.setJH();
+      // this.props.setJH();
+      if (typeof Storage !== "undefined") {
+        localStorage.setItem("disciplineId", this.state.disciplineId);
+      }
     })();
   };
   getGroup = (e) => {
-    this.setState({
-      groupId: e,
-    });
+    (async () => {
+      await this.setState({
+        groupId: e,
+      });
+      await this.props.setPresent();
+      if (
+        this.state.disciplineId !== null &&
+        this.state.groupId !== null &&
+        this.state.typeClass !== null &&
+        this.state.subGroup !== null
+      ) {
+        await this.props.getJournalsiteThunk(
+          this.state.disciplineId,
+          this.state.groupId,
+          this.state.typeClass,
+          this.state.subGroup
+        );
+      }
+      localStorage.setItem("typeC", this.state.typeClass);
+    })();
 
     this.props.clearJournalsite();
     this.props.getTypeClassThunk();
@@ -136,24 +153,6 @@ class Header extends React.Component {
         this.props.setBtnTrue();
       }
     }
-    (async () => {
-      await this.props.setPresent();
-      if (
-        this.state.disciplineId !== null &&
-        this.state.groupId !== null &&
-        this.state.typeClass !== null &&
-        this.state.subGroup !== null
-      ) {
-        await this.props.getJournalsiteThunk(
-          this.state.disciplineId,
-          this.state.groupId,
-          this.state.typeClass,
-          this.state.subGroup
-        );
-      }
-      localStorage.setItem("typeC", this.state.typeClass);
-      this.props.setJH();
-    })();
   };
   getTypeClass = (e) => {
     if (localStorage.getItem("journalsite") !== null) {
@@ -212,7 +211,7 @@ class Header extends React.Component {
         );
       }
       localStorage.setItem("typeC", this.state.typeClass);
-      this.props.setJH();
+      // this.props.setJH();
     })();
   };
   getSubGroup = (e) => {
@@ -235,7 +234,7 @@ class Header extends React.Component {
         );
       }
       localStorage.setItem("typeC", this.state.typeClass);
-      this.props.setJH();
+      // this.props.setJH();
     })();
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
@@ -265,6 +264,10 @@ class Header extends React.Component {
       }
     }
   };
+
+  componentDidMount() {
+    this.props.getCourseSpecThunk(localStorage.getItem("groupId"));
+  }
 
   href = (e) => {
     window.location.assign(e);
@@ -378,6 +381,14 @@ class Header extends React.Component {
               <Select
                 className="group-select"
                 onChange={(e) => getGroup(e.value)}
+                defaultValue={
+                  localStorage.getItem("groupId") !== null
+                    ? {
+                        value: localStorage.getItem("groupId"),
+                        label: localStorage.getItem("groupId"),
+                      }
+                    : { value: "group", label: "Группа" }
+                }
                 options={this.props.group.map((m, i) => ({
                   value: m.group.name,
                   label: m.group.name,
@@ -389,6 +400,23 @@ class Header extends React.Component {
               <Select
                 className="view-input"
                 onChange={(e) => getTypeClass(e.value)}
+                defaultValue={
+                  localStorage.getItem("typeClassId") !== null
+                    ? {
+                        value: localStorage.getItem("typeClassId"),
+                        label:
+                          localStorage.getItem("typeClassId") === "1"
+                            ? "Лабораторная работа"
+                            : localStorage.getItem("typeClassId") === "2"
+                            ? "Лекция"
+                            : localStorage.getItem("typeClassId") === "3"
+                            ? "Практическая работа"
+                            : localStorage.getItem("typeClassId") === "4"
+                            ? "Экзамен"
+                            : localStorage.getItem("typeClassId"),
+                      }
+                    : { value: "typeclass", label: "Тип занятия" }
+                }
                 options={
                   this.props.typeClass !== null
                     ? this.props.typeClass.map((item, i) => ({
@@ -402,6 +430,14 @@ class Header extends React.Component {
             <div>
               <div className="pgroup-name">Подгруппа</div>
               <Select
+                defaultValue={
+                  localStorage.getItem("subgroupId") !== null
+                    ? {
+                        value: localStorage.getItem("subgroupId"),
+                        label: localStorage.getItem("subgroupId"),
+                      }
+                    : { value: "subgroup", label: "Подгруппа" }
+                }
                 className="group-select"
                 onChange={(e) => getSubGroup(e.value)}
                 options={this.props.subGroup.map((item, i) => ({
@@ -444,6 +480,10 @@ class Header extends React.Component {
               }, 1);
               this.props.setBtnTrue();
               localStorage.removeItem("journalsite");
+              localStorage.removeItem("disciplineId");
+              localStorage.removeItem("typeClassId");
+              localStorage.removeItem("groupId");
+              localStorage.removeItem("subgroupId");
             }}
           />
         </div>
