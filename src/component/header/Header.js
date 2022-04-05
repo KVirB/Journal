@@ -215,11 +215,10 @@ class Header extends React.Component {
     })();
   };
   getSubGroup = (e) => {
-    this.setState({
-      subGroup: e,
-    });
     (async () => {
-      await this.props.setPresent();
+      await this.setState({
+        subGroup: e,
+      });
       if (
         this.state.disciplineId !== null &&
         this.state.groupId !== null &&
@@ -233,9 +232,30 @@ class Header extends React.Component {
           this.state.subGroup
         );
       }
+
       localStorage.setItem("typeC", this.state.typeClass);
-      // this.props.setJH();
+      setTimeout(() => {
+        this.props.setPresent();
+      }, 100);
     })();
+    // (async () => {
+    //   await this.props.setPresent();
+    //   if (
+    //     this.state.disciplineId !== null &&
+    //     this.state.groupId !== null &&
+    //     this.state.typeClass !== null &&
+    //     this.state.subGroup !== null
+    //   ) {
+    //     await this.props.getJournalsiteThunk(
+    //       this.state.disciplineId,
+    //       this.state.groupId,
+    //       this.state.typeClass,
+    //       this.state.subGroup
+    //     );
+    //   }
+    //   localStorage.setItem("typeC", this.state.typeClass);
+    //   // this.props.setJH();
+    // })();
     if (localStorage.getItem("journalsite") !== null) {
       let dispConf = window.confirm(
         "У вас остались не сохраненные изменения. Сохранить?"
@@ -459,7 +479,7 @@ class Header extends React.Component {
                   label: "Статистика по группе",
                 },
                 {
-                  value: `/electronicaljournal-view/statisticsstudent`,
+                  value: `/electronicaljournal-view/studentbydiscipline`,
                   label: "Статистика по студенету",
                 },
               ]}

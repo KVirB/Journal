@@ -6,8 +6,8 @@ import Login from "../login/Login";
 import Statistics from "../Stats/statisticsContainer";
 import RequireAuth from "../../hoc/RequireAuth";
 import AuthProvider from "../../hoc/AuthProvider";
-
 import "./App.css";
+import StudentByDiscipline from "../Stats/studentByDisciplineContainer";
 
 const App = () => {
   return (
@@ -26,6 +26,10 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/statistics"
             element={<Statistics />}
+          />
+          <Route
+            path="/electronicaljournal-view/studentbydiscipline"
+            element={<StudentByDiscipline />}
           />
         </Route>
       </Routes>

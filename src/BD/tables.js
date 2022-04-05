@@ -4,6 +4,14 @@ const baseRout = axios.create({
   baseURL: "http://192.168.11.252:8082/",
 });
 
+export const getStudents = () => {
+  return baseRout
+    .get("electronicjournal/students/searchByGroup?q=group.name==Ит-7")
+    .then((response) => {
+      return response.data;
+    });
+};
+
 export const getGeneralStatistics = (groupsId, disciplineId) => {
   return baseRout
     .get(

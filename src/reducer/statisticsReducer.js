@@ -2,9 +2,11 @@ import {
   getGeneralStatistics,
   getDisciplinesStatistic,
   getGroups,
+  getStudents,
 } from "../BD/tables";
 
 const SET_GENERALSTATISTICS = "SET_GENERALSTATISTICS";
+const SET_STUDENT = "SET_STUDENT";
 const SET_GROUPS = "SET_GROUPS";
 const SET_DISCIPLINESTATISTICS = "SET_DISCIPLINESTATISTICS";
 const SET_LOADER_TRUE = "SET_LOADER_TRUE";
@@ -13,12 +15,19 @@ const CLEAR_GROUPS = "CLEAR_GROUPS";
 let initialState = {
   generalStatistics: [],
   groups: [],
+  students: [],
   disciplinesStatistic: [],
   isLoading: false,
 };
 
 const statisticsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_STUDENT: {
+      return {
+        ...state,
+        students: [...action.students],
+      };
+    }
     case SET_LOADER_TRUE:
       return {
         ...state,
@@ -54,6 +63,11 @@ export const setGroups = (groups) => ({
   groups,
 });
 
+export const setStudents = (students) => ({
+  type: SET_STUDENT,
+  students,
+});
+
 export const setDisciplinesStatistics = (disciplinesStatistic) => ({
   type: SET_DISCIPLINESTATISTICS,
   disciplinesStatistic,
@@ -71,6 +85,14 @@ export const setGeneralStatistics = (generalStatistics) => ({
   type: SET_GENERALSTATISTICS,
   generalStatistics,
 });
+
+export const getStudentsThunk = () => {
+  return (dispatch) => {
+    getStudents().then((data) => {
+      dispatch(setStudents(data));
+    });
+  };
+};
 
 export const getGroupsThunk = () => {
   return (dispatch) => {
