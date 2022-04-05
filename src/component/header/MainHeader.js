@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 import "./Header.css";
@@ -20,25 +20,25 @@ function MainHeader() {
     <div>
       <header className="head display-flex">
         <h1 className="journal-name">
-          <a className="j_name" href="/electronicaljournal-view/journal">
+          <Link className="j_name" to="/electronicaljournal-view">
             Электронный журнал преподавателя УО «ВГТУ»
-          </a>
+          </Link>
         </h1>
         <div className="disp">
           <div className="icons_que">
-            <a href="/electronicaljournal-view/journal">
+            <Link to="/electronicaljournal-view">
               <img src={que} alt="description"></img>
-            </a>
+            </Link>
           </div>
           <div className="icons_col">
-            <a href="/electronicaljournal-view/journal">
+            <Link to="/electronicaljournal-view">
               <img src={col} alt="description"></img>
-            </a>
+            </Link>
           </div>
           <div className="icons_mech">
-            <a href="/electronicaljournal-view/journal">
+            <Link to="/electronicaljournal-view">
               <img src={mech} alt="description"></img>
-            </a>
+            </Link>
           </div>
           {user && (
             <div className="user-info__div">

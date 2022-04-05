@@ -26,9 +26,17 @@
   color: #434c63;
 }
 
+.form-error {
+  color: red;
+  padding-top: 10px;
+  position: absolute;
+  text-align: center;
+  width: 25%;
+}
+
 .login-form {
   text-align: left;
-  padding: 40px 50px 35px 50px;
+  padding: 50px 50px 35px 50px;
 }
 
 .login-form__input {

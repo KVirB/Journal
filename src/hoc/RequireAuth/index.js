@@ -5,8 +5,6 @@ import { useAuth } from "../../hooks/useAuth";
 function RequireAuth({ children }) {
   const location = useLocation();
   const { user } = useAuth();
-  // const token = useSelector((state) => state.user.token);
-  // const token = localStorage.getItem('token');
 
   if (!user) {
     return (
