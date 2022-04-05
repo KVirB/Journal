@@ -25,11 +25,19 @@ const App = () => {
           />
           <Route
             path="/electronicaljournal-view/statistics"
-            element={<Statistics />}
+            element={
+              <RequireAuth>
+                <Statistics />
+              </RequireAuth>
+            }
           />
           <Route
             path="/electronicaljournal-view/studentbydiscipline"
-            element={<StudentByDiscipline />}
+            element={
+              <RequireAuth>
+                <StudentByDiscipline />
+              </RequireAuth>
+            }
           />
         </Route>
       </Routes>
