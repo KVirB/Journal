@@ -52,7 +52,7 @@ class Statistics extends React.Component {
               <Select
                 onChange={(e) => getGroups(e.value)}
                 options={this.props.groups.map((m) => ({
-                  value: m.id,
+                  value: m.name,
                   label: m.name,
                 }))}
               />

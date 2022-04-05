@@ -10,6 +10,7 @@ class StudentByDiscipline extends React.Component {
     groupsId: 0,
     studentId: 0,
     disciplineId: 0,
+    groupName: 0,
   };
   componentDidMount() {
     this.props.getGroupsThunk();
@@ -30,6 +31,7 @@ class StudentByDiscipline extends React.Component {
         groupsId: e,
       });
       this.props.getDisciplinesStatisticThunk(this.state.groupsId);
+      this.props.getStudentsThunk(this.state.groupsId);
     })();
   };
   getValueDiscipline = (e) => {
@@ -58,7 +60,7 @@ class StudentByDiscipline extends React.Component {
               className="group-select-statistic"
               onChange={(e) => getGroups(e.value)}
               options={this.props.groups.map((m) => ({
-                value: m.id,
+                value: m.name,
                 label: m.name,
               }))}
             />
@@ -75,20 +77,19 @@ class StudentByDiscipline extends React.Component {
             />
           </div>
           <div>
-            <div className="group-name">Студент</div>
+            <div className="student-name">Студент</div>
             <Select
-              className="group-select-statistic"
+              className="student-select-statistic"
               onChange={(e) => getStudents(e.value)}
-              //   options={this.props.groups.map((m) => ({
-              //     value: m.id,
-              //     label: m.name,
-              //   }))}
+              options={this.props.students.map((m) => ({
+                value: m.id,
+                label: m.surname + " " + m.name,
+              }))}
             />
           </div>
         </div>
-        <div>
+        <div className="graph">
           <Bar
-            className="graph"
             data={{
               labels: this.props.generalStatistics.map((statistic, i) => {
                 return (

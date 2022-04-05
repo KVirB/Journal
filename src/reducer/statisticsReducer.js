@@ -1,3 +1,4 @@
+import { act } from "@testing-library/react";
 import {
   getGeneralStatistics,
   getDisciplinesStatistic,
@@ -8,6 +9,7 @@ import {
 const SET_GENERALSTATISTICS = "SET_GENERALSTATISTICS";
 const SET_STUDENT = "SET_STUDENT";
 const SET_GROUPS = "SET_GROUPS";
+const SET_DISCIPLINEBYSTUDENTSTATISTIC = "SET_DISCIPLINEBYSTUDENTSTATISTIC";
 const SET_DISCIPLINESTATISTICS = "SET_DISCIPLINESTATISTICS";
 const SET_LOADER_TRUE = "SET_LOADER_TRUE";
 const SET_LOADER_FALSE = "SET_LOADER_FALSE";
@@ -17,6 +19,7 @@ let initialState = {
   groups: [],
   students: [],
   disciplinesStatistic: [],
+  disciplineByStudentStatistic: [],
   isLoading: false,
 };
 
@@ -37,6 +40,11 @@ const statisticsReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+      };
+    case SET_DISCIPLINEBYSTUDENTSTATISTIC:
+      return {
+        ...state,
+        disciplineByStudentStatistic: [...action.disciplineByStudentStatistic],
       };
     case SET_GENERALSTATISTICS:
       return {
@@ -86,9 +94,16 @@ export const setGeneralStatistics = (generalStatistics) => ({
   generalStatistics,
 });
 
-export const getStudentsThunk = () => {
+export const setDisciplineByStudentStatistic = (
+  disciplineByStudentStatistic
+) => ({
+  type: SET_DISCIPLINEBYSTUDENTSTATISTIC,
+  disciplineByStudentStatistic,
+});
+
+export const getStudentsThunk = (groupsId) => {
   return (dispatch) => {
-    getStudents().then((data) => {
+    getStudents(groupsId).then((data) => {
       dispatch(setStudents(data));
     });
   };
@@ -107,6 +122,24 @@ export const getDisciplinesStatisticThunk = (groupsId) => {
     getDisciplinesStatistic(groupsId).then((data) => {
       dispatch(setDisciplinesStatistics(data));
     });
+  };
+};
+
+export const getStatisticByDisciplineStudentThunk = (
+  groupsId,
+  disciplineId
+) => {
+  return (dispatch) => {
+    dispatch(setLoaderTrue());
+    getGeneralStatistics(groupsId, disciplineId)
+      .then((data) => {
+        dispatch(setGeneralStatistics(data));
+        dispatch(setLoaderFalse());
+      })
+      .catch((e) => {
+        dispatch(setLoaderFalse());
+        console.log(e);
+      });
   };
 };
 
