@@ -40,8 +40,6 @@ class Statistics extends React.Component {
       <div>LOADING...</div>
     ) : (
       <div>
-        {/* {console.log(JSON.stringify(this.props.groups))}
-        {console.log(this.props.generalStatistics.length)} */}
         {console.log(this.state.groupsId)}
         {console.log(this.state.disciplineId)}
         {console.log(JSON.stringify(this.props.disciplinesStatistic))}
@@ -70,9 +68,8 @@ class Statistics extends React.Component {
             />
           </div>
         </div>
-        <div>
+        <div className="graph">
           <Bar
-            className="graph"
             data={{
               labels: this.props.generalStatistics.map((statistic, i) => {
                 return (
@@ -81,50 +78,34 @@ class Statistics extends React.Component {
                   statistic.studentPerformanceDTO.studentDTO.name
                 );
               }),
-              // labels: this.state.averageMarks,
-
               datasets: [
                 {
-                  // type: "bar",
-                  // axis: "y",
                   label: "Общий средний балл",
                   data: this.props.generalStatistics.map((statistic, i) => {
                     return statistic.studentPerformanceDTO.overallGPA;
                   }),
-                  // data: this.state.studentNames,
                   maxBarThickness: 30,
-                  // fill: false,
                   backgroundColor: ["#1C2742"],
                 },
                 {
-                  // type: "bar",
-                  // axis: "y",
                   label: "Колличество пропусков",
                   data: this.props.generalStatistics.map((statistic, i) => {
                     return statistic.totalNumberPasses;
                   }),
-                  // data: this.state.studentNames,
                   maxBarThickness: 30,
-
-                  // fill: false,
                   backgroundColor: ["#3A405C"],
                 },
                 {
-                  // type: "bar",
-                  // axis: "y",
                   label: "Опоздания",
                   data: this.props.generalStatistics.map((statistic, i) => {
                     return statistic.totalNumberLates;
                   }),
-                  // data: this.state.studentNames,
                   maxBarThickness: 30,
-                  // fill: false,
                   backgroundColor: ["#6F6B94"],
                 },
               ],
             }}
             height={(generalStatistics.length / 5) * 600}
-            // width={2000}
             plugins={[ChartDataLabels]}
             options={{
               maintainAspectRatio: false,
@@ -147,129 +128,6 @@ class Statistics extends React.Component {
                   type: "linear",
                   min: 0,
                 },
-                // yAxes: [
-                //   {
-                //     ticks: {
-                //       // beginAtZero: true,
-                //       min: -1,
-                //     },
-                //   },
-                // ],
-              },
-            }}
-          />
-        </div>
-        <hr></hr>
-        <div className="">
-          <Bar
-            data={{
-              labels: this.props.generalStatistics.map((statistic, i) => {
-                return (
-                  statistic.studentPerformanceDTO.studentDTO.surname +
-                  " " +
-                  statistic.studentPerformanceDTO.studentDTO.name
-                );
-              }),
-              datasets: [
-                {
-                  type: "bar",
-                  axis: "x",
-                  label: "Колличество пропусков",
-                  data: this.props.generalStatistics.map((statistic, i) => {
-                    return statistic.totalNumberPasses;
-                  }),
-                  fill: false,
-                  backgroundColor: [
-                    "#0C293B",
-                    "#015AA2",
-                    "#2D6082",
-                    "#4F9BD0",
-                    "#3A405C",
-                    "#6F6B94",
-                  ],
-
-                  borderWidth: 3,
-                },
-                {
-                  type: "line",
-                  axis: "x",
-                  label: "Колличество пропусков",
-                  data: this.props.generalStatistics.map((statistic, i) => {
-                    return statistic.totalNumberPasses;
-                  }),
-                  fill: false,
-                  backgroundColor: [
-                    "#0C293B",
-                    "#015AA2",
-                    "#2D6082",
-                    "#4F9BD0",
-                    "#3A405C",
-                    "#6F6B94",
-                  ],
-
-                  borderWidth: 3,
-                },
-              ],
-            }}
-            height={1200}
-            width={2000}
-            // plugins={[ChartDataLabels]}
-            options={{
-              maintainAspectRatio: false,
-              indexAxis: "x",
-              scales: {
-                yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true,
-                    },
-                  },
-                ],
-              },
-            }}
-          />
-        </div>
-        <hr></hr>
-        <div className="">
-          <Radar
-            data={{
-              labels: this.props.generalStatistics.map((statistic, i) => {
-                return (
-                  statistic.studentPerformanceDTO.studentDTO.surname +
-                  " " +
-                  statistic.studentPerformanceDTO.studentDTO.name
-                );
-              }),
-              datasets: [
-                {
-                  label: "Опоздания",
-                  data: this.props.generalStatistics.map((statistic, i) => {
-                    return statistic.totalNumberLates;
-                  }),
-                  fill: true,
-                  backgroundColor: "rgba(255, 99, 132, 0.2)",
-                  borderColor: "rgb(255, 99, 132)",
-                  pointBackgroundColor: "rgb(255, 99, 132)",
-                  pointBorderColor: "#fff",
-                  pointHoverBackgroundColor: "#fff",
-                  pointHoverBorderColor: "rgb(255, 99, 132)",
-                },
-              ],
-            }}
-            height={1200}
-            width={2000}
-            plugins={[ChartDataLabels]}
-            options={{
-              maintainAspectRatio: false,
-              indexAxis: "x",
-              scales: {
-                yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true,
-                    },
-                  },
-                ],
               },
             }}
           />

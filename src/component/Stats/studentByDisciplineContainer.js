@@ -5,6 +5,7 @@ import {
   getGroupsThunk,
   getDisciplinesStatisticThunk,
   getStudentsThunk,
+  getStatisticByDisciplineStudentThunk,
 } from "../../reducer/statisticsReducer";
 import StudentByDiscipline from "./StudentByDiscipline";
 
@@ -21,6 +22,10 @@ class studentByDisciplineContainer extends React.Component {
         getDisciplinesStatisticThunk={this.props.getDisciplinesStatisticThunk}
         getStudentsThunk={this.props.getStudentsThunk}
         students={this.props.students}
+        getStatisticByDisciplineStudentThunk={
+          this.props.getStatisticByDisciplineStudentThunk
+        }
+        disciplineByStudentStatistic={this.props.disciplineByStudentStatistic}
       />
     );
   }
@@ -32,6 +37,8 @@ let mapStateToProps = (state) => {
     students: state.generalStatisticPage.students,
     isLoading: state.generalStatisticPage.isLoading,
     disciplinesStatistic: state.generalStatisticPage.disciplinesStatistic,
+    disciplineByStudentStatistic:
+      state.generalStatisticPage.disciplineByStudentStatistic,
   };
 };
 
@@ -40,4 +47,5 @@ export default connect(mapStateToProps, {
   getGroupsThunk,
   getDisciplinesStatisticThunk,
   getStudentsThunk,
+  getStatisticByDisciplineStudentThunk,
 })(studentByDisciplineContainer);

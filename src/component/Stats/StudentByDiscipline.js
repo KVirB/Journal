@@ -11,7 +11,13 @@ class StudentByDiscipline extends React.Component {
     studentId: 0,
     disciplineId: 0,
     groupName: 0,
+    data: [],
   };
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.studentId !== prevState.studentId) {
+      this.state.data = [];
+    }
+  }
   componentDidMount() {
     this.props.getGroupsThunk();
   }
@@ -21,7 +27,10 @@ class StudentByDiscipline extends React.Component {
       await this.setState({
         studentId: e,
       });
-      //   this.props.getDisciplinesStatisticThunk(this.state.groupsId);
+      this.props.getStatisticByDisciplineStudentThunk(
+        this.state.disciplineId,
+        this.state.studentId
+      );
     })();
   };
 
@@ -35,15 +44,9 @@ class StudentByDiscipline extends React.Component {
     })();
   };
   getValueDiscipline = (e) => {
-    (async () => {
-      await this.setState({
-        disciplineId: e,
-      });
-      this.props.getGeneralStatisticsThunk(
-        this.state.groupsId,
-        this.state.disciplineId
-      );
-    })();
+    this.setState({
+      disciplineId: e,
+    });
   };
   render() {
     const { getGroups, getValueDiscipline, getStudents } = this;
@@ -53,6 +56,7 @@ class StudentByDiscipline extends React.Component {
       <div>LOADING...</div>
     ) : (
       <div>
+        {console.log(this.props.disciplineByStudentStatistic)}
         <div className="display-flex">
           <div>
             <div className="group-name">Группа</div>
@@ -89,64 +93,72 @@ class StudentByDiscipline extends React.Component {
           </div>
         </div>
         <div className="graph">
-          <Bar
+          <Radar
             data={{
-              labels: this.props.generalStatistics.map((statistic, i) => {
-                return (
-                  statistic.studentPerformanceDTO.studentDTO.surname +
-                  " " +
-                  statistic.studentPerformanceDTO.studentDTO.name
-                );
-              }),
+              labels: ["Средний балл", "Опоздания", "Пропуски"],
               datasets: [
                 {
-                  label: "Общий средний балл",
-                  data: this.props.generalStatistics.map((statistic, i) => {
-                    return statistic.studentPerformanceDTO.overallGPA;
+                  label: this.props.disciplineByStudentStatistic.map(
+                    (statistic, i) => {
+                      this.state.data.push(
+                        statistic.studentPerformanceDTO.overallGPA
+                      );
+                      this.state.data.push(statistic.totalNumberLates);
+                      this.state.data.push(statistic.totalNumberPasses);
+                      return (
+                        statistic.studentPerformanceDTO.studentDTO.surname +
+                        " " +
+                        statistic.studentPerformanceDTO.studentDTO.name
+                      );
+                    }
+                  ),
+                  data: this.state.data.map((data, i) => {
+                    return data;
                   }),
-                  maxBarThickness: 30,
-                  backgroundColor: ["#1C2742"],
-                },
-                {
-                  label: "Колличество пропусков",
-                  data: this.props.generalStatistics.map((statistic, i) => {
-                    return statistic.totalNumberPasses;
-                  }),
-                  maxBarThickness: 30,
-                  backgroundColor: ["#3A405C"],
-                },
-                {
-                  label: "Опоздания",
-                  data: this.props.generalStatistics.map((statistic, i) => {
-                    return statistic.totalNumberLates;
-                  }),
-                  maxBarThickness: 30,
-                  backgroundColor: ["#6F6B94"],
+                  fill: true,
+                  backgroundColor: "rgb(50, 50, 100, 0.3)",
+                  borderColor: "#1C2742",
+                  pointBackgroundColor: "#1C2742",
+                  pointBorderColor: "#fff",
+                  pointHoverBackgroundColor: "#fff",
+                  pointHoverBorderColor: "#6F6B94",
                 },
               ],
             }}
-            height={(generalStatistics.length / 5) * 600}
+            height={700}
             plugins={[ChartDataLabels]}
             options={{
-              maintainAspectRatio: false,
               plugins: {
+                legend: {
+                  labels: {
+                    font: {
+                      size: 20,
+                    },
+                  },
+                },
                 datalabels: {
-                  color: "white",
-                  align: "right",
-                  anchor: "start",
-                  padding: "25",
+                  align: "end",
+                  offset: 5,
                   font: {
                     size: 16,
                     family: "san-serif",
                   },
                 },
               },
-
+              maintainAspectRatio: false,
               indexAxis: "y",
               scales: {
-                x: {
-                  type: "linear",
-                  min: 0,
+                r: {
+                  pointLabels: {
+                    padding: 30,
+                    font: {
+                      size: 15,
+                    },
+                  },
+                  angleLines: {
+                    display: false,
+                  },
+                  suggestedMin: 0,
                 },
               },
             }}

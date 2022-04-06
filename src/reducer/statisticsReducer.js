@@ -4,6 +4,7 @@ import {
   getDisciplinesStatistic,
   getGroups,
   getStudents,
+  getDisciplineByStudentStatistic,
 } from "../BD/tables";
 
 const SET_GENERALSTATISTICS = "SET_GENERALSTATISTICS";
@@ -42,9 +43,35 @@ const statisticsReducer = (state = initialState, action) => {
         isLoading: false,
       };
     case SET_DISCIPLINEBYSTUDENTSTATISTIC:
+      // let NEWdisciplineByStudentStatistic = [
+      //   {
+      //     ...action.disciplineByStudentStatistic,
+      //   },
+      // ];
+      // let stat = [];
+      // let data = [];
+      // NEWdisciplineByStudentStatistic.map((statistic, i) => {
+      //   (async () => {
+      //     data.push(statistic.studentPerformanceDTO.overallGPA);
+      //     data.push(statistic.totalNumberPasses);
+      //     data.push(statistic.totalNumberLates);
+
+      //     const obj = {
+      //       name:
+      //         statistic.studentPerformanceDTO.studentDTO.surname +
+      //         " " +
+      //         statistic.studentPerformanceDTO.studentDTO.name,
+      //       data: data,
+      //     };
+      //     stat.push(obj);
+      //   })();
+      // });
+
       return {
         ...state,
-        disciplineByStudentStatistic: [...action.disciplineByStudentStatistic],
+        disciplineByStudentStatistic: [
+          { ...action.disciplineByStudentStatistic },
+        ],
       };
     case SET_GENERALSTATISTICS:
       return {
@@ -126,14 +153,14 @@ export const getDisciplinesStatisticThunk = (groupsId) => {
 };
 
 export const getStatisticByDisciplineStudentThunk = (
-  groupsId,
-  disciplineId
+  disciplineId,
+  studentId
 ) => {
   return (dispatch) => {
     dispatch(setLoaderTrue());
-    getGeneralStatistics(groupsId, disciplineId)
+    getDisciplineByStudentStatistic(disciplineId, studentId)
       .then((data) => {
-        dispatch(setGeneralStatistics(data));
+        dispatch(setDisciplineByStudentStatistic(data));
         dispatch(setLoaderFalse());
       })
       .catch((e) => {

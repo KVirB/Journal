@@ -15,7 +15,17 @@ export const getStudents = (groupsId) => {
 export const getGeneralStatistics = (groupsId, disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/getAcademicPerformanceByGroupAndDicsipline?q=discipline.id==${disciplineId};group.id==${groupsId}`
+      `electronicjournal/journal-sites/getAcademicPerformanceByGroupAndDicsipline?q=discipline.id==${disciplineId};group.name==${groupsId}`
+    )
+    .then((response) => {
+      return response.data;
+    });
+};
+
+export const getDisciplineByStudentStatistic = (disciplineId, studentId) => {
+  return baseRout
+    .get(
+      `electronicjournal/journal-sites/getAcademicPerformanceByDisciplineAndStudent?q=discipline.id==${disciplineId};student.id==${studentId}`
     )
     .then((response) => {
       return response.data;
