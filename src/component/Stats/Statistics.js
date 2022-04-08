@@ -12,16 +12,20 @@ class Statistics extends React.Component {
   };
   componentDidMount() {
     this.props.getGroupsThunk();
+    localStorage.removeItem("statDisciplineAll");
+    localStorage.removeItem("statGroupAll");
   }
   getGroups = (e) => {
     (async () => {
       await this.setState({
         groupsId: e,
       });
-      this.props.getDisciplinesStatisticThunk(this.state.groupsId);
+      this.props.getDisciplinesStatisticThunk(e);
+      localStorage.setItem("statGroupAll", e);
+      localStorage.setItem("statDisciplineAll", "Дисциплина");
     })();
   };
-  getValueDiscipline = (e) => {
+  getValueDiscipline = (e, c) => {
     (async () => {
       await this.setState({
         disciplineId: e,
@@ -30,6 +34,7 @@ class Statistics extends React.Component {
         this.state.groupsId,
         this.state.disciplineId
       );
+      localStorage.setItem("statDisciplineAll", c);
     })();
   };
   render() {
@@ -37,7 +42,7 @@ class Statistics extends React.Component {
     const { generalStatistics } = this.props;
     const { isLoading } = this.props;
     return isLoading ? (
-      <div>LOADING...</div>
+      <div class="lds-dual-ring "></div>
     ) : (
       <div>
         {console.log(this.state.groupsId)}
@@ -45,9 +50,12 @@ class Statistics extends React.Component {
         {console.log(JSON.stringify(this.props.disciplinesStatistic))}
         <div className="display-flex">
           <div>
-            <div className="group-name">Группа</div>
+            <div className="group-name">
+              Группа : {localStorage.getItem("statGroupAll")}
+            </div>
             <div className="group-select-statistic">
               <Select
+                defaultValue={{ value: "group", label: "Группа" }}
                 onChange={(e) => getGroups(e.value)}
                 options={this.props.groups.map((m) => ({
                   value: m.name,
@@ -57,10 +65,13 @@ class Statistics extends React.Component {
             </div>
           </div>
           <div>
-            <div className="group-name">Дисциплина</div>
+            <div className="group-name">
+              Дисциплина : {localStorage.getItem("statDisciplineAll")}
+            </div>
             <Select
+              defaultValue={{ value: "discipline", label: "Дисциплина" }}
               className="group-select-statistics"
-              onChange={(e) => getValueDiscipline(e.value)}
+              onChange={(e) => getValueDiscipline(e.value, e.label)}
               options={this.props.disciplinesStatistic.map((m, i) => ({
                 value: m.id,
                 label: m.name,
