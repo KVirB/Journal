@@ -4,7 +4,7 @@ import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import Select from "react-select";
 
-class StudentByDiscipline extends React.Component {
+class StudentStatistic extends React.Component {
   state = {
     passes: [],
     groupsId: 0,
@@ -74,20 +74,6 @@ class StudentByDiscipline extends React.Component {
               onChange={(e) => getGroups(e.value)}
               options={this.props.groups.map((m) => ({
                 value: m.name,
-                label: m.name,
-              }))}
-            />
-          </div>
-          <div>
-            <div className="group-name">
-              Дисциплина : {localStorage.getItem("discipByDisciplineOne")}
-            </div>
-            <Select
-              defaultValue={{ value: "discipline", label: "Дисциплина" }}
-              className="group-select-statistics"
-              onChange={(e) => getValueDiscipline(e.value, e.label)}
-              options={this.props.disciplinesStatistic.map((m, i) => ({
-                value: m.id,
                 label: m.name,
               }))}
             />
@@ -185,4 +171,4 @@ class StudentByDiscipline extends React.Component {
   }
 }
 
-export default StudentByDiscipline;
+export default StudentStatistic;

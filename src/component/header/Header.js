@@ -24,66 +24,171 @@ class Header extends React.Component {
     groupId: null,
     typeClass: null,
     subGroup: null,
+    typeClassName: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
     const { disciplineId, groupId, subGroup, typeClass } = this.state;
     if (disciplineId !== prevState.disciplineId) {
       (async () => {
+        if (localStorage.getItem("journalsite") !== null) {
+          let dispConf = window.confirm(
+            "У вас остались не сохраненные изменения. Сохранить?"
+          );
+
+          if (dispConf === true) {
+            await this.props.setJournalHeader();
+            let header = this.props.journalHeader;
+            await this.props.getJournalHeaderThunk(header);
+            this.props.clearJournalHeader();
+            this.props.setBtnTrue();
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("disciplineId");
+            localStorage.removeItem("disciplineName");
+            localStorage.removeItem("typeClassId");
+            localStorage.removeItem("groupId");
+            localStorage.removeItem("subgroupId");
+            alert("Сохранено");
+          } else {
+            // (async () => {
+            //   this.props.getDisciplineThunk();
+            //   this.props.getGroupThunk(this.state.disciplineId);
+            // })();
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("disciplineId");
+            localStorage.removeItem("disciplineName");
+            localStorage.removeItem("typeClassId");
+            localStorage.removeItem("groupId");
+            localStorage.removeItem("subgroupId");
+          }
+        }
         this.props.getGroupThunk(disciplineId);
         await this.props.clearGroup();
-        this.props.clearTypeClass();
-        this.props.clearSubGroup();
         this.props.clearJournalsite();
       })();
     }
     if (groupId !== prevState.groupId) {
-      this.props.clearJournalsite();
-      this.props.getCourseSpecThunk(this.state.groupId);
-      this.props.clearTypeClass();
-      this.props.clearSubGroup();
+      (async () => {
+        if (localStorage.getItem("journalsite") !== null) {
+          let dispConf = window.confirm(
+            "У вас остались не сохраненные изменения. Сохранить?"
+          );
+
+          if (dispConf === true) {
+            await this.props.setJournalHeader();
+            let header = this.props.journalHeader;
+            await this.props.getJournalHeaderThunk(header);
+            this.props.clearJournalHeader();
+            this.props.setBtnTrue();
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("disciplineId");
+            localStorage.removeItem("disciplineName");
+            localStorage.removeItem("typeClassId");
+            localStorage.removeItem("groupId");
+            localStorage.removeItem("subgroupId");
+            alert("Сохранено");
+          } else {
+            // (async () => {
+            //   this.props.getDisciplineThunk();
+            //   this.props.getGroupThunk(this.state.disciplineId);
+            // })();
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("disciplineId");
+            localStorage.removeItem("disciplineName");
+            localStorage.removeItem("typeClassId");
+            localStorage.removeItem("groupId");
+            localStorage.removeItem("subgroupId");
+          }
+        }
+        this.props.clearJournalsite();
+        this.props.getCourseSpecThunk(this.state.groupId);
+        this.props.clearTypeClass();
+      })();
     }
     if (typeClass !== prevState.typeClass) {
-      this.props.clearJournalsite();
-      this.props.clearSubGroup();
+      (async () => {
+        if (localStorage.getItem("journalsite") !== null) {
+          let dispConf = window.confirm(
+            "У вас остались не сохраненные изменения. Сохранить?"
+          );
+
+          if (dispConf === true) {
+            await this.props.setJournalHeader();
+            let header = this.props.journalHeader;
+            await this.props.getJournalHeaderThunk(header);
+            this.props.clearJournalHeader();
+            this.props.setBtnTrue();
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("disciplineId");
+            localStorage.removeItem("disciplineName");
+            localStorage.removeItem("typeClassId");
+            localStorage.removeItem("groupId");
+            localStorage.removeItem("subgroupId");
+            alert("Сохранено");
+          } else {
+            // (async () => {
+            //   this.props.getDisciplineThunk();
+            //   this.props.getGroupThunk(this.state.disciplineId);
+            // })();
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("disciplineId");
+            localStorage.removeItem("disciplineName");
+            localStorage.removeItem("typeClassId");
+            localStorage.removeItem("groupId");
+            localStorage.removeItem("subgroupId");
+          }
+        }
+        this.props.clearJournalsite();
+        this.props.clearSubGroup();
+      })();
     }
     if (subGroup !== prevState.subGroup) {
-      this.props.clearJournalsite();
+      (async () => {
+        if (localStorage.getItem("journalsite") !== null) {
+          let dispConf = window.confirm(
+            "У вас остались не сохраненные изменения. Сохранить?"
+          );
+
+          if (dispConf === true) {
+            await this.props.setJournalHeader();
+            let header = this.props.journalHeader;
+            await this.props.getJournalHeaderThunk(header);
+            this.props.clearJournalHeader();
+            this.props.setBtnTrue();
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("disciplineId");
+            localStorage.removeItem("disciplineName");
+            localStorage.removeItem("typeClassId");
+            localStorage.removeItem("groupId");
+            localStorage.removeItem("subgroupId");
+            alert("Сохранено");
+          } else {
+            // (async () => {
+            //   this.props.getDisciplineThunk();
+            //   this.props.getGroupThunk(this.state.disciplineId);
+            // })();
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("journalsite");
+            localStorage.removeItem("disciplineId");
+            localStorage.removeItem("disciplineName");
+            localStorage.removeItem("typeClassId");
+            localStorage.removeItem("groupId");
+            localStorage.removeItem("subgroupId");
+          }
+        }
+        this.props.clearJournalsite();
+      })();
     }
   }
 
   getValueDiscipline = (e) => {
-    const { value } = e.target;
     this.setState({
-      disciplineId: value,
+      disciplineId: e,
     });
 
-    if (localStorage.getItem("journalsite") !== null) {
-      let dispConf = window.confirm(
-        "У вас остались не сохраненные изменения. Сохранить?"
-      );
-
-      if (dispConf === true) {
-        (async () => {
-          await this.props.setJournalHeader();
-          await this.props.clearJournalHeader();
-          this.props.setBtnTrue();
-          this.props.getDisciplineThunk();
-          let header = this.props.journalHeader;
-          this.props.getJournalHeaderThunk(header);
-          alert("Сохранено");
-          localStorage.removeItem("journalsite");
-          this.props.clearJournalsite();
-        })();
-      } else {
-        localStorage.removeItem("journalsite");
-        this.props.clearGroup();
-        this.props.clearTypeClass();
-        this.props.clearSubGroup();
-        this.props.clearJournalsite();
-        this.props.setBtnTrue();
-      }
-    }
     (async () => {
       await this.props.setPresent();
       if (
@@ -99,8 +204,7 @@ class Header extends React.Component {
           this.state.subGroup
         );
       }
-      localStorage.setItem("typeC", this.state.typeClass);
-      // this.props.setJH();
+      localStorage.setItem("typeC", this.state.typeClassName);
       if (typeof Storage !== "undefined") {
         localStorage.setItem("disciplineId", this.state.disciplineId);
       }
@@ -125,78 +229,20 @@ class Header extends React.Component {
           this.state.subGroup
         );
       }
-      localStorage.setItem("typeC", this.state.typeClass);
+      localStorage.setItem("typeC", this.state.typeClassName);
     })();
-
     this.props.clearJournalsite();
     this.props.getTypeClassThunk();
-    if (localStorage.getItem("journalsite") !== null) {
-      let dispConf = window.confirm(
-        "У вас остались не сохраненные изменения. Сохранить?"
-      );
-      if (dispConf === true) {
-        (async () => {
-          await this.props.setJournalHeader();
-          await this.props.clearJournalHeader();
-          this.props.setJournalHeader();
-          let header = this.props.journalHeader;
-          this.props.getJournalHeaderThunk(header);
-          alert("Сохранено");
-          localStorage.removeItem("journalsite");
-          this.props.clearJournalsite();
-        })();
-      } else {
-        localStorage.removeItem("journalsite");
-        this.props.clearTypeClass();
-        this.props.clearSubGroup();
-        this.props.clearJournalsite();
-        this.props.setBtnTrue();
-      }
-    }
   };
-  getTypeClass = (e) => {
-    if (localStorage.getItem("journalsite") !== null) {
-      let dispConf = window.confirm(
-        "У вас остались не сохраненные изменения. Сохранить?"
-      );
-
-      if (dispConf === true) {
-        (async () => {
-          await this.props.setJournalHeader();
-          await this.props.clearJH();
-          this.props.setBtnTrue();
-          this.props.getDisciplineThunk();
-          this.props.getGroupThunk(this.state.disciplineId);
-          let header = this.props.journalHeader;
-          this.props.getJournalHeaderThunk(header);
-          this.props.clearJournalHeader();
-          alert("Сохранено");
-          localStorage.removeItem("journalsite");
-          this.props.clearSubGroup();
-          this.props.clearJournalsite();
-        })();
-      } else {
-        (async () => {
-          this.props.getDisciplineThunk();
-          this.props.getGroupThunk(this.state.disciplineId);
-        })();
-        localStorage.removeItem("journalsite");
-        this.props.clearJournalsite();
-        this.props.clearSubGroup();
-        this.props.setBtnTrue();
-      }
-    }
-
+  getTypeClass = (e, c) => {
     (async () => {
       await this.setState({
         typeClass: e,
+        typeClassName: c,
       });
-      this.props.setType(this.state.typeClass);
       await this.props.clearSubGroup();
+      // this.props.setType(c);
       this.props.getSubGroupThunk();
-    })();
-    (async () => {
-      await this.props.setPresent();
       if (
         this.state.disciplineId !== null &&
         this.state.groupId !== null &&
@@ -210,8 +256,7 @@ class Header extends React.Component {
           this.state.subGroup
         );
       }
-      localStorage.setItem("typeC", this.state.typeClass);
-      // this.props.setJH();
+      localStorage.setItem("typeC", this.state.typeClassName);
     })();
   };
   getSubGroup = (e) => {
@@ -233,56 +278,11 @@ class Header extends React.Component {
         );
       }
 
-      localStorage.setItem("typeC", this.state.typeClass);
+      localStorage.setItem("typeC", this.state.typeClassName);
       setTimeout(() => {
         this.props.setPresent();
       }, 100);
     })();
-    // (async () => {
-    //   await this.props.setPresent();
-    //   if (
-    //     this.state.disciplineId !== null &&
-    //     this.state.groupId !== null &&
-    //     this.state.typeClass !== null &&
-    //     this.state.subGroup !== null
-    //   ) {
-    //     await this.props.getJournalsiteThunk(
-    //       this.state.disciplineId,
-    //       this.state.groupId,
-    //       this.state.typeClass,
-    //       this.state.subGroup
-    //     );
-    //   }
-    //   localStorage.setItem("typeC", this.state.typeClass);
-    //   // this.props.setJH();
-    // })();
-    if (localStorage.getItem("journalsite") !== null) {
-      let dispConf = window.confirm(
-        "У вас остались не сохраненные изменения. Сохранить?"
-      );
-
-      if (dispConf === true) {
-        (async () => {
-          await this.props.setJournalHeader();
-          await this.props.clearJH();
-          this.props.setBtnTrue();
-          this.props.getDisciplineThunk();
-          this.props.getGroupThunk(this.state.disciplineId);
-          let header = this.props.journalHeader;
-          this.props.getJournalHeaderThunk(header);
-          this.props.clearJournalHeader();
-          alert("Сохранено");
-          localStorage.removeItem("journalsite");
-        })();
-      } else {
-        (async () => {
-          this.props.getDisciplineThunk();
-          this.props.getGroupThunk(this.state.disciplineId);
-        })();
-        localStorage.removeItem("journalsite");
-        this.props.setBtnTrue();
-      }
-    }
   };
 
   componentDidMount() {
@@ -347,30 +347,26 @@ class Header extends React.Component {
         } */}
         <div className="display-flex pointer">
           {console.log(JSON.stringify(this.props.courseSpec) + "spec")}
+          {console.log(JSON.stringify(this.props.discipline))}
           <div className="display-flex">
             <div>
               <div className="discipline-name">Название дисциплины</div>
-              <div className="styled-select-disс">
-                <select
-                  className="discipline-select"
-                  name="discipline"
-                  title="Выберите дисциплину"
-                  onChange={getValueDiscipline}
-                >
-                  <option defaultValue="" hidden>
-                    Дисциплина
-                  </option>
-                  {this.props.discipline.map((m, i) => (
-                    <option
-                      className="lang__items"
-                      value={m.discipline.id}
-                      key={i}
-                    >
-                      {m.discipline.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <Select
+                className="discipline-select"
+                onChange={(e) => getValueDiscipline(e.value)}
+                defaultValue={
+                  localStorage.getItem("disciplineName") !== null
+                    ? {
+                        value: localStorage.getItem("disciplineName"),
+                        label: localStorage.getItem("disciplineName"),
+                      }
+                    : { value: "disciplines", label: "Дисциплина" }
+                }
+                options={this.props.discipline.map((m, i) => ({
+                  value: m.id,
+                  label: m.name,
+                }))}
+              />
             </div>
             <div>
               <div className="special-name">Специальность</div>
@@ -419,7 +415,7 @@ class Header extends React.Component {
               <div className="view-name">Тип занятия</div>
               <Select
                 className="view-input"
-                onChange={(e) => getTypeClass(e.value)}
+                onChange={(e) => getTypeClass(e.value, e.label)}
                 defaultValue={
                   localStorage.getItem("typeClassId") !== null
                     ? {
@@ -476,11 +472,15 @@ class Header extends React.Component {
               options={[
                 {
                   value: `/electronicaljournal-view/statistics`,
-                  label: "Статистика по группе",
+                  label: "Статистика по конкретной группе",
                 },
                 {
                   value: `/electronicaljournal-view/studentbydiscipline`,
-                  label: "Статистика по студенету",
+                  label: "Статистика по конкретной дисциплине",
+                },
+                {
+                  value: `/electronicaljournal-view/studentstatistic`,
+                  label: "Статистика по конкретному студенту",
                 },
               ]}
             />
@@ -492,18 +492,22 @@ class Header extends React.Component {
             value="СОХРАНИТЬ"
             disabled={this.props.disabled}
             onClick={() => {
-              this.props.setJournalHeader();
-              setTimeout(() => {
+              if (localStorage.removeItem("journalsite") !== null) {
+                window.location.reload();
+              }
+              (async () => {
+                await this.props.setJournalHeader();
                 let header = this.props.journalHeader;
                 this.props.getJournalHeaderThunk(header);
                 this.props.clearJournalHeader();
-              }, 1);
-              this.props.setBtnTrue();
-              localStorage.removeItem("journalsite");
-              localStorage.removeItem("disciplineId");
-              localStorage.removeItem("typeClassId");
-              localStorage.removeItem("groupId");
-              localStorage.removeItem("subgroupId");
+                this.props.setBtnTrue();
+                localStorage.removeItem("journalsite");
+                localStorage.removeItem("disciplineId");
+                localStorage.removeItem("disciplineName");
+                localStorage.removeItem("typeClassId");
+                localStorage.removeItem("groupId");
+                localStorage.removeItem("subgroupId");
+              })();
             }}
           />
         </div>

@@ -391,6 +391,12 @@ section div {
   margin-right: auto;
   margin-left: auto;
 }
+.std_cell_lab {
+  display: block;
+  margin-top: 3.5px;
+  margin-right: auto;
+  margin-left: auto;
+}
 .line_itogo {
   border-left: 1px solid rgba(224, 224, 224, 1);
   border-right: 1px solid rgba(224, 224, 224, 1);
@@ -475,3 +481,31 @@ select {
   margin-top: 30px;
   width: auto;
 }
+/* ==============================================SPINER================================================ */
+.lds-dual-ring {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #434c63;
+  border-color: #434c63 transparent #434c63 transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* ==================================================================================================== */

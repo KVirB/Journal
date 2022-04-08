@@ -46,7 +46,7 @@ const headerReducer = (state = initialState, action) => {
     case SET_DISCIPLINE:
       return {
         ...state,
-        discipline: [{ ...action.discipline }],
+        discipline: [...action.discipline],
       };
     case SET_GROUP:
       return {

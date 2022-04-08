@@ -8,6 +8,7 @@ import RequireAuth from "../../hoc/RequireAuth";
 import AuthProvider from "../../hoc/AuthProvider";
 import "./App.css";
 import StudentByDiscipline from "../Stats/studentByDisciplineContainer";
+import StudentStatistic from "../Stats/studentStatisticContainer";
 
 const App = () => {
   return (
@@ -36,6 +37,14 @@ const App = () => {
             element={
               <RequireAuth>
                 <StudentByDiscipline />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/electronicaljournal-view/studentstatistic"
+            element={
+              <RequireAuth>
+                <StudentStatistic />
               </RequireAuth>
             }
           />

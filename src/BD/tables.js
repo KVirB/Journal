@@ -55,7 +55,7 @@ export const getFio = () => {
 export const getDiscipline = () => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/searchWithoutDublicate?q=teacher.idFromSource==${
+      `electronicjournal/disciplines/searchByGroup?q=teacher.idFromSource==${
         JSON.parse(localStorage.getItem("user")).id_from_source
       }`
     )
