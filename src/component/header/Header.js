@@ -286,7 +286,10 @@ class Header extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getCourseSpecThunk(localStorage.getItem("groupId"));
+    this.props.getDisciplineThunk();
+    if (localStorage.getItem("groupId") !== null) {
+      this.props.getCourseSpecThunk(localStorage.getItem("groupId"));
+    }
   }
 
   href = (e) => {
@@ -306,45 +309,11 @@ class Header extends React.Component {
       getSubGroup,
       href,
     } = this;
-    return (
+    const { isLoading } = this.props;
+    return isLoading ? (
+      <div className="lds-dual-ring"></div>
+    ) : (
       <div>
-        {console.log(this.props.typeC + "TYPE CCCCC")}
-        {console.log(
-          this.state.disciplineId +
-            "disc" +
-            this.state.groupId +
-            "group" +
-            this.state.typeClass +
-            "type" +
-            this.state.subGroup +
-            "sub"
-        )}
-        {/* {
-          (console.log(
-            "%cProject by KVirB",
-            "color: red; font-family: sans-serif; font-size: 4.5em; font-weight: bolder; text-shadow: green 4px 3px;"
-          ),
-          (function (url) {
-            var image = new Image();
-            image.onload = function () {
-              var style = [
-                "font-size: 1px;",
-                "line-height: " + (this.height % 1) + "px;",
-                "padding: " +
-                  this.height * 0.5 +
-                  "px " +
-                  this.width * 0.5 +
-                  "px;",
-                "background-size: " + this.width + "px " + this.height + "px;",
-                "background: url(" + url + ");",
-              ].join(" ");
-              console.log("%c ", style);
-            };
-            image.src = url;
-          })(
-            "http://risovach.ru/thumb/upload/200s400/2019/08/generator/i-tak-soydet_217015291_orig_.png?d9qg6"
-          ))
-        } */}
         <div className="display-flex pointer">
           {console.log(JSON.stringify(this.props.courseSpec) + "spec")}
           {console.log(JSON.stringify(this.props.discipline))}
@@ -493,7 +462,7 @@ class Header extends React.Component {
             disabled={this.props.disabled}
             onClick={() => {
               if (localStorage.removeItem("journalsite") !== null) {
-                window.location.reload();
+                // window.location.reload();
               }
               (async () => {
                 await this.props.setJournalHeader();
