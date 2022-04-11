@@ -92,7 +92,7 @@ export default class MarksTable extends React.Component {
     {
       return (
         <div>
-          <div className="headHr" />
+          {/* <div className="headHr" /> */}
           {console.log(this.state.grades + "grades")}
           {console.log(JSON.stringify(this.props.journalsite) + "site")}
           <div className="all-content">
@@ -439,7 +439,7 @@ export default class MarksTable extends React.Component {
               </Table>
             </TableContainer>
           </div>
-          <div className="headHrDown" />
+          {/* <div className="headHrDown" /> */}
           {console.log(this.state.inputs)}
         </div>
       );

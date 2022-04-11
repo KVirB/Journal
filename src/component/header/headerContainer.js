@@ -30,9 +30,7 @@ class headerContainer extends React.Component {
   // componentWillUnmount() {
   //   window.location.reload();
   // }
-  componentDidMount() {
-    this.props.getDisciplineThunk();
-  }
+  componentDidMount() {}
   render() {
     return (
       <Header
@@ -70,6 +68,7 @@ class headerContainer extends React.Component {
         typeC={this.props.typeC}
         setGr={this.props.setGr}
         setDisc={this.props.setDisc}
+        isLoading={this.props.isLoading}
       />
     );
   }
@@ -91,6 +90,7 @@ let mapStateToProps = (state) => {
     present: state.journalsitePage.present,
     typeC: state.typePage.typeC,
     courseSpec: state.courseSpecPage.courseSpec,
+    isLoading: state.disciplinePage.isLoading,
   };
 };
 

@@ -18,16 +18,29 @@ const CLEAR_TYPECLASS = "CLEAR_TYPECLASS";
 const CLEAR_SUBGROUP = "CLEAR_SUBGROUP";
 const SET_COURSESPEC = "SET_COURSESPEC";
 const CLEAR_COURSESPEC = "CLEAR_COURSESPEC";
+const SET_LOADER_TRUE = "SET_LOADER_TRUE";
+const SET_LOADER_FALSE = "SET_LOADER_FALSE";
 let initialState = {
   discipline: [],
   group: [],
   typeClass: [],
   subGroup: [],
   courseSpec: [],
+  isLoading: false,
 };
 
 const headerReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_LOADER_TRUE:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case SET_LOADER_FALSE:
+      return {
+        ...state,
+        isLoading: false,
+      };
     case SET_DISC:
       return {
         ...state,
@@ -128,9 +141,17 @@ export const clearTypeClass = () => ({
 export const clearSubGroup = () => ({
   type: CLEAR_SUBGROUP,
 });
+export const setLoaderFalse = () => ({
+  type: SET_LOADER_FALSE,
+});
+export const setLoaderTrue = () => ({
+  type: SET_LOADER_TRUE,
+});
 export const getGroupThunk = (disciplineId) => {
   return (dispatch) => {
+    dispatch(setLoaderTrue());
     getGroup(disciplineId).then((data) => {
+      dispatch(setLoaderFalse());
       dispatch(setGroup(data));
     });
   };
@@ -144,8 +165,10 @@ export const getCourseSpecThunk = (groupId) => {
 };
 export const getDisciplineThunk = () => {
   return (dispatch) => {
+    dispatch(setLoaderTrue());
     getDiscipline().then((data) => {
       dispatch(setDiscipline(data));
+      dispatch(setLoaderFalse());
     });
   };
 };

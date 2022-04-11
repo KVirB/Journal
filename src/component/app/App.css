@@ -486,17 +486,17 @@ select {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80px;
-  height: 80px;
+  width: 160px;
+  height: 160px;
 }
 .lds-dual-ring:after {
   content: " ";
   display: block;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
+  width: 128px;
+  height: 128px;
+  margin: 16px;
   border-radius: 50%;
-  border: 6px solid #434c63;
+  border: 12px solid #434c63;
   border-color: #434c63 transparent #434c63 transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
