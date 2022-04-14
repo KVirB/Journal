@@ -9,6 +9,7 @@ import AuthProvider from "../../hoc/AuthProvider";
 import "./App.css";
 import StudentByDiscipline from "../Stats/studentByDisciplineContainer";
 import StudentStatistic from "../Stats/studentStatisticContainer";
+import GeneralGroupStatistic from "../Stats/generalGroupStatisticContainer";
 
 const App = () => {
   return (
@@ -45,6 +46,14 @@ const App = () => {
             element={
               <RequireAuth>
                 <StudentStatistic />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/electronicaljournal-view/generalgroupstatistic"
+            element={
+              <RequireAuth>
+                <GeneralGroupStatistic />
               </RequireAuth>
             }
           />

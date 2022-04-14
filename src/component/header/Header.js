@@ -25,6 +25,7 @@ class Header extends React.Component {
     typeClass: null,
     subGroup: null,
     typeClassName: null,
+    course: "Курс",
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -185,12 +186,10 @@ class Header extends React.Component {
   }
 
   getValueDiscipline = (e) => {
-    this.setState({
-      disciplineId: e,
-    });
-
     (async () => {
-      await this.props.setPresent();
+      await this.setState({
+        disciplineId: e,
+      });
       if (
         this.state.disciplineId !== null &&
         this.state.groupId !== null &&
@@ -208,6 +207,10 @@ class Header extends React.Component {
       if (typeof Storage !== "undefined") {
         localStorage.setItem("disciplineId", this.state.disciplineId);
       }
+      this.props.clearJournalsite();
+      setTimeout(() => {
+        this.props.setPresent();
+      }, 100);
     })();
   };
   getGroup = (e) => {
@@ -215,7 +218,6 @@ class Header extends React.Component {
       await this.setState({
         groupId: e,
       });
-      await this.props.setPresent();
       if (
         this.state.disciplineId !== null &&
         this.state.groupId !== null &&
@@ -233,6 +235,9 @@ class Header extends React.Component {
     })();
     this.props.clearJournalsite();
     this.props.getTypeClassThunk();
+    setTimeout(() => {
+      this.props.setPresent();
+    }, 100);
   };
   getTypeClass = (e, c) => {
     (async () => {
@@ -256,6 +261,10 @@ class Header extends React.Component {
           this.state.subGroup
         );
       }
+      this.props.clearJournalsite();
+      setTimeout(() => {
+        this.props.setPresent();
+      }, 100);
       localStorage.setItem("typeC", this.state.typeClassName);
     })();
   };
@@ -277,7 +286,7 @@ class Header extends React.Component {
           this.state.subGroup
         );
       }
-
+      this.props.clearJournalsite();
       localStorage.setItem("typeC", this.state.typeClassName);
       setTimeout(() => {
         this.props.setPresent();
@@ -336,30 +345,6 @@ class Header extends React.Component {
                   label: m.name,
                 }))}
               />
-            </div>
-            <div>
-              <div className="special-name">Специальность</div>
-              <div className="special-select">
-                {this.props.courseSpec.map(
-                  (courseSpec) => courseSpec.specialty.name
-                )}
-              </div>
-            </div>
-          </div>
-          <div>
-            <a href="/electronicaljournal-view/journal">
-              <img className="points" src={points} alt="description"></img>
-            </a>
-          </div>
-        </div>
-        <div className="headHr" />
-        <div className="kuki">
-          <div className="buki">
-            <div>
-              <div className="course-name">Курс</div>
-              <div className="course-input">
-                {this.props.courseSpec.map((courseSpec) => courseSpec.сourse)}
-              </div>
             </div>
             <div>
               <div className="group-name">Группа</div>
@@ -438,27 +423,63 @@ class Header extends React.Component {
             <Select
               className="statistic-select"
               onChange={(e) => href(e.value)}
+              defaultValue={{ value: `statistic`, label: `Статистика` }}
               options={[
                 {
                   value: `/electronicaljournal-view/statistics`,
-                  label: "Статистика по конкретной группе",
+                  label: "Статистика группы по дисциплине",
                 },
                 {
                   value: `/electronicaljournal-view/studentbydiscipline`,
-                  label: "Статистика по конкретной дисциплине",
+                  label: "Статистика студента по дисциплине",
                 },
+                // {
+                //   value: `/electronicaljournal-view/studentstatistic`,
+                //   label: "Статистика по конкретному студенту",
+                // },
                 {
-                  value: `/electronicaljournal-view/studentstatistic`,
-                  label: "Статистика по конкретному студенту",
+                  value: `/electronicaljournal-view/generalgroupstatistic`,
+                  label: "Общая статистика по группе",
                 },
               ]}
             />
           </div>
 
+          {/* <div>
+            <a href="/electronicaljournal-view/journal">
+              <img className="points" src={points} alt="description"></img>
+            </a>
+          </div> */}
+        </div>
+        {console.log(this.props.courseSpec + "GGGGGGGGGGGGGGGGGGGGGGGG")}
+        <div className="headHr" />
+        <div className="kuki">
+          <div className="buki">
+            <div>
+              <div className="course-name">Курс</div>
+              <div className="course-input">
+                {this.props.courseSpec.length !== 1
+                  ? this.state.course
+                  : this.props.courseSpec.map(
+                      (courseSpec) => courseSpec.сourse
+                    )}
+              </div>
+            </div>
+            <div>
+              <div>
+                <div className="special-name">Специальность</div>
+                <div className="special-select">
+                  {this.props.courseSpec.map(
+                    (courseSpec) => courseSpec.specialty.name
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
           <input
             className="button-header bt_color"
             type="submit"
-            value="СОХРАНИТЬ"
+            value="Сохранить"
             disabled={this.props.disabled}
             onClick={() => {
               if (localStorage.removeItem("journalsite") !== null) {

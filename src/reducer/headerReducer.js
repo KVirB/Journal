@@ -149,9 +149,7 @@ export const setLoaderTrue = () => ({
 });
 export const getGroupThunk = (disciplineId) => {
   return (dispatch) => {
-    dispatch(setLoaderTrue());
     getGroup(disciplineId).then((data) => {
-      dispatch(setLoaderFalse());
       dispatch(setGroup(data));
     });
   };

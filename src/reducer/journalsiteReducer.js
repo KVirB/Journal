@@ -110,9 +110,33 @@ const journalsiteReducer = (state = initialState, action) => {
       };
 
     case SET_JOURNALSITE:
+      let jSites = [...state.journalsite];
+      let jSite = [{ ...action.journalsite }];
+      jSite.map((site, i) => {
+        site.journalHeaders
+          .sort((a, b) => a.id - b.id)
+          .map((header, i) => {
+            header.journalContents
+              .sort(function (a, b) {
+                if (
+                  a.student.surname.toLowerCase() <
+                  b.student.surname.toLowerCase()
+                )
+                  return -1;
+                if (
+                  a.student.surname.toLowerCase() >
+                  b.student.surname.toLowerCase()
+                )
+                  return 1;
+                return 0;
+              })
+              .map((content, i) => {});
+          });
+        jSites.push(site);
+      });
       return {
         ...state,
-        journalsite: [{ ...action.journalsite }],
+        journalsite: jSites,
         update: true,
       };
     case SET_CLOSED_TRUE:
@@ -245,54 +269,57 @@ const journalsiteReducer = (state = initialState, action) => {
         };
       }
     case TOGGLE_JOURNALSITE_PRESENCE:
-      if (state.journalsite.length === 0) {
-        let newJournalsitePresence = JSON.parse(
-          localStorage.getItem("journalsite")
-        );
+      // if (state.journalsite.length === 0) {
+      //   let newJournalsitePresence = JSON.parse(
+      //     localStorage.getItem("journalsite")
+      //   );
 
-        newJournalsitePresence.forEach((site, i) =>
-          site.journalHeaders.forEach((lesson) => {
-            if (lesson.id === action.lesson_id) {
-              lesson.journalContents.forEach((line) => {
-                if (line.id === action.line_id) {
-                  line.presence = !line.presence;
-                  if (!line.presence) {
-                    line.grade = null;
-                  }
-                }
-              });
-            }
-          })
-        );
+      //   newJournalsitePresence.forEach((site, i) =>
+      //     site.journalHeaders.forEach((lesson) => {
+      //       if (lesson.id === action.lesson_id) {
+      //         lesson.journalContents.forEach((line) => {
+      //           if (line.id === action.line_id) {
+      //             line.presence = !line.presence;
+      //             if (!line.presence) {
+      //               line.grade = null;
+      //             }
+      //           }
+      //         });
+      //       }
+      //     })
+      //   );
 
-        return {
-          ...state,
-          journalsite: newJournalsitePresence,
-        };
-      } else {
-        let newJournalsitePresence = [...state.journalsite];
-        newJournalsitePresence.forEach((site, i) =>
-          site.journalHeaders.forEach((lesson) => {
-            if (lesson.id === action.lesson_id) {
-              lesson.journalContents.forEach((line) => {
-                if (line.id === action.line_id) {
-                  line.presence = !line.presence;
-                  if (!line.presence) {
-                    line.grade = null;
-                  }
+      //   return {
+      //     ...state,
+      //     journalsite: newJournalsitePresence,
+      //   };
+      // } else {
+      let newJournalsitePresence = [...state.journalsite];
+      newJournalsitePresence.forEach((site, i) =>
+        site.journalHeaders.forEach((lesson) => {
+          if (lesson.id === action.lesson_id) {
+            lesson.journalContents.forEach((line) => {
+              if (line.id === action.line_id) {
+                line.presence = !line.presence;
+                if (!line.presence) {
+                  line.grade = null;
                 }
-                if (line.presence === null) {
-                  line.presence = false;
-                }
-              });
-            }
-          })
-        );
-        return {
-          ...state,
-          journalsite: newJournalsitePresence,
-        };
-      }
+              }
+              if (line.presence === false) {
+                line.lateness = null;
+              }
+              if (line.presence === null) {
+                line.presence = false;
+              }
+            });
+          }
+        })
+      );
+      return {
+        ...state,
+        journalsite: newJournalsitePresence,
+      };
+    // }
 
     case CLEAR_JOURNALSITE:
       return initialState;

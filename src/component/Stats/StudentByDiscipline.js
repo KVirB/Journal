@@ -59,11 +59,21 @@ class StudentByDiscipline extends React.Component {
     const { generalStatistics } = this.props;
     const { isLoading } = this.props;
     return isLoading ? (
-      <div class="lds-dual-ring"></div>
+      <div className="lds-dual-ring"></div>
     ) : (
       <div>
         {console.log(this.props.disciplineByStudentStatistic)}
         <div className="display-flex">
+          <div>
+            <input
+              className="button-back bt_color"
+              type="submit"
+              value="Назад"
+              onClick={() => {
+                window.location.assign(`/electronicaljournal-view/journal`);
+              }}
+            />
+          </div>
           <div>
             <div className="group-name">
               Группа : {localStorage.getItem("groupByDisciplineOne")}

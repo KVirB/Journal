@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 import "./Header.css";
-import profile from "../../profile.png";
+import profile from "../../profile.svg";
 import mech from "../../Vector.png";
 import col from "../../Col.png";
 import que from "../../Que.png";
@@ -26,19 +26,19 @@ function MainHeader() {
         </h1>
         <div className="disp">
           <div className="icons_que">
-            <Link to="/electronicaljournal-view">
-              <img src={que} alt="description"></img>
-            </Link>
+            {/* <Link to="/electronicaljournal-view"> */}
+            <img src={que} alt="description"></img>
+            {/* </Link> */}
           </div>
           <div className="icons_col">
-            <Link to="/electronicaljournal-view">
-              <img src={col} alt="description"></img>
-            </Link>
+            {/* <Link to="/electronicaljournal-view"> */}
+            <img src={col} alt="description"></img>
+            {/* </Link> */}
           </div>
           <div className="icons_mech">
-            <Link to="/electronicaljournal-view">
-              <img src={mech} alt="description"></img>
-            </Link>
+            {/* <Link to="/electronicaljournal-view"> */}
+            <img src={mech} alt="description"></img>
+            {/* </Link> */}
           </div>
           {user && (
             <div className="user-info__div">

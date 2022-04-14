@@ -5,8 +5,11 @@ import {
   getGroups,
   getStudents,
   getDisciplineByStudentStatistic,
+  getExcel,
+  getGeneralGroupStatistics,
 } from "../BD/tables";
-
+const SET_GENERALGROUPSTATISTICS = "SET_GENERALGROUPSTATISTICS";
+const SET_HEIGHT = "SET_HEIGHT";
 const SET_GENERALSTATISTICS = "SET_GENERALSTATISTICS";
 const SET_STUDENT = "SET_STUDENT";
 const SET_GROUPS = "SET_GROUPS";
@@ -21,11 +24,25 @@ let initialState = {
   students: [],
   disciplinesStatistic: [],
   disciplineByStudentStatistic: [],
+  generalGroupStatistic: [],
   isLoading: false,
+  height: null,
 };
 
 const statisticsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_HEIGHT: {
+      return {
+        ...state,
+        height: ([...state.generalGroupStatistic].length / 5) * 600,
+      };
+    }
+    case SET_GENERALGROUPSTATISTICS: {
+      return {
+        ...state,
+        generalGroupStatistic: [...action.generalGroupStatistic],
+      };
+    }
     case SET_STUDENT: {
       return {
         ...state,
@@ -103,6 +120,11 @@ export const setStudents = (students) => ({
   students,
 });
 
+export const setHeight = (height) => ({
+  type: SET_HEIGHT,
+  height,
+});
+
 export const setDisciplinesStatistics = (disciplinesStatistic) => ({
   type: SET_DISCIPLINESTATISTICS,
   disciplinesStatistic,
@@ -119,6 +141,12 @@ export const setLoaderTrue = () => ({
 export const setGeneralStatistics = (generalStatistics) => ({
   type: SET_GENERALSTATISTICS,
   generalStatistics,
+});
+
+export const setGeneralGroupStatistics = (generalGroupStatistic, height) => ({
+  type: SET_GENERALGROUPSTATISTICS,
+  generalGroupStatistic,
+  height,
 });
 
 export const setDisciplineByStudentStatistic = (
@@ -182,6 +210,28 @@ export const getGeneralStatisticsThunk = (groupsId, disciplineId) => {
         dispatch(setLoaderFalse());
         console.log(e);
       });
+  };
+};
+
+export const getGeneralGroupStatisticsThunk = (groupsId) => {
+  return (dispatch) => {
+    dispatch(setLoaderTrue());
+    getGeneralGroupStatistics(groupsId)
+      .then((data) => {
+        dispatch(setGeneralGroupStatistics(data));
+        dispatch(setHeight());
+        dispatch(setLoaderFalse());
+      })
+      .catch((e) => {
+        dispatch(setLoaderFalse());
+        console.log(e);
+      });
+  };
+};
+
+export const getExcelThunk = (groupsId) => {
+  return (dispatch) => {
+    getExcel(groupsId);
   };
 };
 

@@ -21,7 +21,7 @@
   line-height: 19px;
   color: #212323;
   height: 38px;
-  text-indent: 19px;
+  text-indent: 12px;
   width: 576px;
 }
 .discipline-name {
@@ -55,14 +55,14 @@
   font-size: 15px;
   line-height: 135%;
   color: #9a9c9c;
-  margin-top: 40px;
+  margin-top: 36px;
   margin-left: 55px;
 }
 .special-select {
   font-family: "Roboto", sans-serif;
-  margin-left: 56px;
+  margin-left: 30px;
   width: 700px;
-  text-indent: 26px;
+  text-indent: 24px;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -103,13 +103,13 @@
   line-height: 135%;
   color: #9a9c9c;
   margin-top: 36px;
-  margin-left: 82px;
+  margin-left: 80px;
 }
 .course-input {
   font-family: "Roboto", sans-serif;
   margin-left: 56px;
   width: 103px;
-  text-indent: 26px;
+  text-indent: 23px;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -149,7 +149,7 @@
   font-size: 15px;
   line-height: 135%;
   color: #9a9c9c;
-  margin-top: 36px;
+  margin-top: 40px;
   margin-left: 55px;
 }
 .pgroup-name {
@@ -160,7 +160,7 @@
   line-height: 135%;
   color: #9a9c9c;
   margin-left: 55px;
-  margin-top: 36px;
+  margin-top: 40px;
 }
 .group-select {
   background: #ffffff;
@@ -176,7 +176,7 @@
   font-size: 16px;
   line-height: 19px;
   color: #212323;
-  text-indent: 20px;
+  text-indent: 14px;
 }
 .view-name {
   font-family: "Roboto", sans-serif;
@@ -186,7 +186,7 @@
   line-height: 135%;
   color: #9a9c9c;
   margin-left: 55px;
-  margin-top: 36px;
+  margin-top: 40px;
 }
 .view-input {
   background: #ffffff;
@@ -202,9 +202,10 @@
   font-size: 16px;
   line-height: 19px;
   color: #212323;
-  text-indent: 20px;
+  text-indent: 14px;
 }
 .button-header {
+  padding: 0 40px 0 40px;
   font-family: "Open Sans", sans-serif;
   margin-left: 5px;
   margin-top: 27px;
@@ -220,8 +221,7 @@
   background-image: -o-linear-gradient(top, #ffffff, #ffffff);
   -webkit-box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
-  width: 213px;
-  height: 46px;
+  height: 34px;
   border-radius: 7px;
   margin-top: 71px;
   justify-content: space-between;
@@ -354,7 +354,7 @@ input[type="submit"].button-header:disabled {
 }
 .pointer {
   justify-content: space-between;
-  margin-right: 92px;
+  margin-right: 56px;
 }
 .group-select-statistic {
   background: #ffffff;
@@ -369,7 +369,6 @@ input[type="submit"].button-header:disabled {
   font-size: 16px;
   line-height: 19px;
   color: #212323;
-  text-indent: 20px;
 }
 .statistic-select {
   background: #ffffff;
@@ -384,7 +383,7 @@ input[type="submit"].button-header:disabled {
   font-size: 16px;
   line-height: 19px;
   color: #212323;
-  text-indent: 20px;
+  text-indent: 14px;
 }
 .group-select-statistics {
   background: #ffffff;
@@ -425,6 +424,31 @@ input[type="submit"].button-header:disabled {
   font-size: 15px;
   line-height: 135%;
   color: #9a9c9c;
-  margin-top: 36px;
+  margin-top: 40px;
   margin-left: 55px;
+}
+.button-back {
+  padding: 0 40px 0 40px;
+  font-family: "Open Sans", sans-serif;
+  margin-left: 58px;
+  margin-top: 27px;
+  background: #ffffff;
+  border: 1px solid #bababa;
+  box-sizing: border-box;
+  border-radius: 3px;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+  background-image: -moz-linear-gradient(top, #ffffff, #ffffff);
+  background-image: -o-linear-gradient(top, #ffffff, #ffffff);
+  -webkit-box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
+  height: 36px;
+  border-radius: 7px;
+  margin-top: 74px;
+  justify-content: space-between;
+  background: #434c63;
+  box-shadow: 2px 8px 15px rgba(201, 201, 201, 0.1);
+  border-radius: 7px;
 }

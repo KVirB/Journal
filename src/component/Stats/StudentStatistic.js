@@ -59,7 +59,7 @@ class StudentStatistic extends React.Component {
     const { generalStatistics } = this.props;
     const { isLoading } = this.props;
     return isLoading ? (
-      <div class="lds-dual-ring"></div>
+      <div className="lds-dual-ring"></div>
     ) : (
       <div>
         {console.log(this.props.disciplineByStudentStatistic)}

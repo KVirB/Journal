@@ -92,7 +92,7 @@ export default class MarksTable extends React.Component {
     {
       return (
         <div>
-          {/* <div className="headHr" /> */}
+          <div className="headHr" />
           {console.log(this.state.grades + "grades")}
           {console.log(JSON.stringify(this.props.journalsite) + "site")}
           <div className="all-content">
@@ -106,297 +106,294 @@ export default class MarksTable extends React.Component {
                 <tbody>
                   <TableRow>
                     {this.props.journalsite.map((m, i) => {
-                      if (i === 0)
+                      if (i === 0) {
                         if (this.props.disabled === true) {
                           this.state.inputs = {};
                         }
-                      return (
-                        <td className="line-fio diagonal-line" key={i}>
-                          <label className="dzs">Дата</label>
-                          <label className="fios">ФИО</label>
-                        </td>
-                      );
+                        return (
+                          <td className="line-fio diagonal-line" key={i}>
+                            <label className="dzs">Дата</label>
+                            <label className="fios">ФИО</label>
+                          </td>
+                        );
+                      }
                     })}
 
                     {this.props.journalsite.map((item, i) =>
                       item.journalHeaders.map((header, i) => {
                         if (i === 0) {
-                          return header.journalContents
-                            .sort((a, b) => a.id - b.id)
-                            .map((content, i) => (
-                              <TableCell
-                                height="19px"
-                                width="270px"
-                                className="disp line-stud"
-                                key={content.id}
-                              >
-                                <div className="surname">
-                                  {i + 1 + ". " + content.student.surname}
-                                </div>
-                                <div className="csn surname">
-                                  {content.student.name}
-                                </div>
-                              </TableCell>
-                            ));
+                          return header.journalContents.map((content, i) => (
+                            <TableCell
+                              height="19px"
+                              width="270px"
+                              className="disp line-stud"
+                              key={content.id}
+                            >
+                              <div className="surname">
+                                {i + 1 + ". " + content.student.surname}
+                              </div>
+                              <div className="csn surname">
+                                {content.student.name}
+                              </div>
+                            </TableCell>
+                          ));
                         }
                       })
                     )}
                   </TableRow>
                 </tbody>
                 {this.props.journalsite.map((item, i) =>
-                  item.journalHeaders
-                    .sort((a, b) => a.id - b.id)
-                    .map((header, i) => {
-                      return (
-                        <tbody key={i}>
-                          <TableRow>
-                            <TableCell height="126px" className="line-data">
-                              <div className="">
-                                <p className="day_mount">
-                                  {header.dateOfLesson !== null
-                                    ? header.dateOfLesson[2] < 10
-                                      ? String(this.state.x) +
-                                        header.dateOfLesson[2]
-                                      : header.dateOfLesson[2]
-                                    : "No date"}
-                                  .
-                                  {header.dateOfLesson !== null
-                                    ? header.dateOfLesson[1] < 10
-                                      ? String(this.state.x) +
-                                        header.dateOfLesson[1]
-                                      : header.dateOfLesson[1]
-                                    : console.log("kiki")}
-                                  <br />
-                                </p>
-                                <p className="year">
-                                  {header.dateOfLesson !== null
-                                    ? header.dateOfLesson[0] < 10
-                                      ? String(this.state.x) +
-                                        header.dateOfLesson[0]
-                                      : header.dateOfLesson[0]
-                                    : console.log("kaki")}
-                                </p>
-                                <p className="day_mount">
-                                  {this.state.lessonHours[header.hoursCount]}
-                                </p>
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                          {header.journalContents
-                            .sort((a, b) => a.id - b.id)
-                            .map((content, j) => {
-                              return (
-                                <TableRow key={j}>
-                                  <TableCell
-                                    className="line-grade disp"
-                                    height="26px"
-                                    width={
-                                      localStorage.getItem("typeC") === "Лекция"
-                                        ? "65px"
-                                        : "47px"
+                  item.journalHeaders.map((header, i) => {
+                    return (
+                      <tbody key={i}>
+                        <TableRow>
+                          <TableCell height="126px" className="line-data">
+                            <div className="">
+                              <p className="day_mount">
+                                {header.dateOfLesson !== null
+                                  ? header.dateOfLesson[2] < 10
+                                    ? String(this.state.x) +
+                                      header.dateOfLesson[2]
+                                    : header.dateOfLesson[2]
+                                  : "No date"}
+                                .
+                                {header.dateOfLesson !== null
+                                  ? header.dateOfLesson[1] < 10
+                                    ? String(this.state.x) +
+                                      header.dateOfLesson[1]
+                                    : header.dateOfLesson[1]
+                                  : console.log("kiki")}
+                                <br />
+                              </p>
+                              <p className="year">
+                                {header.dateOfLesson !== null
+                                  ? header.dateOfLesson[0] < 10
+                                    ? String(this.state.x) +
+                                      header.dateOfLesson[0]
+                                    : header.dateOfLesson[0]
+                                  : console.log("kaki")}
+                              </p>
+                              <p className="day_mount">
+                                {this.state.lessonHours[header.hoursCount]}
+                              </p>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                        {header.journalContents.map((content, j) => {
+                          return (
+                            <TableRow key={j}>
+                              <TableCell
+                                className="line-grade disp"
+                                height="26px"
+                                width={
+                                  localStorage.getItem("typeC") === "Лекция"
+                                    ? "65px"
+                                    : "47px"
+                                }
+                              >
+                                <div
+                                  className={
+                                    localStorage.getItem("typeC") ===
+                                    "Лабораторная работа"
+                                      ? "std_cell_lab"
+                                      : "std_cell"
+                                  }
+                                >
+                                  <select
+                                    key={content.id}
+                                    className="sel_grade myInput"
+                                    name="select"
+                                    disabled={
+                                      content.presence === false
+                                        ? true
+                                        : false || content.presence === null
+                                        ? true
+                                        : false
                                     }
+                                    hidden={
+                                      localStorage.getItem("typeC") === "Лекция" //Лекция
+                                        ? true
+                                        : localStorage.getItem("typeC") ===
+                                          "Лабораторная работа" //Лабораторная
+                                        ? true
+                                        : localStorage.getItem("typeC") ===
+                                          "Практическая работа" //Практическая
+                                        ? false
+                                        : localStorage.getItem("typeC") ===
+                                          "Экзамен" // Экзамен
+                                        ? false
+                                        : console.log("Error with hidden")
+                                    }
+                                    defaultValue={content.grade}
+                                    onChange={(e) => {
+                                      (async () => {
+                                        await this.props.setJournalSiteMark(
+                                          header.id,
+                                          content.id,
+                                          e.target.value
+                                        );
+                                        localStorage.setItem(
+                                          "typeClassId",
+                                          content.id
+                                        );
+                                        this.props.setBtnFalse();
+                                        if (typeof Storage !== "undefined") {
+                                          localStorage.setItem(
+                                            "journalsite",
+                                            JSON.stringify(
+                                              this.props.journalsite
+                                            )
+                                          );
+                                          localStorage.setItem(
+                                            "typeClassId",
+                                            header.typeClass.name
+                                          );
+
+                                          localStorage.setItem(
+                                            "groupId",
+                                            item.group.name
+                                          );
+                                          localStorage.setItem(
+                                            "disciplineName",
+                                            item.discipline.name
+                                          );
+                                          localStorage.setItem(
+                                            "subgroupId",
+                                            header.subGroup === 0
+                                              ? "Все"
+                                              : header.subGroup
+                                          );
+                                        }
+                                      })();
+                                    }}
                                   >
-                                    <div
-                                      className={
-                                        localStorage.getItem("typeC") ===
-                                        "Лабораторная работа"
-                                          ? "std_cell_lab"
-                                          : "std_cell"
-                                      }
-                                    >
-                                      {/* {content.presence === true ? ( */}
-                                      <select
-                                        key={content.id}
-                                        className="sel_grade myInput"
-                                        name="select"
-                                        disabled={
-                                          content.presence === false
-                                            ? true
-                                            : false || content.presence === null
-                                            ? true
-                                            : false
-                                        }
-                                        hidden={
-                                          localStorage.getItem("typeC") ===
-                                          "Лекция" //Лекция
-                                            ? true
-                                            : localStorage.getItem("typeC") ===
-                                              "Лабораторная работа" //Лабораторная
-                                            ? true
-                                            : localStorage.getItem("typeC") ===
-                                              "Практическая работа" //Практическая
-                                            ? false
-                                            : localStorage.getItem("typeC") ===
-                                              "Экзамен" // Экзамен
-                                            ? false
-                                            : console.log("Error with hidden")
-                                        }
-                                        defaultValue={content.grade}
-                                        onChange={(e) => {
-                                          (async () => {
-                                            await this.props.setJournalSiteMark(
-                                              header.id,
-                                              content.id,
-                                              e.target.value
+                                    {content.presence === false ? (
+                                      <option hidden></option>
+                                    ) : (
+                                      this.state.grades.map((gr) => (
+                                        <option
+                                          key={gr.grade}
+                                          hidden={
+                                            gr.grade === "" ? true : false
+                                          }
+                                        >
+                                          {gr.grade}
+                                        </option>
+                                      ))
+                                    )}
+                                  </select>
+
+                                  <div className="checkbox">
+                                    <input
+                                      className="custom-checkbox top"
+                                      type="checkbox"
+                                      id={content.id}
+                                      name={content.id}
+                                      defaultChecked={content.presence}
+                                      onChange={() => {
+                                        (async () => {
+                                          await this.props.clearPresent();
+                                          await this.props.toggleJournalSitePresence(
+                                            header.id,
+                                            content.id,
+                                            content.grade
+                                          );
+                                          this.props.setPresent();
+                                          this.props.setBtnFalse();
+                                          if (typeof Storage !== "undefined") {
+                                            localStorage.setItem(
+                                              "journalsite",
+                                              JSON.stringify(
+                                                this.props.journalsite
+                                              )
                                             );
                                             localStorage.setItem(
                                               "typeClassId",
-                                              content.id
+                                              header.typeClass.name
                                             );
-                                            this.props.setBtnFalse();
-                                            if (
-                                              typeof Storage !== "undefined"
-                                            ) {
-                                              localStorage.setItem(
-                                                "journalsite",
-                                                JSON.stringify(
-                                                  this.props.journalsite
-                                                )
-                                              );
-                                              localStorage.setItem(
-                                                "typeClassId",
-                                                header.typeClass.name
-                                              );
-
-                                              localStorage.setItem(
-                                                "groupId",
-                                                item.group.name
-                                              );
-                                              localStorage.setItem(
-                                                "disciplineName",
-                                                item.discipline.name
-                                              );
-                                              localStorage.setItem(
-                                                "subgroupId",
-                                                header.subGroup === 0
-                                                  ? "Все"
-                                                  : header.subGroup
-                                              );
-                                            }
-                                          })();
-                                        }}
-                                      >
-                                        {content.presence === false ? (
-                                          <option hidden></option>
-                                        ) : (
-                                          this.state.grades.map((gr) => (
-                                            <option
-                                              key={gr.grade}
-                                              hidden={
-                                                gr.grade === "" ? true : false
-                                              }
-                                            >
-                                              {gr.grade}
-                                            </option>
-                                          ))
-                                        )}
-                                      </select>
-
-                                      {/* ) } */}
-                                      <div className="checkbox">
-                                        <input
-                                          className="custom-checkbox top"
-                                          type="checkbox"
-                                          id={content.id}
-                                          name={content.id}
-                                          defaultChecked={content.presence}
-                                          onChange={() => {
-                                            (async () => {
-                                              await this.props.clearPresent();
-                                              await this.props.toggleJournalSitePresence(
-                                                header.id,
-                                                content.id,
-                                                content.grade
-                                              );
-                                              this.props.setPresent();
-                                              this.props.setBtnFalse();
-                                              if (
-                                                typeof Storage !== "undefined"
-                                              ) {
-                                                localStorage.setItem(
-                                                  "journalsite",
-                                                  JSON.stringify(
-                                                    this.props.journalsite
-                                                  )
-                                                );
-                                                localStorage.setItem(
-                                                  "typeClassId",
-                                                  header.typeClass.name
-                                                );
-                                                localStorage.setItem(
-                                                  "groupId",
-                                                  item.group.name
-                                                );
-                                                localStorage.setItem(
-                                                  "disciplineName",
-                                                  item.discipline.name
-                                                );
-                                                localStorage.setItem(
-                                                  "subgroupId",
-                                                  header.subGroup === 0
-                                                    ? "Все"
-                                                    : header.subGroup
-                                                );
-                                              }
-                                            })();
-                                          }}
-                                        />
-                                        <label htmlFor={content.id}></label>
-                                      </div>
-                                      <div className="lateness">
-                                        <input
-                                          value={this.state.inputs[content.id]}
-                                          type="number"
-                                          onKeyPress={this.handleKeyPress}
-                                          defaultValue={content.lateness}
-                                          onChange={(e) => {
-                                            (async () => {
-                                              this.getInputValue(e, content.id);
-                                              this.props.setBtnFalse();
-                                              await this.props.setJournalSiteLateness(
-                                                header.id,
-                                                content.id,
-                                                e.target.value
-                                              );
-                                              if (
-                                                typeof Storage !== "undefined"
-                                              ) {
-                                                localStorage.setItem(
-                                                  "journalsite",
-                                                  JSON.stringify(
-                                                    this.props.journalsite
-                                                  )
-                                                );
-                                              }
-                                            })();
-                                          }}
-                                          className="sel_grade myInputMin"
-                                          hidden={
-                                            localStorage.getItem("typeC") ===
-                                            "Лекция"
-                                              ? false
-                                              : true
+                                            localStorage.setItem(
+                                              "groupId",
+                                              item.group.name
+                                            );
+                                            localStorage.setItem(
+                                              "disciplineName",
+                                              item.discipline.name
+                                            );
+                                            localStorage.setItem(
+                                              "subgroupId",
+                                              header.subGroup === 0
+                                                ? "Все"
+                                                : header.subGroup
+                                            );
                                           }
-                                        />
-                                        <label
-                                          hidden={
-                                            localStorage.getItem("typeC") ===
-                                            "Лекция"
-                                              ? false
-                                              : true
+                                        })();
+                                      }}
+                                    />
+                                    <label htmlFor={content.id}></label>
+                                  </div>
+                                  <div className="lateness">
+                                    <input
+                                      disabled={
+                                        content.presence === false
+                                          ? true
+                                          : false || content.presence === null
+                                          ? true
+                                          : false
+                                      }
+                                      value={
+                                        content.presence === false
+                                          ? (this.state.inputs[content.id] = "")
+                                          : this.state.inputs[content.id]
+                                      }
+                                      type="number"
+                                      onKeyPress={this.handleKeyPress}
+                                      defaultValue={content.lateness}
+                                      onChange={(e) => {
+                                        (async () => {
+                                          this.getInputValue(e, content.id);
+                                          this.props.setBtnFalse();
+                                          await this.props.setJournalSiteLateness(
+                                            header.id,
+                                            content.id,
+                                            e.target.value
+                                          );
+                                          if (typeof Storage !== "undefined") {
+                                            localStorage.setItem(
+                                              "journalsite",
+                                              JSON.stringify(
+                                                this.props.journalsite
+                                              )
+                                            );
                                           }
-                                        >
-                                          Мин.
-                                        </label>
-                                      </div>
-                                    </div>
-                                  </TableCell>
-                                </TableRow>
-                              );
-                            })}
-                        </tbody>
-                      );
-                    })
+                                        })();
+                                      }}
+                                      className="sel_grade myInputMin"
+                                      hidden={
+                                        localStorage.getItem("typeC") ===
+                                        "Лекция"
+                                          ? false
+                                          : true
+                                      }
+                                    />
+                                    <label
+                                      hidden={
+                                        localStorage.getItem("typeC") ===
+                                        "Лекция"
+                                          ? false
+                                          : true
+                                      }
+                                    >
+                                      Мин.
+                                    </label>
+                                  </div>
+                                </div>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </tbody>
+                    );
+                  })
                 )}
               </Table>
               <Table
@@ -439,7 +436,7 @@ export default class MarksTable extends React.Component {
               </Table>
             </TableContainer>
           </div>
-          {/* <div className="headHrDown" /> */}
+          <div className="headHrDown" />
           {console.log(this.state.inputs)}
         </div>
       );

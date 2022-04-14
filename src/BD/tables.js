@@ -4,6 +4,32 @@ const baseRout = axios.create({
   baseURL: "http://192.168.11.252:8082/",
 });
 
+export const getExcel = (groupsId) => {
+  return baseRout
+    .request({
+      url: `electronicjournal/utils/myExcel?groupName=${groupsId}`,
+      method: "GET",
+      responseType: "blob",
+    })
+    .then(({ data }) => {
+      const downloadUrl = window.URL.createObjectURL(new Blob([data]));
+      const link = document.createElement("a");
+      let fileName = `Отчёт по группе ${groupsId}`;
+      link.href = downloadUrl;
+      link.setAttribute("download", fileName + ".xlsx");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    })
+    .catch((error) => {
+      if (error.response.status === 500) {
+        getExcel(groupsId);
+      } else {
+        alert("Упс, что-то пошло не так :(");
+      }
+    });
+};
+
 export const getStudents = (groupsId) => {
   return baseRout
     .get(`electronicjournal/students/searchByGroup?q=group.name==${groupsId}`)
@@ -16,6 +42,16 @@ export const getGeneralStatistics = (groupsId, disciplineId) => {
   return baseRout
     .get(
       `electronicjournal/journal-sites/getAcademicPerformanceByGroupAndDicsipline?q=discipline.id==${disciplineId};group.name==${groupsId}`
+    )
+    .then((response) => {
+      return response.data;
+    });
+};
+
+export const getGeneralGroupStatistics = (groupsId) => {
+  return baseRout
+    .get(
+      `electronicjournal/journal-sites/getAcademicPerformanceByGroupAndDicsipline?q=group.name==${groupsId}`
     )
     .then((response) => {
       return response.data;

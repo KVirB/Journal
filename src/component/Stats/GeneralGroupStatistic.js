@@ -4,15 +4,13 @@ import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import Select from "react-select";
 
-class Statistics extends React.Component {
+class GeneralGroupStatistic extends React.Component {
   state = {
     passes: [],
     groupsId: 0,
-    disciplineId: 0,
   };
   componentDidMount() {
     this.props.getGroupsThunk();
-    localStorage.removeItem("statDisciplineAll");
     localStorage.removeItem("statGroupAll");
   }
   getGroups = (e) => {
@@ -20,34 +18,19 @@ class Statistics extends React.Component {
       await this.setState({
         groupsId: e,
       });
-      this.props.getDisciplinesStatisticThunk(e);
+      this.props.getGeneralGroupStatisticsThunk(this.state.groupsId);
       localStorage.setItem("statGroupAll", e);
-      localStorage.setItem("statDisciplineAll", "Дисциплина");
     })();
   };
-  getValueDiscipline = (e, c) => {
-    (async () => {
-      await this.setState({
-        disciplineId: e,
-      });
-      this.props.getGeneralStatisticsThunk(
-        this.state.groupsId,
-        this.state.disciplineId
-      );
-      localStorage.setItem("statDisciplineAll", c);
-    })();
-  };
+
   render() {
-    const { getGroups, getValueDiscipline } = this;
-    const { generalStatistics } = this.props;
+    const { getGroups } = this;
     const { isLoading } = this.props;
     return isLoading ? (
       <div className="lds-dual-ring "></div>
     ) : (
       <div>
         {console.log(this.state.groupsId)}
-        {console.log(this.state.disciplineId)}
-        {console.log(JSON.stringify(this.props.disciplinesStatistic))}
         <div className="display-flex jst_content">
           <div className="display-flex">
             <div>
@@ -75,26 +58,23 @@ class Statistics extends React.Component {
                 />
               </div>
             </div>
-            <div>
-              <div className="group-name">
-                Дисциплина : {localStorage.getItem("statDisciplineAll")}
-              </div>
-              <Select
-                defaultValue={{ value: "discipline", label: "Дисциплина" }}
-                className="group-select-statistics"
-                onChange={(e) => getValueDiscipline(e.value, e.label)}
-                options={this.props.disciplinesStatistic.map((m, i) => ({
-                  value: m.id,
-                  label: m.name,
-                }))}
-              />
-            </div>
+          </div>
+          <div>
+            <input
+              className="bt_color bt_excel"
+              type="submit"
+              value="Excel"
+              disabled={this.props.disabled}
+              onClick={() => {
+                this.props.getExcelThunk(this.state.groupsId);
+              }}
+            />
           </div>
         </div>
         <div className="graph">
           <Bar
             data={{
-              labels: this.props.generalStatistics.map((statistic, i) => {
+              labels: this.props.generalGroupStatistic.map((statistic, i) => {
                 return (
                   statistic.studentPerformanceDTO.studentDTO.surname +
                   " " +
@@ -104,7 +84,7 @@ class Statistics extends React.Component {
               datasets: [
                 {
                   label: "Общий средний балл",
-                  data: this.props.generalStatistics.map((statistic, i) => {
+                  data: this.props.generalGroupStatistic.map((statistic, i) => {
                     return statistic.studentPerformanceDTO.overallGPA;
                   }),
                   maxBarThickness: 30,
@@ -112,7 +92,7 @@ class Statistics extends React.Component {
                 },
                 {
                   label: "Колличество пропусков",
-                  data: this.props.generalStatistics.map((statistic, i) => {
+                  data: this.props.generalGroupStatistic.map((statistic, i) => {
                     return statistic.totalNumberPasses;
                   }),
                   maxBarThickness: 30,
@@ -120,7 +100,7 @@ class Statistics extends React.Component {
                 },
                 {
                   label: "Опоздания",
-                  data: this.props.generalStatistics.map((statistic, i) => {
+                  data: this.props.generalGroupStatistic.map((statistic, i) => {
                     return statistic.totalNumberLates;
                   }),
                   maxBarThickness: 30,
@@ -128,7 +108,7 @@ class Statistics extends React.Component {
                 },
               ],
             }}
-            height={(generalStatistics.length / 5) * 600}
+            height={this.props.height}
             plugins={[ChartDataLabels]}
             options={{
               maintainAspectRatio: false,
@@ -160,4 +140,4 @@ class Statistics extends React.Component {
   }
 }
 
-export default Statistics;
+export default GeneralGroupStatistic;
