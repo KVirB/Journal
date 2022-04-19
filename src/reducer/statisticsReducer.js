@@ -11,6 +11,7 @@ import {
   getFacultys,
   getExcelFaculty,
 } from "../BD/tables";
+const SET_FIRSTDATE = "SET_FIRSTDATE";
 const SET_FACULTY = "SET_FACULTY";
 const SET_GENERALGROUPSTATISTICS = "SET_GENERALGROUPSTATISTICS";
 const SET_HEIGHT = "SET_HEIGHT";
@@ -33,10 +34,17 @@ let initialState = {
   isLoading: false,
   height: null,
   faculty: [],
+  firstDate: null,
 };
 
 const statisticsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_FIRSTDATE: {
+      return {
+        ...state,
+        firstDate: action.firstDate,
+      };
+    }
     case SET_FACULTY: {
       return {
         ...state,
@@ -127,6 +135,11 @@ const statisticsReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const setFirstDate = (firstDate) => ({
+  type: SET_FIRSTDATE,
+  firstDate,
+});
 
 export const setFaculty = (faculty) => ({
   type: SET_FACULTY,

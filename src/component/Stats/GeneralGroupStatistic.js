@@ -9,22 +9,39 @@ class GeneralGroupStatistic extends React.Component {
     passes: [],
     groupsId: 0,
     facultyId: 0,
-    // year: new Date().getFullYear(),
-    // day:
-    //   new Date().getDate().length >= 2
-    //     ? "0" + new Date().getDate()
-    //     : new Date().getDate(),
-    // mounth:
-    //   new Date().getMonth().length === 1
-    //     ? new Date().getMonth()
-    //     : "0" + new Date().getMonth(),
+    firstDate: null,
+    secondDate: null,
   };
   componentDidMount() {
     this.props.getGroupsThunk();
     // this.props.getFacultyThunk();
     localStorage.removeItem("statGroupAll");
     localStorage.removeItem("statFaculty");
+    localStorage.removeItem("firstDate");
+    localStorage.removeItem("secondDate");
   }
+
+  getFirstDate = (e) => {
+    (async () => {
+      await this.setState({
+        firstDate: e,
+      });
+      localStorage.setItem("firstDate", e);
+      console.log(this.state.firstDate);
+      this.props.setFirstDate(e);
+    })();
+  };
+
+  getSecondDate = (e) => {
+    (async () => {
+      await this.setState({
+        secondDate: e,
+      });
+      localStorage.setItem("secondDate", e);
+      console.log(this.state.secondDate);
+    })();
+  };
+
   getGroups = (e) => {
     (async () => {
       await this.setState({
@@ -79,17 +96,36 @@ class GeneralGroupStatistic extends React.Component {
                 />
               </div>
             </div>
+            <div>
+              <div className="date_with_by">
+                C : {localStorage.getItem("firstDate")}
+              </div>
+              <input
+                type="date"
+                className="input_faculty_date"
+                min="2022-01-01"
+                max="2025-12-31"
+                onChange={(e) => {
+                  this.getFirstDate(e.target.value);
+                }}
+              />
+            </div>
+            <div>
+              <div className="date_with_by">
+                По : {localStorage.getItem("secondDate")}
+              </div>
+              <input
+                type="date"
+                className="input_faculty_date"
+                min={this.props.firstDate}
+                max="2025-12-31"
+                onChange={(e) => {
+                  this.getSecondDate(e.target.value);
+                }}
+              />
+            </div>
           </div>
-          <div>
-            <input
-              type="date"
-              className="input_faculty_date"
-              min="2022-01-01"
-              max="2025-12-31"
-              // defaultValue={
-              //   this.state.year + "-" + this.state.mounth + "-" + this.state.day
-              // }
-            ></input>
+          <div className="display-flex">
             <input
               className="bt_color bt_excel"
               type="submit"

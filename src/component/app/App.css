@@ -516,12 +516,10 @@ select {
   padding: 0 40px 0 40px;
   margin-right: 56px;
   font-family: "Open Sans", sans-serif;
-  margin-left: 58px;
   margin-top: 27px;
   background: #ffffff;
   border: 1px solid #bababa;
   box-sizing: border-box;
-  border-radius: 3px;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
@@ -529,14 +527,12 @@ select {
   background-image: -moz-linear-gradient(top, #ffffff, #ffffff);
   background-image: -o-linear-gradient(top, #ffffff, #ffffff);
   -webkit-box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
-  box-shadow: inset 0 1px white, 0 1px 2px rgba(0, 0, 0, 0.15);
   height: 36px;
-  border-radius: 7px;
+  border-radius: 4px;
   margin-top: 74px;
   justify-content: space-between;
   background: #434c63;
   box-shadow: 2px 8px 15px rgba(201, 201, 201, 0.1);
-  border-radius: 7px;
   width: 43px;
 }
 
@@ -563,7 +559,7 @@ select {
   border: 1px solid #ebebeb;
   box-sizing: border-box;
   box-shadow: 2px 8px 15px rgba(201, 201, 201, 0.1);
-  border-radius: 7px;
+  border-radius: 4px;
   margin-left: 30px;
   margin-top: 46px;
   font-family: "Roboto", sans-serif;
@@ -582,4 +578,14 @@ select {
   border-bottom: 1px solid #ececec;
   height: 100%;
   width: 100%;
+}
+.date_with_by {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 135%;
+  color: #9a9c9c;
+  margin-top: 40px;
+  margin-left: 55px;
 }
