@@ -128,7 +128,7 @@ class Statistics extends React.Component {
                 },
               ],
             }}
-            height={(generalStatistics.length / 5) * 600}
+            height={this.props.height}
             plugins={[ChartDataLabels]}
             options={{
               maintainAspectRatio: false,

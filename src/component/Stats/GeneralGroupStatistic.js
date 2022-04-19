@@ -8,10 +8,22 @@ class GeneralGroupStatistic extends React.Component {
   state = {
     passes: [],
     groupsId: 0,
+    facultyId: 0,
+    // year: new Date().getFullYear(),
+    // day:
+    //   new Date().getDate().length >= 2
+    //     ? "0" + new Date().getDate()
+    //     : new Date().getDate(),
+    // mounth:
+    //   new Date().getMonth().length === 1
+    //     ? new Date().getMonth()
+    //     : "0" + new Date().getMonth(),
   };
   componentDidMount() {
     this.props.getGroupsThunk();
+    // this.props.getFacultyThunk();
     localStorage.removeItem("statGroupAll");
+    localStorage.removeItem("statFaculty");
   }
   getGroups = (e) => {
     (async () => {
@@ -22,9 +34,18 @@ class GeneralGroupStatistic extends React.Component {
       localStorage.setItem("statGroupAll", e);
     })();
   };
+  getFacultys = (e) => {
+    (async () => {
+      await this.setState({
+        facultyId: e,
+      });
+      this.props.getGeneralGroupStatisticsThunk(this.state.facultyId);
+      localStorage.setItem("statFaculty", e);
+    })();
+  };
 
   render() {
-    const { getGroups } = this;
+    const { getGroups, getFacultys } = this;
     const { isLoading } = this.props;
     return isLoading ? (
       <div className="lds-dual-ring "></div>
@@ -61,6 +82,15 @@ class GeneralGroupStatistic extends React.Component {
           </div>
           <div>
             <input
+              type="date"
+              className="input_faculty_date"
+              min="2022-01-01"
+              max="2025-12-31"
+              // defaultValue={
+              //   this.state.year + "-" + this.state.mounth + "-" + this.state.day
+              // }
+            ></input>
+            <input
               className="bt_color bt_excel"
               type="submit"
               value="Excel"
@@ -71,6 +101,39 @@ class GeneralGroupStatistic extends React.Component {
             />
           </div>
         </div>
+        <hr></hr>
+        <div className="display-flex jst_content">
+          <div className="display-flex">
+            <div>
+              <div className="faculty-name">
+                Факультет : {localStorage.getItem("statFaculty")}
+              </div>
+              <div className="faculty-select-statistic">
+                <Select
+                  defaultValue={{ value: "faculty", label: "Факультет" }}
+                  onChange={(e) => getFacultys(e.label)}
+                  // options={this.props.faculty.map((m) => ({
+                  //   value: m.name,
+                  //   label: m.name,
+                  // }))}
+                  options={[{ value: "fitr", label: "Фитр" }]}
+                />
+              </div>
+            </div>
+          </div>
+          <div>
+            <input
+              className="bt_color bt_excel"
+              type="submit"
+              value="Excel"
+              disabled={this.props.disabled}
+              onClick={() => {
+                this.props.getExcelFacultyThunk(this.state.facultyId);
+              }}
+            />
+          </div>
+        </div>
+        <hr></hr>
         <div className="graph">
           <Bar
             data={{

@@ -1,3 +1,4 @@
+import { height } from "@mui/system";
 import { act } from "@testing-library/react";
 import {
   getGeneralStatistics,
@@ -7,9 +8,13 @@ import {
   getDisciplineByStudentStatistic,
   getExcel,
   getGeneralGroupStatistics,
+  getFacultys,
+  getExcelFaculty,
 } from "../BD/tables";
+const SET_FACULTY = "SET_FACULTY";
 const SET_GENERALGROUPSTATISTICS = "SET_GENERALGROUPSTATISTICS";
 const SET_HEIGHT = "SET_HEIGHT";
+const SET_HEIGHTGROUPDISCIPLINE = "SET_HEIGHTGROUPDISCIPLINE";
 const SET_GENERALSTATISTICS = "SET_GENERALSTATISTICS";
 const SET_STUDENT = "SET_STUDENT";
 const SET_GROUPS = "SET_GROUPS";
@@ -27,10 +32,23 @@ let initialState = {
   generalGroupStatistic: [],
   isLoading: false,
   height: null,
+  faculty: [],
 };
 
 const statisticsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_FACULTY: {
+      return {
+        ...state,
+        faculty: [...action.faculty],
+      };
+    }
+    case SET_HEIGHTGROUPDISCIPLINE: {
+      return {
+        ...state,
+        height: ([...state.generalStatistics].length / 5) * 600,
+      };
+    }
     case SET_HEIGHT: {
       return {
         ...state,
@@ -110,6 +128,11 @@ const statisticsReducer = (state = initialState, action) => {
   }
 };
 
+export const setFaculty = (faculty) => ({
+  type: SET_FACULTY,
+  faculty,
+});
+
 export const setGroups = (groups) => ({
   type: SET_GROUPS,
   groups,
@@ -122,6 +145,11 @@ export const setStudents = (students) => ({
 
 export const setHeight = (height) => ({
   type: SET_HEIGHT,
+  height,
+});
+
+export const setHeightGroupDiscipline = (height) => ({
+  type: SET_HEIGHTGROUPDISCIPLINE,
   height,
 });
 
@@ -155,6 +183,14 @@ export const setDisciplineByStudentStatistic = (
   type: SET_DISCIPLINEBYSTUDENTSTATISTIC,
   disciplineByStudentStatistic,
 });
+
+export const getFacultyThunk = () => {
+  return (dispatch) => {
+    getFacultys().then((data) => {
+      dispatch(setFaculty(data));
+    });
+  };
+};
 
 export const getStudentsThunk = (groupsId) => {
   return (dispatch) => {
@@ -204,6 +240,7 @@ export const getGeneralStatisticsThunk = (groupsId, disciplineId) => {
     getGeneralStatistics(groupsId, disciplineId)
       .then((data) => {
         dispatch(setGeneralStatistics(data));
+        dispatch(setHeightGroupDiscipline());
         dispatch(setLoaderFalse());
       })
       .catch((e) => {
@@ -232,6 +269,12 @@ export const getGeneralGroupStatisticsThunk = (groupsId) => {
 export const getExcelThunk = (groupsId) => {
   return (dispatch) => {
     getExcel(groupsId);
+  };
+};
+
+export const getExcelFacultyThunk = (facultyId) => {
+  return (dispatch) => {
+    getExcelFaculty(facultyId);
   };
 };
 

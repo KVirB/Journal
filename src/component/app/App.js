@@ -10,6 +10,7 @@ import "./App.css";
 import StudentByDiscipline from "../Stats/studentByDisciplineContainer";
 import StudentStatistic from "../Stats/studentStatisticContainer";
 import GeneralGroupStatistic from "../Stats/generalGroupStatisticContainer";
+import MainPageContainer from "../Main/mainPageContainer";
 
 const App = () => {
   return (
@@ -22,6 +23,14 @@ const App = () => {
             element={
               <RequireAuth>
                 <Combine />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/electronicaljournal-view/main"
+            element={
+              <RequireAuth>
+                <MainPageContainer />
               </RequireAuth>
             }
           />

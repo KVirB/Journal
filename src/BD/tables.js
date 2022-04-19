@@ -3,6 +3,35 @@ import * as axios from "axios";
 const baseRout = axios.create({
   baseURL: "http://192.168.11.252:8082/",
 });
+const baseRoutGeneral = axios.create({
+  baseURL: "http://192.168.11.252:8081/",
+});
+
+export const getExcelFaculty = (facultyId) => {
+  return baseRout
+    .request({
+      url: `electronicjournal/utils/mySecondExcel?facultyName=ФИТР`,
+      method: "GET",
+      responseType: "blob",
+    })
+    .then(({ data }) => {
+      const downloadUrl = window.URL.createObjectURL(new Blob([data]));
+      const link = document.createElement("a");
+      let fileName = `Отчёт по платным отработкам `;
+      link.href = downloadUrl;
+      link.setAttribute("download", fileName + ".xlsx");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    })
+    .catch((error) => {
+      if (error.response.status === 500) {
+        getExcel(facultyId);
+      } else {
+        alert("Упс, что-то пошло не так :(");
+      }
+    });
+};
 
 export const getExcel = (groupsId) => {
   return baseRout
@@ -28,6 +57,12 @@ export const getExcel = (groupsId) => {
         alert("Упс, что-то пошло не так :(");
       }
     });
+};
+
+export const getFacultys = () => {
+  return baseRoutGeneral.get(`faculties/search?q=`).then((response) => {
+    return response.data;
+  });
 };
 
 export const getStudents = (groupsId) => {

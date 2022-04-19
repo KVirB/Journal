@@ -25,7 +25,6 @@ class Header extends React.Component {
     typeClass: null,
     subGroup: null,
     typeClassName: null,
-    course: "Курс",
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -459,7 +458,7 @@ class Header extends React.Component {
               <div className="course-name">Курс</div>
               <div className="course-input">
                 {this.props.courseSpec.length !== 1
-                  ? this.state.course
+                  ? "Курс"
                   : this.props.courseSpec.map(
                       (courseSpec) => courseSpec.сourse
                     )}
@@ -469,9 +468,11 @@ class Header extends React.Component {
               <div>
                 <div className="special-name">Специальность</div>
                 <div className="special-select">
-                  {this.props.courseSpec.map(
-                    (courseSpec) => courseSpec.specialty.name
-                  )}
+                  {this.props.courseSpec.length !== 1
+                    ? "Специальность"
+                    : this.props.courseSpec.map(
+                        (courseSpec) => courseSpec.specialty.name
+                      )}
                 </div>
               </div>
             </div>

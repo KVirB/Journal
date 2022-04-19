@@ -21,6 +21,7 @@ class statisticsContainer extends React.Component {
         getDisciplinesStatisticThunk={this.props.getDisciplinesStatisticThunk}
         students={this.props.students}
         getStudentsThunk={this.props.getStudentsThunk}
+        height={this.props.height}
       />
     );
   }
@@ -32,6 +33,7 @@ let mapStateToProps = (state) => {
     isLoading: state.generalStatisticPage.isLoading,
     disciplinesStatistic: state.generalStatisticPage.disciplinesStatistic,
     students: state.generalStatisticPage.students,
+    height: state.generalStatisticPage.height,
   };
 };
 
