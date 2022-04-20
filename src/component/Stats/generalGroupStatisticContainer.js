@@ -8,6 +8,7 @@ import {
   getFacultyThunk,
   getExcelFacultyThunk,
   setFirstDate,
+  setSecondDate,
 } from "../../reducer/statisticsReducer";
 import GeneralGroupStatistic from "./GeneralGroupStatistic";
 
@@ -29,6 +30,8 @@ class generalGroupStatisticContainer extends React.Component {
         getExcelFacultyThunk={this.props.getExcelFacultyThunk}
         firstDate={this.props.firstDate}
         setFirstDate={this.props.setFirstDate}
+        setSecondDate={this.props.setSecondDate}
+        secondDate={this.props.secondDate}
       />
     );
   }
@@ -41,6 +44,7 @@ let mapStateToProps = (state) => {
     height: state.generalStatisticPage.height,
     faculty: state.generalStatisticPage.faculty,
     firstDate: state.generalStatisticPage.firstDate,
+    secondDate: state.generalStatisticPage.secondDate,
   };
 };
 
@@ -51,4 +55,5 @@ export default connect(mapStateToProps, {
   getFacultyThunk,
   getExcelFacultyThunk,
   setFirstDate,
+  setSecondDate,
 })(generalGroupStatisticContainer);

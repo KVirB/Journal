@@ -11,6 +11,7 @@ import {
   getFacultys,
   getExcelFaculty,
 } from "../BD/tables";
+const SET_SECONDDATE = "SET_SECONDDATE";
 const SET_FIRSTDATE = "SET_FIRSTDATE";
 const SET_FACULTY = "SET_FACULTY";
 const SET_GENERALGROUPSTATISTICS = "SET_GENERALGROUPSTATISTICS";
@@ -24,21 +25,52 @@ const SET_DISCIPLINESTATISTICS = "SET_DISCIPLINESTATISTICS";
 const SET_LOADER_TRUE = "SET_LOADER_TRUE";
 const SET_LOADER_FALSE = "SET_LOADER_FALSE";
 const CLEAR_GROUPS = "CLEAR_GROUPS";
+const CLEAR_DISCIPLINEBYSTUDENTSTATISTIC = "CLEAR_DISCIPLINEBYSTUDENTSTATISTIC";
+const SET_DATABYSTUDENTSTATISTIC = "SET_DATABYSTUDENTSTATISTIC";
 let initialState = {
   generalStatistics: [],
   groups: [],
   students: [],
   disciplinesStatistic: [],
   disciplineByStudentStatistic: [],
+  dataByStudentStatistic: [],
   generalGroupStatistic: [],
   isLoading: false,
   height: null,
   faculty: [],
   firstDate: null,
+  secondDate: null,
 };
 
 const statisticsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_DATABYSTUDENTSTATISTIC: {
+      let newDisciplineByStudentStatistic = [
+        ...state.disciplineByStudentStatistic,
+      ];
+      let newData = [];
+      newDisciplineByStudentStatistic.forEach((statistic, i) => {
+        newData.push(statistic.studentPerformanceDTO.overallGPA);
+        newData.push(statistic.totalNumberLates);
+        newData.push(statistic.totalNumberPasses);
+      });
+      return {
+        ...state,
+        dataByStudentStatistic: newData,
+      };
+    }
+    case CLEAR_DISCIPLINEBYSTUDENTSTATISTIC: {
+      return {
+        ...state,
+        dataByStudentStatistic: [],
+      };
+    }
+    case SET_SECONDDATE: {
+      return {
+        ...state,
+        secondDate: action.secondDate,
+      };
+    }
     case SET_FIRSTDATE: {
       return {
         ...state,
@@ -136,6 +168,18 @@ const statisticsReducer = (state = initialState, action) => {
   }
 };
 
+export const setDataByStudentStatistic = () => ({
+  type: SET_DATABYSTUDENTSTATISTIC,
+});
+
+export const clearDisciplineByStudentStatistic = () => ({
+  type: CLEAR_DISCIPLINEBYSTUDENTSTATISTIC,
+});
+
+export const setSecondDate = (secondDate) => ({
+  type: SET_SECONDDATE,
+  secondDate,
+});
 export const setFirstDate = (firstDate) => ({
   type: SET_FIRSTDATE,
   firstDate,
@@ -208,6 +252,7 @@ export const getFacultyThunk = () => {
 export const getStudentsThunk = (groupsId) => {
   return (dispatch) => {
     getStudents(groupsId).then((data) => {
+      dispatch(clearDisciplineByStudentStatistic());
       dispatch(setStudents(data));
     });
   };
@@ -238,6 +283,7 @@ export const getStatisticByDisciplineStudentThunk = (
     getDisciplineByStudentStatistic(disciplineId, studentId)
       .then((data) => {
         dispatch(setDisciplineByStudentStatistic(data));
+        dispatch(setDataByStudentStatistic());
         dispatch(setLoaderFalse());
       })
       .catch((e) => {

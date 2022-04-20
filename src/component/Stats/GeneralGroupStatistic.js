@@ -17,8 +17,6 @@ class GeneralGroupStatistic extends React.Component {
     // this.props.getFacultyThunk();
     localStorage.removeItem("statGroupAll");
     localStorage.removeItem("statFaculty");
-    localStorage.removeItem("firstDate");
-    localStorage.removeItem("secondDate");
   }
 
   getFirstDate = (e) => {
@@ -26,7 +24,7 @@ class GeneralGroupStatistic extends React.Component {
       await this.setState({
         firstDate: e,
       });
-      localStorage.setItem("firstDate", e);
+      // localStorage.setItem("firstDate", e);
       console.log(this.state.firstDate);
       this.props.setFirstDate(e);
     })();
@@ -37,8 +35,9 @@ class GeneralGroupStatistic extends React.Component {
       await this.setState({
         secondDate: e,
       });
-      localStorage.setItem("secondDate", e);
+      // localStorage.setItem("secondDate", e);
       console.log(this.state.secondDate);
+      this.props.setSecondDate(e);
     })();
   };
 
@@ -97,9 +96,7 @@ class GeneralGroupStatistic extends React.Component {
               </div>
             </div>
             <div>
-              <div className="date_with_by">
-                C : {localStorage.getItem("firstDate")}
-              </div>
+              <div className="date_with_by">C : {this.props.firstDate}</div>
               <input
                 type="date"
                 className="input_faculty_date"
@@ -111,9 +108,7 @@ class GeneralGroupStatistic extends React.Component {
               />
             </div>
             <div>
-              <div className="date_with_by">
-                По : {localStorage.getItem("secondDate")}
-              </div>
+              <div className="date_with_by">По : {this.props.secondDate}</div>
               <input
                 type="date"
                 className="input_faculty_date"

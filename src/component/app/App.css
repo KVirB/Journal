@@ -270,6 +270,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
   padding-left: 25px;
   padding-top: 32px;
 }
+*/
 .year {
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -278,7 +279,6 @@ input[type="date"]::-webkit-datetime-edit-day-field {
   line-height: 15px;
   color: #d7d7d7;
   text-align: center;
-  padding-left: 3.5px;
 }
 .day_mount {
   font-family: "Roboto", sans-serif;
@@ -288,7 +288,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
   line-height: 16px;
   color: #212323;
   text-align: center;
-} */
+}
 .surname {
   font-family: "Roboto", sans-serif;
   font-style: normal;

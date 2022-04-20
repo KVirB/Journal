@@ -13,11 +13,17 @@ class StudentByDiscipline extends React.Component {
     groupName: 0,
     data: [],
   };
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.studentId !== prevState.studentId) {
-      this.state.data = [];
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.state.groupsId !== prevState.groupsId) {
+  //     this.state.data = [];
+  //   }
+  //   if (this.state.studentId !== prevState.studentId) {
+  //     this.state.data = [];
+  //   }
+  //   if (this.state.disciplineId !== prevState.disciplineId) {
+  //     this.state.data = [];
+  //   }
+  // }
   componentDidMount() {
     this.props.getGroupsThunk();
     localStorage.removeItem("groupByDisciplineOne");
@@ -34,6 +40,7 @@ class StudentByDiscipline extends React.Component {
         this.state.disciplineId,
         this.state.studentId
       );
+      // this.props.clearDisciplineByStudentStatistic();
       localStorage.setItem("studentByDisciplineOne", c);
     })();
   };
@@ -46,6 +53,7 @@ class StudentByDiscipline extends React.Component {
       this.props.getDisciplinesStatisticThunk(this.state.groupsId);
       this.props.getStudentsThunk(this.state.groupsId);
       localStorage.setItem("groupByDisciplineOne", e);
+      // this.props.clearDisciplineByStudentStatistic();
     })();
   };
   getValueDiscipline = (e, c) => {
@@ -53,6 +61,7 @@ class StudentByDiscipline extends React.Component {
       disciplineId: e,
     });
     localStorage.setItem("discipByDisciplineOne", c);
+    this.props.clearDisciplineByStudentStatistic();
   };
   render() {
     const { getGroups, getValueDiscipline, getStudents } = this;
@@ -137,10 +146,12 @@ class StudentByDiscipline extends React.Component {
                       );
                     }
                   ),
-                  data: this.state.data.map((data, i) => {
+                  data: this.props.dataByStudentStatistic.map((data, i) => {
+                    if (data === null) {
+                      alert("У студента нет такой дисциплины!");
+                    }
                     return data;
                   }),
-                  fill: true,
                   backgroundColor: "rgb(50, 50, 100, 0.3)",
                   borderColor: "#1C2742",
                   pointBackgroundColor: "#1C2742",
@@ -165,7 +176,7 @@ class StudentByDiscipline extends React.Component {
                   align: "end",
                   offset: 5,
                   font: {
-                    size: 16,
+                    size: 25,
                     family: "san-serif",
                   },
                 },
@@ -183,7 +194,7 @@ class StudentByDiscipline extends React.Component {
                   angleLines: {
                     display: false,
                   },
-                  suggestedMin: 0,
+                  suggestedMin: -1,
                 },
               },
             }}

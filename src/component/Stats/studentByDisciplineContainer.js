@@ -6,6 +6,8 @@ import {
   getDisciplinesStatisticThunk,
   getStudentsThunk,
   getStatisticByDisciplineStudentThunk,
+  clearDisciplineByStudentStatistic,
+  setDataByStudentStatistic,
 } from "../../reducer/statisticsReducer";
 import StudentByDiscipline from "./StudentByDiscipline";
 
@@ -26,6 +28,11 @@ class studentByDisciplineContainer extends React.Component {
           this.props.getStatisticByDisciplineStudentThunk
         }
         disciplineByStudentStatistic={this.props.disciplineByStudentStatistic}
+        clearDisciplineByStudentStatistic={
+          this.props.clearDisciplineByStudentStatistic
+        }
+        setDataByStudentStatistic={this.props.setDataByStudentStatistic}
+        dataByStudentStatistic={this.props.dataByStudentStatistic}
       />
     );
   }
@@ -39,6 +46,7 @@ let mapStateToProps = (state) => {
     disciplinesStatistic: state.generalStatisticPage.disciplinesStatistic,
     disciplineByStudentStatistic:
       state.generalStatisticPage.disciplineByStudentStatistic,
+    dataByStudentStatistic: state.generalStatisticPage.dataByStudentStatistic,
   };
 };
 
@@ -48,4 +56,6 @@ export default connect(mapStateToProps, {
   getDisciplinesStatisticThunk,
   getStudentsThunk,
   getStatisticByDisciplineStudentThunk,
+  clearDisciplineByStudentStatistic,
+  setDataByStudentStatistic,
 })(studentByDisciplineContainer);

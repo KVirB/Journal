@@ -116,7 +116,6 @@ class StudentStatistic extends React.Component {
                   data: this.state.data.map((data, i) => {
                     return data;
                   }),
-                  fill: true,
                   backgroundColor: "rgb(50, 50, 100, 0.3)",
                   borderColor: "#1C2742",
                   pointBackgroundColor: "#1C2742",
