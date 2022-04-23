@@ -8,29 +8,32 @@ const baseRoutGeneral = axios.create({
 });
 
 export const getExcelFaculty = (facultyId) => {
-  return baseRout
-    .request({
-      url: `electronicjournal/utils/mySecondExcel?facultyName=ФИТР`,
-      method: "GET",
-      responseType: "blob",
-    })
-    .then(({ data }) => {
-      const downloadUrl = window.URL.createObjectURL(new Blob([data]));
-      const link = document.createElement("a");
-      let fileName = `Отчёт по платным отработкам `;
-      link.href = downloadUrl;
-      link.setAttribute("download", fileName + ".xlsx");
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    })
-    .catch((error) => {
-      if (error.response.status === 500) {
-        getExcel(facultyId);
-      } else {
-        alert("Упс, что-то пошло не так :(");
-      }
-    });
+  return (
+    baseRout
+      // utils/myExcel?groupName=& period=2022-03-21and...
+      .request({
+        url: `electronicjournal/utils/mySecondExcel?facultyName=${facultyId}`,
+        method: "GET",
+        responseType: "blob",
+      })
+      .then(({ data }) => {
+        const downloadUrl = window.URL.createObjectURL(new Blob([data]));
+        const link = document.createElement("a");
+        let fileName = `Отчёт по платным отработкам ${facultyId}`;
+        link.href = downloadUrl;
+        link.setAttribute("download", fileName + ".xlsx");
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      })
+      .catch((error) => {
+        if (error.response.status === 500) {
+          getExcel(facultyId);
+        } else {
+          alert("Упс, что-то пошло не так :(");
+        }
+      })
+  );
 };
 
 export const getExcel = (groupsId) => {
@@ -63,6 +66,20 @@ export const getFacultys = () => {
   return baseRoutGeneral.get(`faculties/search?q=`).then((response) => {
     return response.data;
   });
+};
+
+export const getStudentsStatisticByPeriod = (
+  studentId,
+  firstDate,
+  secondDate
+) => {
+  return baseRout
+    .get(
+      `electronicjournal/journal-headers/getAcademicPerformance?q=student.id==${studentId};dateOfLesson==${firstDate}and${secondDate}`
+    )
+    .then((response) => {
+      return response.data;
+    });
 };
 
 export const getStudents = (groupsId) => {
