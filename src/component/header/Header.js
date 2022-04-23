@@ -319,7 +319,7 @@ class Header extends React.Component {
     } = this;
     const { isLoading } = this.props;
     return isLoading ? (
-      <div className="lds-dual-ring"></div>
+      <div className="lds-facebook"></div>
     ) : (
       <div>
         <div className="display-flex pointer">
@@ -432,10 +432,10 @@ class Header extends React.Component {
                   value: `/electronicaljournal-view/studentbydiscipline`,
                   label: "Статистика студента по дисциплине",
                 },
-                // {
-                //   value: `/electronicaljournal-view/studentstatistic`,
-                //   label: "Статистика по конкретному студенту",
-                // },
+                {
+                  value: `/electronicaljournal-view/studentstatistic`,
+                  label: "Статистика студента по периоду",
+                },
                 {
                   value: `/electronicaljournal-view/generalgroupstatistic`,
                   label: "Общая статистика по группе",

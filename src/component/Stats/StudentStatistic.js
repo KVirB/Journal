@@ -3,14 +3,17 @@ import { Bar, Line, Radar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import Select from "react-select";
+import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 
 class StudentStatistic extends React.Component {
   state = {
     passes: [],
-    groupsId: 0,
-    studentId: 0,
+    groupsId: null,
+    studentId: null,
     disciplineId: 0,
     groupName: 0,
+    firstDate: null,
+    secondDate: null,
     data: [],
   };
   componentDidUpdate(prevProps, prevState) {
@@ -20,21 +23,78 @@ class StudentStatistic extends React.Component {
   }
   componentDidMount() {
     this.props.getGroupsThunk();
-    localStorage.removeItem("groupByDisciplineOne");
-    localStorage.removeItem("discipByDisciplineOne");
-    localStorage.removeItem("studentByDisciplineOne");
   }
+
+  getFirstDate = (e) => {
+    (async () => {
+      await this.setState({
+        firstDate: e,
+      });
+      this.setState({
+        secondDate: null,
+      });
+
+      this.props.clearGraphStudentByPeriod();
+      console.log(this.state.firstDate);
+      this.props.setFirstDate(e);
+      this.state.firstDate !== null &&
+      this.state.secondDate !== null &&
+      this.state.groupsId !== null
+        ? this.props.getStudentsThunk(this.state.groupsId)
+        : console.log("Error with getStudents");
+      this.state.studentId !== null &&
+      this.state.firstDate !== null &&
+      this.state.secondDate !== null &&
+      this.state.groupsId !== null
+        ? this.props.getStudentStatisticByPeriodThunk(
+            this.state.studentId,
+            this.state.firstDate,
+            this.state.secondDate
+          )
+        : console.log("Error with getStudentsStatistic");
+    })();
+  };
+
+  getSecondDate = (e) => {
+    (async () => {
+      await this.setState({
+        secondDate: e,
+      });
+      console.log(this.state.secondDate);
+      this.state.firstDate !== null &&
+      this.state.secondDate !== null &&
+      this.state.groupsId !== null
+        ? this.props.getStudentsThunk(this.state.groupsId)
+        : console.log("Error with getStudents");
+      this.props.setSecondDate(e);
+      this.state.studentId !== null &&
+      this.state.firstDate !== null &&
+      this.state.secondDate !== null &&
+      this.state.groupsId !== null
+        ? this.props.getStudentStatisticByPeriodThunk(
+            this.state.studentId,
+            this.state.firstDate,
+            this.state.secondDate
+          )
+        : console.log("Error with getStudentsStatistic");
+    })();
+  };
 
   getStudents = (e, c) => {
     (async () => {
       await this.setState({
         studentId: e,
       });
-      this.props.getStatisticByDisciplineStudentThunk(
-        this.state.disciplineId,
-        this.state.studentId
-      );
-      localStorage.setItem("studentByDisciplineOne", c);
+      this.state.studentId !== null &&
+      this.state.firstDate !== null &&
+      this.state.secondDate !== null &&
+      this.state.groupsId !== null
+        ? this.props.getStudentStatisticByPeriodThunk(
+            this.state.studentId,
+            this.state.firstDate,
+            this.state.secondDate
+          )
+        : console.log("Error with getStudentsStatistic");
     })();
   };
 
@@ -43,31 +103,50 @@ class StudentStatistic extends React.Component {
       await this.setState({
         groupsId: e,
       });
-      this.props.getDisciplinesStatisticThunk(this.state.groupsId);
-      this.props.getStudentsThunk(this.state.groupsId);
-      localStorage.setItem("groupByDisciplineOne", e);
+      // this.props.getStudentsThunk(this.state.groupsId);
+      this.state.firstDate !== null &&
+      this.state.secondDate !== null &&
+      this.state.groupsId !== null
+        ? this.props.getStudentsThunk(this.state.groupsId)
+        : console.log("Error with getStudents");
+      this.state.studentId !== null &&
+      this.state.firstDate !== null &&
+      this.state.secondDate !== null &&
+      this.state.groupsId !== null
+        ? this.props.getStudentStatisticByPeriodThunk(
+            this.state.studentId,
+            this.state.firstDate,
+            this.state.secondDate
+          )
+        : console.log("Error with getStudentsStatistic");
     })();
   };
   getValueDiscipline = (e, c) => {
     this.setState({
       disciplineId: e,
     });
-    localStorage.setItem("discipByDisciplineOne", c);
   };
   render() {
     const { getGroups, getValueDiscipline, getStudents } = this;
     const { generalStatistics } = this.props;
     const { isLoading } = this.props;
-    return isLoading ? (
-      <div className="lds-dual-ring"></div>
-    ) : (
+    return (
       <div>
-        {console.log(this.props.disciplineByStudentStatistic)}
+        {console.log(
+          JSON.stringify(
+            this.state.groupsId +
+              "gId" +
+              this.state.firstDate +
+              "fD" +
+              this.state.secondDate +
+              "sD" +
+              this.state.studentId +
+              "sId"
+          )
+        )}
         <div className="display-flex">
           <div>
-            <div className="group-name">
-              Группа : {localStorage.getItem("groupByDisciplineOne")}
-            </div>
+            <div className="group-name">Группа</div>
             <Select
               defaultValue={{ value: "group", label: "Группа" }}
               className="group-select-statistic"
@@ -79,9 +158,37 @@ class StudentStatistic extends React.Component {
             />
           </div>
           <div>
-            <div className="student-name">
-              Студент : {localStorage.getItem("studentByDisciplineOne")}
-            </div>
+            <div className="date_with_by">C</div>
+            <input
+              type="date"
+              className="input_faculty_date"
+              min="2022-01-01"
+              max="2025-12-31"
+              onChange={(e) => {
+                this.getFirstDate(e.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <div className="date_with_by">По</div>
+            <input
+              disabled={this.props.secondDateDisabled}
+              type="date"
+              value={
+                this.state.secondDate === null
+                  ? "гггг-мм-дд"
+                  : this.state.secondDate
+              }
+              className="input_faculty_date"
+              min={this.props.firstDate}
+              max="2025-12-31"
+              onChange={(e) => {
+                this.getSecondDate(e.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <div className="student-name">Студент</div>
             <Select
               defaultValue={{ value: "student", label: "Студент" }}
               className="student-select-statistic"
@@ -93,29 +200,38 @@ class StudentStatistic extends React.Component {
             />
           </div>
         </div>
-        <div className="graph">
+        <div className={isLoading ? "lds-facebook" : ""}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div
+          className="graph"
+          hidden={isLoading === null ? true : isLoading === true ? true : false}
+        >
           <Radar
             data={{
               labels: ["Средний балл", "Опоздания", "Пропуски"],
               datasets: [
                 {
-                  label: this.props.disciplineByStudentStatistic.map(
+                  label: this.props.studentStatisticByPeriod.map(
                     (statistic, i) => {
-                      this.state.data.push(
-                        statistic.studentPerformanceDTO.overallGPA
-                      );
-                      this.state.data.push(statistic.totalNumberLates);
-                      this.state.data.push(statistic.totalNumberPasses);
-                      return (
-                        statistic.studentPerformanceDTO.studentDTO.surname +
-                        " " +
-                        statistic.studentPerformanceDTO.studentDTO.name
-                      );
+                      if (statistic.studentPerformanceDTO.studentDTO === null) {
+                        return "На данный период данных нет";
+                      } else {
+                        return (
+                          statistic.studentPerformanceDTO.studentDTO.surname +
+                          " " +
+                          statistic.studentPerformanceDTO.studentDTO.name
+                        );
+                      }
                     }
                   ),
-                  data: this.state.data.map((data, i) => {
-                    return data;
-                  }),
+                  data: this.props.dataByStudentStatisticPeriod.map(
+                    (data, i) => {
+                      return data;
+                    }
+                  ),
                   backgroundColor: "rgb(50, 50, 100, 0.3)",
                   borderColor: "#1C2742",
                   pointBackgroundColor: "#1C2742",
@@ -158,13 +274,12 @@ class StudentStatistic extends React.Component {
                   angleLines: {
                     display: false,
                   },
-                  suggestedMin: 0,
+                  suggestedMin: -1,
                 },
               },
             }}
           />
         </div>
-        <hr></hr>
       </div>
     );
   }

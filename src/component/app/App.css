@@ -482,32 +482,46 @@ select {
   width: auto;
 }
 /* ==============================================SPINER================================================ */
-.lds-dual-ring {
+.lds-facebook {
   display: block;
+  position: relative;
+  width: 80px;
+  height: 80px;
   margin-left: auto;
   margin-right: auto;
-  width: 160px;
-  height: 160px;
 }
-.lds-dual-ring:after {
-  content: " ";
-  display: block;
-  width: 128px;
-  height: 128px;
-  margin: 16px;
-  border-radius: 50%;
-  border: 12px solid #434c63;
-  border-color: #434c63 transparent #434c63 transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #434c63;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
-@keyframes lds-dual-ring {
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
   0% {
-    transform: rotate(0deg);
+    top: 8px;
+    height: 64px;
   }
+  50%,
   100% {
-    transform: rotate(360deg);
+    top: 24px;
+    height: 32px;
   }
 }
+
 /* ==================================================================================================== */
 .jst_content {
   justify-content: space-between;

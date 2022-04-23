@@ -54,6 +54,8 @@ class StudentByDiscipline extends React.Component {
       this.props.getStudentsThunk(this.state.groupsId);
       localStorage.setItem("groupByDisciplineOne", e);
       // this.props.clearDisciplineByStudentStatistic();
+      localStorage.removeItem("discipByDisciplineOne");
+      localStorage.removeItem("studentByDisciplineOne");
     })();
   };
   getValueDiscipline = (e, c) => {
@@ -62,13 +64,14 @@ class StudentByDiscipline extends React.Component {
     });
     localStorage.setItem("discipByDisciplineOne", c);
     this.props.clearDisciplineByStudentStatistic();
+    localStorage.removeItem("studentByDisciplineOne");
   };
   render() {
     const { getGroups, getValueDiscipline, getStudents } = this;
     const { generalStatistics } = this.props;
     const { isLoading } = this.props;
     return isLoading ? (
-      <div className="lds-dual-ring"></div>
+      <div className="lds-facebook"></div>
     ) : (
       <div>
         {console.log(this.props.disciplineByStudentStatistic)}

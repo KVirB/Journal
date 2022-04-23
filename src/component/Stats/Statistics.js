@@ -42,7 +42,7 @@ class Statistics extends React.Component {
     const { generalStatistics } = this.props;
     const { isLoading } = this.props;
     return isLoading ? (
-      <div className="lds-dual-ring "></div>
+      <div className="lds-facebook"></div>
     ) : (
       <div>
         {console.log(this.state.groupsId)}

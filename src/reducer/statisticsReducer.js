@@ -10,7 +10,11 @@ import {
   getGeneralGroupStatistics,
   getFacultys,
   getExcelFaculty,
+  getStudentsStatisticByPeriod,
 } from "../BD/tables";
+const CLEAR_GRAPHSTUDENTBYPERIOD = "CLEAR_GRAPHSTUDENTBYPERIOD";
+const SET_DATABYSTUDENTSTATISTICPERIOD = "SET_DATABYSTUDENTSTATISTICPERIOD";
+const SET_STUDENTSTATISTICBYPERIOD = "SET_STUDENTSTATISTICBYPERIOD";
 const SET_SECONDDATE = "SET_SECONDDATE";
 const SET_FIRSTDATE = "SET_FIRSTDATE";
 const SET_FACULTY = "SET_FACULTY";
@@ -34,16 +38,45 @@ let initialState = {
   disciplinesStatistic: [],
   disciplineByStudentStatistic: [],
   dataByStudentStatistic: [],
+  dataByStudentStatisticPeriod: [],
   generalGroupStatistic: [],
-  isLoading: false,
+  studentStatisticByPeriod: [],
+  isLoading: null,
   height: null,
   faculty: [],
   firstDate: null,
   secondDate: null,
+  secondDateDisabled: true,
 };
 
 const statisticsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CLEAR_GRAPHSTUDENTBYPERIOD: {
+      return {
+        ...state,
+        dataByStudentStatisticPeriod: [],
+        studentStatisticByPeriod: [],
+      };
+    }
+    case SET_STUDENTSTATISTICBYPERIOD: {
+      return {
+        ...state,
+        studentStatisticByPeriod: [{ ...action.studentStatisticByPeriod }],
+      };
+    }
+    case SET_DATABYSTUDENTSTATISTICPERIOD: {
+      let newStudentStatisticByPeriod = [...state.studentStatisticByPeriod];
+      let newData = [];
+      newStudentStatisticByPeriod.forEach((statistic, i) => {
+        newData.push(statistic.studentPerformanceDTO.overallGPA);
+        newData.push(statistic.totalNumberLates);
+        newData.push(statistic.totalNumberPasses);
+      });
+      return {
+        ...state,
+        dataByStudentStatisticPeriod: newData,
+      };
+    }
     case SET_DATABYSTUDENTSTATISTIC: {
       let newDisciplineByStudentStatistic = [
         ...state.disciplineByStudentStatistic,
@@ -63,6 +96,7 @@ const statisticsReducer = (state = initialState, action) => {
       return {
         ...state,
         dataByStudentStatistic: [],
+        disciplineByStudentStatistic: [],
       };
     }
     case SET_SECONDDATE: {
@@ -75,6 +109,7 @@ const statisticsReducer = (state = initialState, action) => {
       return {
         ...state,
         firstDate: action.firstDate,
+        secondDateDisabled: false,
       };
     }
     case SET_FACULTY: {
@@ -168,8 +203,21 @@ const statisticsReducer = (state = initialState, action) => {
   }
 };
 
+export const clearGraphStudentByPeriod = () => ({
+  type: CLEAR_GRAPHSTUDENTBYPERIOD,
+});
+
+export const setStudentStatisticByPeriod = (studentStatisticByPeriod) => ({
+  type: SET_STUDENTSTATISTICBYPERIOD,
+  studentStatisticByPeriod,
+});
+
 export const setDataByStudentStatistic = () => ({
   type: SET_DATABYSTUDENTSTATISTIC,
+});
+
+export const setDataByStudentStatisticPeriod = () => ({
+  type: SET_DATABYSTUDENTSTATISTICPERIOD,
 });
 
 export const clearDisciplineByStudentStatistic = () => ({
@@ -246,6 +294,23 @@ export const getFacultyThunk = () => {
     getFacultys().then((data) => {
       dispatch(setFaculty(data));
     });
+  };
+};
+
+export const getStudentStatisticByPeriodThunk = (
+  groupsId,
+  firstDate,
+  secondDate
+) => {
+  return (dispatch) => {
+    dispatch(setLoaderTrue());
+    getStudentsStatisticByPeriod(groupsId, firstDate, secondDate).then(
+      (data) => {
+        dispatch(setStudentStatisticByPeriod(data));
+        dispatch(setDataByStudentStatisticPeriod());
+        dispatch(setLoaderFalse());
+      }
+    );
   };
 };
 

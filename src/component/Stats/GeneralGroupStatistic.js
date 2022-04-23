@@ -14,7 +14,7 @@ class GeneralGroupStatistic extends React.Component {
   };
   componentDidMount() {
     this.props.getGroupsThunk();
-    // this.props.getFacultyThunk();
+    this.props.getFacultyThunk();
     localStorage.removeItem("statGroupAll");
     localStorage.removeItem("statFaculty");
   }
@@ -64,7 +64,7 @@ class GeneralGroupStatistic extends React.Component {
     const { getGroups, getFacultys } = this;
     const { isLoading } = this.props;
     return isLoading ? (
-      <div className="lds-dual-ring "></div>
+      <div className="lds-facebook"></div>
     ) : (
       <div>
         {console.log(this.state.groupsId)}
@@ -143,11 +143,11 @@ class GeneralGroupStatistic extends React.Component {
                 <Select
                   defaultValue={{ value: "faculty", label: "Факультет" }}
                   onChange={(e) => getFacultys(e.label)}
-                  // options={this.props.faculty.map((m) => ({
-                  //   value: m.name,
-                  //   label: m.name,
-                  // }))}
-                  options={[{ value: "fitr", label: "Фитр" }]}
+                  options={this.props.faculty.map((m) => ({
+                    value: m.shortName,
+                    label: m.shortName,
+                  }))}
+                  // options={[{ value: "fitr", label: "Фитр" }]}
                 />
               </div>
             </div>
