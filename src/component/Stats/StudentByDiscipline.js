@@ -3,32 +3,19 @@ import { Bar, Line, Radar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import Select from "react-select";
+import StudentByDisciplineRadar from "./Chart/StudentByDisciplineRadar";
 
 class StudentByDiscipline extends React.Component {
   state = {
     passes: [],
-    groupsId: 0,
-    studentId: 0,
-    disciplineId: 0,
-    groupName: 0,
+    groupsId: null,
+    studentId: null,
+    disciplineId: null,
+    groupName: null,
     data: [],
   };
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.groupsId !== prevState.groupsId) {
-  //     this.state.data = [];
-  //   }
-  //   if (this.state.studentId !== prevState.studentId) {
-  //     this.state.data = [];
-  //   }
-  //   if (this.state.disciplineId !== prevState.disciplineId) {
-  //     this.state.data = [];
-  //   }
-  // }
   componentDidMount() {
     this.props.getGroupsThunk();
-    localStorage.removeItem("groupByDisciplineOne");
-    localStorage.removeItem("discipByDisciplineOne");
-    localStorage.removeItem("studentByDisciplineOne");
   }
 
   getStudents = (e, c) => {
@@ -40,8 +27,6 @@ class StudentByDiscipline extends React.Component {
         this.state.disciplineId,
         this.state.studentId
       );
-      // this.props.clearDisciplineByStudentStatistic();
-      localStorage.setItem("studentByDisciplineOne", c);
     })();
   };
 
@@ -52,27 +37,18 @@ class StudentByDiscipline extends React.Component {
       });
       this.props.getDisciplinesStatisticThunk(this.state.groupsId);
       this.props.getStudentsThunk(this.state.groupsId);
-      localStorage.setItem("groupByDisciplineOne", e);
-      // this.props.clearDisciplineByStudentStatistic();
-      localStorage.removeItem("discipByDisciplineOne");
-      localStorage.removeItem("studentByDisciplineOne");
     })();
   };
   getValueDiscipline = (e, c) => {
     this.setState({
       disciplineId: e,
     });
-    localStorage.setItem("discipByDisciplineOne", c);
     this.props.clearDisciplineByStudentStatistic();
-    localStorage.removeItem("studentByDisciplineOne");
   };
   render() {
     const { getGroups, getValueDiscipline, getStudents } = this;
-    const { generalStatistics } = this.props;
     const { isLoading } = this.props;
-    return isLoading ? (
-      <div className="lds-facebook"></div>
-    ) : (
+    return (
       <div>
         {console.log(this.props.disciplineByStudentStatistic)}
         <div className="display-flex">
@@ -87,9 +63,7 @@ class StudentByDiscipline extends React.Component {
             />
           </div>
           <div>
-            <div className="group-name">
-              Группа : {localStorage.getItem("groupByDisciplineOne")}
-            </div>
+            <div className="group-name">Группа</div>
             <Select
               defaultValue={{ value: "group", label: "Группа" }}
               className="group-select-statistic"
@@ -101,9 +75,7 @@ class StudentByDiscipline extends React.Component {
             />
           </div>
           <div>
-            <div className="group-name">
-              Дисциплина : {localStorage.getItem("discipByDisciplineOne")}
-            </div>
+            <div className="group-name">Дисциплина</div>
             <Select
               defaultValue={{ value: "discipline", label: "Дисциплина" }}
               className="group-select-statistics"
@@ -115,9 +87,7 @@ class StudentByDiscipline extends React.Component {
             />
           </div>
           <div>
-            <div className="student-name">
-              Студент : {localStorage.getItem("studentByDisciplineOne")}
-            </div>
+            <div className="student-name">Студент</div>
             <Select
               defaultValue={{ value: "student", label: "Студент" }}
               className="student-select-statistic"
@@ -129,81 +99,17 @@ class StudentByDiscipline extends React.Component {
             />
           </div>
         </div>
-        <div className="graph">
-          <Radar
-            data={{
-              labels: ["Средний балл", "Опоздания", "Пропуски"],
-              datasets: [
-                {
-                  label: this.props.disciplineByStudentStatistic.map(
-                    (statistic, i) => {
-                      this.state.data.push(
-                        statistic.studentPerformanceDTO.overallGPA
-                      );
-                      this.state.data.push(statistic.totalNumberLates);
-                      this.state.data.push(statistic.totalNumberPasses);
-                      return (
-                        statistic.studentPerformanceDTO.studentDTO.surname +
-                        " " +
-                        statistic.studentPerformanceDTO.studentDTO.name
-                      );
-                    }
-                  ),
-                  data: this.props.dataByStudentStatistic.map((data, i) => {
-                    if (data === null) {
-                      alert("У студента нет такой дисциплины!");
-                    }
-                    return data;
-                  }),
-                  backgroundColor: "rgb(50, 50, 100, 0.3)",
-                  borderColor: "#1C2742",
-                  pointBackgroundColor: "#1C2742",
-                  pointBorderColor: "#fff",
-                  pointHoverBackgroundColor: "#fff",
-                  pointHoverBorderColor: "#6F6B94",
-                },
-              ],
-            }}
-            height={700}
-            plugins={[ChartDataLabels]}
-            options={{
-              plugins: {
-                legend: {
-                  labels: {
-                    font: {
-                      size: 20,
-                    },
-                  },
-                },
-                datalabels: {
-                  align: "end",
-                  offset: 5,
-                  font: {
-                    size: 25,
-                    family: "san-serif",
-                  },
-                },
-              },
-              maintainAspectRatio: false,
-              indexAxis: "y",
-              scales: {
-                r: {
-                  pointLabels: {
-                    padding: 30,
-                    font: {
-                      size: 15,
-                    },
-                  },
-                  angleLines: {
-                    display: false,
-                  },
-                  suggestedMin: -1,
-                },
-              },
-            }}
-          />
+        <div className={isLoading ? "lds-facebook" : ""}>
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
-        <hr></hr>
+        <StudentByDisciplineRadar
+          disciplineByStudentStatistic={this.props.disciplineByStudentStatistic}
+          dataByStudentStatistic={this.props.dataByStudentStatistic}
+          height={this.props.height}
+          isLoading={this.props.isLoading}
+        />
       </div>
     );
   }

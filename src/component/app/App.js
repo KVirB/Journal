@@ -11,6 +11,7 @@ import StudentByDiscipline from "../Stats/studentByDisciplineContainer";
 import StudentStatistic from "../Stats/studentStatisticContainer";
 import GeneralGroupStatistic from "../Stats/generalGroupStatisticContainer";
 import MainPageContainer from "../Main/mainPageContainer";
+import FacultyStatistic from "../Stats/facultyStatisticContainer";
 
 const App = () => {
   return (
@@ -63,6 +64,14 @@ const App = () => {
             element={
               <RequireAuth>
                 <GeneralGroupStatistic />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/electronicaljournal-view/facultystatistic"
+            element={
+              <RequireAuth>
+                <FacultyStatistic />
               </RequireAuth>
             }
           />

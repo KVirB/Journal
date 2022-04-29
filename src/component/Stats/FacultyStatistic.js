@@ -5,7 +5,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 import Select from "react-select";
 import GeneralBar from "./Chart/GeneralBar";
 
-class GeneralGroupStatistic extends React.Component {
+class FacultyStatistic extends React.Component {
   state = {
     passes: [],
     groupsId: 0,
@@ -14,7 +14,7 @@ class GeneralGroupStatistic extends React.Component {
     secondDate: null,
   };
   componentDidMount() {
-    this.props.getGroupsThunk();
+    this.props.getFacultyThunk();
   }
 
   getFirstDate = (e) => {
@@ -25,13 +25,6 @@ class GeneralGroupStatistic extends React.Component {
       this.setState({
         secondDate: null,
       });
-      this.state.groupsId !== null &&
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null
-        ? this.props.getGeneralGroupStatisticsThunk(this.state.groupsId)
-        : console.log("Error with generalSecondDate");
-      // localStorage.setItem("firstDate", e);
-      console.log(this.state.firstDate);
       this.props.setFirstDate(e);
     })();
   };
@@ -41,33 +34,27 @@ class GeneralGroupStatistic extends React.Component {
       await this.setState({
         secondDate: e,
       });
-      // localStorage.setItem("secondDate", e);
-      this.state.groupsId !== null &&
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null
-        ? this.props.getGeneralGroupStatisticsThunk(this.state.groupsId)
-        : console.log("Error with generalSecondDate");
-      console.log(this.state.secondDate);
       this.props.setSecondDate(e);
     })();
   };
 
   getGroups = (e) => {
     (async () => {
-      await this.setState({
+      this.setState({
         groupsId: e,
       });
-      await this.props.getStudentsThunk(this.state.groupsId);
-      this.state.groupsId !== null &&
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null
-        ? this.props.getGeneralGroupStatisticsThunk(this.state.groupsId)
-        : console.log("Error with generalSecondDate");
+    })();
+  };
+  getFacultys = (e) => {
+    (async () => {
+      this.setState({
+        facultyId: e,
+      });
     })();
   };
 
   render() {
-    const { getGroups } = this;
+    const { getFacultys } = this;
     const { isLoading } = this.props;
     return (
       <div>
@@ -85,15 +72,16 @@ class GeneralGroupStatistic extends React.Component {
               />
             </div>
             <div>
-              <div className="group-name">Группа</div>
-              <div className="group-select-statistic">
+              <div className="faculty-name">Факультет</div>
+              <div className="faculty-select-statistic">
                 <Select
-                  defaultValue={{ value: "group", label: "Группа" }}
-                  onChange={(e) => getGroups(e.value)}
-                  options={this.props.groups.map((m) => ({
-                    value: m.name,
-                    label: m.name,
+                  defaultValue={{ value: "faculty", label: "Факультет" }}
+                  onChange={(e) => getFacultys(e.label)}
+                  options={this.props.faculty.map((m) => ({
+                    value: m.shortName,
+                    label: m.shortName,
                   }))}
+                  // options={[{ value: "fitr", label: "Фитр" }]}
                 />
               </div>
             </div>
@@ -128,15 +116,16 @@ class GeneralGroupStatistic extends React.Component {
               />
             </div>
           </div>
-          <div className="display-flex">
+          <div className="display-flex"></div>
+          <div>
             <input
               className="bt_color bt_excel"
               type="submit"
               value="Excel"
               disabled={this.props.disabled}
               onClick={() => {
-                this.props.getExcelThunk(
-                  this.state.groupsId,
+                this.props.getExcelFacultyThunk(
+                  this.state.facultyId,
                   this.state.firstDate,
                   this.state.secondDate
                 );
@@ -144,20 +133,9 @@ class GeneralGroupStatistic extends React.Component {
             />
           </div>
         </div>
-        <div className={isLoading ? "lds-facebook" : ""}>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <GeneralBar
-          generalGroupStatistic={this.props.generalGroupStatistic}
-          height={this.props.height}
-          students={this.props.students}
-          isLoading={this.props.isLoading}
-        />
       </div>
     );
   }
 }
 
-export default GeneralGroupStatistic;
+export default FacultyStatistic;

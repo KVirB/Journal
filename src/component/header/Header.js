@@ -440,6 +440,10 @@ class Header extends React.Component {
                   value: `/electronicaljournal-view/generalgroupstatistic`,
                   label: "Общая статистика по группе",
                 },
+                {
+                  value: `/electronicaljournal-view/facultystatistic`,
+                  label: "Статистика по факультету",
+                },
               ]}
             />
           </div>

@@ -4,6 +4,7 @@ import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import Select from "react-select";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
+import StudentStatisticRadar from "./Chart/StudentStatisticRadar";
 
 class StudentStatistic extends React.Component {
   state = {
@@ -15,6 +16,7 @@ class StudentStatistic extends React.Component {
     firstDate: null,
     secondDate: null,
     data: [],
+    hidden: null,
   };
   componentDidUpdate(prevProps, prevState) {
     if (this.state.studentId !== prevState.studentId) {
@@ -146,6 +148,16 @@ class StudentStatistic extends React.Component {
         )}
         <div className="display-flex">
           <div>
+            <input
+              className="button-back bt_color"
+              type="submit"
+              value="Назад"
+              onClick={() => {
+                window.location.assign(`/electronicaljournal-view/journal`);
+              }}
+            />
+          </div>
+          <div>
             <div className="group-name">Группа</div>
             <Select
               defaultValue={{ value: "group", label: "Группа" }}
@@ -205,81 +217,11 @@ class StudentStatistic extends React.Component {
           <div></div>
           <div></div>
         </div>
-        <div
-          className="graph"
-          hidden={isLoading === null ? true : isLoading === true ? true : false}
-        >
-          <Radar
-            data={{
-              labels: ["Средний балл", "Опоздания", "Пропуски"],
-              datasets: [
-                {
-                  label: this.props.studentStatisticByPeriod.map(
-                    (statistic, i) => {
-                      if (statistic.studentPerformanceDTO.studentDTO === null) {
-                        return "На данный период данных нет";
-                      } else {
-                        return (
-                          statistic.studentPerformanceDTO.studentDTO.surname +
-                          " " +
-                          statistic.studentPerformanceDTO.studentDTO.name
-                        );
-                      }
-                    }
-                  ),
-                  data: this.props.dataByStudentStatisticPeriod.map(
-                    (data, i) => {
-                      return data;
-                    }
-                  ),
-                  backgroundColor: "rgb(50, 50, 100, 0.3)",
-                  borderColor: "#1C2742",
-                  pointBackgroundColor: "#1C2742",
-                  pointBorderColor: "#fff",
-                  pointHoverBackgroundColor: "#fff",
-                  pointHoverBorderColor: "#6F6B94",
-                },
-              ],
-            }}
-            height={700}
-            plugins={[ChartDataLabels]}
-            options={{
-              plugins: {
-                legend: {
-                  labels: {
-                    font: {
-                      size: 20,
-                    },
-                  },
-                },
-                datalabels: {
-                  align: "end",
-                  offset: 5,
-                  font: {
-                    size: 16,
-                    family: "san-serif",
-                  },
-                },
-              },
-              maintainAspectRatio: false,
-              indexAxis: "y",
-              scales: {
-                r: {
-                  pointLabels: {
-                    padding: 30,
-                    font: {
-                      size: 15,
-                    },
-                  },
-                  angleLines: {
-                    display: false,
-                  },
-                  suggestedMin: -1,
-                },
-              },
-            }}
-          />
-        </div>
+        <StudentStatisticRadar
+          isLoading={this.props.isLoading}
+          studentStatisticByPeriod={this.props.studentStatisticByPeriod}
+          dataByStudentStatisticPeriod={this.props.dataByStudentStatisticPeriod}
+        />
       </div>
     );
   }

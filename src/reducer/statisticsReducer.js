@@ -304,13 +304,16 @@ export const getStudentStatisticByPeriodThunk = (
 ) => {
   return (dispatch) => {
     dispatch(setLoaderTrue());
-    getStudentsStatisticByPeriod(groupsId, firstDate, secondDate).then(
-      (data) => {
+    getStudentsStatisticByPeriod(groupsId, firstDate, secondDate)
+      .then((data) => {
         dispatch(setStudentStatisticByPeriod(data));
         dispatch(setDataByStudentStatisticPeriod());
         dispatch(setLoaderFalse());
-      }
-    );
+      })
+      .catch((e) => {
+        dispatch(setLoaderFalse());
+        console.log(e);
+      });
   };
 };
 
@@ -390,15 +393,15 @@ export const getGeneralGroupStatisticsThunk = (groupsId) => {
   };
 };
 
-export const getExcelThunk = (groupsId) => {
+export const getExcelThunk = (groupsId, firstDate, secondDate) => {
   return (dispatch) => {
-    getExcel(groupsId);
+    getExcel(groupsId, firstDate, secondDate);
   };
 };
 
-export const getExcelFacultyThunk = (facultyId) => {
+export const getExcelFacultyThunk = (facultyId, firstDate, secondDate) => {
   return (dispatch) => {
-    getExcelFaculty(facultyId);
+    getExcelFaculty(facultyId, firstDate, secondDate);
   };
 };
 

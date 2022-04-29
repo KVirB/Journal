@@ -3,17 +3,16 @@ import { Bar, Line, Radar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import Select from "react-select";
+import StatisticGroupByDisciplineBar from "./Chart/StatisticGroupByDisciplineBar";
 
 class Statistics extends React.Component {
   state = {
     passes: [],
-    groupsId: 0,
-    disciplineId: 0,
+    groupsId: null,
+    disciplineId: null,
   };
   componentDidMount() {
     this.props.getGroupsThunk();
-    localStorage.removeItem("statDisciplineAll");
-    localStorage.removeItem("statGroupAll");
   }
   getGroups = (e) => {
     (async () => {
@@ -21,8 +20,12 @@ class Statistics extends React.Component {
         groupsId: e,
       });
       this.props.getDisciplinesStatisticThunk(e);
-      localStorage.setItem("statGroupAll", e);
-      localStorage.setItem("statDisciplineAll", "Дисциплина");
+      this.state.groupsId !== null && this.state.disciplineId !== null
+        ? this.props.getGeneralStatisticsThunk(
+            this.state.groupsId,
+            this.state.disciplineId
+          )
+        : console.log("Error with Statistics");
     })();
   };
   getValueDiscipline = (e, c) => {
@@ -30,20 +33,19 @@ class Statistics extends React.Component {
       await this.setState({
         disciplineId: e,
       });
-      this.props.getGeneralStatisticsThunk(
-        this.state.groupsId,
-        this.state.disciplineId
-      );
-      localStorage.setItem("statDisciplineAll", c);
+      this.state.groupsId !== null && this.state.disciplineId !== null
+        ? this.props.getGeneralStatisticsThunk(
+            this.state.groupsId,
+            this.state.disciplineId
+          )
+        : console.log("Error with Statistics");
     })();
   };
   render() {
     const { getGroups, getValueDiscipline } = this;
     const { generalStatistics } = this.props;
     const { isLoading } = this.props;
-    return isLoading ? (
-      <div className="lds-facebook"></div>
-    ) : (
+    return (
       <div>
         {console.log(this.state.groupsId)}
         {console.log(this.state.disciplineId)}
@@ -61,9 +63,7 @@ class Statistics extends React.Component {
               />
             </div>
             <div>
-              <div className="group-name">
-                Группа : {localStorage.getItem("statGroupAll")}
-              </div>
+              <div className="group-name">Группа</div>
               <div className="group-select-statistic">
                 <Select
                   defaultValue={{ value: "group", label: "Группа" }}
@@ -76,9 +76,7 @@ class Statistics extends React.Component {
               </div>
             </div>
             <div>
-              <div className="group-name">
-                Дисциплина : {localStorage.getItem("statDisciplineAll")}
-              </div>
+              <div className="group-name">Дисциплина</div>
               <Select
                 defaultValue={{ value: "discipline", label: "Дисциплина" }}
                 className="group-select-statistics"
@@ -91,70 +89,16 @@ class Statistics extends React.Component {
             </div>
           </div>
         </div>
-        <div className="graph">
-          <Bar
-            data={{
-              labels: this.props.generalStatistics.map((statistic, i) => {
-                return (
-                  statistic.studentPerformanceDTO.studentDTO.surname +
-                  " " +
-                  statistic.studentPerformanceDTO.studentDTO.name
-                );
-              }),
-              datasets: [
-                {
-                  label: "Общий средний балл",
-                  data: this.props.generalStatistics.map((statistic, i) => {
-                    return statistic.studentPerformanceDTO.overallGPA;
-                  }),
-                  maxBarThickness: 30,
-                  backgroundColor: ["#1C2742"],
-                },
-                {
-                  label: "Колличество пропусков",
-                  data: this.props.generalStatistics.map((statistic, i) => {
-                    return statistic.totalNumberPasses;
-                  }),
-                  maxBarThickness: 30,
-                  backgroundColor: ["#3A405C"],
-                },
-                {
-                  label: "Опоздания",
-                  data: this.props.generalStatistics.map((statistic, i) => {
-                    return statistic.totalNumberLates;
-                  }),
-                  maxBarThickness: 30,
-                  backgroundColor: ["#6F6B94"],
-                },
-              ],
-            }}
-            height={this.props.height}
-            plugins={[ChartDataLabels]}
-            options={{
-              maintainAspectRatio: false,
-              plugins: {
-                datalabels: {
-                  color: "white",
-                  align: "right",
-                  anchor: "start",
-                  padding: "25",
-                  font: {
-                    size: 16,
-                    family: "san-serif",
-                  },
-                },
-              },
-
-              indexAxis: "y",
-              scales: {
-                x: {
-                  type: "linear",
-                  min: 0,
-                },
-              },
-            }}
-          />
+        <div className={isLoading ? "lds-facebook" : ""}>
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
+        <StatisticGroupByDisciplineBar
+          generalStatistics={this.props.generalStatistics}
+          height={this.props.height}
+          isLoading={this.props.isLoading}
+        />
       </div>
     );
   }

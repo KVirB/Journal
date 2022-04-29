@@ -8,7 +8,6 @@
 }
 .discipline-select {
   background: #ffffff;
-  border: 1px solid #ebebeb;
   box-sizing: border-box;
   box-shadow: 2px 8px 15px rgba(201, 201, 201, 0.1);
   border-radius: 4px;
@@ -160,7 +159,7 @@
   line-height: 135%;
   color: #9a9c9c;
   margin-top: 40px;
-  margin-left: 236px;
+  margin-left: 55px;
 }
 .pgroup-name {
   font-family: "Roboto", sans-serif;
@@ -385,7 +384,7 @@ input[type="submit"].button-header:disabled {
   box-sizing: border-box;
   width: 144px;
   height: 38px;
-  margin-left: 213px;
+  margin-left: 30px;
   margin-top: 14px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -416,7 +415,7 @@ input[type="submit"].button-header:disabled {
   width: 500px;
   height: 38px;
   margin-left: 30px;
-  margin-top: 15px;
+  margin-top: 14px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;

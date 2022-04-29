@@ -7,12 +7,12 @@ const baseRoutGeneral = axios.create({
   baseURL: "http://192.168.11.252:8081/",
 });
 
-export const getExcelFaculty = (facultyId) => {
+export const getExcelFaculty = (facultyId, firstDate, secondDate) => {
   return (
     baseRout
       // utils/myExcel?groupName=& period=2022-03-21and...
       .request({
-        url: `electronicjournal/utils/mySecondExcel?facultyName=${facultyId}`,
+        url: `electronicjournal/utils/mySecondExcel?facultyName=${facultyId}&period=${firstDate}and${secondDate}`,
         method: "GET",
         responseType: "blob",
       })
@@ -36,10 +36,10 @@ export const getExcelFaculty = (facultyId) => {
   );
 };
 
-export const getExcel = (groupsId) => {
+export const getExcel = (groupsId, firstDate, secondDate) => {
   return baseRout
     .request({
-      url: `electronicjournal/utils/myExcel?groupName=${groupsId}`,
+      url: `electronicjournal/utils/myExcel?groupName=${groupsId}&period=${firstDate}and${secondDate}`,
       method: "GET",
       responseType: "blob",
     })
