@@ -81,7 +81,6 @@ class FacultyStatistic extends React.Component {
                     value: m.shortName,
                     label: m.shortName,
                   }))}
-                  // options={[{ value: "fitr", label: "Фитр" }]}
                 />
               </div>
             </div>

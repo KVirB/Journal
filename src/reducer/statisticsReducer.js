@@ -31,6 +31,7 @@ const SET_LOADER_FALSE = "SET_LOADER_FALSE";
 const CLEAR_GROUPS = "CLEAR_GROUPS";
 const CLEAR_DISCIPLINEBYSTUDENTSTATISTIC = "CLEAR_DISCIPLINEBYSTUDENTSTATISTIC";
 const SET_DATABYSTUDENTSTATISTIC = "SET_DATABYSTUDENTSTATISTIC";
+const CLEAR_DISCIPLINESTATISTIC = "CLEAR_DISCIPLINESTATISTIC";
 let initialState = {
   generalStatistics: [],
   groups: [],
@@ -51,6 +52,12 @@ let initialState = {
 
 const statisticsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CLEAR_DISCIPLINESTATISTIC: {
+      return {
+        ...state,
+        disciplinesStatistic: [],
+      };
+    }
     case CLEAR_GRAPHSTUDENTBYPERIOD: {
       return {
         ...state,
@@ -202,6 +209,10 @@ const statisticsReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const clearDisciplineStatistic = () => ({
+  type: CLEAR_DISCIPLINESTATISTIC,
+});
 
 export const clearGraphStudentByPeriod = () => ({
   type: CLEAR_GRAPHSTUDENTBYPERIOD,

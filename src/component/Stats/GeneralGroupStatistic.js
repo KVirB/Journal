@@ -30,7 +30,6 @@ class GeneralGroupStatistic extends React.Component {
       this.state.secondDate !== null
         ? this.props.getGeneralGroupStatisticsThunk(this.state.groupsId)
         : console.log("Error with generalSecondDate");
-      // localStorage.setItem("firstDate", e);
       console.log(this.state.firstDate);
       this.props.setFirstDate(e);
     })();
@@ -41,7 +40,6 @@ class GeneralGroupStatistic extends React.Component {
       await this.setState({
         secondDate: e,
       });
-      // localStorage.setItem("secondDate", e);
       this.state.groupsId !== null &&
       this.state.firstDate !== null &&
       this.state.secondDate !== null
@@ -57,7 +55,7 @@ class GeneralGroupStatistic extends React.Component {
       await this.setState({
         groupsId: e,
       });
-      await this.props.getStudentsThunk(this.state.groupsId);
+      // await this.props.getStudentsThunk(this.state.groupsId);
       this.state.groupsId !== null &&
       this.state.firstDate !== null &&
       this.state.secondDate !== null
@@ -152,7 +150,7 @@ class GeneralGroupStatistic extends React.Component {
         <GeneralBar
           generalGroupStatistic={this.props.generalGroupStatistic}
           height={this.props.height}
-          students={this.props.students}
+          // students={this.props.students}
           isLoading={this.props.isLoading}
         />
       </div>

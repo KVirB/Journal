@@ -378,6 +378,7 @@ input[type="submit"].button-header:disabled {
   font-size: 16px;
   line-height: 19px;
   color: #212323;
+  text-indent: 20px;
 }
 .faculty-select-statistic {
   background: #ffffff;

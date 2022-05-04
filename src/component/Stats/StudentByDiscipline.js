@@ -23,10 +23,14 @@ class StudentByDiscipline extends React.Component {
       await this.setState({
         studentId: e,
       });
-      this.props.getStatisticByDisciplineStudentThunk(
-        this.state.disciplineId,
-        this.state.studentId
-      );
+      this.state.groupsId !== null &&
+      this.state.studentId !== null &&
+      this.state.disciplineId !== null
+        ? this.props.getStatisticByDisciplineStudentThunk(
+            this.state.disciplineId,
+            this.state.studentId
+          )
+        : console.log("Error with StudentByDiscipline");
     })();
   };
 
@@ -35,22 +39,41 @@ class StudentByDiscipline extends React.Component {
       await this.setState({
         groupsId: e,
       });
-      this.props.getDisciplinesStatisticThunk(this.state.groupsId);
+      await this.props.getDisciplinesStatisticThunk(this.state.groupsId);
       this.props.getStudentsThunk(this.state.groupsId);
+      this.state.groupsId !== null &&
+      this.state.studentId !== null &&
+      this.state.disciplineId !== null
+        ? this.props.getStatisticByDisciplineStudentThunk(
+            this.state.disciplineId,
+            this.state.studentId
+          )
+        : console.log("Error with StudentByDiscipline");
     })();
   };
   getValueDiscipline = (e, c) => {
-    this.setState({
-      disciplineId: e,
-    });
-    this.props.clearDisciplineByStudentStatistic();
+    (async () => {
+      await this.setState({
+        disciplineId: e,
+      });
+      this.props.clearDisciplineByStudentStatistic();
+      this.props.getStudentsThunk(this.state.groupsId);
+      this.state.groupsId !== null &&
+      this.state.studentId !== null &&
+      this.state.disciplineId !== null
+        ? this.props.getStatisticByDisciplineStudentThunk(
+            this.state.disciplineId,
+            this.state.studentId
+          )
+        : console.log("Error with StudentByDiscipline");
+    })();
   };
   render() {
     const { getGroups, getValueDiscipline, getStudents } = this;
     const { isLoading } = this.props;
     return (
       <div>
-        {console.log(this.props.disciplineByStudentStatistic)}
+        {console.log(this.props.disciplinesStatistic + "HELLO")}
         <div className="display-flex">
           <div>
             <input
