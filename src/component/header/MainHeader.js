@@ -18,7 +18,7 @@ function MainHeader() {
 
   return (
     <div>
-      <header className="head display-flex">
+      <header className="head">
         <h1 className="journal-name">
           <Link className="j_name" to="/electronicaljournal-view">
             Электронный журнал преподавателя УО «ВГТУ»
@@ -49,8 +49,10 @@ function MainHeader() {
                   alt="description"
                 ></img>
               </div>
-              <div>
+              <div className="block_of_name">
                 <label className="name_of_teacher">{user.fio}</label>
+              </div>
+              <div>
                 <input
                   type="submit"
                   className="bth_exit"

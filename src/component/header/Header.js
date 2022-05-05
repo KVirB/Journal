@@ -322,7 +322,7 @@ class Header extends React.Component {
       <div className="lds-facebook"></div>
     ) : (
       <div>
-        <div className="display-flex pointer">
+        <div className="wrap_selects pointer">
           {console.log(JSON.stringify(this.props.courseSpec) + "spec")}
           {console.log(JSON.stringify(this.props.discipline))}
           <div className="display-flex">

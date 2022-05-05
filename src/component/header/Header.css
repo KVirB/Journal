@@ -11,7 +11,7 @@
   box-sizing: border-box;
   box-shadow: 2px 8px 15px rgba(201, 201, 201, 0.1);
   border-radius: 4px;
-  margin-left: 56px;
+  margin-left: 30px;
   margin-top: 15px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -30,7 +30,7 @@
   font-size: 15px;
   line-height: 135%;
   color: #9a9c9c;
-  margin-left: 80px;
+  margin-left: 54px;
   margin-top: 40px;
 }
 .display-flex {
@@ -102,11 +102,11 @@
   line-height: 135%;
   color: #9a9c9c;
   margin-top: 36px;
-  margin-left: 80px;
+  margin-left: 54px;
 }
 .course-input {
   font-family: "Roboto", sans-serif;
-  margin-left: 56px;
+  margin-left: 30px;
   width: 103px;
   text-indent: 23px;
   font-style: normal;
@@ -319,6 +319,9 @@ input[type="submit"].button-header:disabled {
   line-height: 18px;
   color: #ffffff;
   margin-right: 40px;
+}
+.block_of_name {
+  margin-top: 36px;
 }
 
 .user-info__div {

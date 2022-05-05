@@ -98,12 +98,12 @@ export default class MarksTable extends React.Component {
           <div className="all-content">
             <TableContainer>
               <Table
-                stickyHeader
-                aria-label="sticky table"
-                style={{ maxWidth: 0, minWidth: 0 }}
-                className="disp"
+                // stickyHeader
+                // aria-label="sticky table"
+                // style={{ maxWidth: 0, minWidth: 0 }}
+                className="disp overwlov_for_table"
               >
-                <tbody>
+                <tbody className="sticky_fio">
                   <TableRow>
                     {this.props.journalsite.map((m, i) => {
                       if (i === 0) {
@@ -111,10 +111,10 @@ export default class MarksTable extends React.Component {
                           this.state.inputs = {};
                         }
                         return (
-                          <td className="line-fio diagonal-line" key={i}>
+                          <TableCell className="line-fio diagonal-line" key={i}>
                             <label className="dzs">Дата</label>
                             <label className="fios">ФИО</label>
-                          </td>
+                          </TableCell>
                         );
                       }
                     })}
@@ -142,12 +142,13 @@ export default class MarksTable extends React.Component {
                     )}
                   </TableRow>
                 </tbody>
+
                 {this.props.journalsite.map((item, i) =>
                   item.journalHeaders.map((header, i) => {
                     return (
                       <tbody key={i}>
                         <TableRow>
-                          <TableCell height="126px" className="line-data">
+                          <TableCell height="158.5px" className="line-data">
                             <div className="">
                               <p className="day_mount">
                                 {header.dateOfLesson !== null
@@ -183,8 +184,8 @@ export default class MarksTable extends React.Component {
                           return (
                             <TableRow key={j}>
                               <TableCell
-                                className="line-grade disp"
-                                height="26px"
+                                className="line-grade"
+                                height="32px"
                                 width={
                                   localStorage.getItem("typeC") === "Лекция"
                                     ? "65px"
@@ -396,7 +397,7 @@ export default class MarksTable extends React.Component {
                   })
                 )}
               </Table>
-              <Table
+              {/* <Table
                 stickyHeader
                 aria-label="sticky table"
                 style={{ maxWidth: 0, minWidth: 0 }}
@@ -433,7 +434,7 @@ export default class MarksTable extends React.Component {
                     })}
                   </TableRow>
                 </tbody>
-              </Table>
+              </Table> */}
             </TableContainer>
           </div>
           <div className="headHrDown" />

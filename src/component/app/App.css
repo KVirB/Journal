@@ -150,14 +150,14 @@ hr {
 .line-stud {
   border-left: 1px solid rgba(224, 224, 224, 1);
   border-right: 1px solid rgba(224, 224, 224, 1);
-  height: 26px;
+  height: 32px;
 }
 .line-fio {
   border-left: 1px solid rgba(224, 224, 224, 1);
   border-right: 1px solid rgba(224, 224, 224, 1);
   border-bottom: 1px solid rgba(224, 224, 224, 1);
-  height: 158px;
-  width: 302px;
+  height: 158.5px;
+  width: 270px;
   display: block;
 }
 
@@ -603,4 +603,34 @@ select {
   color: #9a9c9c;
   margin-top: 40px;
   margin-left: 55px;
+}
+.overwlov_for_table {
+  overflow: auto;
+}
+.sticky_fio {
+  position: sticky;
+  left: 0;
+  background: white;
+  opacity: 1;
+  z-index: 1;
+}
+.wrap_selects {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media (max-width: 1200px) {
+  .discipline-select {
+    width: 262px;
+  }
+  .special-select {
+    width: 435px;
+  }
+}
+@media (max-width: 1000px) {
+  .discipline-select {
+    width: 262px;
+  }
+  .special-select {
+    width: 435px;
+  }
 }
