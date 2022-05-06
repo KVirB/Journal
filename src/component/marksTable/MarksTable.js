@@ -112,7 +112,7 @@ export default class MarksTable extends React.Component {
                         }
                         return (
                           <TableCell className="line-fio diagonal-line" key={i}>
-                            <label className="dzs">Дата</label>
+                            <label className="dzs wrap_selects">Дата</label>
                             <label className="fios">ФИО</label>
                           </TableCell>
                         );
@@ -125,16 +125,19 @@ export default class MarksTable extends React.Component {
                           return header.journalContents.map((content, i) => (
                             <TableCell
                               height="19px"
-                              width="270px"
+                              width="auto"
                               className="disp line-stud"
                               key={content.id}
                             >
                               <div className="surname">
-                                {i + 1 + ". " + content.student.surname}
+                                {i +
+                                  1 +
+                                  ". " +
+                                  content.student.surname +
+                                  " " +
+                                  content.student.name}
                               </div>
-                              <div className="csn surname">
-                                {content.student.name}
-                              </div>
+                              {/* <div className="csn surname">{}</div> */}
                             </TableCell>
                           ));
                         }

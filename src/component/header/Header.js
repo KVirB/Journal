@@ -325,7 +325,7 @@ class Header extends React.Component {
         <div className="wrap_selects pointer">
           {console.log(JSON.stringify(this.props.courseSpec) + "spec")}
           {console.log(JSON.stringify(this.props.discipline))}
-          <div className="display-flex">
+          <div className="wrap_selects">
             <div>
               <div className="discipline-name">Название дисциплины</div>
               <Select
@@ -456,7 +456,7 @@ class Header extends React.Component {
         </div>
         {console.log(this.props.courseSpec + "GGGGGGGGGGGGGGGGGGGGGGGG")}
         <div className="headHr" />
-        <div className="kuki">
+        <div className="kuki wrap_selects">
           <div className="buki">
             <div>
               <div className="course-name">Курс</div>

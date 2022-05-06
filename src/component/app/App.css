@@ -157,7 +157,7 @@ hr {
   border-right: 1px solid rgba(224, 224, 224, 1);
   border-bottom: 1px solid rgba(224, 224, 224, 1);
   height: 158.5px;
-  width: 270px;
+  width: 200px;
   display: block;
 }
 
@@ -296,7 +296,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
   font-size: 16px;
   line-height: 19px;
   color: #212323;
-  text-align: center;
+  /* text-align: center; */
   align-items: center;
 }
 section h2 {
@@ -625,6 +625,15 @@ select {
   .special-select {
     width: 435px;
   }
+  .kuki {
+    padding: 0 30px 0 0;
+  }
+  .head {
+    padding: 0 30px 0 30px;
+  }
+  .all-content {
+    padding-left: 30px;
+  }
 }
 @media (max-width: 1000px) {
   .discipline-select {
@@ -632,5 +641,147 @@ select {
   }
   .special-select {
     width: 435px;
+  }
+  .kuki {
+    padding: 0 30px 0 0;
+  }
+  .head {
+    padding: 0 30px 0 30px;
+  }
+  .icons_que {
+    margin-top: 50px;
+  }
+  .icons_col {
+    margin-top: 50px;
+  }
+  .icons_mech {
+    margin-top: 50px;
+  }
+  .button-header {
+    margin-left: 30px;
+  }
+  .journal-name {
+    max-width: 250px;
+  }
+  .profile_pic {
+    margin-top: 40px;
+  }
+  .block_of_name {
+    margin-top: 50px;
+  }
+  .bth_exit {
+    margin-top: 38px;
+  }
+  .all-content {
+    padding-left: 30px;
+  }
+}
+
+@media (max-width: 800px) {
+  .icons_que {
+    display: none;
+  }
+  .icons_col {
+    display: none;
+  }
+  .icons_mech {
+    display: none;
+  }
+  .button-header {
+    margin-left: 30px;
+  }
+  .journal-name {
+    max-width: 250px;
+  }
+  .profile_pic {
+    margin-top: 40px;
+  }
+  .block_of_name {
+    margin-top: 50px;
+  }
+  .bth_exit {
+    margin-top: 38px;
+  }
+  .button-header {
+    margin-top: 45px;
+  }
+  .all-content {
+    padding-left: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .icons_que {
+    display: none;
+  }
+  .icons_col {
+    display: none;
+  }
+  .icons_mech {
+    display: none;
+  }
+  .button-header {
+    margin-left: 30px;
+  }
+  .journal-name {
+    max-width: 250px;
+  }
+  .profile_pic {
+    margin-top: 40px;
+  }
+  .block_of_name {
+    margin-top: 50px;
+  }
+  .bth_exit {
+    margin-top: 38px;
+  }
+  .button-header {
+    margin-top: 45px;
+  }
+  .all-content {
+    padding-left: 30px;
+  }
+}
+@media (max-width: 600px) {
+  .profile_pic {
+    display: none;
+  }
+  .bth_exit {
+    width: 40px;
+    height: 40px;
+  }
+  .special-select {
+    width: 250px;
+    height: 38px;
+    overflow: scroll;
+  }
+  .name_of_teacher {
+    margin-right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile_pic {
+    display: none;
+  }
+  .bth_exit {
+    width: 40px;
+    height: 40px;
+  }
+  .special-select {
+    width: 250px;
+    height: 38px;
+    overflow: scroll;
+  }
+  .name_of_teacher {
+    margin-right: 15px;
+  }
+}
+@media (max-width: 360px) {
+  .special-select {
+    width: 180px;
+  }
+  .name_of_teacher {
+    display: none;
   }
 }

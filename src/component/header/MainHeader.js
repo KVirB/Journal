@@ -56,7 +56,7 @@ function MainHeader() {
                 <input
                   type="submit"
                   className="bth_exit"
-                  value="Выйти"
+                  value="➞"
                   onClick={Logout}
                 />
               </div>
