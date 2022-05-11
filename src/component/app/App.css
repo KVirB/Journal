@@ -157,7 +157,7 @@ hr {
   border-right: 1px solid rgba(224, 224, 224, 1);
   border-bottom: 1px solid rgba(224, 224, 224, 1);
   height: 158.5px;
-  width: 200px;
+  /* width: 200px; */
   display: block;
 }
 
@@ -325,7 +325,7 @@ section div {
 }
 /* для элемента input c type="checkbox" */
 .custom-checkbox {
-  position: absolute;
+  position: fixed;
   z-index: -1;
   opacity: 0;
 }
@@ -493,7 +493,7 @@ select {
 }
 .lds-facebook div {
   display: inline-block;
-  position: absolute;
+  position: fixed;
   left: 8px;
   width: 16px;
   background: #434c63;
@@ -618,9 +618,27 @@ select {
   display: flex;
   flex-wrap: wrap;
 }
-@media (max-width: 1200px) {
+.exit_480 {
+  text-align: center;
+  display: none;
+}
+.exit_1920 {
+  text-align: center;
+}
+
+@media (max-width: 1264px) {
+  .course-input {
+    margin-left: 30px;
+  }
+  .course-name {
+    margin-left: 55px;
+  }
+  .discipline-name {
+    margin-left: 55px;
+  }
   .discipline-select {
     width: 262px;
+    margin-left: 30px;
   }
   .special-select {
     width: 435px;
@@ -636,8 +654,18 @@ select {
   }
 }
 @media (max-width: 1000px) {
+  .course-input {
+    margin-left: 30px;
+  }
+  .course-name {
+    margin-left: 55px;
+  }
+  .discipline-name {
+    margin-left: 55px;
+  }
   .discipline-select {
     width: 262px;
+    margin-left: 30px;
   }
   .special-select {
     width: 435px;
@@ -743,6 +771,12 @@ select {
   }
 }
 @media (max-width: 600px) {
+  .exit_1920 {
+    display: none;
+  }
+  .exit_480 {
+    display: block;
+  }
   .profile_pic {
     display: none;
   }
@@ -752,8 +786,6 @@ select {
   }
   .special-select {
     width: 250px;
-    height: 38px;
-    overflow: scroll;
   }
   .name_of_teacher {
     margin-right: 15px;
@@ -770,11 +802,32 @@ select {
   }
   .special-select {
     width: 250px;
-    height: 38px;
-    overflow: scroll;
   }
   .name_of_teacher {
     margin-right: 15px;
+  }
+}
+@media (max-width: 460px) {
+  .block_of_name {
+    display: none;
+  }
+  .profile_pic {
+    display: none;
+  }
+  .bth_exit {
+    width: 40px;
+    height: 40px;
+  }
+  .special-select {
+    width: 250px;
+  }
+  .name_of_teacher {
+    margin-right: 15px;
+  }
+}
+@media (max-width: 420px) {
+  .special-select {
+    width: 180px;
   }
 }
 @media (max-width: 360px) {
@@ -784,4 +837,30 @@ select {
   .name_of_teacher {
     display: none;
   }
+}
+[id^="c"] {
+  display: none;
+}
+[id^="c"] + label {
+  display: block;
+  width: 17px;
+  height: 17px;
+  border: 1.3px solid #e0e0e0;
+  border-radius: 3px;
+  text-align: center;
+}
+[id^="c"] + label:before {
+  content: "\2713";
+  display: inline-block;
+  color: #5da952;
+  font-size: 30px;
+  line-height: 12px;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+[id^="c"]:checked + label:before {
+  -webkit-transform: scale(1);
+  transform: scale(1);
 }

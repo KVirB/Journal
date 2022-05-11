@@ -111,7 +111,11 @@ export default class MarksTable extends React.Component {
                           this.state.inputs = {};
                         }
                         return (
-                          <TableCell className="line-fio diagonal-line" key={i}>
+                          <TableCell
+                            className="line-fio diagonal-line"
+                            width="220px"
+                            key={i}
+                          >
                             <label className="dzs wrap_selects">Дата</label>
                             <label className="fios">ФИО</label>
                           </TableCell>
@@ -125,7 +129,7 @@ export default class MarksTable extends React.Component {
                           return header.journalContents.map((content, i) => (
                             <TableCell
                               height="19px"
-                              width="auto"
+                              width="220px"
                               className="disp line-stud"
                               key={content.id}
                             >
@@ -286,13 +290,18 @@ export default class MarksTable extends React.Component {
                                       ))
                                     )}
                                   </select>
-
+                                  {/* <input
+                                    type="checkbox"
+                                    name={"c" + content.id}
+                                    id={"c" + content.id}
+                                  />
+                                  <label for={"c" + content.id}></label> */}
                                   <div className="checkbox">
                                     <input
-                                      className="custom-checkbox top"
+                                      className="top"
                                       type="checkbox"
-                                      id={content.id}
-                                      name={content.id}
+                                      name={"c" + content.id}
+                                      id={"c" + content.id}
                                       defaultChecked={content.presence}
                                       onChange={() => {
                                         (async () => {
@@ -302,7 +311,7 @@ export default class MarksTable extends React.Component {
                                             content.id,
                                             content.grade
                                           );
-                                          this.props.setPresent();
+                                          // this.props.setPresent();
                                           this.props.setBtnFalse();
                                           if (typeof Storage !== "undefined") {
                                             localStorage.setItem(
@@ -333,7 +342,7 @@ export default class MarksTable extends React.Component {
                                         })();
                                       }}
                                     />
-                                    <label htmlFor={content.id}></label>
+                                    <label for={"c" + content.id}></label>
                                   </div>
                                   <div className="lateness">
                                     <input

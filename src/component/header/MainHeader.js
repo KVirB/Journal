@@ -55,7 +55,15 @@ function MainHeader() {
               <div>
                 <input
                   type="submit"
-                  className="bth_exit"
+                  className="bth_exit exit_1920"
+                  value="Выйти"
+                  onClick={Logout}
+                />
+              </div>
+              <div>
+                <input
+                  type="submit"
+                  className="bth_exit exit_480"
                   value="➞"
                   onClick={Logout}
                 />

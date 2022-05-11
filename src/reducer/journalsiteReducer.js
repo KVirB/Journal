@@ -305,9 +305,9 @@ const journalsiteReducer = (state = initialState, action) => {
                   line.grade = null;
                 }
               }
-              if (line.presence === false) {
-                line.lateness = null;
-              }
+              // if (line.presence === false) {
+              //   line.lateness = null;
+              // }
               if (line.presence === null) {
                 line.presence = false;
               }
