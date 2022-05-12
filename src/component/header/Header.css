@@ -491,3 +491,40 @@ input[type="submit"].button-header:disabled {
   margin-top: 14px;
   margin-left: 30px;
 }
+.burger_button {
+  margin-right: 30px;
+  width: 53px;
+  height: 51px;
+  border: 1px solid #ebebeb;
+  border-radius: 7px;
+  margin-top: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2253%22%20height%3D%2251%22%20viewBox%3D%220%200%2053%2051%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.5%22%20y%3D%220.5%22%20width%3D%2252%22%20height%3D%2250%22%20rx%3D%226.5%22%20fill%3D%22white%22%20stroke%3D%22%23EBEBEB%22%2F%3E%0A%3Cpath%20d%3D%22M15%2017H38M15%2025H38M15%2033H38%22%20stroke%3D%22%23434C63%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22square%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+/* BURGER MODAL */
+.modal_main {
+  border: 2px solid red;
+  width: 200px;
+  height: -webkit-fill-available;
+  background-color: #ffffff;
+}
+.modal_open {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(17, 17, 17, 0.6);
+}
+.bt_close {
+  float: right;
+}
+.links {
+  text-decoration: none;
+  color: black;
+}
+.links:hover {
+  color: red;
+}
+.links:active {
+  color: black;
+}
+/* BURGER MODAL */

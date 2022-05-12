@@ -6,6 +6,7 @@ import profile from "../../profile.svg";
 import mech from "../../Vector.png";
 import col from "../../Col.png";
 import que from "../../Que.png";
+import BurgerModal from "./BurgerModal";
 
 function MainHeader() {
   const navigate = useNavigate();
@@ -19,11 +20,16 @@ function MainHeader() {
   return (
     <div>
       <header className="head">
-        <h1 className="journal-name">
-          <Link className="j_name" to="/electronicaljournal-view">
-            Электронный журнал преподавателя УО «ВГТУ»
-          </Link>
-        </h1>
+        <div className="disp">
+          {/* <button className="burger_button"></button> */}
+          <BurgerModal></BurgerModal>
+          <h1 className="journal-name">
+            <Link className="j_name" to="/electronicaljournal-view">
+              Электронный журнал преподавателя УО «ВГТУ»
+            </Link>
+          </h1>
+        </div>
+
         <div className="disp">
           <div className="icons_que">
             {/* <Link to="/electronicaljournal-view"> */}

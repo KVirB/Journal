@@ -838,6 +838,7 @@ select {
     display: none;
   }
 }
+/* CHECKBOX */
 [id^="c"] {
   display: none;
 }
@@ -864,3 +865,7 @@ select {
   -webkit-transform: scale(1);
   transform: scale(1);
 }
+/* CHECKBOX */
+/* BURGER */
+
+/* BURGER */
