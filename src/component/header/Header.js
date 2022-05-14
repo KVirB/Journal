@@ -319,7 +319,11 @@ class Header extends React.Component {
     } = this;
     const { isLoading } = this.props;
     return isLoading ? (
-      <div className="lds-facebook"></div>
+      <div class="lds-facebook">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     ) : (
       <div>
         <div className="wrap_selects pointer">
@@ -417,7 +421,7 @@ class Header extends React.Component {
               />
             </div>
           </div>
-          <div>
+          {/* <div>
             <div className="pgroup-name">Статистика</div>
             <Select
               className="statistic-select"
@@ -446,12 +450,6 @@ class Header extends React.Component {
                 },
               ]}
             />
-          </div>
-
-          {/* <div>
-            <a href="/electronicaljournal-view/journal">
-              <img className="points" src={points} alt="description"></img>
-            </a>
           </div> */}
         </div>
         {console.log(this.props.courseSpec + "GGGGGGGGGGGGGGGGGGGGGGGG")}

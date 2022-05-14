@@ -1,22 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
-import { Link } from "react-router-dom";
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
+import { Link, useNavigate } from "react-router-dom";
+import { ReactComponent as Home } from "../../Home.svg";
+import { ReactComponent as Cross } from "../../cross.svg";
+import { ReactComponent as BurgerBt } from "../../BurgerBt.svg";
 
-// Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement("#root");
 
 function BurgerModal() {
+  const [count, setCount] = useState(true);
+  const navigate = useNavigate();
+
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -24,14 +19,13 @@ function BurgerModal() {
     setIsOpen(true);
   }
 
-  //   function afterOpenModal() {
-  //     // references are now sync'd and can be accessed.
-  //     subtitle.style.color = "#ff0000";
-  //   }
-
   function closeModal() {
     setIsOpen(false);
   }
+  let count_stats = () => {
+    count === true ? setCount(false) : setCount(true);
+    console.log(count);
+  };
 
   return (
     <div>
@@ -39,53 +33,105 @@ function BurgerModal() {
         className="burger_button"
         hidden={modalIsOpen}
         onClick={openModal}
-      ></button>
+      >
+        <div>
+          <BurgerBt />
+        </div>
+      </button>
       <div>
         <Modal
           className="modal_main"
-          //   ariaHideApp={false}
           isOpen={modalIsOpen}
-          //   onAfterOpen={afterOpenModal}
           onRequestClose={closeModal}
           overlayClassName={"modal_open"}
-          //   style={customStyles}
           contentLabel="Example Modal"
         >
-          <button className="bt_close" onClick={closeModal}>
-            close
+          <div className="container_with_bt_close">
+            <button
+              className="bt_main_page"
+              onClick={() =>
+                navigate("/electronicaljournal-view/journal", {
+                  replace: false,
+                })
+              }
+            >
+              <div>
+                <Home />
+              </div>
+            </button>
+            <Link
+              className="home_item"
+              to="/electronicaljournal-view/journal"
+              onClick={closeModal}
+            >
+              Главная
+            </Link>
+            <button className="bt_close" onClick={closeModal}>
+              <Cross />
+            </button>
+          </div>
+          <button
+            className="input_statistics"
+            onClick={() => {
+              count_stats();
+            }}
+          >
+            <div>
+              <div>Статистика</div>
+              <div className="arrow_div">
+                <span
+                  className={
+                    count ? "arrow_down" : "arrow_down arrow_down_transform"
+                  }
+                ></span>
+              </div>
+            </div>
           </button>
-          <div>I am a modal</div>
-          {/* <form> */}
-          <div>
+          <div className="menu_container" hidden={count}>
             <Link
-              className="links"
-              to="/media/examples/link-element-example.css"
+              className="item_stat"
+              to="/electronicaljournal-view/statistics"
+              onClick={closeModal}
             >
-              Hello
-            </Link>
-            <br />
-            <Link
-              className="links"
-              to="/media/examples/link-element-example.css"
-            >
-              Hello
-            </Link>
-            <br />
-            <Link
-              className="links"
-              to="/media/examples/link-element-example.css"
-            >
-              Hello
-            </Link>
-            <br />
-            <Link
-              className="links"
-              to="https://vk.com/im?peers=438774955_240124365_c58&sel=211533626"
-            >
-              Hello
+              1. Статистика группы по дисциплине
             </Link>
           </div>
-          {/* </form> */}
+          <div className="menu_container" hidden={count}>
+            <Link
+              className="item_stat"
+              to="/electronicaljournal-view/studentbydiscipline"
+              onClick={closeModal}
+            >
+              2. Статистика студента по дисциплине
+            </Link>
+          </div>
+          <div className="menu_container" hidden={count}>
+            <Link
+              className="item_stat"
+              to="/electronicaljournal-view/studentstatistic"
+              onClick={closeModal}
+            >
+              3. Статистика студента по периоду
+            </Link>
+          </div>
+          <div className="menu_container" hidden={count}>
+            <Link
+              className="item_stat"
+              to="/electronicaljournal-view/generalgroupstatistic"
+              onClick={closeModal}
+            >
+              4. Общая статистика по группе
+            </Link>
+          </div>
+          <div className="menu_container" hidden={count}>
+            <Link
+              className="item_stat"
+              to="/electronicaljournal-view/facultystatistic"
+              onClick={closeModal}
+            >
+              5. Статистика по факультету
+            </Link>
+          </div>
         </Modal>
       </div>
     </div>

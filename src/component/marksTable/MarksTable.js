@@ -290,12 +290,6 @@ export default class MarksTable extends React.Component {
                                       ))
                                     )}
                                   </select>
-                                  {/* <input
-                                    type="checkbox"
-                                    name={"c" + content.id}
-                                    id={"c" + content.id}
-                                  />
-                                  <label for={"c" + content.id}></label> */}
                                   <div className="checkbox">
                                     <input
                                       className="top"
