@@ -97,6 +97,11 @@
   overflow: scroll;
   overflow-x: hidden;
 }
+::-webkit-scrollbar {
+  /* chrome based */
+  width: 0px; /* ширина scrollbar'a */
+  background: transparent; /* опционально */
+}
 .course-name {
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -500,6 +505,15 @@ input[type="submit"].button-header:disabled {
   margin-top: 20px;
   background: white;
   cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg width='25' height='18' viewBox='0 0 25 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1H24M1 9H24M1 17H24' stroke='%23434C63' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E%0A");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.burger_button:hover {
+  background: #353f57;
+  background-image: url("data:image/svg+xml,%3Csvg width='25' height='18' viewBox='0 0 25 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1H24M1 9H24M1 17H24' stroke='white' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E ");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 /* BURGER MODAL */
 .modal_main {
@@ -524,8 +538,17 @@ input[type="submit"].button-header:disabled {
   float: right;
   margin-top: 40px;
   margin-right: 50px;
-  background: white;
+  background: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 2L18 18' stroke='%23434C63' stroke-width='2' stroke-linecap='square'/%3E%3Cpath d='M2 18L18 2' stroke='%23434C63' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E");
   cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.bt_close:hover {
+  background: #353f57;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 2L18 18M2 18L18 2' stroke='white' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .item {

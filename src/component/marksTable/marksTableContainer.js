@@ -46,6 +46,8 @@ class marksTableContainer extends React.Component {
           clearTypeClass={this.props.clearTypeClass}
           typeC={this.props.typeC}
           setCheckData={this.props.setCheckData}
+          isLoading={this.props.isLoading}
+          subGroup={this.props.subGroup}
         />
       </div>
     );
@@ -60,6 +62,8 @@ let mapStateToProps = (state) => {
     jh: state.journalsitePage.jh,
     present: state.journalsitePage.present,
     typeC: state.typePage.typeC,
+    isLoading: state.disciplinePage.isLoading,
+    subGroup: state.typeClassPage.subGroup,
   };
 };
 

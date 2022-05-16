@@ -1,4 +1,5 @@
 import { getJournalsite, patchJournalsite } from "../BD/tables";
+import { setLoaderTrue, setLoaderFalse } from "./headerReducer.js";
 
 const SET_JOURNALSITE = "SET_JOURNALSITE";
 const CLEAR_JOURNALSITE = "CLEAR_JOURNALSITE";
@@ -301,16 +302,16 @@ const journalsiteReducer = (state = initialState, action) => {
             lesson.journalContents.forEach((line) => {
               if (line.id === action.line_id) {
                 line.presence = !line.presence;
-                if (!line.presence) {
-                  line.grade = null;
-                }
+                // if (!line.presence) {
+                //   line.grade = null;
+                // }
               }
               // if (line.presence === false) {
               //   line.lateness = null;
               // }
-              if (line.presence === null) {
-                line.presence = false;
-              }
+              // if (line.presence === null) {
+              //   line.presence = false;
+              // }
             });
           }
         })
@@ -401,8 +402,10 @@ export const getJournalsiteThunk = (
   subGroup
 ) => {
   return (dispatch) => {
+    dispatch(setLoaderTrue());
     getJournalsite(disciplineId, groupId, typeClass, subGroup).then((data) => {
       dispatch(setJournalsite(data));
+      dispatch(setLoaderFalse());
     });
   };
 };

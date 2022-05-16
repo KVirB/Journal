@@ -5,12 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as Home } from "../../Home.svg";
 import { ReactComponent as Cross } from "../../cross.svg";
 import { ReactComponent as BurgerBt } from "../../BurgerBt.svg";
+import { useAuth } from "../../hooks/useAuth";
 
 Modal.setAppElement("#root");
 
 function BurgerModal() {
   const [count, setCount] = useState(true);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
@@ -29,15 +31,17 @@ function BurgerModal() {
 
   return (
     <div>
-      <button
-        className="burger_button"
-        hidden={modalIsOpen}
-        onClick={openModal}
-      >
-        <div>
-          <BurgerBt />
-        </div>
-      </button>
+      {user && (
+        <button
+          className="burger_button"
+          hidden={modalIsOpen}
+          onClick={openModal}
+        >
+          {/* <div>
+            <BurgerBt />
+          </div> */}
+        </button>
+      )}
       <div>
         <Modal
           className="modal_main"
@@ -67,7 +71,7 @@ function BurgerModal() {
               Главная
             </Link>
             <button className="bt_close" onClick={closeModal}>
-              <Cross />
+              {/* <Cross /> */}
             </button>
           </div>
           <button

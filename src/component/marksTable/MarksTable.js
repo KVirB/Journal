@@ -90,11 +90,15 @@ export default class MarksTable extends React.Component {
 
   render() {
     {
+      const { isLoading } = this.props;
       return (
         <div>
-          <div className="headHr" />
-          {console.log(this.state.grades + "grades")}
-          {console.log(JSON.stringify(this.props.journalsite) + "site")}
+          <div
+            className="headHr"
+            hidden={
+              localStorage.getItem("journalsite") !== null ? false : isLoading
+            }
+          />
           <div className="all-content">
             <TableContainer>
               <Table
@@ -128,7 +132,6 @@ export default class MarksTable extends React.Component {
                         if (i === 0) {
                           return header.journalContents.map((content, i) => (
                             <TableCell
-                              height="19px"
                               width="220px"
                               className="disp line-stud"
                               key={content.id}
@@ -192,7 +195,7 @@ export default class MarksTable extends React.Component {
                             <TableRow key={j}>
                               <TableCell
                                 className="line-grade"
-                                height="32px"
+                                height="37px"
                                 width={
                                   localStorage.getItem("typeC") === "Лекция"
                                     ? "65px"
@@ -299,7 +302,7 @@ export default class MarksTable extends React.Component {
                                       defaultChecked={content.presence}
                                       onChange={() => {
                                         (async () => {
-                                          await this.props.clearPresent();
+                                          // await this.props.clearPresent();
                                           await this.props.toggleJournalSitePresence(
                                             header.id,
                                             content.id,
@@ -338,7 +341,14 @@ export default class MarksTable extends React.Component {
                                     />
                                     <label for={"c" + content.id}></label>
                                   </div>
-                                  <div className="lateness">
+                                  <div
+                                    className={
+                                      localStorage.getItem("typeC") !==
+                                      "Лабораторная работа"
+                                        ? "lateness"
+                                        : ""
+                                    }
+                                  >
                                     <input
                                       disabled={
                                         content.presence === false
@@ -443,7 +453,12 @@ export default class MarksTable extends React.Component {
               </Table> */}
             </TableContainer>
           </div>
-          <div className="headHrDown" />
+          <div
+            className="headHrDown"
+            hidden={
+              localStorage.getItem("journalsite") !== null ? false : isLoading
+            }
+          />
           {console.log(this.state.inputs)}
         </div>
       );
