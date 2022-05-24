@@ -6,15 +6,18 @@ import journalsiteReducer from "./reducer/journalsiteReducer";
 import teacherReducer from "./reducer/teacherReducer";
 import btnReducer from "./reducer/btnReducer";
 import typeReducer from "./reducer/typeReducer";
+import statisticsReducer from "./reducer/statisticsReducer";
 
 let reducers = combineReducers({
   journalsitePage: journalsiteReducer,
   disciplinePage: headerReducer,
   groupPage: headerReducer,
+  courseSpecPage: headerReducer,
   typeClassPage: headerReducer,
   teacherPage: teacherReducer,
   btnPage: btnReducer,
   typePage: typeReducer,
+  generalStatisticPage: statisticsReducer,
   form: formReducer,
 });
 
@@ -26,12 +29,6 @@ let reducers = combineReducers({
 //   return reducers(state, action);
 // };
 
-let store = createStore(
-  reducers,
-  compose(
-    applyMiddleware(thunkMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
+let store = createStore(reducers, compose(applyMiddleware(thunkMiddleware)));
 
 export default store;

@@ -1,4 +1,5 @@
 import { getJournalsite, patchJournalsite } from "../BD/tables";
+import { setLoaderTrue, setLoaderFalse } from "./headerReducer.js";
 
 const SET_JOURNALSITE = "SET_JOURNALSITE";
 const CLEAR_JOURNALSITE = "CLEAR_JOURNALSITE";
@@ -14,6 +15,7 @@ const SET_SB = "SET_SB";
 const CLEAR_SB = "CLEAR_SB";
 const SET_PRESENT = "SET_PRESENT";
 const CLEAR_PRESENT = "CLEAR_PRESENT";
+const SET_LATENESS = "SET_LATENESS";
 let initialState = {
   id: null,
   journalsite: [],
@@ -54,16 +56,18 @@ const journalsiteReducer = (state = initialState, action) => {
       let newJournalsitePresent = [...state.journalsite];
       let presenT = [...state.present];
       let counter = 0;
-      newJournalsitePresent[0].journalHeaders.forEach((header, i) => {
-        header.journalContents.forEach((content, i) => {
-          if (content.presence === true) {
-            counter = counter + 1;
-          }
+      newJournalsitePresent.forEach((site, i) => {
+        site.journalHeaders.forEach((header, i) => {
+          header.journalContents.forEach((content, i) => {
+            if (content.presence === true) {
+              counter = counter + 1;
+            }
+          });
+          (async () => {
+            presenT.push(counter);
+          })();
+          counter = 0;
         });
-        (async () => {
-          presenT.push(counter);
-        })();
-        counter = 0;
       });
       return {
         ...state,
@@ -76,40 +80,11 @@ const journalsiteReducer = (state = initialState, action) => {
       };
 
     case SET_JH:
-      let newJournalsite = [...state.journalsite];
-      let jH = [...state.jh];
-      let count = 0;
-      newJournalsite[0].journalHeaders.forEach((header) => {
-        header.journalContents.forEach((content) => {
-          if (content.presence === true) {
-            count = count + 1;
-          }
-        });
-
-        (async () => {
-          const obj = {
-            id: header.id,
-            typeClass: header.typeClass.name,
-            content: header.journalContents,
-            data: header.dateOfLesson,
-            subGroup: header.subGroup,
-            counter: count,
-          };
-          if (
-            (header.typeClass.id === Number(action.typeClass) &&
-              header.subGroup === Number(action.subGroup)) ||
-            (header.typeClass.id === Number(action.typeClass) &&
-              action.subGroup === "Все")
-          ) {
-            jH.push(obj);
-          }
-        })();
-        count = 0;
-      });
       return {
         ...state,
-        jh: jH,
+        journalsite: JSON.parse(localStorage.getItem("journalsite")),
       };
+
     case CLEAR_JH:
       return {
         ...state,
@@ -136,9 +111,33 @@ const journalsiteReducer = (state = initialState, action) => {
       };
 
     case SET_JOURNALSITE:
+      let jSites = [...state.journalsite];
+      let jSite = [{ ...action.journalsite }];
+      jSite.map((site, i) => {
+        site.journalHeaders
+          .sort((a, b) => a.id - b.id)
+          .map((header, i) => {
+            header.journalContents
+              .sort(function (a, b) {
+                if (
+                  a.student.surname.toLowerCase() <
+                  b.student.surname.toLowerCase()
+                )
+                  return -1;
+                if (
+                  a.student.surname.toLowerCase() >
+                  b.student.surname.toLowerCase()
+                )
+                  return 1;
+                return 0;
+              })
+              .map((content, i) => {});
+          });
+        jSites.push(site);
+      });
       return {
         ...state,
-        journalsite: [...action.journalsite],
+        journalsite: jSites,
         update: true,
       };
     case SET_CLOSED_TRUE:
@@ -176,42 +175,152 @@ const journalsiteReducer = (state = initialState, action) => {
           journalHeader: jHeader,
         };
       }
+    case SET_LATENESS:
+      if (state.journalsite.length === 0) {
+        let newJournalsiteLateness = JSON.parse(
+          localStorage.getItem("journalsite")
+        );
+
+        newJournalsiteLateness.forEach((site) => {
+          site.journalHeaders.forEach((lesson) => {
+            if (lesson.id === action.lesson_id) {
+              lesson.journalContents.forEach((line) => {
+                if (line.id === action.line_id) {
+                  if (action.lateness <= 120) line.lateness = action.lateness;
+                }
+              });
+            }
+          });
+        });
+
+        return {
+          ...state,
+          journalsite: newJournalsiteLateness,
+        };
+      } else {
+        let newJournalsiteLateness = [...state.journalsite];
+        newJournalsiteLateness.forEach((site) => {
+          site.journalHeaders.forEach((lesson) => {
+            if (lesson.id === action.lesson_id) {
+              lesson.journalContents.forEach((line) => {
+                if (line.id === action.line_id) {
+                  if (action.lateness <= 120) line.lateness = action.lateness;
+                }
+              });
+            }
+          });
+        });
+        return {
+          ...state,
+          journalsite: newJournalsiteLateness,
+        };
+      }
 
     case SET_JOURNALSITE_MARK:
       let newJournalsiteMark = [...state.journalsite];
-      newJournalsiteMark[0].journalHeaders.forEach((lesson) => {
-        if (lesson.id === action.lesson_id) {
-          lesson.journalContents.forEach((line) => {
-            if (line.id === action.line_id) {
-              line.grade = action.grade;
-            }
-          });
-        }
-      });
-
-      return {
-        ...state,
-        journalsite: newJournalsiteMark,
-      };
-    case TOGGLE_JOURNALSITE_PRESENCE:
-      let newJournalsitePresence = [...state.journalsite];
-      newJournalsitePresence[0].journalHeaders.forEach((lesson) => {
-        if (lesson.id === action.lesson_id) {
-          lesson.journalContents.forEach((line) => {
-            if (line.id === action.line_id) {
-              line.presence = !line.presence;
-              if (!line.presence) {
-                line.grade = null;
+      newJournalsiteMark.forEach((site) => {
+        site.journalHeaders.forEach((lesson) => {
+          if (lesson.id === action.lesson_id) {
+            lesson.journalContents.forEach((line) => {
+              if (line.id === action.line_id) {
+                line.grade = action.grade;
               }
-            }
-          });
-        }
+            });
+          }
+        });
       });
 
+      if (state.journalsite.length === 0) {
+        let newJournalsiteMark = JSON.parse(
+          localStorage.getItem("journalsite")
+        );
+
+        newJournalsiteMark.forEach((site) => {
+          site.journalHeaders.forEach((lesson) => {
+            if (lesson.id === action.lesson_id) {
+              lesson.journalContents.forEach((line) => {
+                if (line.id === action.line_id) {
+                  line.grade = action.grade;
+                }
+              });
+            }
+          });
+        });
+
+        return {
+          ...state,
+          journalsite: newJournalsiteMark,
+        };
+      } else {
+        let newJournalsiteMark = [...state.journalsite];
+        newJournalsiteMark.forEach((site) => {
+          site.journalHeaders.forEach((lesson) => {
+            if (lesson.id === action.lesson_id) {
+              lesson.journalContents.forEach((line) => {
+                if (line.id === action.line_id) {
+                  line.grade = action.grade;
+                }
+              });
+            }
+          });
+        });
+        return {
+          ...state,
+          journalsite: newJournalsiteMark,
+        };
+      }
+    case TOGGLE_JOURNALSITE_PRESENCE:
+      // if (state.journalsite.length === 0) {
+      //   let newJournalsitePresence = JSON.parse(
+      //     localStorage.getItem("journalsite")
+      //   );
+
+      //   newJournalsitePresence.forEach((site, i) =>
+      //     site.journalHeaders.forEach((lesson) => {
+      //       if (lesson.id === action.lesson_id) {
+      //         lesson.journalContents.forEach((line) => {
+      //           if (line.id === action.line_id) {
+      //             line.presence = !line.presence;
+      //             if (!line.presence) {
+      //               line.grade = null;
+      //             }
+      //           }
+      //         });
+      //       }
+      //     })
+      //   );
+
+      //   return {
+      //     ...state,
+      //     journalsite: newJournalsitePresence,
+      //   };
+      // } else {
+      let newJournalsitePresence = [...state.journalsite];
+      newJournalsitePresence.forEach((site, i) =>
+        site.journalHeaders.forEach((lesson) => {
+          if (lesson.id === action.lesson_id) {
+            lesson.journalContents.forEach((line) => {
+              if (line.id === action.line_id) {
+                line.presence = !line.presence;
+                if (!line.presence) {
+                  line.grade = null;
+                }
+              }
+              if (line.presence === false) {
+                line.lateness = null;
+              }
+              if (line.presence === null) {
+                line.presence = false;
+              }
+            });
+          }
+        })
+      );
       return {
         ...state,
         journalsite: newJournalsitePresence,
       };
+    // }
 
     case CLEAR_JOURNALSITE:
       return initialState;
@@ -225,10 +334,11 @@ const journalsiteReducer = (state = initialState, action) => {
   }
 };
 
-export const toggleJournalSitePresence = (lesson_id, line_id) => ({
+export const toggleJournalSitePresence = (lesson_id, line_id, grade) => ({
   type: TOGGLE_JOURNALSITE_PRESENCE,
   lesson_id,
   line_id,
+  grade,
 });
 export const setClosedFalse = () => ({
   type: SET_CLOSED_FALSE,
@@ -242,22 +352,24 @@ export const setJournalSiteMark = (lesson_id, line_id, grade) => ({
   line_id,
   grade,
 });
+export const setJournalSiteLateness = (lesson_id, line_id, lateness) => ({
+  type: SET_LATENESS,
+  lesson_id,
+  line_id,
+  lateness,
+});
 export const setPresent = (present) => ({
   type: SET_PRESENT,
   present,
 });
-export const setJH = (typeClass, subGroup, jh) => ({
+export const setJH = () => ({
   type: SET_JH,
-  typeClass,
-  subGroup,
-  jh,
 });
 export const clearPresent = () => ({
   type: CLEAR_PRESENT,
 });
-export const setSB = (sb) => ({
+export const setSB = () => ({
   type: SET_SB,
-  sb,
 });
 export const clearSB = () => ({
   type: CLEAR_SB,
@@ -283,10 +395,17 @@ export const clearJournalHeader = () => ({
   type: CLEAR_JOURNALHEADER,
 });
 
-export const getJournalsiteThunk = (groupId, disciplineId) => {
+export const getJournalsiteThunk = (
+  disciplineId,
+  groupId,
+  typeClass,
+  subGroup
+) => {
   return (dispatch) => {
-    getJournalsite(groupId, disciplineId).then((data) => {
+    dispatch(setLoaderTrue());
+    getJournalsite(disciplineId, groupId, typeClass, subGroup).then((data) => {
       dispatch(setJournalsite(data));
+      dispatch(setLoaderFalse());
     });
   };
 };

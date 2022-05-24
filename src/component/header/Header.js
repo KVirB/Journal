@@ -5,6 +5,7 @@ import {
   getJournalsiteThunk,
   clearJournalsite,
   setJournalHeader,
+  setJournalsite,
 } from "../../reducer/journalsiteReducer";
 import {
   getGroupThunk,
@@ -12,315 +13,423 @@ import {
   getTypeClassThunk,
   clearTypeClass,
   clearGroup,
+  getSubGroupThunk,
+  clearSubGroup,
 } from "../../reducer/headerReducer";
 import points from "../../points.png";
-import MainHeader from "../header/MainHeader";
+import Select from "react-select";
+import UnSaveDataModal from "./UnSaveDataModal.js";
+
 class Header extends React.Component {
   state = {
-    disciplineId: 0,
-    groupId: 0,
-    typeClass: 0,
-    subGroup: 0,
+    disciplineId: null,
+    groupId: null,
+    typeClass: null,
+    subGroup: null,
+    typeClassName: null,
+    modalIsOpen: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
     const { disciplineId, groupId, subGroup, typeClass } = this.state;
     if (disciplineId !== prevState.disciplineId) {
-      this.props.getGroupThunk(disciplineId);
-      this.props.clearGroup();
-      this.props.clearJH();
-      this.props.clearTypeClass();
-      this.props.clearSB();
+      (async () => {
+        if (localStorage.getItem("journalsite") !== null) {
+          this.openModal();
+          // localStorage.removeItem("journalsite");
+          // localStorage.removeItem("journalsite");
+          // localStorage.removeItem("disciplineId");
+          // localStorage.removeItem("disciplineName");
+          // localStorage.removeItem("typeClassId");
+          // localStorage.removeItem("groupId");
+          // localStorage.removeItem("subgroupId");
+        }
+        this.props.getGroupThunk(disciplineId);
+        await this.props.clearGroup();
+        this.props.clearJournalsite();
+      })();
     }
     if (groupId !== prevState.groupId) {
-      this.props.getJournalsiteThunk(disciplineId, groupId);
-      this.props.clearSB();
       (async () => {
-        await this.props.getTypeClassThunk();
+        if (localStorage.getItem("journalsite") !== null) {
+          // await this.props.setJournalHeader();
+          // let header = this.props.journalHeader;
+          // await this.props.getJournalHeaderThunk(header);
+          // this.props.clearJournalHeader();
+          // this.props.setBtnTrue();
+          this.openModal();
+        }
+        this.props.clearJournalsite();
+        this.props.getCourseSpecThunk(this.state.groupId);
         this.props.clearTypeClass();
       })();
     }
     if (typeClass !== prevState.typeClass) {
       (async () => {
-        this.props.clearSB();
-        this.props.clearJH();
+        if (localStorage.getItem("journalsite") !== null) {
+          // await this.props.setJournalHeader();
+          // let header = this.props.journalHeader;
+          // await this.props.getJournalHeaderThunk(header);
+          // this.props.clearJournalHeader();
+          // this.props.setBtnTrue();
+          this.openModal();
+        }
+        this.props.clearJournalsite();
+        this.props.clearSubGroup();
       })();
-      if (subGroup !== prevState.subGroup) {
-        this.props.setBtnFalse();
-      }
+    }
+    if (subGroup !== prevState.subGroup) {
+      (async () => {
+        if (localStorage.getItem("journalsite") !== null) {
+          // await this.props.setJournalHeader();
+          // let header = this.props.journalHeader;
+          // await this.props.getJournalHeaderThunk(header);
+          // this.props.clearJournalHeader();
+          // this.props.setBtnTrue();
+          this.openModal();
+        }
+        this.props.clearJournalsite();
+      })();
     }
   }
 
   getValueDiscipline = (e) => {
-    const { value } = e.target;
-    this.setState({
-      disciplineId: value,
-    });
-    this.setState({
-      groupId: 0,
-    });
-    // this.state.groupId = 0;
-    if (localStorage.getItem("journalsite") !== null) {
-      let dispConf = window.confirm(
-        "У вас остались не сохраненные изменения. Сохранить?"
-      );
-      this.props.setJournalHeader();
-      if (dispConf === true) {
-        (async () => {
-          await localStorage.clear();
-          await this.props.clearJH();
-          this.props.setBtnTrue();
-          this.props.getDisciplineThunk();
-          let header = this.props.journalHeader;
-          this.props.getJournalHeaderThunk(header);
-          this.props.clearJournalHeader();
-          alert("Сохранено");
-        })();
-      } else {
-        localStorage.clear();
-        this.props.clearTypeClass();
-        this.props.clearSB();
+    (async () => {
+      await this.setState({
+        disciplineId: e,
+      });
+      if (
+        this.state.disciplineId !== null &&
+        this.state.groupId !== null &&
+        this.state.typeClass !== null &&
+        this.state.subGroup !== null
+      ) {
+        await this.props.getJournalsiteThunk(
+          this.state.disciplineId,
+          this.state.groupId,
+          this.state.typeClass,
+          this.state.subGroup
+        );
       }
-    }
+      localStorage.setItem("typeC", this.state.typeClassName);
+      if (typeof Storage !== "undefined") {
+        localStorage.setItem("disciplineId", this.state.disciplineId);
+      }
+      this.props.clearJournalsite();
+      setTimeout(() => {
+        this.props.setPresent();
+      }, 100);
+    })();
   };
   getGroup = (e) => {
-    const { value } = e.target;
-    this.setState({
-      groupId: value,
-    });
-  };
-  getTypeClass = (e) => {
-    if (localStorage.getItem("journalsite") !== null) {
-      let dispConf = window.confirm(
-        "У вас остались не сохраненные изменения. Сохранить?"
-      );
-      this.props.setJournalHeader();
-      if (dispConf === true) {
-        (async () => {
-          await localStorage.clear();
-          await this.props.clearJH();
-          this.props.setBtnTrue();
-          this.props.getDisciplineThunk();
-          this.props.getGroupThunk(this.state.disciplineId);
-          let header = this.props.journalHeader;
-          this.props.getJournalHeaderThunk(header);
-          this.props.clearJournalHeader();
-          alert("Сохранено");
-        })();
-      } else {
-        (async () => {
-          this.props.getDisciplineThunk();
-          this.props.getGroupThunk(this.state.disciplineId);
-        })();
-        localStorage.clear();
-      }
-    }
     (async () => {
-      await this.props.clearJH();
-      this.props.setSB();
-    })();
-    (async () => {
-      const { value } = e.target;
       await this.setState({
-        typeClass: value,
+        groupId: e,
       });
-      this.props.setType(this.state.typeClass);
+      if (
+        this.state.disciplineId !== null &&
+        this.state.groupId !== null &&
+        this.state.typeClass !== null &&
+        this.state.subGroup !== null
+      ) {
+        await this.props.getJournalsiteThunk(
+          this.state.disciplineId,
+          this.state.groupId,
+          this.state.typeClass,
+          this.state.subGroup
+        );
+      }
+      localStorage.setItem("typeC", this.state.typeClassName);
+    })();
+    this.props.clearJournalsite();
+    this.props.getTypeClassThunk();
+    setTimeout(() => {
+      this.props.setPresent();
+    }, 100);
+  };
+  getTypeClass = (e, c) => {
+    (async () => {
+      await this.setState({
+        typeClass: e,
+        typeClassName: c,
+      });
+      await this.props.clearSubGroup();
+      // this.props.setType(c);
+      this.props.getSubGroupThunk();
+      if (
+        this.state.disciplineId !== null &&
+        this.state.groupId !== null &&
+        this.state.typeClass !== null &&
+        this.state.subGroup !== null
+      ) {
+        await this.props.getJournalsiteThunk(
+          this.state.disciplineId,
+          this.state.groupId,
+          this.state.typeClass,
+          this.state.subGroup
+        );
+      }
+      this.props.clearJournalsite();
+      setTimeout(() => {
+        this.props.setPresent();
+      }, 100);
+      localStorage.setItem("typeC", this.state.typeClassName);
     })();
   };
   getSubGroup = (e) => {
-    if (localStorage.getItem("journalsite") !== null) {
-      let dispConf = window.confirm(
-        "У вас остались не сохраненные изменения. Сохранить?"
-      );
-      this.props.setJournalHeader();
-      if (dispConf === true) {
-        (async () => {
-          await localStorage.clear();
-          await this.props.clearJH();
-          this.props.setBtnTrue();
-          this.props.getDisciplineThunk();
-          this.props.getGroupThunk(this.state.disciplineId);
-          let header = this.props.journalHeader;
-          this.props.getJournalHeaderThunk(header);
-          this.props.clearJournalHeader();
-          alert("Сохранено");
-        })();
-      } else {
-        (async () => {
-          this.props.getDisciplineThunk();
-          this.props.getGroupThunk(this.state.disciplineId);
-        })();
-        localStorage.clear();
-      }
-    }
     (async () => {
-      await this.props.clearJH();
-      await this.props.clearPresent();
-      this.props.setJH(this.state.typeClass, this.state.subGroup);
-      this.props.setPresent();
+      await this.setState({
+        subGroup: e,
+      });
+      if (
+        this.state.disciplineId !== null &&
+        this.state.groupId !== null &&
+        this.state.typeClass !== null &&
+        this.state.subGroup !== null
+      ) {
+        await this.props.getJournalsiteThunk(
+          this.state.disciplineId,
+          this.state.groupId,
+          this.state.typeClass,
+          this.state.subGroup
+        );
+      }
+      this.props.clearJournalsite();
+      localStorage.setItem("typeC", this.state.typeClassName);
+      setTimeout(() => {
+        this.props.setPresent();
+      }, 100);
     })();
-    const { value } = e.target;
-    this.setState({
-      subGroup: value,
-    });
+  };
+
+  componentDidMount() {
+    this.props.getDisciplineThunk();
+    if (localStorage.getItem("groupId") !== null) {
+      this.props.getCourseSpecThunk(localStorage.getItem("groupId"));
+    }
+  }
+
+  href = (e) => {
+    window.location.assign(e);
   };
 
   Logout = () => {
     window.location.assign("/electronicaljournal-view");
   };
-
+  openModal = () => {
+    this.setState({
+      modalIsOpen: true,
+    });
+  };
+  closeModal = () => {
+    this.setState({
+      modalIsOpen: false,
+    });
+    localStorage.removeItem("journalsite");
+    localStorage.removeItem("journalsite");
+    localStorage.removeItem("disciplineId");
+    localStorage.removeItem("disciplineName");
+    localStorage.removeItem("typeClassId");
+    localStorage.removeItem("groupId");
+    localStorage.removeItem("subgroupId");
+  };
   render() {
-    const { getValueDiscipline, getGroup, getTypeClass, Logout, getSubGroup } =
-      this;
+    const {
+      getValueDiscipline,
+      getGroup,
+      getTypeClass,
+      Logout,
+      getSubGroup,
+      href,
+    } = this;
+    const { isLoading } = this.props;
     return (
       <div>
-        {console.log(this.state.typeClass + "TypeClass")}
-        {/* {
-          (console.log(
-            "%cProject by KVirB",
-            "color: red; font-family: sans-serif; font-size: 4.5em; font-weight: bolder; text-shadow: green 4px 3px;"
-          ),
-          (function (url) {
-            var image = new Image();
-            image.onload = function () {
-              var style = [
-                "font-size: 1px;",
-                "line-height: " + (this.height % 1) + "px;",
-                "padding: " +
-                  this.height * 0.5 +
-                  "px " +
-                  this.width * 0.5 +
-                  "px;",
-                "background-size: " + this.width + "px " + this.height + "px;",
-                "background: url(" + url + ");",
-              ].join(" ");
-              console.log("%c ", style);
-            };
-            image.src = url;
-          })(
-            "http://risovach.ru/thumb/upload/200s400/2019/08/generator/i-tak-soydet_217015291_orig_.png?d9qg6"
-          ))
-        } */}
-        <MainHeader />
-        <div className="display-flex pointer">
-          <div className="display-flex">
-            <div>
-              <div className="discipline-name">Название дисциплины</div>
-              <div class="styled-select-disp">
-                <select
+        <UnSaveDataModal
+          isOpen={this.state.modalIsOpen}
+          closeModal={this.closeModal}
+          disabled={this.props.disabled}
+          setJournalHeader={this.props.setJournalHeader}
+          journalHeader={this.props.journalHeader}
+          getJournalHeaderThunk={this.props.getJournalHeaderThunk}
+          clearJournalHeader={this.props.clearJournalHeader}
+          setBtnTrue={this.props.setBtnTrue}
+        ></UnSaveDataModal>
+        {/* <button onClick={this.openModal}>Modal</button> */}
+        <div
+          className="lds-ellipsis"
+          hidden={
+            localStorage.getItem("journalsite") !== null ? true : !isLoading
+          }
+        >
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div
+          hidden={
+            localStorage.getItem("journalsite") !== null ? false : isLoading
+          }
+        >
+          <div className="wrap_selects pointer">
+            <div className="wrap_selects">
+              <div>
+                <div className="discipline-name">Название дисциплины</div>
+                <Select
                   className="discipline-select"
-                  name="discipline"
-                  title="Выберите дисциплину"
-                  onChange={getValueDiscipline}
-                >
-                  <option defaultValue="" hidden>
-                    Дисциплина
-                  </option>
-                  {this.props.discipline.map((m, i) => (
-                    <option className="lang__items" value={m.id} key={i}>
-                      {m.name}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(e) => getValueDiscipline(e.value)}
+                  defaultValue={
+                    localStorage.getItem("disciplineName") !== null
+                      ? {
+                          value: localStorage.getItem("disciplineName"),
+                          label: localStorage.getItem("disciplineName"),
+                        }
+                      : { value: "disciplines", label: "Дисциплина" }
+                  }
+                  options={this.props.discipline.map((m, i) => ({
+                    value: m.id,
+                    label: m.name,
+                  }))}
+                />
+              </div>
+              <div>
+                <div className="group-name">Группа</div>
+                <Select
+                  className="group-select"
+                  onChange={(e) => getGroup(e.value)}
+                  defaultValue={
+                    localStorage.getItem("groupId") !== null
+                      ? {
+                          value: localStorage.getItem("groupId"),
+                          label: localStorage.getItem("groupId"),
+                        }
+                      : { value: "group", label: "Группа" }
+                  }
+                  options={this.props.group.map((m, i) => ({
+                    value: m.name,
+                    label: m.name,
+                  }))}
+                />
+              </div>
+              <div>
+                <div className="view-name">Тип занятия</div>
+                <Select
+                  className="view-input"
+                  onChange={(e) => getTypeClass(e.value, e.label)}
+                  defaultValue={
+                    localStorage.getItem("typeClassId") !== null
+                      ? {
+                          value: localStorage.getItem("typeClassId"),
+                          label:
+                            localStorage.getItem("typeClassId") === "1"
+                              ? "Лабораторная работа"
+                              : localStorage.getItem("typeClassId") === "2"
+                              ? "Лекция"
+                              : localStorage.getItem("typeClassId") === "3"
+                              ? "Практическая работа"
+                              : localStorage.getItem("typeClassId") === "4"
+                              ? "Экзамен"
+                              : localStorage.getItem("typeClassId"),
+                        }
+                      : { value: "typeclass", label: "Тип занятия" }
+                  }
+                  options={
+                    this.props.typeClass !== null
+                      ? this.props.typeClass.map((item, i) => ({
+                          value: item.id,
+                          label: item.name,
+                        }))
+                      : { value: null, label: null }
+                  }
+                />
+              </div>
+              <div>
+                <div className="pgroup-name">Подгруппа</div>
+                <Select
+                  defaultValue={
+                    localStorage.getItem("subgroupId") !== null
+                      ? {
+                          value: localStorage.getItem("subgroupId"),
+                          label: localStorage.getItem("subgroupId"),
+                        }
+                      : { value: "subgroup", label: "Подгруппа" }
+                  }
+                  className="group-select"
+                  onChange={(e) => getSubGroup(e.value)}
+                  options={this.props.subGroup.map((item, i) => ({
+                    value: item.subGroupNumber,
+                    label:
+                      item.subGroupNumber === 0 ? "Все" : item.subGroupNumber,
+                  }))}
+                />
               </div>
             </div>
-            <div>
-              <div class="styled-select">
-                <div className="special-name">Специальность</div>
-                <div className="special-select">Test</div>
-              </div>
-            </div>
           </div>
-          <div>
-            <a href="/electronicaljournal-view/journal">
-              <img className="points" src={points} alt="description"></img>
-            </a>
-          </div>
-        </div>
-        <div className="headHr" />
-        <div className="kuki">
-          <div className="buki">
-            <div>
-              <div className="course-name">Курс</div>
-              <div className="course-input">Test</div>
-            </div>
-            <div>
-              <div className="group-name">Группа</div>
-              <select
-                className="group-select"
-                name="select"
-                title="Выберите группу"
-                onChange={getGroup}
-              >
-                <option defaultValue="" hidden>
-                  Группа
-                </option>
-                {this.props.group.map((m, i) => (
-                  <option className="lang__items" value={m.group.id} key={i}>
-                    {m.group.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <div className="view-name">Тип занятия</div>
-              <select
-                id="select"
-                className="view-input"
-                onChange={getTypeClass}
-              >
-                <option defaultValue="" hidden>
-                  Тип
-                </option>
-                {this.props.typeClass.map((item, i) => (
-                  <option value={item.id} key={i}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <div className="pgroup-name">Подгруппа</div>
-              <select
-                id="select"
-                className="group-select"
-                onChange={getSubGroup}
-              >
-                <option value={this.state.subGroup} hidden>
-                  Подгруппа
-                </option>
-                {this.props.sb.map((item, i) => (
-                  <option value={item.subGroup} key={i}>
-                    {item.subGroup}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <input
-            className="button-header bt_color"
-            type="submit"
-            value="СОХРАНИТЬ"
-            disabled={this.props.disabled}
-            onClick={() => {
-              this.props.setJournalHeader();
-              setTimeout(() => {
-                let header = this.props.journalHeader;
-                this.props.getJournalHeaderThunk(header);
-                this.props.clearJournalHeader();
-              }, 1);
-              this.props.setBtnTrue();
-              localStorage.removeItem("journalsite");
-            }}
+          <div
+            className="headHr"
+            hidden={
+              localStorage.getItem("journalsite") !== null ? false : isLoading
+            }
           />
-        </div>
-        {this.props.teacher.map((m) => {
-          return (
-            <div>
-              <input value={m.surname}></input>
+          <div className="kuki wrap_selects">
+            <div className="buki">
+              <div>
+                <div className="course-name">Курс</div>
+                <div className="course-input">
+                  {this.props.courseSpec.length !== 1
+                    ? "Курс"
+                    : this.props.courseSpec.map(
+                        (courseSpec) => courseSpec.сourse
+                      )}
+                </div>
+              </div>
+              <div>
+                <div>
+                  <div className="special-name">Специальность</div>
+                  <div className="special-select">
+                    {this.props.courseSpec.length !== 1
+                      ? "Специальность"
+                      : this.props.courseSpec.map(
+                          (courseSpec) => courseSpec.specialty.name
+                        )}
+                  </div>
+                </div>
+              </div>
             </div>
-          );
-        })}
+            <input
+              className="button-header bt_color"
+              type="submit"
+              value="Сохранить"
+              disabled={this.props.disabled}
+              onClick={() => {
+                if (localStorage.getItem("journalsite") !== null) {
+                  // window.location.reload();
+                }
+                (async () => {
+                  await this.props.setJournalHeader();
+                  let header = this.props.journalHeader;
+                  await this.props.getJournalHeaderThunk(header);
+                  this.props.clearJournalHeader();
+                  this.props.setBtnTrue();
+                  localStorage.removeItem("journalsite");
+                  localStorage.removeItem("disciplineId");
+                  localStorage.removeItem("disciplineName");
+                  localStorage.removeItem("typeClassId");
+                  localStorage.removeItem("groupId");
+                  localStorage.removeItem("subgroupId");
+                })();
+              }}
+            />
+          </div>
+          {this.props.teacher.map((m) => {
+            return (
+              <div>
+                <input value={m.surname}></input>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   }
@@ -330,8 +439,11 @@ export default connect(null, {
   getGroupThunk,
   getDisciplineThunk,
   getTypeClassThunk,
+  getSubGroupThunk,
+  clearSubGroup,
   clearTypeClass,
   clearJournalsite,
   clearGroup,
   setJournalHeader,
+  setJournalsite,
 })(Header);
