@@ -18,6 +18,8 @@ import {
 } from "../../reducer/headerReducer";
 import points from "../../points.png";
 import Select from "react-select";
+import UnSaveDataModal from "./UnSaveDataModal.js";
+
 class Header extends React.Component {
   state = {
     disciplineId: null,
@@ -25,6 +27,7 @@ class Header extends React.Component {
     typeClass: null,
     subGroup: null,
     typeClassName: null,
+    modalIsOpen: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -32,36 +35,14 @@ class Header extends React.Component {
     if (disciplineId !== prevState.disciplineId) {
       (async () => {
         if (localStorage.getItem("journalsite") !== null) {
-          let dispConf = window.confirm(
-            "У вас остались не сохраненные изменения. Сохранить?"
-          );
-
-          if (dispConf === true) {
-            await this.props.setJournalHeader();
-            let header = this.props.journalHeader;
-            await this.props.getJournalHeaderThunk(header);
-            this.props.clearJournalHeader();
-            this.props.setBtnTrue();
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("disciplineId");
-            localStorage.removeItem("disciplineName");
-            localStorage.removeItem("typeClassId");
-            localStorage.removeItem("groupId");
-            localStorage.removeItem("subgroupId");
-            alert("Сохранено");
-          } else {
-            // (async () => {
-            //   this.props.getDisciplineThunk();
-            //   this.props.getGroupThunk(this.state.disciplineId);
-            // })();
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("disciplineId");
-            localStorage.removeItem("disciplineName");
-            localStorage.removeItem("typeClassId");
-            localStorage.removeItem("groupId");
-            localStorage.removeItem("subgroupId");
-          }
+          this.openModal();
+          // localStorage.removeItem("journalsite");
+          // localStorage.removeItem("journalsite");
+          // localStorage.removeItem("disciplineId");
+          // localStorage.removeItem("disciplineName");
+          // localStorage.removeItem("typeClassId");
+          // localStorage.removeItem("groupId");
+          // localStorage.removeItem("subgroupId");
         }
         this.props.getGroupThunk(disciplineId);
         await this.props.clearGroup();
@@ -71,36 +52,12 @@ class Header extends React.Component {
     if (groupId !== prevState.groupId) {
       (async () => {
         if (localStorage.getItem("journalsite") !== null) {
-          let dispConf = window.confirm(
-            "У вас остались не сохраненные изменения. Сохранить?"
-          );
-
-          if (dispConf === true) {
-            await this.props.setJournalHeader();
-            let header = this.props.journalHeader;
-            await this.props.getJournalHeaderThunk(header);
-            this.props.clearJournalHeader();
-            this.props.setBtnTrue();
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("disciplineId");
-            localStorage.removeItem("disciplineName");
-            localStorage.removeItem("typeClassId");
-            localStorage.removeItem("groupId");
-            localStorage.removeItem("subgroupId");
-            alert("Сохранено");
-          } else {
-            // (async () => {
-            //   this.props.getDisciplineThunk();
-            //   this.props.getGroupThunk(this.state.disciplineId);
-            // })();
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("disciplineId");
-            localStorage.removeItem("disciplineName");
-            localStorage.removeItem("typeClassId");
-            localStorage.removeItem("groupId");
-            localStorage.removeItem("subgroupId");
-          }
+          // await this.props.setJournalHeader();
+          // let header = this.props.journalHeader;
+          // await this.props.getJournalHeaderThunk(header);
+          // this.props.clearJournalHeader();
+          // this.props.setBtnTrue();
+          this.openModal();
         }
         this.props.clearJournalsite();
         this.props.getCourseSpecThunk(this.state.groupId);
@@ -110,36 +67,12 @@ class Header extends React.Component {
     if (typeClass !== prevState.typeClass) {
       (async () => {
         if (localStorage.getItem("journalsite") !== null) {
-          let dispConf = window.confirm(
-            "У вас остались не сохраненные изменения. Сохранить?"
-          );
-
-          if (dispConf === true) {
-            await this.props.setJournalHeader();
-            let header = this.props.journalHeader;
-            await this.props.getJournalHeaderThunk(header);
-            this.props.clearJournalHeader();
-            this.props.setBtnTrue();
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("disciplineId");
-            localStorage.removeItem("disciplineName");
-            localStorage.removeItem("typeClassId");
-            localStorage.removeItem("groupId");
-            localStorage.removeItem("subgroupId");
-            alert("Сохранено");
-          } else {
-            // (async () => {
-            //   this.props.getDisciplineThunk();
-            //   this.props.getGroupThunk(this.state.disciplineId);
-            // })();
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("disciplineId");
-            localStorage.removeItem("disciplineName");
-            localStorage.removeItem("typeClassId");
-            localStorage.removeItem("groupId");
-            localStorage.removeItem("subgroupId");
-          }
+          // await this.props.setJournalHeader();
+          // let header = this.props.journalHeader;
+          // await this.props.getJournalHeaderThunk(header);
+          // this.props.clearJournalHeader();
+          // this.props.setBtnTrue();
+          this.openModal();
         }
         this.props.clearJournalsite();
         this.props.clearSubGroup();
@@ -148,36 +81,12 @@ class Header extends React.Component {
     if (subGroup !== prevState.subGroup) {
       (async () => {
         if (localStorage.getItem("journalsite") !== null) {
-          let dispConf = window.confirm(
-            "У вас остались не сохраненные изменения. Сохранить?"
-          );
-
-          if (dispConf === true) {
-            await this.props.setJournalHeader();
-            let header = this.props.journalHeader;
-            await this.props.getJournalHeaderThunk(header);
-            this.props.clearJournalHeader();
-            this.props.setBtnTrue();
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("disciplineId");
-            localStorage.removeItem("disciplineName");
-            localStorage.removeItem("typeClassId");
-            localStorage.removeItem("groupId");
-            localStorage.removeItem("subgroupId");
-            alert("Сохранено");
-          } else {
-            // (async () => {
-            //   this.props.getDisciplineThunk();
-            //   this.props.getGroupThunk(this.state.disciplineId);
-            // })();
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("journalsite");
-            localStorage.removeItem("disciplineId");
-            localStorage.removeItem("disciplineName");
-            localStorage.removeItem("typeClassId");
-            localStorage.removeItem("groupId");
-            localStorage.removeItem("subgroupId");
-          }
+          // await this.props.setJournalHeader();
+          // let header = this.props.journalHeader;
+          // await this.props.getJournalHeaderThunk(header);
+          // this.props.clearJournalHeader();
+          // this.props.setBtnTrue();
+          this.openModal();
         }
         this.props.clearJournalsite();
       })();
@@ -307,7 +216,23 @@ class Header extends React.Component {
   Logout = () => {
     window.location.assign("/electronicaljournal-view");
   };
-
+  openModal = () => {
+    this.setState({
+      modalIsOpen: true,
+    });
+  };
+  closeModal = () => {
+    this.setState({
+      modalIsOpen: false,
+    });
+    localStorage.removeItem("journalsite");
+    localStorage.removeItem("journalsite");
+    localStorage.removeItem("disciplineId");
+    localStorage.removeItem("disciplineName");
+    localStorage.removeItem("typeClassId");
+    localStorage.removeItem("groupId");
+    localStorage.removeItem("subgroupId");
+  };
   render() {
     const {
       getValueDiscipline,
@@ -320,8 +245,19 @@ class Header extends React.Component {
     const { isLoading } = this.props;
     return (
       <div>
+        <UnSaveDataModal
+          isOpen={this.state.modalIsOpen}
+          closeModal={this.closeModal}
+          disabled={this.props.disabled}
+          setJournalHeader={this.props.setJournalHeader}
+          journalHeader={this.props.journalHeader}
+          getJournalHeaderThunk={this.props.getJournalHeaderThunk}
+          clearJournalHeader={this.props.clearJournalHeader}
+          setBtnTrue={this.props.setBtnTrue}
+        ></UnSaveDataModal>
+        {/* <button onClick={this.openModal}>Modal</button> */}
         <div
-          class="lds-ellipsis"
+          className="lds-ellipsis"
           hidden={
             localStorage.getItem("journalsite") !== null ? true : !isLoading
           }
@@ -339,7 +275,6 @@ class Header extends React.Component {
           <div className="wrap_selects pointer">
             <div className="wrap_selects">
               <div>
-                {console.log(isLoading + "LOADER")}
                 <div className="discipline-name">Название дисциплины</div>
                 <Select
                   className="discipline-select"
@@ -372,8 +307,8 @@ class Header extends React.Component {
                       : { value: "group", label: "Группа" }
                   }
                   options={this.props.group.map((m, i) => ({
-                    value: m.group.name,
-                    label: m.group.name,
+                    value: m.name,
+                    label: m.name,
                   }))}
                 />
               </div>
@@ -468,13 +403,13 @@ class Header extends React.Component {
               value="Сохранить"
               disabled={this.props.disabled}
               onClick={() => {
-                if (localStorage.removeItem("journalsite") !== null) {
+                if (localStorage.getItem("journalsite") !== null) {
                   // window.location.reload();
                 }
                 (async () => {
                   await this.props.setJournalHeader();
                   let header = this.props.journalHeader;
-                  this.props.getJournalHeaderThunk(header);
+                  await this.props.getJournalHeaderThunk(header);
                   this.props.clearJournalHeader();
                   this.props.setBtnTrue();
                   localStorage.removeItem("journalsite");

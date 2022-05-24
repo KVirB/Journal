@@ -19,7 +19,6 @@ class GeneralBar extends React.Component {
             : false
         }
       >
-        {/* {console.log(this.props.students + "students")} */}
         <Bar
           data={{
             labels: this.props.generalGroupStatistic.map((statistic, i) => {

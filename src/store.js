@@ -29,12 +29,6 @@ let reducers = combineReducers({
 //   return reducers(state, action);
 // };
 
-let store = createStore(
-  reducers,
-  compose(
-    applyMiddleware(thunkMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
-);
+let store = createStore(reducers, compose(applyMiddleware(thunkMiddleware)));
 
 export default store;

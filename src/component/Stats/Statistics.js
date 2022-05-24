@@ -20,12 +20,12 @@ class Statistics extends React.Component {
         groupsId: e,
       });
       this.props.getDisciplinesStatisticThunk(e);
-      this.state.groupsId !== null && this.state.disciplineId !== null
-        ? this.props.getGeneralStatisticsThunk(
-            this.state.groupsId,
-            this.state.disciplineId
-          )
-        : console.log("Error with Statistics");
+      if (this.state.groupsId !== null && this.state.disciplineId !== null) {
+        this.props.getGeneralStatisticsThunk(
+          this.state.groupsId,
+          this.state.disciplineId
+        );
+      }
     })();
   };
   getValueDiscipline = (e, c) => {
@@ -33,12 +33,13 @@ class Statistics extends React.Component {
       await this.setState({
         disciplineId: e,
       });
-      this.state.groupsId !== null && this.state.disciplineId !== null
-        ? this.props.getGeneralStatisticsThunk(
-            this.state.groupsId,
-            this.state.disciplineId
-          )
-        : console.log("Error with Statistics");
+
+      if (this.state.groupsId !== null && this.state.disciplineId !== null) {
+        this.props.getGeneralStatisticsThunk(
+          this.state.groupsId,
+          this.state.disciplineId
+        );
+      }
     })();
   };
   render() {
@@ -47,9 +48,6 @@ class Statistics extends React.Component {
     const { isLoading } = this.props;
     return (
       <div>
-        {console.log(this.state.groupsId)}
-        {console.log(this.state.disciplineId)}
-        {console.log(JSON.stringify(this.props.disciplinesStatistic))}
         <div className="display-flex jst_content">
           <div className="display-flex">
             <div>

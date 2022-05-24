@@ -10,7 +10,8 @@ import { useAuth } from "../../hooks/useAuth";
 Modal.setAppElement("#root");
 
 function BurgerModal() {
-  const [count, setCount] = useState(true);
+  const [stats, setCount] = useState(true);
+  const [second, setSecond] = useState(true);
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -25,8 +26,12 @@ function BurgerModal() {
     setIsOpen(false);
   }
   let count_stats = () => {
-    count === true ? setCount(false) : setCount(true);
-    console.log(count);
+    stats === true ? setCount(false) : setCount(true);
+    console.log(stats);
+  };
+  let second_stats = () => {
+    second === true ? setSecond(false) : setSecond(true);
+    console.log(second);
   };
 
   return (
@@ -36,11 +41,7 @@ function BurgerModal() {
           className="burger_button"
           hidden={modalIsOpen}
           onClick={openModal}
-        >
-          {/* <div>
-            <BurgerBt />
-          </div> */}
-        </button>
+        ></button>
       )}
       <div>
         <Modal
@@ -50,32 +51,35 @@ function BurgerModal() {
           overlayClassName={"modal_open"}
           contentLabel="Example Modal"
         >
-          <div className="container_with_bt_close">
-            <button
-              className="bt_main_page"
-              onClick={() =>
-                navigate("/electronicaljournal-view/journal", {
-                  replace: false,
-                })
-              }
-            >
-              <div>
-                <Home />
-              </div>
-            </button>
-            <Link
-              className="home_item"
-              to="/electronicaljournal-view/journal"
-              onClick={closeModal}
-            >
-              Главная
-            </Link>
-            <button className="bt_close" onClick={closeModal}>
-              {/* <Cross /> */}
-            </button>
+          <div className="burger_main_with_bt">
+            <div className="container_with_bt_close">
+              <button
+                className="bt_main_page"
+                onClick={() =>
+                  navigate("/electronicaljournal-view/journal", {
+                    replace: false,
+                  })
+                }
+              >
+                <Link
+                  className="home_item"
+                  to="/electronicaljournal-view/journal"
+                  onClick={closeModal}
+                >
+                  Главная
+                </Link>
+              </button>
+            </div>
+            <div>
+              <button className="bt_close" onClick={closeModal}></button>
+            </div>
           </div>
           <button
-            className="input_statistics"
+            className={
+              stats
+                ? "input_statistics"
+                : "input_statistics input_statistics_menu_down"
+            }
             onClick={() => {
               count_stats();
             }}
@@ -85,57 +89,83 @@ function BurgerModal() {
               <div className="arrow_div">
                 <span
                   className={
-                    count ? "arrow_down" : "arrow_down arrow_down_transform"
+                    stats
+                      ? "arrow_down"
+                      : "arrow_down_menu arrow_down_transform"
                   }
                 ></span>
               </div>
             </div>
           </button>
-          <div className="menu_container" hidden={count}>
+
+          <div className="menu_container" hidden={stats}>
             <Link
               className="item_stat"
               to="/electronicaljournal-view/statistics"
               onClick={closeModal}
             >
-              1. Статистика группы по дисциплине
+              Группы по дисциплине
             </Link>
           </div>
-          <div className="menu_container" hidden={count}>
+          <div className="menu_container" hidden={stats}>
             <Link
               className="item_stat"
               to="/electronicaljournal-view/studentbydiscipline"
               onClick={closeModal}
             >
-              2. Статистика студента по дисциплине
+              Студента по дисциплине
             </Link>
           </div>
-          <div className="menu_container" hidden={count}>
+          <div className="menu_container" hidden={stats}>
             <Link
               className="item_stat"
               to="/electronicaljournal-view/studentstatistic"
               onClick={closeModal}
             >
-              3. Статистика студента по периоду
+              Студента по периоду
             </Link>
           </div>
-          <div className="menu_container" hidden={count}>
+          <div className="menu_container" hidden={stats}>
             <Link
               className="item_stat"
               to="/electronicaljournal-view/generalgroupstatistic"
               onClick={closeModal}
             >
-              4. Общая статистика по группе
+              Общая статистика по группе
             </Link>
           </div>
-          <div className="menu_container" hidden={count}>
+          <div className="menu_container" hidden={stats}>
             <Link
               className="item_stat"
               to="/electronicaljournal-view/facultystatistic"
               onClick={closeModal}
             >
-              5. Статистика по факультету
+              Статистика по факультету
             </Link>
           </div>
+          {/* <button
+            className={
+              second
+                ? "input_statistics"
+                : "input_statistics input_statistics_menu_down"
+            }
+            onClick={() => {
+              second_stats();
+            }}
+          >
+            <div>
+              <div>Пункт меню 1</div>
+              <div className="arrow_div">
+                <span
+                  className={
+                    second
+                      ? "arrow_down"
+                      : "arrow_down_menu arrow_down_transform"
+                  }
+                ></span>
+              </div>
+            </div>
+          </button> */}
         </Modal>
       </div>
     </div>

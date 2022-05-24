@@ -23,14 +23,17 @@ class StudentByDiscipline extends React.Component {
       await this.setState({
         studentId: e,
       });
-      this.state.groupsId !== null &&
-      this.state.studentId !== null &&
-      this.state.disciplineId !== null
-        ? this.props.getStatisticByDisciplineStudentThunk(
-            this.state.disciplineId,
-            this.state.studentId
-          )
-        : console.log("Error with StudentByDiscipline");
+
+      if (
+        this.state.groupsId !== null &&
+        this.state.studentId !== null &&
+        this.state.disciplineId !== null
+      ) {
+        this.props.getStatisticByDisciplineStudentThunk(
+          this.state.disciplineId,
+          this.state.studentId
+        );
+      }
     })();
   };
 
@@ -41,14 +44,17 @@ class StudentByDiscipline extends React.Component {
       });
       await this.props.getDisciplinesStatisticThunk(this.state.groupsId);
       this.props.getStudentsThunk(this.state.groupsId);
-      this.state.groupsId !== null &&
-      this.state.studentId !== null &&
-      this.state.disciplineId !== null
-        ? this.props.getStatisticByDisciplineStudentThunk(
-            this.state.disciplineId,
-            this.state.studentId
-          )
-        : console.log("Error with StudentByDiscipline");
+
+      if (
+        this.state.groupsId !== null &&
+        this.state.studentId !== null &&
+        this.state.disciplineId !== null
+      ) {
+        this.props.getStatisticByDisciplineStudentThunk(
+          this.state.disciplineId,
+          this.state.studentId
+        );
+      }
     })();
   };
   getValueDiscipline = (e, c) => {
@@ -58,14 +64,17 @@ class StudentByDiscipline extends React.Component {
       });
       this.props.clearDisciplineByStudentStatistic();
       this.props.getStudentsThunk(this.state.groupsId);
-      this.state.groupsId !== null &&
-      this.state.studentId !== null &&
-      this.state.disciplineId !== null
-        ? this.props.getStatisticByDisciplineStudentThunk(
-            this.state.disciplineId,
-            this.state.studentId
-          )
-        : console.log("Error with StudentByDiscipline");
+
+      if (
+        this.state.groupsId !== null &&
+        this.state.studentId !== null &&
+        this.state.disciplineId !== null
+      ) {
+        this.props.getStatisticByDisciplineStudentThunk(
+          this.state.disciplineId,
+          this.state.studentId
+        );
+      }
     })();
   };
   render() {
@@ -73,7 +82,6 @@ class StudentByDiscipline extends React.Component {
     const { isLoading } = this.props;
     return (
       <div>
-        {console.log(this.props.disciplinesStatistic + "HELLO")}
         <div className="display-flex">
           <div>
             <input

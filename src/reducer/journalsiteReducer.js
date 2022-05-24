@@ -152,29 +152,29 @@ const journalsiteReducer = (state = initialState, action) => {
       };
 
     case SET_JOURNAL_HEADER:
-      // if (localStorage.getItem("journalsite") !== null) {
-      //   let newJournalsite = JSON.parse(localStorage.getItem("journalsite"));
-      //   let jHeader = [...state.journalHeader];
-      //   newJournalsite[0].journalHeaders.forEach((header) => {
-      //     const obj = { id: header.id, content: header.journalContents };
-      //     jHeader.push(obj);
-      //   });
-      //   return {
-      //     ...state,
-      //     journalHeader: jHeader,
-      //   };
-      // } else {
-      let newJournalsite = [...state.journalsite];
-      let jHeader = [...state.journalHeader];
-      newJournalsite[0].journalHeaders.forEach((header) => {
-        const obj = { id: header.id, content: header.journalContents };
-        jHeader.push(obj);
-      });
-      return {
-        ...state,
-        journalHeader: jHeader,
-      };
-    // }
+      if (localStorage.getItem("journalsite") !== null) {
+        let newJournalsite = JSON.parse(localStorage.getItem("journalsite"));
+        let jHeader = [...state.journalHeader];
+        newJournalsite[0].journalHeaders.forEach((header) => {
+          const obj = { id: header.id, content: header.journalContents };
+          jHeader.push(obj);
+        });
+        return {
+          ...state,
+          journalHeader: jHeader,
+        };
+      } else {
+        let newJournalsite = [...state.journalsite];
+        let jHeader = [...state.journalHeader];
+        newJournalsite[0].journalHeaders.forEach((header) => {
+          const obj = { id: header.id, content: header.journalContents };
+          jHeader.push(obj);
+        });
+        return {
+          ...state,
+          journalHeader: jHeader,
+        };
+      }
     case SET_LATENESS:
       if (state.journalsite.length === 0) {
         let newJournalsiteLateness = JSON.parse(
@@ -302,16 +302,16 @@ const journalsiteReducer = (state = initialState, action) => {
             lesson.journalContents.forEach((line) => {
               if (line.id === action.line_id) {
                 line.presence = !line.presence;
-                // if (!line.presence) {
-                //   line.grade = null;
-                // }
+                if (!line.presence) {
+                  line.grade = null;
+                }
               }
-              // if (line.presence === false) {
-              //   line.lateness = null;
-              // }
-              // if (line.presence === null) {
-              //   line.presence = false;
-              // }
+              if (line.presence === false) {
+                line.lateness = null;
+              }
+              if (line.presence === null) {
+                line.presence = false;
+              }
             });
           }
         })

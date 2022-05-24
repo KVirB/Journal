@@ -3,6 +3,7 @@ import * as axios from "axios";
 const baseRout = axios.create({
   baseURL: "http://192.168.11.252:8082/",
 });
+
 const baseRoutGeneral = axios.create({
   baseURL: "http://192.168.11.252:8081/",
 });
@@ -143,7 +144,7 @@ export const getFio = () => {
 export const getDiscipline = () => {
   return baseRout
     .get(
-      `electronicjournal/disciplines/searchByGroup?q=teacher.idFromSource==${
+      `electronicjournal/disciplines/searchDisciplinesByTeacher?q=teacher.idFromSource==${
         JSON.parse(localStorage.getItem("user")).id_from_source
       }`
     )
@@ -223,6 +224,7 @@ export const patchJournalsite = async (bodyItems) => {
   await bodyItems.map((m) => {
     let requestOptions = {
       method: "PATCH",
+      // "Authorization": `Bearer + ${localStorage.getItem("user").access_token}`
       headers: { "Content-Type": "application/json" },
     };
     return baseRout
@@ -239,6 +241,7 @@ export const patchJournalsite = async (bodyItems) => {
       })
       .finally((item) => {
         console.log(requestOptions);
+        window.location.reload();
       });
   });
 };

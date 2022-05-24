@@ -37,23 +37,26 @@ class StudentStatistic extends React.Component {
       });
 
       this.props.clearGraphStudentByPeriod();
-      console.log(this.state.firstDate);
       this.props.setFirstDate(e);
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null &&
-      this.state.groupsId !== null
-        ? this.props.getStudentsThunk(this.state.groupsId)
-        : console.log("Error with getStudents");
-      this.state.studentId !== null &&
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null &&
-      this.state.groupsId !== null
-        ? this.props.getStudentStatisticByPeriodThunk(
-            this.state.studentId,
-            this.state.firstDate,
-            this.state.secondDate
-          )
-        : console.log("Error with getStudentsStatistic");
+      if (
+        this.state.firstDate !== null &&
+        this.state.secondDate !== null &&
+        this.state.groupsId !== null
+      ) {
+        this.props.getStudentsThunk(this.state.groupsId);
+      }
+      if (
+        this.state.studentId !== null &&
+        this.state.firstDate !== null &&
+        this.state.secondDate !== null &&
+        this.state.groupsId !== null
+      ) {
+        this.props.getStudentStatisticByPeriodThunk(
+          this.state.studentId,
+          this.state.firstDate,
+          this.state.secondDate
+        );
+      }
     })();
   };
 
@@ -62,23 +65,27 @@ class StudentStatistic extends React.Component {
       await this.setState({
         secondDate: e,
       });
-      console.log(this.state.secondDate);
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null &&
-      this.state.groupsId !== null
-        ? this.props.getStudentsThunk(this.state.groupsId)
-        : console.log("Error with getStudents");
+      if (
+        this.state.firstDate !== null &&
+        this.state.secondDate !== null &&
+        this.state.groupsId !== null
+      ) {
+        this.props.getStudentsThunk(this.state.groupsId);
+      }
+
       this.props.setSecondDate(e);
-      this.state.studentId !== null &&
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null &&
-      this.state.groupsId !== null
-        ? this.props.getStudentStatisticByPeriodThunk(
-            this.state.studentId,
-            this.state.firstDate,
-            this.state.secondDate
-          )
-        : console.log("Error with getStudentsStatistic");
+      if (
+        this.state.studentId !== null &&
+        this.state.firstDate !== null &&
+        this.state.secondDate !== null &&
+        this.state.groupsId !== null
+      ) {
+        this.props.getStudentStatisticByPeriodThunk(
+          this.state.studentId,
+          this.state.firstDate,
+          this.state.secondDate
+        );
+      }
     })();
   };
 
@@ -87,16 +94,19 @@ class StudentStatistic extends React.Component {
       await this.setState({
         studentId: e,
       });
-      this.state.studentId !== null &&
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null &&
-      this.state.groupsId !== null
-        ? this.props.getStudentStatisticByPeriodThunk(
-            this.state.studentId,
-            this.state.firstDate,
-            this.state.secondDate
-          )
-        : console.log("Error with getStudentsStatistic");
+
+      if (
+        this.state.studentId !== null &&
+        this.state.firstDate !== null &&
+        this.state.secondDate !== null &&
+        this.state.groupsId !== null
+      ) {
+        this.props.getStudentStatisticByPeriodThunk(
+          this.state.studentId,
+          this.state.firstDate,
+          this.state.secondDate
+        );
+      }
     })();
   };
 
@@ -106,21 +116,27 @@ class StudentStatistic extends React.Component {
         groupsId: e,
       });
       // this.props.getStudentsThunk(this.state.groupsId);
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null &&
-      this.state.groupsId !== null
-        ? this.props.getStudentsThunk(this.state.groupsId)
-        : console.log("Error with getStudents");
-      this.state.studentId !== null &&
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null &&
-      this.state.groupsId !== null
-        ? this.props.getStudentStatisticByPeriodThunk(
-            this.state.studentId,
-            this.state.firstDate,
-            this.state.secondDate
-          )
-        : console.log("Error with getStudentsStatistic");
+
+      if (
+        this.state.firstDate !== null &&
+        this.state.secondDate !== null &&
+        this.state.groupsId !== null
+      ) {
+        this.props.getStudentsThunk(this.state.groupsId);
+      }
+
+      if (
+        this.state.studentId !== null &&
+        this.state.firstDate !== null &&
+        this.state.secondDate !== null &&
+        this.state.groupsId !== null
+      ) {
+        this.props.getStudentStatisticByPeriodThunk(
+          this.state.studentId,
+          this.state.firstDate,
+          this.state.secondDate
+        );
+      }
     })();
   };
   getValueDiscipline = (e, c) => {
@@ -134,18 +150,6 @@ class StudentStatistic extends React.Component {
     const { isLoading } = this.props;
     return (
       <div>
-        {console.log(
-          JSON.stringify(
-            this.state.groupsId +
-              "gId" +
-              this.state.firstDate +
-              "fD" +
-              this.state.secondDate +
-              "sD" +
-              this.state.studentId +
-              "sId"
-          )
-        )}
         <div className="display-flex">
           <div>
             <input

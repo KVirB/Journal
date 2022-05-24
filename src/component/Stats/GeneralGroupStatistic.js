@@ -25,12 +25,14 @@ class GeneralGroupStatistic extends React.Component {
       this.setState({
         secondDate: null,
       });
-      this.state.groupsId !== null &&
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null
-        ? this.props.getGeneralGroupStatisticsThunk(this.state.groupsId)
-        : console.log("Error with generalSecondDate");
-      console.log(this.state.firstDate);
+
+      if (
+        this.state.groupsId !== null &&
+        this.state.firstDate !== null &&
+        this.state.secondDate !== null
+      ) {
+        this.props.getGeneralGroupStatisticsThunk(this.state.groupsId);
+      }
       this.props.setFirstDate(e);
     })();
   };
@@ -40,12 +42,14 @@ class GeneralGroupStatistic extends React.Component {
       await this.setState({
         secondDate: e,
       });
-      this.state.groupsId !== null &&
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null
-        ? this.props.getGeneralGroupStatisticsThunk(this.state.groupsId)
-        : console.log("Error with generalSecondDate");
-      console.log(this.state.secondDate);
+
+      if (
+        this.state.groupsId !== null &&
+        this.state.firstDate !== null &&
+        this.state.secondDate !== null
+      ) {
+        this.props.getGeneralGroupStatisticsThunk(this.state.groupsId);
+      }
       this.props.setSecondDate(e);
     })();
   };
@@ -56,11 +60,14 @@ class GeneralGroupStatistic extends React.Component {
         groupsId: e,
       });
       // await this.props.getStudentsThunk(this.state.groupsId);
-      this.state.groupsId !== null &&
-      this.state.firstDate !== null &&
-      this.state.secondDate !== null
-        ? this.props.getGeneralGroupStatisticsThunk(this.state.groupsId)
-        : console.log("Error with generalSecondDate");
+
+      if (
+        this.state.groupsId !== null &&
+        this.state.firstDate !== null &&
+        this.state.secondDate !== null
+      ) {
+        this.props.getGeneralGroupStatisticsThunk(this.state.groupsId);
+      }
     })();
   };
 
@@ -69,7 +76,6 @@ class GeneralGroupStatistic extends React.Component {
     const { isLoading } = this.props;
     return (
       <div>
-        {console.log(this.state.groupsId)}
         <div className="display-flex jst_content">
           <div className="display-flex">
             <div>

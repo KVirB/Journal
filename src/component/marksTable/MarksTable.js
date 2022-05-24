@@ -173,7 +173,7 @@ export default class MarksTable extends React.Component {
                                     ? String(this.state.x) +
                                       header.dateOfLesson[1]
                                     : header.dateOfLesson[1]
-                                  : console.log("kiki")}
+                                  : false}
                                 <br />
                               </p>
                               <p className="year">
@@ -182,7 +182,7 @@ export default class MarksTable extends React.Component {
                                     ? String(this.state.x) +
                                       header.dateOfLesson[0]
                                     : header.dateOfLesson[0]
-                                  : console.log("kaki")}
+                                  : false}
                               </p>
                               <p className="day_mount">
                                 {this.state.lessonHours[header.hoursCount]}
@@ -191,6 +191,9 @@ export default class MarksTable extends React.Component {
                           </TableCell>
                         </TableRow>
                         {header.journalContents.map((content, j) => {
+                          {
+                            let presence = content.presence;
+                          }
                           return (
                             <TableRow key={j}>
                               <TableCell
@@ -233,7 +236,7 @@ export default class MarksTable extends React.Component {
                                         : localStorage.getItem("typeC") ===
                                           "Экзамен" // Экзамен
                                         ? false
-                                        : console.log("Error with hidden")
+                                        : 0
                                     }
                                     defaultValue={content.grade}
                                     onChange={(e) => {
@@ -299,6 +302,7 @@ export default class MarksTable extends React.Component {
                                       type="checkbox"
                                       name={"c" + content.id}
                                       id={"c" + content.id}
+                                      // defaultChecked={content.presence}
                                       defaultChecked={content.presence}
                                       onChange={() => {
                                         (async () => {
@@ -339,7 +343,7 @@ export default class MarksTable extends React.Component {
                                         })();
                                       }}
                                     />
-                                    <label for={"c" + content.id}></label>
+                                    <label htmlFor={"c" + content.id}></label>
                                   </div>
                                   <div
                                     className={
@@ -360,11 +364,14 @@ export default class MarksTable extends React.Component {
                                       value={
                                         content.presence === false
                                           ? (this.state.inputs[content.id] = "")
-                                          : this.state.inputs[content.id]
+                                          : content.lateness === null
+                                          ? undefined
+                                          : content.lateness
+                                        // this.state.inputs[content.id]
                                       }
                                       type="number"
                                       onKeyPress={this.handleKeyPress}
-                                      defaultValue={content.lateness}
+                                      // defaultValue={content.lateness}
                                       onChange={(e) => {
                                         (async () => {
                                           this.getInputValue(e, content.id);
@@ -459,7 +466,6 @@ export default class MarksTable extends React.Component {
               localStorage.getItem("journalsite") !== null ? false : isLoading
             }
           />
-          {console.log(this.state.inputs)}
         </div>
       );
     }

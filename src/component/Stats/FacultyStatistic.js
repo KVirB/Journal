@@ -58,7 +58,6 @@ class FacultyStatistic extends React.Component {
     const { isLoading } = this.props;
     return (
       <div>
-        {console.log(this.state.groupsId)}
         <div className="display-flex jst_content">
           <div className="display-flex">
             <div>
