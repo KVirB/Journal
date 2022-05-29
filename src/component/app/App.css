@@ -142,21 +142,25 @@ hr {
   border-top: 1px solid rgba(224, 224, 224, 1);
 } */
 .line-data {
-  border-right: 1px solid rgba(224, 224, 224, 1);
+  min-width: 81px;
 }
 .line-grade {
-  border-right: 1px solid rgba(224, 224, 224, 1);
-}
-.line-stud {
-  border-left: 1px solid rgba(224, 224, 224, 1);
-  border-right: 1px solid rgba(224, 224, 224, 1);
-  height: 37px;
-}
-.line-fio {
-  border-left: 1px solid rgba(224, 224, 224, 1);
+  width: 80px;
+  height: 59px;
   border-right: 1px solid rgba(224, 224, 224, 1);
   border-bottom: 1px solid rgba(224, 224, 224, 1);
-  height: 158.5px;
+}
+.line-stud {
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  vertical-align: middle;
+}
+.line-grade-tr {
+  /* border-top: 1px solid rgba(224, 224, 224, 1); */
+}
+.line-fio {
+  border-right: 1px solid rgba(224, 224, 224, 1);
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  height: 90px;
   /* width: 200px; */
   display: block;
 }
@@ -170,7 +174,7 @@ hr {
 }
 .all-content {
   padding-left: 56px;
-  width: 600px;
+  width: 1069px;
   overflow: auto;
   margin-bottom: 40px;
 }
@@ -201,20 +205,19 @@ hr {
   background-clip: content-box; /* THIS IS IMPORTANT */
   top: 0;
 }
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #495471;
   border-radius: 29px;
 }
 .diagonal-line {
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to bottom left,
     transparent 49%,
     #ececec,
     transparent 50%
   );
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
 }
 .dzs {
   font-family: Roboto;
@@ -235,7 +238,7 @@ hr {
   line-height: 135%;
   color: #9a9c9c;
   float: left;
-  margin-top: 120px;
+  margin-top: 60px;
   margin-left: 20px;
 }
 .csn {
@@ -325,6 +328,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
   text-align: center;
 }
 .surname {
+  width: max-content;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -425,6 +429,7 @@ section div {
   margin-top: 3.5px;
   margin-right: auto;
   margin-left: auto;
+  margin: auto;
 }
 .std_cell_lab {
   display: block;
@@ -919,3 +924,25 @@ select {
   transform: scale(1);
 }
 /* CHECKBOX */
+.main_table {
+  width: 1160px;
+  height: 500px;
+}
+.sticky_top {
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 7;
+  top: 0px;
+  background-color: white;
+}
+.sticky_left {
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 7;
+  left: 0px;
+  background-color: white;
+}
+.container_student {
+  width: max-content;
+  height: 60px;
+}

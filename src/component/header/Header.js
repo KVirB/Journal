@@ -19,6 +19,7 @@ import {
 import points from "../../points.png";
 import Select from "react-select";
 import UnSaveDataModal from "./UnSaveDataModal.js";
+import BurgerModal from "./BurgerModal";
 
 class Header extends React.Component {
   state = {
@@ -245,6 +246,7 @@ class Header extends React.Component {
     const { isLoading } = this.props;
     return (
       <div>
+        {/* <BurgerModal></BurgerModal> */}
         <UnSaveDataModal
           isOpen={this.state.modalIsOpen}
           closeModal={this.closeModal}

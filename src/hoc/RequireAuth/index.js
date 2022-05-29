@@ -1,10 +1,11 @@
-import { useLocation, Navigate } from "react-router-dom";
+import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 // import { useSelector } from 'react-redux';
 
-function RequireAuth({ children }) {
+function RequireAuth({ children, role }) {
   const location = useLocation();
-  const { user } = useAuth();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
 
   if (!user) {
     return (
@@ -14,6 +15,15 @@ function RequireAuth({ children }) {
         replace
       />
     );
+  }
+  if (user) {
+    user.roles.forEach((element) => {
+      if (role.indexOf(element) === -1) {
+        localStorage.removeItem("user");
+        signOut(() => navigate("/electronicaljournal-view", { replace: true }));
+        console.log(role.indexOf(element), element);
+      }
+    });
   }
 
   return children;

@@ -11,11 +11,10 @@ Modal.setAppElement("#root");
 
 function BurgerModal() {
   const [stats, setCount] = useState(true);
-  const [second, setSecond] = useState(true);
+  const [close, setClose] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -23,15 +22,15 @@ function BurgerModal() {
   }
 
   function closeModal() {
+    setClose(true);
+  }
+  function closeOnRequest() {
     setIsOpen(false);
+    setClose(false);
   }
   let count_stats = () => {
     stats === true ? setCount(false) : setCount(true);
     console.log(stats);
-  };
-  let second_stats = () => {
-    second === true ? setSecond(false) : setSecond(true);
-    console.log(second);
   };
 
   return (
@@ -45,14 +44,16 @@ function BurgerModal() {
       )}
       <div>
         <Modal
-          className="modal_main"
+          id={"modal"}
+          className={close ? "modal_main2" : "modal_main"}
           isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+          onRequestClose={closeOnRequest}
           overlayClassName={"modal_open"}
           contentLabel="Example Modal"
         >
           <div className="burger_main_with_bt">
             <div className="container_with_bt_close">
+              {/* {console.log(transformStyle)} */}
               <button
                 className="bt_main_page"
                 onClick={() =>

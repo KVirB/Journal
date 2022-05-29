@@ -22,7 +22,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/journal"
             element={
-              <RequireAuth>
+              <RequireAuth role={["USER", "DISPETCHER"]}>
                 <Combine />
               </RequireAuth>
             }
@@ -30,7 +30,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/main"
             element={
-              <RequireAuth>
+              <RequireAuth role={["USER", "DISPETCHER"]}>
                 <MainPageContainer />
               </RequireAuth>
             }
@@ -38,7 +38,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/statistics"
             element={
-              <RequireAuth>
+              <RequireAuth role={["USER", "DISPETCHER"]}>
                 <Statistics />
               </RequireAuth>
             }
@@ -46,7 +46,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/studentbydiscipline"
             element={
-              <RequireAuth>
+              <RequireAuth role={["USER", "DISPETCHER"]}>
                 <StudentByDiscipline />
               </RequireAuth>
             }
@@ -54,7 +54,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/studentstatistic"
             element={
-              <RequireAuth>
+              <RequireAuth role={["USER", "DISPETCHER"]}>
                 <StudentStatistic />
               </RequireAuth>
             }
@@ -62,7 +62,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/generalgroupstatistic"
             element={
-              <RequireAuth>
+              <RequireAuth role={["USER", "DISPETCHER"]}>
                 <GeneralGroupStatistic />
               </RequireAuth>
             }
@@ -70,7 +70,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/facultystatistic"
             element={
-              <RequireAuth>
+              <RequireAuth role={["USER", "DISPETCHER"]}>
                 <FacultyStatistic />
               </RequireAuth>
             }

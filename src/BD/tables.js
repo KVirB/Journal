@@ -193,7 +193,7 @@ export const getGroups = () => {
 export const getDisciplinesStatistic = (groupsId) => {
   return baseRout
     .get(
-      `electronicjournal/disciplines/searchByGroup?q=group.name==${groupsId}`
+      `electronicjournal/disciplines/searchDisciplinesByTeacher?q=group.name==${groupsId}`
     )
     .then((response) => {
       return response.data;

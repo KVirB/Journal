@@ -6,7 +6,6 @@ import profile from "../../profile.svg";
 import mech from "../../Vector.png";
 import col from "../../Col.png";
 import que from "../../Que.png";
-import BurgerModal from "./BurgerModal";
 
 function MainHeader() {
   const navigate = useNavigate();
@@ -16,13 +15,25 @@ function MainHeader() {
     localStorage.removeItem("user");
     signOut(() => navigate("/electronicaljournal-view", { replace: true }));
   };
+  var prevScrollpos = window.pageYOffset;
+  window.onscroll = function () {
+    var currentScrollPos = window.pageYOffset;
+    if (document.getElementById("header")) {
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("header").style.top = "0";
+      } else {
+        document.getElementById("header").style.top = "-100px";
+      }
+    }
+    console.log(currentScrollPos);
+    prevScrollpos = currentScrollPos;
+  };
 
   return (
-    <div>
-      <header className="head">
+    <div className="main_header">
+      <header className="head" id="header">
         <div className="disp">
           {/* <button className="burger_button"></button> */}
-          <BurgerModal></BurgerModal>
           <h1 className="journal-name">
             <Link className="j_name" to="/electronicaljournal-view">
               Электронный журнал преподавателя УО «ВГТУ»
