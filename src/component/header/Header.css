@@ -11,7 +11,7 @@
   box-sizing: border-box;
   box-shadow: 2px 8px 15px rgba(201, 201, 201, 0.1);
   border-radius: 4px;
-  margin-left: 58px;
+  margin-left: 45px;
   margin-top: 15px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -31,7 +31,7 @@
   font-size: 15px;
   line-height: 135%;
   color: #9a9c9c;
-  margin-left: 82px;
+  margin-left: 70px;
   margin-top: 40px;
 }
 .display-flex {
@@ -45,8 +45,20 @@
   line-height: 120%;
   text-transform: none;
   width: auto;
-  padding: 31px 0;
+  padding: 39px 0;
   color: #ffffff;
+}
+.journal-name-600 {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 23px;
+  line-height: 120%;
+  text-transform: none;
+  width: 340px;
+  padding: 25px 0;
+  color: #ffffff;
+  text-align: center;
 }
 .special-name {
   font-family: "Roboto", sans-serif;
@@ -55,7 +67,7 @@
   font-size: 15px;
   line-height: 135%;
   color: #9a9c9c;
-  margin-top: 36px;
+  margin-top: 40px;
   margin-left: 55px;
 }
 .special-select {
@@ -95,8 +107,6 @@
   transition: all 100ms;
   box-sizing: border-box;
   height: 38px;
-  overflow: scroll;
-  overflow-x: hidden;
 }
 
 /* ::-webkit-scrollbar {
@@ -111,12 +121,12 @@
   font-size: 15px;
   line-height: 135%;
   color: #9a9c9c;
-  margin-top: 36px;
-  margin-left: 82px;
+  margin-top: 40px;
+  margin-left: 70px;
 }
 .course-input {
   font-family: "Roboto", sans-serif;
-  margin-left: 58px;
+  margin-left: 45px;
   width: 103px;
   text-indent: 23px;
   font-style: normal;
@@ -224,7 +234,17 @@
   text-indent: 14px;
 }
 .button-header {
-  padding: 0 40px 0 40px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  border-radius: 7px;
+  margin-top: 75px;
+  height: 38px;
+  width: 144px;
+  cursor: pointer;
+  /* padding: 0 32px 0 32px;
   font-family: "Open Sans", sans-serif;
   margin-left: 5px;
   margin-top: 27px;
@@ -246,11 +266,12 @@
   justify-content: space-between;
   background: #434c63;
   box-shadow: 2px 8px 15px rgba(201, 201, 201, 0.1);
-  border-radius: 4px;
+  border-radius: 4px; */
 }
 .bt_color {
   color: white;
   background-color: #434c63;
+  border: 1px solid #434c63;
 }
 .button-header:active {
   background: #cde5ef;
@@ -274,8 +295,9 @@ input[type="reset"]:hover {
   color: white;
 }
 input[type="submit"].button-header:disabled {
-  background-color: #d8d8d8;
-  color: white;
+  color: #b8b8b8;
+  background: #ebebeb;
+  border: 1px solid #ebebeb;
 }
 .bt_left {
   margin-left: auto;
@@ -287,22 +309,23 @@ input[type="submit"].button-header:disabled {
   display: flex;
   justify-content: space-between;
   padding: 0 56px 0 56px;
-  /* position: fixed;
+  position: fixed;
   width: -webkit-fill-available;
-  z-index: 5; */
+  z-index: 5;
 }
 .bth_exit {
-  background: #434c63;
-  border: 1.5px solid #ffffff;
-  border-radius: 4px;
-  height: 42px;
-  width: 100px;
+  cursor: pointer;
+  border: 1px;
+  background: #353f57;
+  border-radius: 7px;
+  height: 51px;
+  width: 113px;
   font-family: "Roboto", sans-serif;
   font-weight: normal;
   font-size: 15px;
   line-height: 18px;
   color: #ffffff;
-  margin-top: 24px;
+  margin-top: 25px;
 }
 .headHr {
   border: 1px solid #ececec;
@@ -326,16 +349,24 @@ input[type="submit"].button-header:disabled {
   display: inline-flex;
 }
 .name_of_teacher {
-  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 15px;
   line-height: 18px;
   color: #ffffff;
+  display: flex;
+}
+.email_of_teacher {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  color: #ebebeb;
   margin-right: 40px;
 }
 .block_of_name {
-  margin-top: 36px;
+  margin-top: 32px;
 }
 
 .user-info__div {
@@ -344,7 +375,10 @@ input[type="submit"].button-header:disabled {
 
 .profile_pic {
   margin-right: 12px;
-  margin-top: 26px;
+  margin-top: 28px;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
 }
 .icons_mech {
   width: 20px;
@@ -356,7 +390,7 @@ input[type="submit"].button-header:disabled {
   width: 20px;
   height: 20px;
   margin-right: 25px;
-  margin-top: 37px;
+  margin-top: 38px;
 }
 .icons_que {
   width: 20px;
@@ -365,6 +399,17 @@ input[type="submit"].button-header:disabled {
   margin-top: 37px;
 }
 .j_name {
+  text-decoration: none;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 120%;
+  text-align: center;
+  color: #ffffff;
+}
+.j_name-600 {
   text-decoration: none;
   color: white;
   font-family: "Roboto", sans-serif;
@@ -859,7 +904,7 @@ input[type="submit"].button-header:disabled {
   background-color: white;
 }
 .combine_main {
-  width: 100%;
+  width: calc(100% - 168px);
 }
 .menu_container a {
   display: block; /* Ссылка как блочный элемент */
@@ -933,6 +978,7 @@ input[type="submit"].button-header:disabled {
   height: 48px;
   border: 2px black;
   background-color: white;
+  cursor: pointer;
 }
 .bt_icon_stats:hover {
   background-color: #434c63;

@@ -91,6 +91,7 @@ export default class MarksTable extends React.Component {
   render() {
     {
       const { isLoading } = this.props;
+
       return (
         <div>
           <div
@@ -99,7 +100,7 @@ export default class MarksTable extends React.Component {
               localStorage.getItem("journalsite") !== null ? false : isLoading
             }
           />
-          <div className="main_table overwlov_for_table">
+          <div className="main_table overwlov_for_table" align="justify">
             <table>
               <thead>
                 <tr className="sticky_top">
@@ -195,7 +196,7 @@ export default class MarksTable extends React.Component {
                         {header.journalContents.map((content, i) => (
                           <th
                             className="line-grade disp"
-                            height="37px"
+                            // height="37px"
                             width={
                               localStorage.getItem("typeC") === "Лекция"
                                 ? "65px"

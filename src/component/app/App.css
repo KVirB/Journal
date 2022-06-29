@@ -152,6 +152,7 @@ hr {
 }
 .line-stud {
   border-bottom: 1px solid rgba(224, 224, 224, 1);
+  border-right: 1px solid rgba(224, 224, 224, 1);
   vertical-align: middle;
 }
 .line-grade-tr {
@@ -159,8 +160,7 @@ hr {
 }
 .line-fio {
   border-right: 1px solid rgba(224, 224, 224, 1);
-  border-bottom: 1px solid rgba(224, 224, 224, 1);
-  height: 90px;
+  height: 153px;
   /* width: 200px; */
   display: block;
 }
@@ -211,13 +211,13 @@ hr {
   border-radius: 29px;
 }
 .diagonal-line {
-  /* background-image: linear-gradient(
+  background-image: linear-gradient(
     to bottom left,
     transparent 49%,
     #ececec,
     transparent 50%
   );
-  background-repeat: no-repeat; */
+  background-repeat: no-repeat;
 }
 .dzs {
   font-family: Roboto;
@@ -238,8 +238,8 @@ hr {
   line-height: 135%;
   color: #9a9c9c;
   float: left;
-  margin-top: 60px;
-  margin-left: 20px;
+  margin-top: 110px;
+  margin-left: 45px;
 }
 .csn {
   margin-left: 5px;
@@ -336,7 +336,9 @@ input[type="date"]::-webkit-datetime-edit-day-field {
   line-height: 19px;
   color: #212323;
   /* text-align: center; */
+  margin-left: 45px;
   align-items: center;
+  margin-right: 10px;
 }
 section h2 {
   font-size: 2rem;
@@ -684,7 +686,100 @@ select {
   text-align: center;
 }
 
+/* CHECKBOX */
+[id^="c"] {
+  display: none;
+}
+[id^="c"] + label {
+  display: block;
+  width: 17px;
+  height: 17px;
+  border: 1.3px solid #e0e0e0;
+  border-radius: 3px;
+  text-align: center;
+}
+[id^="c"] + label:before {
+  content: "\2713";
+  display: inline-block;
+  color: #5da952;
+  font-size: 30px;
+  line-height: 12px;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+[id^="c"]:checked + label:before {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+/* CHECKBOX */
+.main_table {
+  /* max-width: 1684px; */
+  width: calc(100% - 57px);
+  height: 500px;
+}
+.sticky_top {
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 7;
+  top: 0px;
+  background-color: white;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+}
+.sticky_left {
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 7;
+  left: 0px;
+  background-color: white;
+}
+.container_student {
+  width: max-content;
+  height: 60px;
+}
+p.clip {
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  padding: 5px; /* Поля вокруг текста */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+}
+.main_page {
+  overflow-x: hidden;
+}
+.main_page::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+.journal_name_header {
+  display: none;
+  color: white;
+  height: 100px;
+  background: #434c63;
+  position: fixed;
+  width: -webkit-fill-available;
+  z-index: 5;
+}
 @media (max-width: 1264px) {
+  .combine_main {
+    width: calc(100% - 92px);
+  }
+  .main_table {
+    margin-left: 1px;
+    width: calc(100% - 20px);
+  }
+  .burger_menu_main_container {
+    min-width: 92px;
+  }
+  .bt_icon_stats {
+    margin-left: 20px;
+  }
+  .burger_button {
+    margin-left: 20px;
+  }
+  .Burger_menu {
+    width: 92px;
+  }
   .course-input {
     margin-left: 30px;
   }
@@ -702,10 +797,10 @@ select {
     width: 435px;
   }
   .kuki {
-    padding: 0 30px 0 0;
+    padding: 0 20px 0 0;
   }
   .head {
-    padding: 0 30px 0 30px;
+    padding: 0 20px 0 20px;
   }
   .all-content {
     padding-left: 30px;
@@ -729,16 +824,16 @@ select {
     width: 435px;
   }
   .kuki {
-    padding: 0 30px 0 0;
+    padding: 0 20px 0 0;
   }
   .head {
-    padding: 0 30px 0 30px;
+    padding: 0 20px 0 20px;
   }
   .icons_que {
     margin-top: 50px;
   }
   .icons_col {
-    margin-top: 50px;
+    margin-top: 38px;
   }
   .icons_mech {
     margin-top: 50px;
@@ -747,16 +842,16 @@ select {
     margin-left: 30px;
   }
   .journal-name {
-    max-width: 250px;
+    max-width: 460px;
   }
   .profile_pic {
-    margin-top: 40px;
+    margin-top: 28px;
   }
   .block_of_name {
-    margin-top: 50px;
+    margin-top: 32px;
   }
   .bth_exit {
-    margin-top: 38px;
+    margin-top: 25px;
   }
   .all-content {
     padding-left: 30px;
@@ -768,7 +863,7 @@ select {
     display: none;
   }
   .icons_col {
-    display: none;
+    margin-right: 40px;
   }
   .icons_mech {
     display: none;
@@ -777,16 +872,17 @@ select {
     margin-left: 30px;
   }
   .journal-name {
+    padding: 24px 0;
     max-width: 250px;
   }
   .profile_pic {
-    margin-top: 40px;
+    margin-top: 28px;
   }
   .block_of_name {
-    margin-top: 50px;
+    margin-top: 32px;
   }
   .bth_exit {
-    margin-top: 38px;
+    margin-top: 25px;
   }
   .button-header {
     margin-top: 45px;
@@ -801,7 +897,7 @@ select {
     display: none;
   }
   .icons_col {
-    display: none;
+    margin-right: 40px;
   }
   .icons_mech {
     display: none;
@@ -810,16 +906,17 @@ select {
     margin-left: 30px;
   }
   .journal-name {
+    padding: 24px 0;
     max-width: 250px;
   }
   .profile_pic {
-    margin-top: 40px;
+    margin-top: 28px;
   }
   .block_of_name {
-    margin-top: 50px;
+    margin-top: 32px;
   }
   .bth_exit {
-    margin-top: 38px;
+    margin-top: 25px;
   }
   .button-header {
     margin-top: 45px;
@@ -829,18 +926,28 @@ select {
   }
 }
 @media (max-width: 600px) {
+  .journal_name_header {
+    display: flex;
+    justify-content: center;
+  }
+  .burger_menu_main_container {
+    display: none;
+  }
+  .journal-name {
+    display: none;
+  }
   .exit_1920 {
     display: none;
   }
   .exit_480 {
     display: block;
   }
-  .profile_pic {
-    display: none;
+  .head {
+    background: #495471;
+    justify-content: normal;
   }
   .bth_exit {
-    width: 40px;
-    height: 40px;
+    display: none;
   }
   .special-select {
     width: 250px;
@@ -895,54 +1002,4 @@ select {
   .name_of_teacher {
     display: none;
   }
-}
-/* CHECKBOX */
-[id^="c"] {
-  display: none;
-}
-[id^="c"] + label {
-  display: block;
-  width: 17px;
-  height: 17px;
-  border: 1.3px solid #e0e0e0;
-  border-radius: 3px;
-  text-align: center;
-}
-[id^="c"] + label:before {
-  content: "\2713";
-  display: inline-block;
-  color: #5da952;
-  font-size: 30px;
-  line-height: 12px;
-  -webkit-transform: scale(0);
-  transform: scale(0);
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-}
-[id^="c"]:checked + label:before {
-  -webkit-transform: scale(1);
-  transform: scale(1);
-}
-/* CHECKBOX */
-.main_table {
-  width: 1160px;
-  height: 500px;
-}
-.sticky_top {
-  position: sticky;
-  position: -webkit-sticky;
-  z-index: 7;
-  top: 0px;
-  background-color: white;
-}
-.sticky_left {
-  position: sticky;
-  position: -webkit-sticky;
-  z-index: 7;
-  left: 0px;
-  background-color: white;
-}
-.container_student {
-  width: max-content;
-  height: 60px;
 }

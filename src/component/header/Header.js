@@ -390,11 +390,13 @@ class Header extends React.Component {
                 <div>
                   <div className="special-name">Специальность</div>
                   <div className="special-select">
-                    {this.props.courseSpec.length !== 1
-                      ? "Специальность"
-                      : this.props.courseSpec.map(
-                          (courseSpec) => courseSpec.specialty.name
-                        )}
+                    <p class="clip">
+                      {this.props.courseSpec.length !== 1
+                        ? "Специальность"
+                        : this.props.courseSpec.map(
+                            (courseSpec) => courseSpec.specialty.name
+                          )}
+                    </p>
                   </div>
                 </div>
               </div>
