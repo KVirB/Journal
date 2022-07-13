@@ -12,6 +12,7 @@ import StudentStatistic from "../Stats/studentStatisticContainer";
 import GeneralGroupStatistic from "../Stats/generalGroupStatisticContainer";
 import MainPageContainer from "../Main/mainPageContainer";
 import FacultyStatistic from "../Stats/facultyStatisticContainer";
+import TeacherProfile from "../Teacher/TeacherProfile";
 
 const App = () => {
   return (
@@ -72,6 +73,14 @@ const App = () => {
             element={
               <RequireAuth role={["USER", "DISPETCHER"]}>
                 <FacultyStatistic />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/electronicaljournal-view/teacher_profile"
+            element={
+              <RequireAuth role={["USER", "DISPETCHER"]}>
+                <TeacherProfile></TeacherProfile>
               </RequireAuth>
             }
           />

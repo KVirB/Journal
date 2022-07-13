@@ -752,16 +752,24 @@ p.clip {
   width: 0px;
   background: transparent;
 }
+
 .journal_name_header {
   display: none;
   color: white;
   height: 100px;
+  transition: 1s;
   background: #434c63;
-  position: fixed;
-  width: -webkit-fill-available;
-  z-index: 5;
+}
+.burger_modal_block {
+  display: none;
+}
+.otstup {
+  margin-top: 0;
 }
 @media (max-width: 1264px) {
+  .burger_combine {
+    width: 92px;
+  }
   .combine_main {
     width: calc(100% - 92px);
   }
@@ -926,26 +934,39 @@ p.clip {
     padding-left: 30px;
   }
 }
+@media (max-width: 700px) {
+  .button-header {
+    margin-top: 60px;
+  }
+  .special-select {
+    width: 241px;
+  }
+  .view-input {
+    width: 200px;
+  }
+  .discipline-select {
+    width: 200px;
+  }
+  .bth_exit {
+    display: none;
+  }
+  .combine_main {
+    width: calc(100%-92px);
+  }
+}
 @media (max-width: 600px) {
-  .journal_name_header {
-    display: flex;
-    justify-content: center;
+  .combine_main {
+    width: calc(100%-92px);
   }
-  .burger_menu_main_container {
-    display: none;
+  .discipline-name {
+    margin-top: 40px;
   }
-  .journal-name {
-    display: none;
-  }
+
   .exit_1920 {
     display: none;
   }
   .exit_480 {
     display: block;
-  }
-  .head {
-    background: #495471;
-    justify-content: normal;
   }
   .bth_exit {
     display: none;
@@ -957,10 +978,99 @@ p.clip {
     margin-right: 15px;
   }
 }
-
-@media (max-width: 480px) {
-  .profile_pic {
+@media (max-width: 580px) {
+  .journal-name-block {
     display: none;
+  }
+}
+@media (max-width: 510px) {
+  .special-select {
+    width: 200px;
+  }
+}
+@media (max-width: 480px) {
+  .burger_button_header {
+    display: block;
+  }
+  .burger_button {
+    background-image: none;
+    background: #434c63;
+    border: 1px solid #434c63;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 24px;
+    margin-left: 40px;
+  }
+  .burger_button:hover {
+    background-image: none;
+  }
+  .burger_button:active {
+    background-image: none;
+  }
+  .burger_pic {
+    display: inline-block;
+  }
+  .bt_icon_stats {
+    display: none;
+  }
+  .burger_combine {
+    display: none;
+  }
+  .icons_col {
+    order: 1;
+    position: absolute;
+    right: 80px;
+  }
+  .bt_close {
+    display: none;
+  }
+  .pull_out_menu_open {
+    top: 200px;
+  }
+  .burger_modal_block {
+    display: flex;
+  }
+  .bt_burger_modal {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .main_burger_window {
+    background-color: rgba(26, 30, 46, 0);
+    position: unset;
+  }
+  .combine_main {
+    width: calc(100%);
+  }
+  /* .burger_menu_main_container {
+    display: none;
+  } */
+  .burger_modal_main_container {
+    display: block;
+  }
+  .journal-name {
+    display: none;
+  }
+  .otstup {
+    margin-top: 200px;
+  }
+  .head {
+    top: 100px;
+    position: fixed;
+    width: -webkit-fill-available;
+    z-index: 5;
+    background: #495471;
+    justify-content: normal;
+  }
+  .journal_name_header {
+    top: 0px;
+    position: fixed;
+    width: -webkit-fill-available;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+  }
+  .profile_pic {
+    /* display: none; */
   }
   .bth_exit {
     width: 40px;
@@ -974,12 +1084,6 @@ p.clip {
   }
 }
 @media (max-width: 460px) {
-  .block_of_name {
-    display: none;
-  }
-  .profile_pic {
-    display: none;
-  }
   .bth_exit {
     width: 40px;
     height: 40px;
@@ -1000,7 +1104,13 @@ p.clip {
   .special-select {
     width: 180px;
   }
-  .name_of_teacher {
+  .icons_col {
     display: none;
+  }
+  .pull_out_menu_open {
+    width: 360px;
+  }
+  .bt_guide {
+    width: 360px;
   }
 }

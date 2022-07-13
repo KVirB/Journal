@@ -7,82 +7,30 @@ import { ReactComponent as HomeWhite } from "../../home_white.svg";
 import { ReactComponent as HomeBlack } from "../../home_black.svg";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 import BurgerModal from "./BurgerModal";
+import ButtonStatistics from "./ButtonStatistics";
 
-export default class BurgerMenu extends React.Component {
-  state = {
-    modal: false,
-    stats: true,
-  };
-
-  openModal = () => {
-    if (this.state.modal === false) {
-      this.setState({
-        modal: true,
-      });
-    } else {
-      this.setState({
-        modal: false,
-      });
-    }
-  };
-  setStats = () => {
-    if (this.state.stats === false) {
-      this.setState({
-        stats: true,
-      });
-    } else {
-      this.setState({
-        stats: false,
-      });
-    }
-  };
-  setStatsClose = () => {
-    this.setState({
-      stats: true,
-    });
-  };
-  setStatsOpen = () => {
-    this.setState({
-      stats: false,
-    });
-  };
-
+export default class BurgerMenuMain extends React.Component {
   render() {
     return (
       <div className="burger_menu_main_container">
+        <ButtonStatistics
+          setStatsOpen={this.props.setStatsOpen}
+          openModal={this.props.openModal}
+        ></ButtonStatistics>
         <div
           className={
-            this.state.modal ? "main_burger_window" : "main_burger_window_close"
+            this.props.modal ? "main_burger_window" : "main_burger_window_close"
           }
-          onClick={() => this.openModal()}
+          onClick={() => this.props.openModal()}
         >
-          <div className="Burger_menu" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="burger_button"
-              onClick={() => {
-                this.openModal();
-                this.setStatsClose();
-              }}
-            ></button>
-
-            <button
-              className="bt_icon_stats"
-              onClick={() => {
-                this.openModal();
-                this.setStatsOpen();
-              }}
-            >
-              <IconStats className="icon_stats_blue"></IconStats>
-              <IconStatsWhite className="icon_stats_white"></IconStatsWhite>
-            </button>
-          </div>
           <div
             className={
-              this.state.modal
+              this.props.modal
                 ? "pull_out_menu_open"
                 : "pull_out_menu_open pull_out_menu_close"
             }
             onClick={(e) => e.stopPropagation()}
+            id="pull_out"
           >
             <div className="burger_main_with_bt">
               <div className="container_with_bt_close disp">
@@ -103,8 +51,8 @@ export default class BurgerMenu extends React.Component {
                 <button
                   className="bt_close"
                   onClick={() => {
-                    this.openModal();
-                    this.setStatsClose();
+                    this.props.openModal();
+                    this.props.setStatsClose();
                   }}
                 ></button>
               </div>
@@ -112,12 +60,12 @@ export default class BurgerMenu extends React.Component {
             <div>
               <button
                 onClick={() =>
-                  this.state.stats === true
-                    ? this.setStatsOpen()
-                    : this.setStatsClose()
+                  this.props.stats === true
+                    ? this.props.setStatsOpen()
+                    : this.props.setStatsClose()
                 }
                 className={
-                  this.state.stats
+                  this.props.stats
                     ? "input_statistics"
                     : "input_statistics input_statistics_menu_down"
                 }
@@ -126,14 +74,14 @@ export default class BurgerMenu extends React.Component {
                   <div>
                     <IconStats
                       className={
-                        this.state.stats
+                        this.props.stats
                           ? "icon_stats_blue"
                           : "icon_stats_blue_open"
                       }
                     ></IconStats>
                     <IconStatsWhite
                       className={
-                        this.state.stats
+                        this.props.stats
                           ? "icon_stats_white"
                           : "icon_stats_white_open"
                       }
@@ -143,7 +91,7 @@ export default class BurgerMenu extends React.Component {
                   <div className="arrow_div">
                     <span
                       className={
-                        this.state.stats
+                        this.props.stats
                           ? "arrow_down"
                           : "arrow_down_menu arrow_down_transform"
                       }
@@ -152,7 +100,7 @@ export default class BurgerMenu extends React.Component {
                 </div>
               </button>
               <div className="statistics_container">
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/statistics"
@@ -160,7 +108,7 @@ export default class BurgerMenu extends React.Component {
                     Группы по дисциплине
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/studentbydiscipline"
@@ -168,7 +116,7 @@ export default class BurgerMenu extends React.Component {
                     Студента по дисциплине
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/studentstatistic"
@@ -176,7 +124,7 @@ export default class BurgerMenu extends React.Component {
                     Студента по периоду
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/generalgroupstatistic"
@@ -184,7 +132,7 @@ export default class BurgerMenu extends React.Component {
                     Общая статистика по группе
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/facultystatistic"
@@ -192,7 +140,7 @@ export default class BurgerMenu extends React.Component {
                     Статистика по факультету
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/statistics"
@@ -200,7 +148,7 @@ export default class BurgerMenu extends React.Component {
                     Группы по дисциплине
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/studentbydiscipline"
@@ -208,7 +156,7 @@ export default class BurgerMenu extends React.Component {
                     Студента по дисциплине
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/studentstatistic"
@@ -216,7 +164,7 @@ export default class BurgerMenu extends React.Component {
                     Студента по периоду
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/generalgroupstatistic"
@@ -224,7 +172,7 @@ export default class BurgerMenu extends React.Component {
                     Общая статистика по группе
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/facultystatistic"
@@ -232,7 +180,7 @@ export default class BurgerMenu extends React.Component {
                     Статистика по факультету
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/statistics"
@@ -240,7 +188,7 @@ export default class BurgerMenu extends React.Component {
                     Группы по дисциплине
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/studentbydiscipline"
@@ -248,7 +196,7 @@ export default class BurgerMenu extends React.Component {
                     Студента по дисциплине
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/studentstatistic"
@@ -256,7 +204,7 @@ export default class BurgerMenu extends React.Component {
                     Студента по периоду
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/generalgroupstatistic"
@@ -264,7 +212,7 @@ export default class BurgerMenu extends React.Component {
                     Общая статистика по группе
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/facultystatistic"
@@ -272,7 +220,7 @@ export default class BurgerMenu extends React.Component {
                     Статистика по факультету
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/facultystatistic"
@@ -280,7 +228,7 @@ export default class BurgerMenu extends React.Component {
                     Статистика по факультету
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/facultystatistic"
@@ -288,7 +236,7 @@ export default class BurgerMenu extends React.Component {
                     Статистика по факультету
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.state.stats}>
+                <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
                     to="/electronicaljournal-view/facultystatistic"

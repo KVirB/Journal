@@ -1,176 +1,299 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import Modal from "react-modal";
-import { Link, useNavigate } from "react-router-dom";
-import { ReactComponent as Home } from "../../Home.svg";
-import { ReactComponent as Cross } from "../../cross.svg";
-import { ReactComponent as BurgerBt } from "../../BurgerBt.svg";
-import { useAuth } from "../../hooks/useAuth";
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { ReactComponent as PoloskiWhite } from "../../poloski_white.svg";
+import { ReactComponent as StrWhite } from "../../white_str.svg";
+import { ReactComponent as HomeWhite } from "../../home_white.svg";
+import { ReactComponent as HomeBlack } from "../../home_black.svg";
+import { ReactComponent as IconStatsWhite } from "../../icons_stats_white.svg";
+import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
+import { ReactComponent as Guide } from "../../guide.svg";
 
-Modal.setAppElement("#root");
-
-function BurgerModal() {
-  const [stats, setCount] = useState(true);
-  const [close, setClose] = useState(false);
-  const navigate = useNavigate();
-  const { user } = useAuth();
-
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setClose(true);
-  }
-  function closeOnRequest() {
-    setIsOpen(false);
-    setClose(false);
-  }
-  let count_stats = () => {
-    stats === true ? setCount(false) : setCount(true);
-    console.log(stats);
+export default class BurgerModal extends React.Component {
+  state = {
+    modal: false,
+    stats: true,
   };
 
-  return (
-    <div>
-      {user && (
-        <button
-          className="burger_button"
-          hidden={modalIsOpen}
-          onClick={openModal}
-        ></button>
-      )}
-      <div>
-        <Modal
-          id={"modal"}
-          className={close ? "modal_main2" : "modal_main"}
-          isOpen={modalIsOpen}
-          onRequestClose={closeOnRequest}
-          overlayClassName={"modal_open"}
-          contentLabel="Example Modal"
+  openModal = () => {
+    if (this.state.modal === false) {
+      this.setState({
+        modal: true,
+      });
+    } else {
+      this.setState({
+        modal: false,
+      });
+    }
+  };
+  setStats = () => {
+    if (this.state.stats === false) {
+      this.setState({
+        stats: true,
+      });
+    } else {
+      this.setState({
+        stats: false,
+      });
+    }
+  };
+  setStatsClose = () => {
+    this.setState({
+      stats: true,
+    });
+  };
+  setStatsOpen = () => {
+    this.setState({
+      stats: false,
+    });
+  };
+
+  render() {
+    return (
+      <div className="burger_modal_main_container">
+        <div
+          className={
+            this.state.modal ? "main_burger_window" : "main_burger_window_close"
+          }
+          onClick={() => this.openModal()}
         >
-          <div className="burger_main_with_bt">
-            <div className="container_with_bt_close">
-              {/* {console.log(transformStyle)} */}
-              <button
-                className="bt_main_page"
-                onClick={() =>
-                  navigate("/electronicaljournal-view/journal", {
-                    replace: false,
-                  })
-                }
-              >
+          <div className="" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="burger_button_modal"
+              onClick={() => {
+                this.openModal();
+                this.setStatsClose();
+              }}
+            >
+              {this.state.modal === false ? (
+                <PoloskiWhite></PoloskiWhite>
+              ) : (
+                <StrWhite></StrWhite>
+              )}
+            </button>
+          </div>
+          {console.log(this.state.modal)}
+          <div
+            className={
+              this.state.modal
+                ? "pull_out_menu_open"
+                : "pull_out_menu_open pull_out_menu_close"
+            }
+            onClick={(e) => e.stopPropagation()}
+            // id="pull_out"
+          >
+            <div className="burger_main_with_bt">
+              <div className="container_with_bt_close disp">
+                <div>
+                  <button className="bt_main_page">
+                    <HomeWhite className="home_white"></HomeWhite>
+                    <HomeBlack className="home_black"></HomeBlack>
+                  </button>
+                </div>
                 <Link
                   className="home_item"
                   to="/electronicaljournal-view/journal"
-                  onClick={closeModal}
                 >
                   Главная
                 </Link>
+              </div>
+              <div>
+                <button
+                  className="bt_close"
+                  onClick={() => {
+                    this.openModal();
+                    this.setStatsClose();
+                  }}
+                ></button>
+              </div>
+            </div>
+            <div>
+              <button
+                onClick={() =>
+                  this.state.stats === true
+                    ? this.setStatsOpen()
+                    : this.setStatsClose()
+                }
+                className={
+                  this.state.stats
+                    ? "input_statistics"
+                    : "input_statistics input_statistics_menu_down"
+                }
+              >
+                <div>
+                  <div>Статистика</div>
+                  <div className="arrow_div">
+                    <span
+                      className={
+                        this.state.stats
+                          ? "arrow_down"
+                          : "arrow_down_menu arrow_down_transform"
+                      }
+                    ></span>
+                  </div>
+                </div>
               </button>
-            </div>
-            <div>
-              <button className="bt_close" onClick={closeModal}></button>
-            </div>
-          </div>
-          <button
-            className={
-              stats
-                ? "input_statistics"
-                : "input_statistics input_statistics_menu_down"
-            }
-            onClick={() => {
-              count_stats();
-            }}
-          >
-            <div>
-              <div>Статистика</div>
-              <div className="arrow_div">
-                <span
-                  className={
-                    stats
-                      ? "arrow_down"
-                      : "arrow_down_menu arrow_down_transform"
-                  }
-                ></span>
+              <div className="statistics_container">
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/statistics"
+                  >
+                    Группы по дисциплине
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/studentbydiscipline"
+                  >
+                    Студента по дисциплине
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/studentstatistic"
+                  >
+                    Студента по периоду
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/generalgroupstatistic"
+                  >
+                    Общая статистика по группе
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/facultystatistic"
+                  >
+                    Статистика по факультету
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/statistics"
+                  >
+                    Группы по дисциплине
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/studentbydiscipline"
+                  >
+                    Студента по дисциплине
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/studentstatistic"
+                  >
+                    Студента по периоду
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/generalgroupstatistic"
+                  >
+                    Общая статистика по группе
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/facultystatistic"
+                  >
+                    Статистика по факультету
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/statistics"
+                  >
+                    Группы по дисциплине
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/studentbydiscipline"
+                  >
+                    Студента по дисциплине
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/studentstatistic"
+                  >
+                    Студента по периоду
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/generalgroupstatistic"
+                  >
+                    Общая статистика по группе
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/facultystatistic"
+                  >
+                    Статистика по факультету
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/facultystatistic"
+                  >
+                    Статистика по факультету
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/facultystatistic"
+                  >
+                    Статистика по факультету
+                  </Link>
+                </div>
+                <div className="menu_container" hidden={this.state.stats}>
+                  <Link
+                    className="item_stat"
+                    to="/electronicaljournal-view/facultystatistic"
+                  >
+                    RK
+                  </Link>
+                </div>
               </div>
             </div>
-          </button>
-
-          <div className="menu_container" hidden={stats}>
-            <Link
-              className="item_stat"
-              to="/electronicaljournal-view/statistics"
-              onClick={closeModal}
-            >
-              Группы по дисциплине
-            </Link>
-          </div>
-          <div className="menu_container" hidden={stats}>
-            <Link
-              className="item_stat"
-              to="/electronicaljournal-view/studentbydiscipline"
-              onClick={closeModal}
-            >
-              Студента по дисциплине
-            </Link>
-          </div>
-          <div className="menu_container" hidden={stats}>
-            <Link
-              className="item_stat"
-              to="/electronicaljournal-view/studentstatistic"
-              onClick={closeModal}
-            >
-              Студента по периоду
-            </Link>
-          </div>
-          <div className="menu_container" hidden={stats}>
-            <Link
-              className="item_stat"
-              to="/electronicaljournal-view/generalgroupstatistic"
-              onClick={closeModal}
-            >
-              Общая статистика по группе
-            </Link>
-          </div>
-          <div className="menu_container" hidden={stats}>
-            <Link
-              className="item_stat"
-              to="/electronicaljournal-view/facultystatistic"
-              onClick={closeModal}
-            >
-              Статистика по факультету
-            </Link>
-          </div>
-          {/* <button
-            className={
-              second
-                ? "input_statistics"
-                : "input_statistics input_statistics_menu_down"
-            }
-            onClick={() => {
-              second_stats();
-            }}
-          >
-            <div>
-              <div>Пункт меню 1</div>
-              <div className="arrow_div">
-                <span
-                  className={
-                    second
-                      ? "arrow_down"
-                      : "arrow_down_menu arrow_down_transform"
-                  }
-                ></span>
+            <button className="bt_guide">
+              <Guide className="guide_pic"></Guide>
+              <div className="guide_name">Руководство пользователя</div>
+            </button>
+            <footer className="footer_burger_menu">
+              <div className="support_name">
+                Техническая поддержка веб-сервиса и последующее обновление —{" "}
+                <Link className="cit_name" to="https://cit.vstu.by">
+                  cit.vstu.by
+                </Link>
               </div>
-            </div>
-          </button> */}
-        </Modal>
+            </footer>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
-export default BurgerModal;

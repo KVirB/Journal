@@ -189,7 +189,7 @@ export default class MarksTable extends React.Component {
                         .getBoundingClientRect().width
                     )
                   : false}
-                <tfoot className="disp">
+                <tfoot className="disp table_tfoot">
                   {this.props.journalsite.map((item, i) => {
                     return item.journalHeaders.map((header, i) => (
                       <tr className="line-grade-tr">
