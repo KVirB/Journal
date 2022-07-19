@@ -574,7 +574,6 @@ input[type="submit"].button-header:disabled {
 }
 .burger_button {
   position: absolute;
-  margin-left: 58px;
   width: 52px;
   height: 48px;
   border: 1px solid #ebebeb;
@@ -1034,9 +1033,9 @@ input[type="submit"].button-header:disabled {
   transition: 1s;
 }
 .burger_combine {
-  min-width: 167px;
-  max-width: 167px;
+  width: 110px;
   border-right: 1px solid #ebebeb;
+  margin-left: 58px;
 }
 .burger_menu_main_container {
   /* min-width: 169px;
@@ -1069,7 +1068,6 @@ input[type="submit"].button-header:disabled {
 .bt_icon_stats {
   position: absolute;
   margin-top: 135px;
-  margin-left: 58px;
   width: 52px;
   height: 48px;
   border: 2px black;
@@ -1117,20 +1115,18 @@ input[type="submit"].button-header:disabled {
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  margin: 40px 45px 45px 45px;
+  margin-top: 40px;
+  margin-left: 45px;
 }
 .button_exit_teacher_profile:hover {
   background: #353f57;
   cursor: pointer;
 }
 .button_exit_teacher_profile_block {
-  border-bottom: 1px solid #ebebeb;
   border-right: 1px solid #ebebeb;
   width: 200px;
 }
 .data_teacher_profile_block {
-  width: calc(100vw - 369px);
-  border-bottom: 1px solid #ebebeb;
   height: 135px;
 }
 .p_today {
@@ -1154,7 +1150,6 @@ input[type="submit"].button-header:disabled {
   margin-top: 6px;
 }
 .teacher_block {
-  width: 975px;
   height: 416px;
   border-right: 1px solid #ebebeb;
   border-bottom: 1px solid #ebebeb;
@@ -1168,7 +1163,7 @@ input[type="submit"].button-header:disabled {
 .teacher_name {
   margin-top: 40px;
   margin-left: 55px;
-  width: 550px;
+  width: 75%;
   font-family: "Montserrat", sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1247,11 +1242,11 @@ input[type="submit"].button-header:disabled {
   font-size: 24px;
   line-height: 30px;
   color: #434c63;
-  padding: 40px 72px;
+  padding: 40px 70px;
 }
 .journal_block {
-  width: calc(100% - 975px);
   border-bottom: 1px solid #ebebeb;
+  height: 416px;
 }
 .block_with_selects {
   border-top: 1px solid #ebebeb;
@@ -1272,7 +1267,6 @@ input[type="submit"].button-header:disabled {
 }
 .block_name_contacts {
   height: 109px;
-  width: 975px;
   border-bottom: 1px solid #ebebeb;
 }
 .name_contacts {
@@ -1282,15 +1276,14 @@ input[type="submit"].button-header:disabled {
   font-size: 24px;
   line-height: 30px;
   color: #434c63;
-  padding: 40px 72px;
+  padding: 40px 45px;
 }
 .contacts_block {
   border-right: 1px solid #ebebeb;
-  height: calc(100vh - 552px);
-  width: 974px;
+  height: 428px;
 }
 .block_prompt {
-  height: calc(100vh - 552px);
+  height: 428px;
   width: 100%;
   background: #fafafa;
 }
@@ -1314,7 +1307,7 @@ input[type="submit"].button-header:disabled {
   background: #f5f5f5;
   border-radius: 7px;
   max-height: 38px;
-  width: 430px;
+  width: 424px;
   padding: 9.5px 20px 9.5px 25px;
   margin-left: 45px;
   margin-top: 13px;
@@ -1347,7 +1340,7 @@ input[type="submit"].button-header:disabled {
   margin-top: 13px;
   margin-left: 30px;
   max-height: 38px;
-  max-width: 192px;
+  width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -1423,8 +1416,8 @@ input[type="submit"].button-header:disabled {
   font-size: 24px;
   line-height: 30px;
   color: #c4c4c4;
-  margin-top: 40px;
   margin-left: 70px;
+  padding-top: 40px;
 }
 .text_of_prompt {
   margin-top: 30px;
@@ -1436,4 +1429,31 @@ input[type="submit"].button-header:disabled {
   line-height: 24px;
   color: #505050;
   margin-right: 56px;
+}
+.block_link_prompt {
+  margin-top: 47px;
+}
+.link_prompt {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #c4c4c4;
+  text-decoration: none;
+}
+.link_prompt:hover {
+  color: #434c63;
+}
+.main_teacher_profile {
+  width: 91.25%;
+}
+.header_main_teacher_profile {
+  border-bottom: 1px solid #ebebeb;
+}
+.right_block_teacher_profile {
+  width: 44.374643%;
+}
+.left_block_teacher_profile {
+  width: 55.682467%;
 }
