@@ -142,21 +142,25 @@ hr {
   border-top: 1px solid rgba(224, 224, 224, 1);
 } */
 .line-data {
-  border-right: 1px solid rgba(224, 224, 224, 1);
+  min-width: 81px;
 }
 .line-grade {
-  border-right: 1px solid rgba(224, 224, 224, 1);
-}
-.line-stud {
-  border-left: 1px solid rgba(224, 224, 224, 1);
-  border-right: 1px solid rgba(224, 224, 224, 1);
-  height: 37px;
-}
-.line-fio {
-  border-left: 1px solid rgba(224, 224, 224, 1);
+  width: 80px;
+  height: 59px;
   border-right: 1px solid rgba(224, 224, 224, 1);
   border-bottom: 1px solid rgba(224, 224, 224, 1);
-  height: 158.5px;
+}
+.line-stud {
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  border-right: 1px solid rgba(224, 224, 224, 1);
+  vertical-align: middle;
+}
+.line-grade-tr {
+  /* border-top: 1px solid rgba(224, 224, 224, 1); */
+}
+.line-fio {
+  border-right: 1px solid rgba(224, 224, 224, 1);
+  height: 153px;
   /* width: 200px; */
   display: block;
 }
@@ -170,7 +174,7 @@ hr {
 }
 .all-content {
   padding-left: 56px;
-  width: 600px;
+  width: 1069px;
   overflow: auto;
   margin-bottom: 40px;
 }
@@ -201,7 +205,6 @@ hr {
   background-clip: content-box; /* THIS IS IMPORTANT */
   top: 0;
 }
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #495471;
@@ -235,8 +238,8 @@ hr {
   line-height: 135%;
   color: #9a9c9c;
   float: left;
-  margin-top: 120px;
-  margin-left: 20px;
+  margin-top: 110px;
+  margin-left: 45px;
 }
 .csn {
   margin-left: 5px;
@@ -325,6 +328,7 @@ input[type="date"]::-webkit-datetime-edit-day-field {
   text-align: center;
 }
 .surname {
+  width: max-content;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -332,7 +336,9 @@ input[type="date"]::-webkit-datetime-edit-day-field {
   line-height: 19px;
   color: #212323;
   /* text-align: center; */
+  margin-left: 45px;
   align-items: center;
+  margin-right: 10px;
 }
 section h2 {
   font-size: 2rem;
@@ -425,6 +431,7 @@ section div {
   margin-top: 3.5px;
   margin-right: auto;
   margin-left: auto;
+  margin: auto;
 }
 .std_cell_lab {
   display: block;
@@ -680,218 +687,6 @@ select {
   text-align: center;
 }
 
-@media (max-width: 1264px) {
-  .course-input {
-    margin-left: 30px;
-  }
-  .course-name {
-    margin-left: 55px;
-  }
-  .discipline-name {
-    margin-left: 55px;
-  }
-  .discipline-select {
-    width: 262px;
-    margin-left: 30px;
-  }
-  .special-select {
-    width: 435px;
-  }
-  .kuki {
-    padding: 0 30px 0 0;
-  }
-  .head {
-    padding: 0 30px 0 30px;
-  }
-  .all-content {
-    padding-left: 30px;
-  }
-}
-@media (max-width: 1000px) {
-  .course-input {
-    margin-left: 30px;
-  }
-  .course-name {
-    margin-left: 55px;
-  }
-  .discipline-name {
-    margin-left: 55px;
-  }
-  .discipline-select {
-    width: 262px;
-    margin-left: 30px;
-  }
-  .special-select {
-    width: 435px;
-  }
-  .kuki {
-    padding: 0 30px 0 0;
-  }
-  .head {
-    padding: 0 30px 0 30px;
-  }
-  .icons_que {
-    margin-top: 50px;
-  }
-  .icons_col {
-    margin-top: 50px;
-  }
-  .icons_mech {
-    margin-top: 50px;
-  }
-  .button-header {
-    margin-left: 30px;
-  }
-  .journal-name {
-    max-width: 250px;
-  }
-  .profile_pic {
-    margin-top: 40px;
-  }
-  .block_of_name {
-    margin-top: 50px;
-  }
-  .bth_exit {
-    margin-top: 38px;
-  }
-  .all-content {
-    padding-left: 30px;
-  }
-}
-
-@media (max-width: 800px) {
-  .icons_que {
-    display: none;
-  }
-  .icons_col {
-    display: none;
-  }
-  .icons_mech {
-    display: none;
-  }
-  .button-header {
-    margin-left: 30px;
-  }
-  .journal-name {
-    max-width: 250px;
-  }
-  .profile_pic {
-    margin-top: 40px;
-  }
-  .block_of_name {
-    margin-top: 50px;
-  }
-  .bth_exit {
-    margin-top: 38px;
-  }
-  .button-header {
-    margin-top: 45px;
-  }
-  .all-content {
-    padding-left: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .icons_que {
-    display: none;
-  }
-  .icons_col {
-    display: none;
-  }
-  .icons_mech {
-    display: none;
-  }
-  .button-header {
-    margin-left: 30px;
-  }
-  .journal-name {
-    max-width: 250px;
-  }
-  .profile_pic {
-    margin-top: 40px;
-  }
-  .block_of_name {
-    margin-top: 50px;
-  }
-  .bth_exit {
-    margin-top: 38px;
-  }
-  .button-header {
-    margin-top: 45px;
-  }
-  .all-content {
-    padding-left: 30px;
-  }
-}
-@media (max-width: 600px) {
-  .exit_1920 {
-    display: none;
-  }
-  .exit_480 {
-    display: block;
-  }
-  .profile_pic {
-    display: none;
-  }
-  .bth_exit {
-    width: 40px;
-    height: 40px;
-  }
-  .special-select {
-    width: 250px;
-  }
-  .name_of_teacher {
-    margin-right: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .profile_pic {
-    display: none;
-  }
-  .bth_exit {
-    width: 40px;
-    height: 40px;
-  }
-  .special-select {
-    width: 250px;
-  }
-  .name_of_teacher {
-    margin-right: 15px;
-  }
-}
-@media (max-width: 460px) {
-  .block_of_name {
-    display: none;
-  }
-  .profile_pic {
-    display: none;
-  }
-  .bth_exit {
-    width: 40px;
-    height: 40px;
-  }
-  .special-select {
-    width: 250px;
-  }
-  .name_of_teacher {
-    margin-right: 15px;
-  }
-}
-@media (max-width: 420px) {
-  .special-select {
-    width: 180px;
-  }
-}
-@media (max-width: 360px) {
-  .special-select {
-    width: 180px;
-  }
-  .name_of_teacher {
-    display: none;
-  }
-}
 /* CHECKBOX */
 [id^="c"] {
   display: none;
@@ -920,3 +715,561 @@ select {
   transform: scale(1);
 }
 /* CHECKBOX */
+.main_table {
+  /* max-width: 1684px; */
+  width: calc(100% - 57px);
+  height: 500px;
+}
+.sticky_top {
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 7;
+  top: 0px;
+  background-color: white;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+}
+.sticky_left {
+  position: sticky;
+  position: -webkit-sticky;
+  z-index: 7;
+  left: 0px;
+  background-color: white;
+}
+.container_student {
+  width: max-content;
+  height: 60px;
+}
+p.clip {
+  white-space: nowrap; /* Запрещаем перенос строк */
+  overflow: hidden; /* Обрезаем все, что не помещается в область */
+  padding: 5px; /* Поля вокруг текста */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+}
+.main_page {
+  overflow-x: hidden;
+}
+.main_page::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.journal_name_header {
+  display: none;
+  color: white;
+  height: 100px;
+  transition: 1s;
+  background: #434c63;
+}
+.burger_modal_block {
+  display: none;
+}
+.otstup {
+  margin-top: 0;
+}
+@media (max-width: 1264px) {
+  /* .burger_combine {
+    width: 72px;
+  } */
+  .combine_main {
+    width: calc(100% - 92px);
+  }
+  .main_table {
+    margin-left: 1px;
+    width: calc(100% - 20px);
+  }
+  /* .burger_menu_main_container {
+    min-width: 92px;
+  } */
+  /* .bt_icon_stats {
+    margin-left: 20px;
+  } */
+  /* .burger_button {
+    margin-left: 20px;
+  } */
+  .Burger_menu {
+    width: 92px;
+  }
+  .course-input {
+    margin-left: 30px;
+  }
+  .course-name {
+    margin-left: 55px;
+  }
+  /* .discipline-name {
+    margin-left: 55px;
+  } */
+  .discipline-select {
+    width: 262px;
+    /* margin-left: 30px; */
+  }
+  .special-select {
+    width: 435px;
+  }
+  .kuki {
+    padding: 0 20px 0 0;
+  }
+  .head {
+    padding: 0 20px 0 20px;
+  }
+  .all-content {
+    padding-left: 30px;
+  }
+}
+@media (max-width: 1500px) {
+  .block_prompt {
+    height: 320px;
+  }
+  .journal_block {
+    height: 270px;
+  }
+  .main_teacher_profile {
+    width: 94.208333%;
+  }
+  .view-input {
+    margin-left: 30px;
+  }
+  .journal_name_block {
+    border-top: 1px solid #ebebeb;
+  }
+  .contacts_block {
+    border-right: none;
+    height: 380px;
+  }
+  .teacher_block {
+    border-right: none;
+  }
+  .all_blocks_teacher_profile {
+    display: block;
+  }
+  .right_block_teacher_profile {
+    width: 100%;
+  }
+  .left_block_teacher_profile {
+    width: 100%;
+  }
+  .burger_combine {
+    width: 72px;
+    margin-left: 20px;
+  }
+}
+@media (max-width: 1440px) {
+  .discipline-select {
+    width: 260px;
+  }
+  .load_journal {
+    padding: 9.5px 30.5px;
+  }
+}
+@media (max-width: 1280px) {
+  .journal_block {
+    height: 370px;
+  }
+  .block_prompt {
+    height: 370px;
+  }
+}
+@media (max-width: 1000px) {
+  .text_of_prompt {
+    margin-left: 30px;
+  }
+  .name_prompt {
+    margin-left: 30px;
+  }
+  .journal_name {
+    padding: 40px 30px;
+  }
+  .button_exit_teacher_profile_block {
+    width: 180px;
+  }
+  .button_exit_teacher_profile {
+    margin-left: 30px;
+  }
+  .interior_tel {
+    margin-left: 55px;
+  }
+  .department_name {
+    margin-left: 55px;
+  }
+  .block_of_interior_tel {
+    margin-left: 30px;
+  }
+  .block_of_department_name {
+    margin-left: 30px;
+  }
+  .name_contacts {
+    padding: 40px 30px;
+  }
+  .teacher_photo {
+    margin-left: 30px;
+  }
+  .block_prompt {
+    height: 396px;
+  }
+  .view-input {
+    width: 152px;
+  }
+  .group-select {
+    width: 152px;
+  }
+  .journal_block {
+    height: 389px;
+  }
+  .view-input {
+    margin-left: 30px;
+  }
+  .journal_name_block {
+    border-top: 1px solid #ebebeb;
+  }
+  .contacts_block {
+    border-right: none;
+    height: 390px;
+  }
+  .teacher_block {
+    border-right: none;
+  }
+  .all_blocks_teacher_profile {
+    display: block;
+  }
+  .right_block_teacher_profile {
+    width: 100%;
+  }
+  .left_block_teacher_profile {
+    width: 100%;
+  }
+  .course-input {
+    margin-left: 30px;
+  }
+  .course-name {
+    margin-left: 55px;
+  }
+  .discipline-name {
+    margin-left: 55px;
+  }
+  .discipline-select {
+    width: 414px;
+    margin-left: 30px;
+  }
+  .special-select {
+    width: 435px;
+  }
+  .kuki {
+    padding: 0 20px 0 0;
+  }
+  .head {
+    padding: 0 20px 0 20px;
+  }
+  .icons_que {
+    margin-top: 50px;
+  }
+  .icons_col {
+    margin-top: 38px;
+  }
+  .icons_mech {
+    margin-top: 50px;
+  }
+  .button-header {
+    margin-left: 30px;
+  }
+  .journal-name {
+    max-width: 460px;
+  }
+  .profile_pic {
+    margin-top: 28px;
+  }
+  .block_of_name {
+    margin-top: 32px;
+  }
+  .bth_exit {
+    margin-top: 25px;
+  }
+  .all-content {
+    padding-left: 30px;
+  }
+}
+
+@media (max-width: 800px) {
+  .icons_que {
+    display: none;
+  }
+  .icons_col {
+    margin-right: 40px;
+  }
+  .icons_mech {
+    display: none;
+  }
+  .button-header {
+    margin-left: 30px;
+  }
+  .journal-name {
+    padding: 24px 0;
+    max-width: 250px;
+  }
+  .profile_pic {
+    margin-top: 28px;
+  }
+  .block_of_name {
+    margin-top: 32px;
+  }
+  .bth_exit {
+    margin-top: 25px;
+  }
+  .button-header {
+    margin-top: 45px;
+  }
+  .all-content {
+    padding-left: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .block_prompt{
+    height: 420px;
+  }
+  .load_journal{
+    padding: 9.5px 41.5px;
+  }
+  .discipline-select{
+    width: 400px;
+  }
+
+  .block_of_interior_tel{
+    max-width: 147px;
+  }
+  .block_of_mobile_tel{
+    max-width: 200px;
+    width: 200px;
+  }
+  .contacts_block{
+    height: 500px;
+  }
+  .teacher_info{
+    margin-left: 10px;
+  }
+  .teacher_name{
+    margin-left: 30px;
+  }
+  .block_of_email_name {
+    width: 200px;
+  }
+  .input_teacher_info {
+    height: 190px;
+  }
+  .teacher_block {
+    display: block;
+    height: 761px;
+  }
+  .icons_que {
+    display: none;
+  }
+  .icons_col {
+    margin-right: 40px;
+  }
+  .icons_mech {
+    display: none;
+  }
+  .button-header {
+    margin-left: 30px;
+  }
+  .journal-name {
+    padding: 24px 0;
+    max-width: 250px;
+  }
+  .profile_pic {
+    margin-top: 28px;
+  }
+  .block_of_name {
+    margin-top: 32px;
+  }
+  .bth_exit {
+    margin-top: 25px;
+  }
+  .button-header {
+    margin-top: 45px;
+  }
+  .all-content {
+    padding-left: 30px;
+  }
+}
+@media (max-width: 700px) {
+  .button-header {
+    margin-top: 60px;
+  }
+  .special-select {
+    width: 241px;
+  }
+  .view-input {
+    width: 200px;
+  }
+  .discipline-select {
+    width: 200px;
+  }
+  .bth_exit {
+    display: none;
+  }
+  .combine_main {
+    width: calc(100%-92px);
+  }
+}
+@media (max-width: 600px) {
+  .combine_main {
+    width: calc(100%-92px);
+  }
+  .discipline-name {
+    margin-top: 40px;
+  }
+
+  .exit_1920 {
+    display: none;
+  }
+  .exit_480 {
+    display: block;
+  }
+  .bth_exit {
+    display: none;
+  }
+  .special-select {
+    width: 250px;
+  }
+  .name_of_teacher {
+    margin-right: 15px;
+  }
+}
+@media (max-width: 580px) {
+  .journal-name-block {
+    display: none;
+  }
+}
+@media (max-width: 510px) {
+  .special-select {
+    width: 200px;
+  }
+}
+@media (max-width: 480px) {
+  .main_teacher_profile{
+    margin-top: 200px;
+  }
+  .burger_button_header {
+    display: block;
+  }
+  .burger_button {
+    background-image: none;
+    background: #434c63;
+    border: 1px solid #434c63;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 24px;
+    margin-left: 40px;
+  }
+  .burger_button:hover {
+    background-image: none;
+  }
+  .burger_button:active {
+    background-image: none;
+  }
+  .burger_pic {
+    display: inline-block;
+  }
+  .bt_icon_stats {
+    display: none;
+  }
+  .burger_combine {
+    display: none;
+  }
+  .icons_col {
+    order: 1;
+    position: absolute;
+    right: 80px;
+  }
+  .bt_close {
+    display: none;
+  }
+  .pull_out_menu_open {
+    top: 200px;
+  }
+  .burger_modal_block {
+    display: flex;
+  }
+  .bt_burger_modal {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .main_burger_window {
+    background-color: rgba(26, 30, 46, 0);
+    position: unset;
+  }
+  .combine_main {
+    width: calc(100%);
+  }
+  /* .burger_menu_main_container {
+    display: none;
+  } */
+  .burger_modal_main_container {
+    display: block;
+  }
+  .journal-name {
+    display: none;
+  }
+  .otstup {
+    margin-top: 200px;
+  }
+  .head {
+    top: 100px;
+    position: fixed;
+    width: -webkit-fill-available;
+    z-index: 5;
+    background: #495471;
+    justify-content: normal;
+  }
+  .journal_name_header {
+    top: 0px;
+    position: fixed;
+    width: -webkit-fill-available;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+  }
+  .profile_pic {
+    /* display: none; */
+  }
+  .bth_exit {
+    width: 40px;
+    height: 40px;
+  }
+  .special-select {
+    width: 250px;
+  }
+  .name_of_teacher {
+    margin-right: 15px;
+  }
+}
+@media (max-width: 460px) {
+  .bth_exit {
+    width: 40px;
+    height: 40px;
+  }
+  .special-select {
+    width: 250px;
+  }
+  .name_of_teacher {
+    margin-right: 15px;
+  }
+}
+@media (max-width: 420px) {
+  .special-select {
+    width: 180px;
+  }
+}
+@media (max-width: 360px) {
+  .special-select {
+    width: 180px;
+  }
+  .icons_col {
+    display: none;
+  }
+  .pull_out_menu_open {
+    width: 360px;
+  }
+  .bt_guide {
+    width: 360px;
+  }
+}

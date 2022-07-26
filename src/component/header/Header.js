@@ -19,6 +19,8 @@ import {
 import points from "../../points.png";
 import Select from "react-select";
 import UnSaveDataModal from "./UnSaveDataModal.js";
+import BurgerModal from "./BurgerModal";
+import { Link } from "react-router-dom";
 
 class Header extends React.Component {
   state = {
@@ -255,7 +257,6 @@ class Header extends React.Component {
           clearJournalHeader={this.props.clearJournalHeader}
           setBtnTrue={this.props.setBtnTrue}
         ></UnSaveDataModal>
-        {/* <button onClick={this.openModal}>Modal</button> */}
         <div
           className="lds-ellipsis"
           hidden={
@@ -273,6 +274,7 @@ class Header extends React.Component {
           }
         >
           <div className="wrap_selects pointer">
+
             <div className="wrap_selects">
               <div>
                 <div className="discipline-name">Название дисциплины</div>
@@ -364,39 +366,20 @@ class Header extends React.Component {
                   }))}
                 />
               </div>
+              <div>
+                <div className="load_journal">              
+                  <Link
+                        className=""
+                        to="/electronicaljournal-view/journal"
+                  >
+                    Загрузить журнал
+                  </Link>
+
+                </div>
+              </div>
             </div>
           </div>
-          <div
-            className="headHr"
-            hidden={
-              localStorage.getItem("journalsite") !== null ? false : isLoading
-            }
-          />
-          <div className="kuki wrap_selects">
-            <div className="buki">
-              <div>
-                <div className="course-name">Курс</div>
-                <div className="course-input">
-                  {this.props.courseSpec.length !== 1
-                    ? "Курс"
-                    : this.props.courseSpec.map(
-                        (courseSpec) => courseSpec.сourse
-                      )}
-                </div>
-              </div>
-              <div>
-                <div>
-                  <div className="special-name">Специальность</div>
-                  <div className="special-select">
-                    {this.props.courseSpec.length !== 1
-                      ? "Специальность"
-                      : this.props.courseSpec.map(
-                          (courseSpec) => courseSpec.specialty.name
-                        )}
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* <div className="kuki wrap_selects">
             <input
               className="button-header bt_color"
               type="submit"
@@ -421,7 +404,7 @@ class Header extends React.Component {
                 })();
               }}
             />
-          </div>
+          </div> */}
           {this.props.teacher.map((m) => {
             return (
               <div>

@@ -1,14 +1,14 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as PoloskiWhite } from "../../poloski_white.svg";
-import { ReactComponent as StrWhite } from "../../white_str.svg";
+import { ReactComponent as IconStats } from "../../icon_stats.svg";
+import { ReactComponent as IconStatsWhite } from "../../icons_stats_white.svg";
+import { ReactComponent as Guide } from "../../guide.svg";
 import { ReactComponent as HomeWhite } from "../../home_white.svg";
 import { ReactComponent as HomeBlack } from "../../home_black.svg";
-import { ReactComponent as IconStatsWhite } from "../../icons_stats_white.svg";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
-import { ReactComponent as Guide } from "../../guide.svg";
+import BurgerModal from "./BurgerModal";
 
-export default class BurgerModal extends React.Component {
+export default class BurgerMenu extends React.Component {
   state = {
     modal: false,
     stats: true,
@@ -49,29 +49,33 @@ export default class BurgerModal extends React.Component {
 
   render() {
     return (
-      <div className="burger_modal_main_container">
+      <div className="burger_menu_main_container">
         <div
           className={
             this.state.modal ? "main_burger_window" : "main_burger_window_close"
           }
           onClick={() => this.openModal()}
         >
-          <div className="" onClick={(e) => e.stopPropagation()}>
+          <div className="Burger_menu" onClick={(e) => e.stopPropagation()}>
             <button
-              className="burger_button_modal"
+              className="burger_button"
               onClick={() => {
                 this.openModal();
                 this.setStatsClose();
               }}
+            ></button>
+
+            <button
+              className="bt_icon_stats"
+              onClick={() => {
+                this.openModal();
+                this.setStatsOpen();
+              }}
             >
-              {this.state.modal === false ? (
-                <PoloskiWhite></PoloskiWhite>
-              ) : (
-                <StrWhite></StrWhite>
-              )}
+              <IconStats className="icon_stats_blue"></IconStats>
+              <IconStatsWhite className="icon_stats_white"></IconStatsWhite>
             </button>
           </div>
-          {console.log(this.state.modal)}
           <div
             className={
               this.state.modal
@@ -79,7 +83,6 @@ export default class BurgerModal extends React.Component {
                 : "pull_out_menu_open pull_out_menu_close"
             }
             onClick={(e) => e.stopPropagation()}
-            // id="pull_out"
           >
             <div className="burger_main_with_bt">
               <div className="container_with_bt_close disp">
@@ -120,7 +123,23 @@ export default class BurgerModal extends React.Component {
                 }
               >
                 <div>
-                  <div>Статистика</div>
+                  <div>
+                    <IconStats
+                      className={
+                        this.state.stats
+                          ? "icon_stats_blue"
+                          : "icon_stats_blue_open"
+                      }
+                    ></IconStats>
+                    <IconStatsWhite
+                      className={
+                        this.state.stats
+                          ? "icon_stats_white"
+                          : "icon_stats_white_open"
+                      }
+                    ></IconStatsWhite>
+                    <div className="statistics_name">Статистика</div>
+                  </div>
                   <div className="arrow_div">
                     <span
                       className={
@@ -286,9 +305,9 @@ export default class BurgerModal extends React.Component {
             <footer className="footer_burger_menu">
               <div className="support_name">
                 Техническая поддержка веб-сервиса и последующее обновление —{" "}
-                <Link className="cit_name" to="https://cit.vstu.by">
+                <a className="cit_name" href="https://cit.vstu.by">
                   cit.vstu.by
-                </Link>
+                </a>
               </div>
             </footer>
           </div>
