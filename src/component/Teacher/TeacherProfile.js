@@ -7,7 +7,6 @@ import Select from "react-select";
 import InputMask from "react-input-mask";
 import { Link } from "react-router-dom";
 
-
 export default class TeacherProfile extends React.Component {
   state = {
     date: "",
@@ -17,34 +16,34 @@ export default class TeacherProfile extends React.Component {
     type: "",
     subgroup: "",
   };
-  getValueDiscipline = (e) => {
-    (async () => {
-      await this.setState({
-        discipline: e,
-      });
-    })();
-  };
-  getGroup = (e) => {
-    (async () => {
-      await this.setState({
-        group: e,
-      });
-    })();
-  };
-  getTypeClass = (e, ) => {
-    (async () => {
-      await this.setState({
-        type: e,
-      });
-    })();
-  };
-  getSubGroup = (e) => {
-    (async () => {
-      await this.setState({
-        subgroup: e,
-      });
-    })();
-  };
+  // getValueDiscipline = (e) => {
+  //   (async () => {
+  //     await this.setState({
+  //       discipline: e,
+  //     });
+  //   })();
+  // };
+  // getGroup = (e) => {
+  //   (async () => {
+  //     await this.setState({
+  //       group: e,
+  //     });
+  //   })();
+  // };
+  // getTypeClass = (e, ) => {
+  //   (async () => {
+  //     await this.setState({
+  //       type: e,
+  //     });
+  //   })();
+  // };
+  // getSubGroup = (e) => {
+  //   (async () => {
+  //     await this.setState({
+  //       subgroup: e,
+  //     });
+  //   })();
+  // };
   getInputValue = (e) => {
     this.setState({
       mobile: e.target.value,
@@ -69,9 +68,7 @@ export default class TeacherProfile extends React.Component {
         <div className="main_teacher_profile">
           <div className="disp header_main_teacher_profile">
             <div className="button_exit_teacher_profile_block">
-              <button className="button_exit_teacher_profile">
-                Назад
-              </button>
+              <button className="button_exit_teacher_profile">Назад</button>
             </div>
             <div className="data_teacher_profile_block">
               <p className="p_today">Сегодня</p>

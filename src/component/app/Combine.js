@@ -5,6 +5,7 @@ import MarksTable from "../marksTable/marksTableContainer";
 import BurgerMenu from "../header/BurgerMenu";
 import BurgerButtonMain from "../header/BurgerButtonMain";
 import BurgerMenuMain from "../header/BurgerMenuMain";
+import MarksTableHeader from "../marksTableHeader/marksTableHeader";
 
 function Combine() {
   return (
@@ -14,7 +15,7 @@ function Combine() {
         <BurgerButtonMain></BurgerButtonMain>
       </div>
       <div className="combine_main otstup">
-        <Header />
+        <MarksTableHeader />
         <MarksTable />
       </div>
     </div>

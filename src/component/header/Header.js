@@ -30,6 +30,7 @@ class Header extends React.Component {
     subGroup: null,
     typeClassName: null,
     modalIsOpen: false,
+    disciplineName: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -95,11 +96,13 @@ class Header extends React.Component {
     }
   }
 
-  getValueDiscipline = (e) => {
+  getValueDiscipline = (e, g) => {
     (async () => {
       await this.setState({
         disciplineId: e,
+        disciplineName: g,
       });
+
       if (
         this.state.disciplineId !== null &&
         this.state.groupId !== null &&
@@ -115,6 +118,7 @@ class Header extends React.Component {
       }
       localStorage.setItem("typeC", this.state.typeClassName);
       if (typeof Storage !== "undefined") {
+        localStorage.setItem("disciplineName", this.state.disciplineName);
         localStorage.setItem("disciplineId", this.state.disciplineId);
       }
       this.props.clearJournalsite();
@@ -274,21 +278,13 @@ class Header extends React.Component {
           }
         >
           <div className="wrap_selects pointer">
-
             <div className="wrap_selects">
               <div>
                 <div className="discipline-name">Название дисциплины</div>
                 <Select
                   className="discipline-select"
-                  onChange={(e) => getValueDiscipline(e.value)}
-                  defaultValue={
-                    localStorage.getItem("disciplineName") !== null
-                      ? {
-                          value: localStorage.getItem("disciplineName"),
-                          label: localStorage.getItem("disciplineName"),
-                        }
-                      : { value: "disciplines", label: "Дисциплина" }
-                  }
+                  onChange={(e) => getValueDiscipline(e.value, e.label)}
+                  defaultValue={{ value: "disciplines", label: "Дисциплина" }}
                   options={this.props.discipline.map((m, i) => ({
                     value: m.id,
                     label: m.name,
@@ -366,16 +362,13 @@ class Header extends React.Component {
                   }))}
                 />
               </div>
-              <div>
-                <div className="load_journal">              
-                  <Link
-                        className=""
-                        to="/electronicaljournal-view/journal"
-                  >
-                    Загрузить журнал
-                  </Link>
-
-                </div>
+              <div className="load_journal_block">
+                <Link
+                  className="load_journal"
+                  to="/electronicaljournal-view/journal"
+                >
+                  Загрузить журнал
+                </Link>
               </div>
             </div>
           </div>
