@@ -11,7 +11,39 @@ export default class TeacherProfile extends React.Component {
   state = {
     date: "",
     mobile: "",
+    discipline: "",
+    group: "",
+    type: "",
+    subgroup: "",
   };
+  // getValueDiscipline = (e) => {
+  //   (async () => {
+  //     await this.setState({
+  //       discipline: e,
+  //     });
+  //   })();
+  // };
+  // getGroup = (e) => {
+  //   (async () => {
+  //     await this.setState({
+  //       group: e,
+  //     });
+  //   })();
+  // };
+  // getTypeClass = (e, ) => {
+  //   (async () => {
+  //     await this.setState({
+  //       type: e,
+  //     });
+  //   })();
+  // };
+  // getSubGroup = (e) => {
+  //   (async () => {
+  //     await this.setState({
+  //       subgroup: e,
+  //     });
+  //   })();
+  // };
   getInputValue = (e) => {
     this.setState({
       mobile: e.target.value,

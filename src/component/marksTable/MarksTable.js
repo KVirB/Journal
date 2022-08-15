@@ -4,6 +4,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import "../app/App.css";
+import PropTypes from "prop-types";
 
 export default class MarksTable extends React.Component {
   state = {
@@ -113,7 +114,7 @@ export default class MarksTable extends React.Component {
                             document.querySelector(".container_student")
                               ? document
                                   .querySelector(".container_student")
-                                  .getBoundingClientRect().width - 1
+                                  .getBoundingClientRect().width
                               : false
                           }
                         >

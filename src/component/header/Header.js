@@ -20,6 +20,7 @@ import points from "../../points.png";
 import Select from "react-select";
 import UnSaveDataModal from "./UnSaveDataModal.js";
 import BurgerModal from "./BurgerModal";
+import { Link } from "react-router-dom";
 
 class Header extends React.Component {
   state = {
@@ -29,6 +30,7 @@ class Header extends React.Component {
     subGroup: null,
     typeClassName: null,
     modalIsOpen: false,
+    disciplineName: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -94,11 +96,13 @@ class Header extends React.Component {
     }
   }
 
-  getValueDiscipline = (e) => {
+  getValueDiscipline = (e, g) => {
     (async () => {
       await this.setState({
         disciplineId: e,
+        disciplineName: g,
       });
+
       if (
         this.state.disciplineId !== null &&
         this.state.groupId !== null &&
@@ -114,6 +118,7 @@ class Header extends React.Component {
       }
       localStorage.setItem("typeC", this.state.typeClassName);
       if (typeof Storage !== "undefined") {
+        localStorage.setItem("disciplineName", this.state.disciplineName);
         localStorage.setItem("disciplineId", this.state.disciplineId);
       }
       this.props.clearJournalsite();
@@ -257,7 +262,6 @@ class Header extends React.Component {
           clearJournalHeader={this.props.clearJournalHeader}
           setBtnTrue={this.props.setBtnTrue}
         ></UnSaveDataModal>
-        {/* <button onClick={this.openModal}>Modal</button> */}
         <div
           className="lds-ellipsis"
           hidden={
@@ -280,15 +284,8 @@ class Header extends React.Component {
                 <div className="discipline-name">Название дисциплины</div>
                 <Select
                   className="discipline-select"
-                  onChange={(e) => getValueDiscipline(e.value)}
-                  defaultValue={
-                    localStorage.getItem("disciplineName") !== null
-                      ? {
-                          value: localStorage.getItem("disciplineName"),
-                          label: localStorage.getItem("disciplineName"),
-                        }
-                      : { value: "disciplines", label: "Дисциплина" }
-                  }
+                  onChange={(e) => getValueDiscipline(e.value, e.label)}
+                  defaultValue={{ value: "disciplines", label: "Дисциплина" }}
                   options={this.props.discipline.map((m, i) => ({
                     value: m.id,
                     label: m.name,
@@ -366,8 +363,13 @@ class Header extends React.Component {
                   }))}
                 />
               </div>
-              <div>
-                <button className="load_journal">Загрузить журнал</button>
+              <div className="load_journal_block">
+                <Link
+                  className="load_journal"
+                  to="/electronicaljournal-view/journal"
+                >
+                  Загрузить журнал
+                </Link>
               </div>
             </div>
           </div>

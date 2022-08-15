@@ -1022,6 +1022,32 @@ p.clip {
 }
 
 @media (max-width: 768px) {
+  .block_prompt {
+    height: 420px;
+  }
+  .load_journal {
+    padding: 9.5px 41.5px;
+  }
+  .discipline-select {
+    width: 400px;
+  }
+
+  .block_of_interior_tel {
+    max-width: 147px;
+  }
+  .block_of_mobile_tel {
+    max-width: 200px;
+    width: 200px;
+  }
+  .contacts_block {
+    height: 500px;
+  }
+  .teacher_info {
+    margin-left: 10px;
+  }
+  .teacher_name {
+    margin-left: 30px;
+  }
   .block_of_email_name {
     width: 200px;
   }
@@ -1119,6 +1145,9 @@ p.clip {
   }
 }
 @media (max-width: 480px) {
+  .main_teacher_profile {
+    margin-top: 200px;
+  }
   .burger_button_header {
     display: block;
   }
