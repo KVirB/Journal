@@ -6,20 +6,36 @@ import BurgerMenu from "../header/BurgerMenu";
 import BurgerButtonMain from "../header/BurgerButtonMain";
 import BurgerMenuMain from "../header/BurgerMenuMain";
 import MarksTableHeader from "../marksTableHeader/marksTableHeader";
+import { connect } from "react-redux";
 
-function Combine() {
-  return (
-    <div className="disp">
-      {/* <BurgerMenu></BurgerMenu> */}
-      <div className="burger_combine">
-        <BurgerButtonMain></BurgerButtonMain>
+export class Combine extends React.Component {
+  render() {
+    return (
+      <div>
+        <div className="lds-ellipsis" hidden={this.props.isLoadJournal}>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div className="disp">
+          {/* <BurgerMenu></BurgerMenu> */}
+          <div className="burger_combine">
+            <BurgerButtonMain></BurgerButtonMain>
+          </div>
+          <div className="combine_main otstup">
+            <MarksTableHeader />
+            <MarksTable />
+          </div>
+        </div>
       </div>
-      <div className="combine_main otstup">
-        <MarksTableHeader />
-        <MarksTable />
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default Combine;
+let mapStateToProps = (state) => {
+  return {
+    isLoadJournal: state.journalsitePage.isLoadJournal,
+  };
+};
+export default connect(mapStateToProps, {})(Combine);

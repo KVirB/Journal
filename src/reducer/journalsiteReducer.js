@@ -2,6 +2,8 @@ import { getJournalsite, patchJournalsite } from "../BD/tables";
 import { setLoaderTrue, setLoaderFalse } from "./headerReducer.js";
 
 const SET_JOURNALSITE = "SET_JOURNALSITE";
+const SET_ISLOADJOURNALFALSE = "SET_ISLOADJOURNALFALSE";
+const SET_ISLOADJOURNALTRUE = "SET_ISLOADJOURNALTRUE";
 const CLEAR_JOURNALSITE = "CLEAR_JOURNALSITE";
 const SET_JOURNALSITE_MARK = "SET_JOURNALSITE_MARK";
 const TOGGLE_JOURNALSITE_PRESENCE = "TOGGLE_JOURNALSITE_PRESENCE";
@@ -17,6 +19,7 @@ const SET_PRESENT = "SET_PRESENT";
 const CLEAR_PRESENT = "CLEAR_PRESENT";
 const SET_LATENESS = "SET_LATENESS";
 let initialState = {
+  isLoadJournal: true,
   id: null,
   journalsite: [],
   journalHeader: [],
@@ -109,7 +112,16 @@ const journalsiteReducer = (state = initialState, action) => {
         ...state,
         sb: [],
       };
-
+    case SET_ISLOADJOURNALFALSE:
+      return {
+        ...state,
+        isLoadJournal: false,
+      };
+    case SET_ISLOADJOURNALTRUE:
+      return {
+        ...state,
+        isLoadJournal: true,
+      };
     case SET_JOURNALSITE:
       let jSites = [...state.journalsite];
       let jSite = [{ ...action.journalsite }];
@@ -339,6 +351,12 @@ export const toggleJournalSitePresence = (lesson_id, line_id, grade) => ({
   lesson_id,
   line_id,
   grade,
+});
+export const setIsLoadJournalFalse = () => ({
+  type: SET_ISLOADJOURNALFALSE,
+});
+export const setIsLoadJournalTrue = () => ({
+  type: SET_ISLOADJOURNALTRUE,
 });
 export const setClosedFalse = () => ({
   type: SET_CLOSED_FALSE,

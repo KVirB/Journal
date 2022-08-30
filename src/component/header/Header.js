@@ -31,14 +31,14 @@ class Header extends React.Component {
     typeClassName: null,
     modalIsOpen: false,
     disciplineName: null,
+    subgroupName: null,
   };
-
   componentDidUpdate(prevProps, prevState) {
     const { disciplineId, groupId, subGroup, typeClass } = this.state;
     if (disciplineId !== prevState.disciplineId) {
       (async () => {
         if (localStorage.getItem("journalsite") !== null) {
-          this.openModal();
+          // this.openModal();
           // localStorage.removeItem("journalsite");
           // localStorage.removeItem("journalsite");
           // localStorage.removeItem("disciplineId");
@@ -146,6 +146,9 @@ class Header extends React.Component {
         );
       }
       localStorage.setItem("typeC", this.state.typeClassName);
+      if (typeof Storage !== "undefined") {
+        localStorage.setItem("groupName", this.state.groupId);
+      }
     })();
     this.props.clearJournalsite();
     this.props.getTypeClassThunk();
@@ -180,12 +183,16 @@ class Header extends React.Component {
         this.props.setPresent();
       }, 100);
       localStorage.setItem("typeC", this.state.typeClassName);
+      if (typeof Storage !== "undefined") {
+        localStorage.setItem("typeName", this.state.typeClassName);
+      }
     })();
   };
-  getSubGroup = (e) => {
+  getSubGroup = (e, c) => {
     (async () => {
       await this.setState({
         subGroup: e,
+        subgroupName: c,
       });
       if (
         this.state.disciplineId !== null &&
@@ -202,6 +209,9 @@ class Header extends React.Component {
       }
       this.props.clearJournalsite();
       localStorage.setItem("typeC", this.state.typeClassName);
+      if (typeof Storage !== "undefined") {
+        localStorage.setItem("subgroupName", this.state.subgroupName);
+      }
       setTimeout(() => {
         this.props.setPresent();
       }, 100);
@@ -212,6 +222,9 @@ class Header extends React.Component {
     this.props.getDisciplineThunk();
     if (localStorage.getItem("groupId") !== null) {
       this.props.getCourseSpecThunk(localStorage.getItem("groupId"));
+    }
+    if (localStorage.getItem("journalsite") !== null) {
+      this.openModal();
     }
   }
 
@@ -238,6 +251,9 @@ class Header extends React.Component {
     localStorage.removeItem("typeClassId");
     localStorage.removeItem("groupId");
     localStorage.removeItem("subgroupId");
+    localStorage.removeItem("groupName");
+    localStorage.removeItem("typeName");
+    localStorage.removeItem("subgroupName");
   };
   render() {
     const {
@@ -354,8 +370,8 @@ class Header extends React.Component {
                         }
                       : { value: "subgroup", label: "Подгруппа" }
                   }
-                  className="group-select"
-                  onChange={(e) => getSubGroup(e.value)}
+                  className="pgroup-select"
+                  onChange={(e) => getSubGroup(e.value, e.label)}
                   options={this.props.subGroup.map((item, i) => ({
                     value: item.subGroupNumber,
                     label:
@@ -373,32 +389,6 @@ class Header extends React.Component {
               </div>
             </div>
           </div>
-          {/* <div className="kuki wrap_selects">
-            <input
-              className="button-header bt_color"
-              type="submit"
-              value="Сохранить"
-              disabled={this.props.disabled}
-              onClick={() => {
-                if (localStorage.getItem("journalsite") !== null) {
-                  // window.location.reload();
-                }
-                (async () => {
-                  await this.props.setJournalHeader();
-                  let header = this.props.journalHeader;
-                  await this.props.getJournalHeaderThunk(header);
-                  this.props.clearJournalHeader();
-                  this.props.setBtnTrue();
-                  localStorage.removeItem("journalsite");
-                  localStorage.removeItem("disciplineId");
-                  localStorage.removeItem("disciplineName");
-                  localStorage.removeItem("typeClassId");
-                  localStorage.removeItem("groupId");
-                  localStorage.removeItem("subgroupId");
-                })();
-              }}
-            />
-          </div> */}
           {this.props.teacher.map((m) => {
             return (
               <div>

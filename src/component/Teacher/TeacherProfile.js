@@ -3,6 +3,7 @@ import "../app/App.css";
 import BurgerButtonMain from "../header/BurgerButtonMain";
 import Header from "../header/headerContainer";
 import { ReactComponent as TeacherPicture } from "../../teacher_pic.svg";
+import { ReactComponent as TeacherPicture480 } from "../../photo_480.svg";
 import Select from "react-select";
 import InputMask from "react-input-mask";
 import { Link } from "react-router-dom";
@@ -79,7 +80,8 @@ export default class TeacherProfile extends React.Component {
             <div className="left_block_teacher_profile">
               <div className="teacher_block disp">
                 <div className="teacher_photo_block disp">
-                  <TeacherPicture className="teacher_photo"></TeacherPicture>
+                  {/* <TeacherPicture className="teacher_photo"></TeacherPicture> */}
+                  <div className="teacher_photo"></div>
                 </div>
                 <div className="block_name_with_info">
                   <input
@@ -109,7 +111,7 @@ export default class TeacherProfile extends React.Component {
                   <div>
                     <p className="department_name">Кафедра:</p>
                     <p className="block_of_department_name">
-                      Кафедра «Техническое регулирование и товароведение»
+                      Здесь будет кафедра
                     </p>
                   </div>
                   <div>
@@ -122,15 +124,20 @@ export default class TeacherProfile extends React.Component {
                   {/* <div className="disp"> */}
                   <div>
                     <p className="interior_tel">Внутр.тел.:</p>
-                    <input
+                    <InputMask
+                      defaultValue={"99-99"}
                       className="block_of_interior_tel"
-                      defaultValue={"35-40"}
-                    ></input>
+                      mask="99-99"
+                      maskChar={null}
+                      onChange={(e) => {
+                        this.getInputValue(e);
+                      }}
+                    />
                   </div>
                   <div>
                     <p className="mobile_tel">Телефон:</p>
                     <InputMask
-                      defaultValue={"+375-(29)-295-58-97"}
+                      defaultValue={"+375-(99)-999-99-99"}
                       className="block_of_mobile_tel"
                       mask="+375-(99)-999-99-99"
                       maskChar={null}
@@ -170,14 +177,14 @@ export default class TeacherProfile extends React.Component {
                       почты», «Телефон», «Фотографию профиля» и «Информацию
                       о себе», чтобы это сделать нажмите на иконку.
                     </p>
-                    <div className="block_link_prompt">
-                      <Link
-                        className="link_prompt"
-                        to="/electronicaljournal-view/prompt_user"
-                      >
-                        Руководство пользователя
-                      </Link>
-                    </div>
+                  </div>
+                  <div className="block_link_prompt">
+                    <Link
+                      className="link_prompt"
+                      to="/electronicaljournal-view/prompt_user"
+                    >
+                      Руководство пользователя
+                    </Link>
                   </div>
                 </div>
               </div>

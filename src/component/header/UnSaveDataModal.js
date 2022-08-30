@@ -39,26 +39,13 @@ class UnSaveDataModal extends React.Component {
               Отменить
             </button>
             <button
-              disabled={this.props.disabled}
+              // disabled={this.props.disabled}
               className="bt_savechanges_modal_unsave"
               onClick={() => {
-                (async () => {
-                  await this.props.setJournalHeader();
-                  let header = this.props.journalHeader;
-                  await this.props.getJournalHeaderThunk(header);
-                  this.props.clearJournalHeader();
-                  this.props.setBtnTrue();
-                  localStorage.removeItem("journalsite");
-                  localStorage.removeItem("disciplineId");
-                  localStorage.removeItem("disciplineName");
-                  localStorage.removeItem("typeClassId");
-                  localStorage.removeItem("groupId");
-                  localStorage.removeItem("subgroupId");
-                  this.props.closeModal();
-                })();
+                window.location.assign(`/electronicaljournal-view/journal`);
               }}
             >
-              Сохранить изменения
+              Вернуться к изменениям
             </button>
             {/* <input
               className="button-header bt_color"

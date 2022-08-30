@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 
 export default class MarksTable extends React.Component {
   state = {
+    widthData: null,
     presence: null,
     date: null,
     koko: [],
@@ -110,13 +111,13 @@ export default class MarksTable extends React.Component {
                       <tr>
                         <th
                           className="line-fio diagonal-line"
-                          width={
-                            document.querySelector(".container_student")
-                              ? document
-                                  .querySelector(".container_student")
-                                  .getBoundingClientRect().width
-                              : false
-                          }
+                          // width={
+                          //   document.querySelector(".container_student")
+                          //     ? document
+                          //         .querySelector(".container_student")
+                          //         .getBoundingClientRect().width - 1
+                          //     : false
+                          // }
                         >
                           <label className="dzs wrap_selects">Дата</label>
                           <label className="fios">ФИО</label>
@@ -166,7 +167,15 @@ export default class MarksTable extends React.Component {
                       if (k === 0) {
                         return header.journalContents.map((content, j) => (
                           <tr key={j} className="container_student">
-                            <th className="line-stud" key={content.id}>
+                            <th
+                              className="line-stud"
+                              title={
+                                content.student.surname +
+                                " " +
+                                content.student.name
+                              }
+                              key={content.id}
+                            >
                               <div className="surname">
                                 {j +
                                   1 +
@@ -182,14 +191,6 @@ export default class MarksTable extends React.Component {
                     })
                   )}
                 </tbody>
-
-                {document.querySelector(".container_student")
-                  ? console.log(
-                      document
-                        .querySelector(".container_student")
-                        .getBoundingClientRect().width
-                    )
-                  : false}
                 <tfoot className="disp table_tfoot">
                   {this.props.journalsite.map((item, i) => {
                     return item.journalHeaders.map((header, i) => (

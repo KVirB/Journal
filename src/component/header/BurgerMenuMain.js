@@ -35,14 +35,24 @@ export default class BurgerMenuMain extends React.Component {
             <div className="burger_main_with_bt">
               <div className="container_with_bt_close disp">
                 <div>
-                  <button className="bt_main_page">
+                  <button
+                    className="bt_main_page"
+                    // onClick={() => {
+                    //   window.location.href =
+                    //     "/electronicaljournal-view/teacher_profile";
+                    // }}
+                    onClick={() => {
+                      document.getElementById("home_item").click();
+                    }}
+                  >
                     <HomeWhite className="home_white"></HomeWhite>
                     <HomeBlack className="home_black"></HomeBlack>
                   </button>
                 </div>
                 <Link
+                  id="home_item"
                   className="home_item"
-                  to="/electronicaljournal-view/journal"
+                  to="/electronicaljournal-view/teacher_profile"
                 >
                   Главная
                 </Link>
@@ -140,116 +150,22 @@ export default class BurgerMenuMain extends React.Component {
                     Статистика по факультету
                   </Link>
                 </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/statistics"
-                  >
-                    Группы по дисциплине
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/studentbydiscipline"
-                  >
-                    Студента по дисциплине
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/studentstatistic"
-                  >
-                    Студента по периоду
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/generalgroupstatistic"
-                  >
-                    Общая статистика по группе
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
-                  >
-                    Статистика по факультету
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/statistics"
-                  >
-                    Группы по дисциплине
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/studentbydiscipline"
-                  >
-                    Студента по дисциплине
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/studentstatistic"
-                  >
-                    Студента по периоду
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/generalgroupstatistic"
-                  >
-                    Общая статистика по группе
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
-                  >
-                    Статистика по факультету
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
-                  >
-                    Статистика по факультету
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
-                  >
-                    Статистика по факультету
-                  </Link>
-                </div>
-                <div className="menu_container" hidden={this.props.stats}>
-                  <Link
-                    className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
-                  >
-                    RK
-                  </Link>
-                </div>
               </div>
             </div>
-            <button className="bt_guide">
+            {/* <button className="bt_guide">
               <Guide className="guide_pic"></Guide>
               <div className="guide_name">Руководство пользователя</div>
-            </button>
+            </button> */}
+            <div className="container_with_guide disp">
+              <div>
+                <button className="bt_guide_page">
+                  <Guide className="guide_white"></Guide>
+                </button>
+              </div>
+              <Link className="guide_item" to="/electronicaljournal-view/guide">
+                Руководство пользователя
+              </Link>
+            </div>
             <footer className="footer_burger_menu">
               <div className="support_name">
                 Техническая поддержка веб-сервиса и последующее обновление —{" "}

@@ -221,7 +221,9 @@ export const getTeacher = (surname, teacherId) => {
     });
 };
 export const patchJournalsite = async (bodyItems) => {
+  let itemNumber = 1;
   await bodyItems.map((m) => {
+    let number = itemNumber++;
     let requestOptions = {
       method: "PATCH",
       // "Authorization": `Bearer + ${localStorage.getItem("user").access_token}`
@@ -240,8 +242,11 @@ export const patchJournalsite = async (bodyItems) => {
         console.error(error);
       })
       .finally((item) => {
-        console.log(requestOptions);
-        window.location.reload();
+        console.log(number, "resp");
+        console.log(bodyItems.length, "leng");
+        if (bodyItems.length === number) {
+          window.location.href = "/electronicaljournal-view/teacher_profile";
+        }
       });
   });
 };
