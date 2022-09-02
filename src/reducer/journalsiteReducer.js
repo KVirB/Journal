@@ -125,6 +125,7 @@ const journalsiteReducer = (state = initialState, action) => {
     case SET_JOURNALSITE:
       let jSites = [...state.journalsite];
       let jSite = [{ ...action.journalsite }];
+      console.log(JSON.stringify(jSite));
       jSite.map((site, i) => {
         site.journalHeaders
           .sort((a, b) => a.id - b.id)

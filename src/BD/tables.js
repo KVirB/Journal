@@ -1,19 +1,33 @@
 import * as axios from "axios";
-
-const baseRout = axios.create({
+var baseRout = axios.create({
   baseURL: "http://192.168.11.252:8082/",
 });
-
-const baseRoutGeneral = axios.create({
+var baseRoutGeneral = axios.create({
   baseURL: "http://192.168.11.252:8081/",
 });
+if (localStorage.getItem("user") !== null) {
+  baseRout = axios.create({
+    baseURL: "http://192.168.11.252:8082/",
+    headers: {
+      Authorization:
+        "Bearer " + JSON.parse(localStorage.getItem("user")).access_token,
+    },
+  });
+  baseRoutGeneral = axios.create({
+    baseURL: "http://192.168.11.252:8082/",
+    headers: {
+      Authorization:
+        "Bearer " + JSON.parse(localStorage.getItem("user")).access_token,
+    },
+  });
+}
 
 export const getExcelFaculty = (facultyId, firstDate, secondDate) => {
   return (
     baseRout
       // utils/myExcel?groupName=& period=2022-03-21and...
       .request({
-        url: `electronicjournal/utils/mySecondExcel?facultyName=${facultyId}&period=${firstDate}and${secondDate}`,
+        url: `electronicjournal/utils/mySecondExcel?cathedraName=${facultyId}&period=${firstDate}and${secondDate}`,
         method: "GET",
         responseType: "blob",
       })
@@ -64,9 +78,11 @@ export const getExcel = (groupsId, firstDate, secondDate) => {
 };
 
 export const getFacultys = () => {
-  return baseRoutGeneral.get(`faculties/search?q=`).then((response) => {
-    return response.data;
-  });
+  return baseRout
+    .get(`electronicjournal/departments/search?q=`)
+    .then((response) => {
+      return response.data;
+    });
 };
 
 export const getStudentsStatisticByPeriod = (
@@ -148,6 +164,7 @@ export const getDiscipline = () => {
         JSON.parse(localStorage.getItem("user")).id_from_source
       }`
     )
+
     .then((response) => {
       return response.data;
     });

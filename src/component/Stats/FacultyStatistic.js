@@ -71,14 +71,14 @@ class FacultyStatistic extends React.Component {
               />
             </div>
             <div>
-              <div className="faculty-name">Факультет</div>
+              <div className="faculty-name">Кафедра</div>
               <div className="faculty-select-statistic">
                 <Select
-                  defaultValue={{ value: "faculty", label: "Факультет" }}
+                  defaultValue={{ value: "faculty", label: "Кафедра" }}
                   onChange={(e) => getFacultys(e.label)}
                   options={this.props.faculty.map((m) => ({
-                    value: m.shortName,
-                    label: m.shortName,
+                    value: m.displayName,
+                    label: m.displayName,
                   }))}
                 />
               </div>

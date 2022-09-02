@@ -4,7 +4,7 @@ const http = create({
   baseURL: "http://192.168.11.252:8082/authorization",
   headers: {
     Authorization:
-      "Basic VlNUVV9DT05GRVJFTkNFX0NMSUVOVDpWU1RVX0NPTkZFUkVOQ0VfQ0xJRU5U",
+      "Basic VlNUVV9FTEVDVFJPTklDSk9VUk5BTF9DTElFTlQ6VlNUVV9FTEVDVFJPTklDSk9VUk5BTF9DTElFTlQ=",
   },
 });
 

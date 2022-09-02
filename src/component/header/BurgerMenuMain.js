@@ -147,7 +147,7 @@ export default class BurgerMenuMain extends React.Component {
                     className="item_stat"
                     to="/electronicaljournal-view/facultystatistic"
                   >
-                    Статистика по факультету
+                    Статистика по кафедре
                   </Link>
                 </div>
               </div>

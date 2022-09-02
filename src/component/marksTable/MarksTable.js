@@ -127,26 +127,17 @@ export default class MarksTable extends React.Component {
                             <div className="">
                               <p className="day_mount">
                                 {header.dateOfLesson !== null
-                                  ? header.dateOfLesson[2] < 10
-                                    ? String(this.state.x) +
-                                      header.dateOfLesson[2]
-                                    : header.dateOfLesson[2]
+                                  ? header.dateOfLesson.split("-")[2]
                                   : "No date"}
                                 .
                                 {header.dateOfLesson !== null
-                                  ? header.dateOfLesson[1] < 10
-                                    ? String(this.state.x) +
-                                      header.dateOfLesson[1]
-                                    : header.dateOfLesson[1]
+                                  ? header.dateOfLesson.split("-")[1]
                                   : false}
                                 <br />
                               </p>
                               <p className="year">
                                 {header.dateOfLesson !== null
-                                  ? header.dateOfLesson[0] < 10
-                                    ? String(this.state.x) +
-                                      header.dateOfLesson[0]
-                                    : header.dateOfLesson[0]
+                                  ? header.dateOfLesson.split("-")[0]
                                   : false}
                               </p>
                               <p className="day_mount">
@@ -387,6 +378,7 @@ export default class MarksTable extends React.Component {
                                   }
                                 />
                                 <label
+                                  className="label_for_minimum"
                                   hidden={
                                     localStorage.getItem("typeC") === "Лекция"
                                       ? false

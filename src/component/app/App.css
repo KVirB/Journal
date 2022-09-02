@@ -431,11 +431,14 @@ section div {
   background-color: #e9ecef;
 }
 .std_cell {
-  display: inline-flex;
+  /* display: inline-flex;
   margin-top: 3.5px;
   margin-right: auto;
   margin-left: auto;
-  margin: auto;
+  margin: auto; */
+  display: inline-flex;
+  margin-top: 20px;
+  margin-left: 8px;
 }
 .std_cell_lab {
   display: block;

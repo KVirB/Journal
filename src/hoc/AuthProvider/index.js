@@ -13,7 +13,7 @@ const AuthProvider = ({ children }) => {
     setUser(null);
     cb();
   };
-
+  // console.log(JSON.stringify(user) + "ABRAHAM");
   const value = { user, signIn, signOut };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
