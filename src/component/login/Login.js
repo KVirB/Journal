@@ -26,7 +26,7 @@ function Login() {
         navigate(
           location.state
             ? location.state?.from
-            : `/electronicaljournal-view/journal`,
+            : `/electronicaljournal-view/teacher_profile`,
           { replace: true }
         )
       );
@@ -48,7 +48,9 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(data));
         reset();
         signIn(data, () =>
-          navigate(`/electronicaljournal-view/journal`, { replace: true })
+          navigate(`/electronicaljournal-view/teacher_profile`, {
+            replace: true,
+          })
         );
       })
       .catch((e) => {

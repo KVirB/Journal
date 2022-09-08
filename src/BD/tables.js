@@ -217,6 +217,14 @@ export const getDisciplinesStatistic = (groupsId) => {
     });
 };
 
+export const getTeachersManagements = () => {
+  return baseRout
+    .get(`electronicjournal/teachers/search?q=`)
+    .then((response) => {
+      return response.data;
+    });
+};
+
 export const getJournalsite = (disciplineId, groupId, typeClass, subGroup) => {
   return baseRout
     .get(

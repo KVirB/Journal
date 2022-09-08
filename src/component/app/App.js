@@ -14,6 +14,7 @@ import MainPageContainer from "../Main/mainPageContainer";
 import FacultyStatistic from "../Stats/facultyStatisticContainer";
 import TeacherProfile from "../Teacher/TeacherProfile";
 import ManagementPage from "../ManagementPage/ManagementPage";
+import ManagementPageContainer from "../ManagementPage/managementPageContainer";
 
 const App = () => {
   return (
@@ -90,7 +91,7 @@ const App = () => {
             path="/electronicaljournal-view/management_page"
             element={
               <RequireAuth role={["USER", "HEAD_OF_DEPARTMENT"]}>
-                <ManagementPage></ManagementPage>
+                <ManagementPageContainer></ManagementPageContainer>
               </RequireAuth>
             }
           />

@@ -1655,27 +1655,138 @@ input[type="submit"].button-header:disabled {
   margin-left: 55px;
 }
 .pagination {
+  height: 45px;
   list-style: none;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   margin-bottom: 5rem;
-  font-size: 1.2rem;
-  gap: 5px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  grid-gap: 5px;
+  gap: 12px;
+}
+.block_for_page_num {
+  height: 45px;
+  width: 45px;
+}
+.page-num {
+  color: #495471;
+  width: 45px;
+  height: 45px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 .pagination .page-num {
-  padding: 8px 15px;
+  /* padding: 11px 17.5px; */
   cursor: pointer;
   border-radius: 3px;
   font-weight: 400;
 }
 .pagination .page-num:hover {
-  background-color: #5ab1bb;
+  background-color: #434c63;
   color: #fff;
 }
 .pagination .active {
-  background-color: #5ab1bb;
+  background-color: #434c63;
+  color: #fff;
 }
 .label_for_minimum {
   margin-left: 5px;
+}
+.pagination_block {
+  width: 300px;
+  margin-top: 45px;
+  margin-left: 45px;
+}
+.white_arrow {
+  display: none;
+}
+.blue_arrow {
+  display: inline-block;
+}
+.previous:hover .white_arrow {
+  display: inline-block;
+}
+.previous:hover .blue_arrow {
+  display: none;
+}
+.next:hover .white_arrow {
+  display: inline-block;
+}
+.next:hover .blue_arrow {
+  display: none;
+}
+.break {
+  pointer-events: none;
+}
+.rotate_arrow_pading {
+  transform: rotate(180deg);
+}
+.management_page_block {
+  display: block;
+  height: 100vh;
+}
+.block_for_button {
+  height: 130px;
+  border-bottom: 1px solid #ebebeb;
+  width: calc(100vw - 168px);
+}
+.button_my_journal {
+  background: #434c63;
+  border-radius: 7px;
+  height: 51px;
+  border: 1px;
+  width: 169px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin-top: 40px;
+  margin-left: 45px;
+  cursor: pointer;
+}
+.button_my_journal:hover {
+  background: #353f57;
+}
+.department_sort_block {
+  height: 111px;
+  border-bottom: 1px solid #ebebeb;
+  width: calc(100vw - 168px);
+}
+.teachers_name_for_sort_block {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 32px;
+  color: #434c63;
+  padding-left: 45px;
+  padding-top: 40px;
+}
+.teachers_block {
+  margin-top: 5px;
+  margin-left: 5px;
+  width: calc(100vw - 168px);
+}
+.teacher_card {
+  margin-top: 35px;
+  margin-left: 40px;
+  width: 523px;
+  height: 260px;
+  border: 1px solid #ebebeb;
+  border-radius: 10px;
+}
+.teacher_card_block {
+  display: flex;
+  flex-wrap: wrap;
 }

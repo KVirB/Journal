@@ -189,7 +189,6 @@ export default class MarksTable extends React.Component {
                         {header.journalContents.map((content, i) => (
                           <th
                             className="line-grade disp"
-                            // height="37px"
                             width={
                               localStorage.getItem("typeC") === "Лекция"
                                 ? "65px"
@@ -201,6 +200,8 @@ export default class MarksTable extends React.Component {
                                 localStorage.getItem("typeC") ===
                                 "Лабораторная работа"
                                   ? "std_cell_lab"
+                                  : localStorage.getItem("typeC") === "Лекция"
+                                  ? "std_cell_lek"
                                   : "std_cell"
                               }
                             >

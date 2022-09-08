@@ -1,117 +1,99 @@
 import React, { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useAuth } from "../../hooks/useAuth";
+import { ReactComponent as BlueArrow } from "../../blue_arrow.svg";
+import { ReactComponent as WhiteArrow } from "../../white_arrow.svg";
+import BurgerButtonMain from "../header/BurgerButtonMain";
 
 const ManagementPage = (props) => {
   const { user } = useAuth();
 
-  //   const { items } = props;
-  const items = [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
-    { id: 6 },
-    { id: 7 },
-    { id: 8 },
-    { id: 9 },
-    { id: 10 },
-    { id: 11 },
-  ];
+  const { teachers } = props;
+
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 3;
+
+  const itemsPerPage = 6;
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(items.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(items.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, items]);
+    setCurrentItems(teachers.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(teachers.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, teachers]);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
+    const newOffset = (event.selected * itemsPerPage) % teachers.length;
     setItemOffset(newOffset);
   };
 
   return (
-    <>
-      <div className="teachers">
-        {currentItems.map((teacher) => {
-          return <div className="teacher"> {teacher.id}</div>;
-        })}
+    <div className="disp">
+      <div className="burger_combine">
+        <BurgerButtonMain></BurgerButtonMain>
       </div>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel=">"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="<"
-        renderOnZeroPageCount={null}
-        containerClassName="pagination"
-        pageLinkClassName="page-num"
-        previousLinkClassName="page-num"
-        nextLinkClassName="page-num"
-        activeLinkClassName="active"
-      />
-    </>
+      <div className="management_page_block">
+        <div className="block_for_button">
+          <button
+            className="button_my_journal"
+            onClick={() => {
+              window.location.assign(
+                `/electronicaljournal-view/teacher_profile`
+              );
+            }}
+          >
+            Мои журналы
+          </button>
+        </div>
+        <div className="department_sort_block">
+          <p className="teachers_name_for_sort_block">Преподаватели</p>
+        </div>
+
+        <div className="teachers_block">
+          <div className="teacher_card_block">
+            {currentItems.map((teacher) => {
+              return (
+                <div className="teacher_card" key={teacher.id}>
+                  {teacher.surname +
+                    " " +
+                    teacher.name +
+                    " " +
+                    teacher.patronymic}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="pagination_block">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel={
+              <>
+                <BlueArrow className="blue_arrow rotate_arrow_pading"></BlueArrow>
+                <WhiteArrow className="white_arrow rotate_arrow_pading"></WhiteArrow>
+              </>
+            }
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={1}
+            marginPagesDisplayed={1}
+            pageCount={pageCount}
+            previousLabel={
+              <>
+                <BlueArrow className="blue_arrow"></BlueArrow>
+                <WhiteArrow className="white_arrow"></WhiteArrow>
+              </>
+            }
+            renderOnZeroPageCount={null}
+            containerClassName="pagination"
+            pageLinkClassName="page-num"
+            previousLinkClassName="page-num"
+            nextLinkClassName="page-num"
+            activeLinkClassName="active"
+            pageClassName="block_for_page_num"
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 
