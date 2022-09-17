@@ -52,7 +52,7 @@ export default class BurgerMenuMain extends React.Component {
                 <Link
                   id="home_item"
                   className="home_item"
-                  to="/electronicaljournal-view/teacher_profile"
+                  to="/electronicaljournal-view"
                 >
                   Главная
                 </Link>

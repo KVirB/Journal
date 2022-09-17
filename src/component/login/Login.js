@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { useAuth } from "../../hooks/useAuth";
-
 import schema from "./validation";
 import "./Login.css";
 import { getToken } from "./axios";
 
-function Login() {
+function Login(props) {
   const location = useLocation();
   const navigate = useNavigate();
   const { signIn } = useAuth();
@@ -21,14 +19,27 @@ function Login() {
   });
 
   useEffect(() => {
+    let stateRole = null;
+    let role = ["HEAD_OF_DEPARTMENT", "RECTOR", "DEAN"];
+
     if (localStorage.getItem("user")) {
+      JSON.parse(localStorage.getItem("user")).roles.forEach((el) => {
+        stateRole = stateRole + role.includes(el);
+      });
       signIn(JSON.parse(localStorage.getItem("user")), () =>
-        navigate(
-          location.state
-            ? location.state?.from
-            : `/electronicaljournal-view/teacher_profile`,
-          { replace: true }
-        )
+        stateRole === 0
+          ? navigate(
+              location.state
+                ? location.state?.from
+                : `/electronicaljournal-view/teacher_profile`,
+              { replace: true }
+            )
+          : navigate(
+              location.state
+                ? location.state?.from
+                : `/electronicaljournal-view/management_page`,
+              { replace: true }
+            )
       );
     }
   }, [location, navigate, signIn]);
@@ -48,7 +59,7 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(data));
         reset();
         signIn(data, () =>
-          navigate(`/electronicaljournal-view/teacher_profile`, {
+          navigate(`/electronicaljournal-view`, {
             replace: true,
           })
         );

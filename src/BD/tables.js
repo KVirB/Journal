@@ -161,7 +161,9 @@ export const getDiscipline = () => {
   return baseRout
     .get(
       `electronicjournal/disciplines/searchDisciplinesByTeacher?q=teacher.idFromSource==${
-        JSON.parse(localStorage.getItem("user")).id_from_source
+        localStorage.getItem("idSourse") === null
+          ? JSON.parse(localStorage.getItem("user")).id_from_source
+          : localStorage.getItem("idSourse")
       }`
     )
 
@@ -194,7 +196,9 @@ export const getGroup = (disciplineId) => {
   return baseRout
     .get(
       `electronicjournal/journal-sites/searchByTeacherAndDiscipline?q=discipline.id==${disciplineId};teacher.idFromSource==${
-        JSON.parse(localStorage.getItem("user")).id_from_source
+        localStorage.getItem("idSourse") === null
+          ? JSON.parse(localStorage.getItem("user")).id_from_source
+          : localStorage.getItem("idSourse")
       }`
     )
     .then((response) => {
@@ -222,14 +226,42 @@ export const getTeachersManagements = () => {
     .get(`electronicjournal/teachers/search?q=`)
     .then((response) => {
       return response.data;
+    })
+    .catch((err) => {
+      if (err !== null) {
+        if (err.response) {
+          window.location.reload();
+        } else if (err.request) {
+          console.log(err.request);
+        }
+      }
     });
+};
+
+export const getTeacherProfile = (idFromSource) => {
+  return (
+    baseRout
+      // .get(
+      //   `electronicjournal/teachers/search?q=idFromSource==${
+      //     localStorage.getItem("idSourse") === null
+      //       ? JSON.parse(localStorage.getItem("user")).id_from_source
+      //       : localStorage.getItem("idSourse")
+      //   }`
+      // )
+      .get(`electronicjournal/teachers/search?q=idFromSource==${idFromSource}`)
+      .then((response) => {
+        return response.data;
+      })
+  );
 };
 
 export const getJournalsite = (disciplineId, groupId, typeClass, subGroup) => {
   return baseRout
     .get(
       `electronicjournal/journal-sites/filter?teacher_idFromSource=${
-        JSON.parse(localStorage.getItem("user")).id_from_source
+        localStorage.getItem("idSourse") === null
+          ? JSON.parse(localStorage.getItem("user")).id_from_source
+          : localStorage.getItem("idSourse")
       }&group_name=${groupId}&discipline_id=${disciplineId}&type_class_id=${typeClass}&sub_group_number=${subGroup}`
     )
     .then((response) => {

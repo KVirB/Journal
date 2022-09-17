@@ -1,12 +1,26 @@
 import { useLocation, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { useEffect, useState } from "react";
 // import { useSelector } from 'react-redux';
 
-export default function RequireAuth({ children, role }) {
+export default function RequireAuth({ children, role, getTeacherManagement }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
 
+  useEffect(() => {
+    let stateRole = null;
+    if (localStorage.getItem("user") !== null) {
+      JSON.parse(localStorage.getItem("user")).roles.forEach((el) => {
+        stateRole = stateRole + role.includes(el);
+      });
+    }
+    if (user) {
+      if (stateRole === 0) {
+        navigate("/electronicaljournal-view/teacher_profile");
+      }
+    }
+  });
   if (!user) {
     return (
       <Navigate
@@ -16,13 +30,11 @@ export default function RequireAuth({ children, role }) {
       />
     );
   }
+
   // if (user) {
   //   user.roles.forEach((element) => {
-  //     console.log(user.roles);
-  //     console.log(role.indexOf());
-  //     if (role.indexOf(element) === -1) {
-  //       localStorage.removeItem("user");
-  //       signOut(() => navigate("/electronicaljournal-view", { replace: true }));
+  //     if (!role.some(() => checkRole(element, role))) {
+  //       navigate("/electronicaljournal-view/teacher_profile");
   //       console.log(role.indexOf(element), element);
   //     }
   //   });

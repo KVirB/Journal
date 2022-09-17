@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useAuth } from "../../hooks/useAuth";
 import { ReactComponent as BlueArrow } from "../../blue_arrow.svg";
 import { ReactComponent as WhiteArrow } from "../../white_arrow.svg";
+import { ReactComponent as PictureProfile } from "../../teacher_pic.svg";
 import BurgerButtonMain from "../header/BurgerButtonMain";
+import TeacherCard from "./TeacherCard";
+import { Link } from "react-router-dom";
 
 const ManagementPage = (props) => {
   const { user } = useAuth();
 
-  const { teachers } = props;
+  const { teachers, getTeacherProfileThunk } = props;
 
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -17,6 +20,7 @@ const ManagementPage = (props) => {
   const itemsPerPage = 6;
 
   useEffect(() => {
+    localStorage.removeItem("idSourse");
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(teachers.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(teachers.length / itemsPerPage));
@@ -37,6 +41,9 @@ const ManagementPage = (props) => {
           <button
             className="button_my_journal"
             onClick={() => {
+              getTeacherProfileThunk(
+                JSON.parse(localStorage.getItem("user")).id_from_source
+              );
               window.location.assign(
                 `/electronicaljournal-view/teacher_profile`
               );
@@ -44,6 +51,17 @@ const ManagementPage = (props) => {
           >
             Мои журналы
           </button>
+          {/* <Link
+            onClick={() => {
+              getTeacherProfileThunk(
+                JSON.parse(localStorage.getItem("user")).id_from_source
+              );
+            }}
+            className="button_my_journal"
+            to="/electronicaljournal-view/teacher_profile"
+          >
+            Мои журналы
+          </Link> */}
         </div>
         <div className="department_sort_block">
           <p className="teachers_name_for_sort_block">Преподаватели</p>
@@ -54,11 +72,11 @@ const ManagementPage = (props) => {
             {currentItems.map((teacher) => {
               return (
                 <div className="teacher_card" key={teacher.id}>
-                  {teacher.surname +
-                    " " +
-                    teacher.name +
-                    " " +
-                    teacher.patronymic}
+                  <PictureProfile className="teacher_card_picture"></PictureProfile>
+                  <TeacherCard
+                    teacher={teacher}
+                    getTeacherProfileThunk={getTeacherProfileThunk}
+                  ></TeacherCard>
                 </div>
               );
             })}

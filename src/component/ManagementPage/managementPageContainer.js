@@ -1,7 +1,10 @@
 import { toHaveStyle } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
 import { connect } from "react-redux";
-import { getTeacherManagement } from "../../reducer/managementReducer";
+import {
+  getTeacherManagement,
+  getTeacherProfileThunk,
+} from "../../reducer/managementReducer";
 import ManagementPage from "./ManagementPage";
 
 class managementPageContainer extends React.Component {
@@ -14,6 +17,7 @@ class managementPageContainer extends React.Component {
         <ManagementPage
           teachers={this.props.teachers}
           getTeacherManagement={this.props.getTeacherManagement}
+          getTeacherProfileThunk={this.props.getTeacherProfileThunk}
         />
       </div>
     );
@@ -27,4 +31,5 @@ let mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   getTeacherManagement,
+  getTeacherProfileThunk,
 })(managementPageContainer);

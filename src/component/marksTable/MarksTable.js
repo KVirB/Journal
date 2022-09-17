@@ -214,7 +214,10 @@ export default class MarksTable extends React.Component {
                                     ? true
                                     : false || content.presence === null
                                     ? true
-                                    : false
+                                    : false ||
+                                      localStorage.getItem("idSourse") === null
+                                    ? false
+                                    : true
                                 }
                                 hidden={
                                   localStorage.getItem("typeC") === "Лекция"
@@ -286,6 +289,11 @@ export default class MarksTable extends React.Component {
                               </select>
                               <div className="checkbox">
                                 <input
+                                  disabled={
+                                    localStorage.getItem("idSourse") === null
+                                      ? false
+                                      : true
+                                  }
                                   className="top"
                                   type="checkbox"
                                   name={"c" + content.id}
@@ -343,7 +351,11 @@ export default class MarksTable extends React.Component {
                                       ? true
                                       : false || content.presence === null
                                       ? true
-                                      : false
+                                      : false ||
+                                        localStorage.getItem("idSourse") ===
+                                          null
+                                      ? false
+                                      : true
                                   }
                                   value={
                                     content.presence === false

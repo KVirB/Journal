@@ -1,9 +1,13 @@
+import { letterSpacing } from "@mui/system";
 import { getTeachersManagements } from "../BD/tables";
+import { getTeacherProfile } from "../BD/tables";
 
 const SET_TEACHERS_MANAGEMENTS = "SET_TEACHERS_MANAGEMENTS";
+const SET_TEACHER_PROFILE = "SET_TEACHER_PROFILE";
 
 let initialState = {
   teachers: [],
+  teacherProf: [],
 };
 
 const managementReducer = (state = initialState, action) => {
@@ -12,6 +16,12 @@ const managementReducer = (state = initialState, action) => {
       return {
         ...state,
         teachers: [...action.teachers],
+      };
+
+    case SET_TEACHER_PROFILE:
+      return {
+        ...state,
+        teacherProf: [...action.teacherProf],
       };
     default:
       return state;
@@ -22,6 +32,21 @@ export const setTeachersManagements = (teachers) => ({
   type: SET_TEACHERS_MANAGEMENTS,
   teachers: teachers,
 });
+
+export const setTeacherProfile = (teacherProf) => ({
+  type: SET_TEACHER_PROFILE,
+  teacherProf: teacherProf,
+});
+
+export const getTeacherProfileThunk = (idFromSource) => {
+  console.log(idFromSource + " reducer");
+  return (dispatch) => {
+    getTeacherProfile(idFromSource).then((data) => {
+      dispatch(setTeacherProfile(data));
+    });
+  };
+};
+
 export const getTeacherManagement = () => {
   return (dispatch) => {
     getTeachersManagements().then((data) => {

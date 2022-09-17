@@ -15,8 +15,6 @@ const AuthProvider = ({ children }) => {
   };
   // console.log(JSON.stringify(user) + "ABRAHAM");
   const value = { user, signIn, signOut };
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-
 export default AuthProvider;

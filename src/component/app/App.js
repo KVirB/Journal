@@ -12,7 +12,7 @@ import StudentStatistic from "../Stats/studentStatisticContainer";
 import GeneralGroupStatistic from "../Stats/generalGroupStatisticContainer";
 import MainPageContainer from "../Main/mainPageContainer";
 import FacultyStatistic from "../Stats/facultyStatisticContainer";
-import TeacherProfile from "../Teacher/TeacherProfile";
+import TeacherProfile from "../Teacher/teacherProfileContainer";
 import ManagementPage from "../ManagementPage/ManagementPage";
 import ManagementPageContainer from "../ManagementPage/managementPageContainer";
 
@@ -82,7 +82,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/teacher_profile"
             element={
-              <RequireAuth role={["USER", "HEAD_OF_DEPARTMENT"]}>
+              <RequireAuth role={["HEAD_OF_DEPARTMENT", "USER"]}>
                 <TeacherProfile></TeacherProfile>
               </RequireAuth>
             }
@@ -90,7 +90,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/management_page"
             element={
-              <RequireAuth role={["USER", "HEAD_OF_DEPARTMENT"]}>
+              <RequireAuth role={["HEAD_OF_DEPARTMENT"]}>
                 <ManagementPageContainer></ManagementPageContainer>
               </RequireAuth>
             }

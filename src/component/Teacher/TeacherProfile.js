@@ -45,6 +45,17 @@ export default class TeacherProfile extends React.Component {
   //     });
   //   })();
   // };
+  componentDidMount() {
+    if (localStorage.getItem("user") !== null) {
+      if (localStorage.getItem("idSourse") !== null) {
+        this.props.getTeacherProfileThunk(localStorage.getItem("idSourse"));
+      } else {
+        this.props.getTeacherProfileThunk(
+          JSON.parse(localStorage.getItem("user")).id_from_source
+        );
+      }
+    }
+  }
   getInputValue = (e) => {
     this.setState({
       mobile: e.target.value,
@@ -82,12 +93,27 @@ export default class TeacherProfile extends React.Component {
                 <div className="teacher_photo_block disp">
                   {/* <TeacherPicture className="teacher_photo"></TeacherPicture> */}
                   <div className="teacher_photo"></div>
+                  {/* <img
+                    src="C:/data/files/images/123.jpg"
+                    alt="Grapefruit slice atop a pile of other slices"
+                  /> */}
                 </div>
                 <div className="block_name_with_info">
-                  <input
-                    className="teacher_name"
-                    defaultValue={JSON.parse(localStorage.getItem("user")).fio}
-                  ></input>
+                  {this.props.teacherProf.map((teacher) => {
+                    return (
+                      <input
+                        key={teacher.id}
+                        className="teacher_name"
+                        defaultValue={
+                          teacher.surname +
+                          " " +
+                          teacher.name +
+                          " " +
+                          teacher.patronymic
+                        }
+                      ></input>
+                    );
+                  })}
                   <div className="teacher_info">
                     <textarea
                       className="input_teacher_info"

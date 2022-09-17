@@ -597,7 +597,7 @@ input[type="submit"].button-header:disabled {
   border: 1px solid #ebebeb;
   border-radius: 7px;
   margin-top: 40px;
-  margin-right: 58px;
+  /* margin-right: 58px; */
   background: white;
   cursor: pointer;
   background-image: url("data:image/svg+xml,%3Csvg width='25' height='18' viewBox='0 0 25 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1H24M1 9H24M1 17H24' stroke='%23434C63' stroke-width='2' stroke-linecap='square'/%3E%3C/svg%3E%0A");
@@ -1105,7 +1105,7 @@ input[type="submit"].button-header:disabled {
 .burger_combine {
   width: 110px;
   border-right: 1px solid #ebebeb;
-  margin-left: 58px;
+  margin-left: 52px;
 }
 .burger_menu_main_container {
   /* min-width: 169px;
@@ -1702,7 +1702,6 @@ input[type="submit"].button-header:disabled {
   margin-left: 5px;
 }
 .pagination_block {
-  width: 300px;
   margin-top: 45px;
   margin-left: 45px;
 }
@@ -1779,6 +1778,8 @@ input[type="submit"].button-header:disabled {
   width: calc(100vw - 168px);
 }
 .teacher_card {
+  /* display: -webkit-inline-box; */
+  display: inline-flex;
   margin-top: 35px;
   margin-left: 40px;
   width: 523px;
@@ -1789,4 +1790,50 @@ input[type="submit"].button-header:disabled {
 .teacher_card_block {
   display: flex;
   flex-wrap: wrap;
+}
+.teacher_card_picture {
+  height: 260px;
+  max-width: 205px;
+  width: 205px;
+  min-width: 205px;
+}
+.teacher_card_picture svg {
+  width: 100%;
+  height: 100%;
+}
+.teacher_card_info {
+  margin-left: 30px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.teacher_card_info_name {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 28px;
+  color: #434c63;
+}
+.teacher_card_info_department {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #505050;
+  margin-top: 20px;
+}
+.teacher_card_info_link_block {
+  margin-bottom: 30px;
+}
+.teacher_card_info_link {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #434c63;
+  text-decoration: none;
 }
