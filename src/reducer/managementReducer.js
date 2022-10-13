@@ -3,6 +3,7 @@ import { getTeachersManagements } from "../BD/tables";
 import { getTeacherProfile } from "../BD/tables";
 
 const SET_TEACHERS_MANAGEMENTS = "SET_TEACHERS_MANAGEMENTS";
+const CLEAR_TEACHERS_MANAGEMENTS = "CLEAR_TEACHERS_MANAGEMENTS";
 const SET_TEACHER_PROFILE = "SET_TEACHER_PROFILE";
 
 let initialState = {
@@ -16,6 +17,11 @@ const managementReducer = (state = initialState, action) => {
       return {
         ...state,
         teachers: [...action.teachers],
+      };
+    case CLEAR_TEACHERS_MANAGEMENTS:
+      return {
+        ...state,
+        teachers: [],
       };
 
     case SET_TEACHER_PROFILE:
@@ -31,6 +37,9 @@ const managementReducer = (state = initialState, action) => {
 export const setTeachersManagements = (teachers) => ({
   type: SET_TEACHERS_MANAGEMENTS,
   teachers: teachers,
+});
+export const clearTeachersManagement = () => ({
+  type: CLEAR_TEACHERS_MANAGEMENTS,
 });
 
 export const setTeacherProfile = (teacherProf) => ({

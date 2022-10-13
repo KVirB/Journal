@@ -18,14 +18,16 @@ export class Combine extends React.Component {
           <div></div>
           <div></div>
         </div>
-        <div className="disp">
-          {/* <BurgerMenu></BurgerMenu> */}
-          <div className="burger_combine">
-            <BurgerButtonMain></BurgerButtonMain>
-          </div>
-          <div className="combine_main otstup">
-            <MarksTableHeader />
-            <MarksTable />
+        <div hidden={!this.props.isLoadJournal}>
+          <div className="disp">
+            {/* <BurgerMenu></BurgerMenu> */}
+            <div className="burger_combine">
+              <BurgerButtonMain></BurgerButtonMain>
+            </div>
+            <div className="combine_main otstup">
+              <MarksTableHeader />
+              <MarksTable />
+            </div>
           </div>
         </div>
       </div>

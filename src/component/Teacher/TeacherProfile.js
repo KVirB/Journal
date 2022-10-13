@@ -99,6 +99,7 @@ export default class TeacherProfile extends React.Component {
                   /> */}
                 </div>
                 <div className="block_name_with_info">
+                  {console.log(this.props.teacherProf + "name")}
                   {this.props.teacherProf.map((teacher) => {
                     return (
                       <input
@@ -136,15 +137,11 @@ export default class TeacherProfile extends React.Component {
                   {/* <div className="disp"> */}
                   <div>
                     <p className="department_name">Кафедра:</p>
-                    <p className="block_of_department_name">
-                      Здесь будет кафедра
-                    </p>
+                    <p className="block_of_department_name">Кафедра</p>
                   </div>
                   <div>
                     <p className="email_name">Электронная почта:</p>
-                    <p className="block_of_email_name">
-                      {JSON.parse(localStorage.getItem("user")).email}
-                    </p>
+                    <p className="block_of_email_name">E-mail</p>
                   </div>
                   {/* </div> */}
                   {/* <div className="disp"> */}

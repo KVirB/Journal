@@ -106,6 +106,7 @@ export default class MarksTable extends React.Component {
             <table>
               <thead>
                 <tr className="sticky_top">
+                  {console.log(JSON.stringify(this.props.journalsite))}
                   {this.props.journalsite.map((item, i) => {
                     return (
                       <tr>

@@ -1,26 +1,33 @@
 import * as axios from "axios";
-var baseRout = axios.create({
+import { useAuth } from "../hooks/useAuth";
+// axios.default.headers.common["Authorization"] =
+//   "Bearer" + JSON.parse(localStorage.getItem("user")).access_token;
+// var baseRout = axios.create({
+//   baseURL: "http://192.168.11.252:8082/",
+// });
+// if (localStorage.getItem("user") !== null) {
+//   baseRout = axios.create({
+//     baseURL: "http://192.168.11.252:8082/",
+//     headers: {
+//       Authorization:
+//         "Bearer " + JSON.parse(localStorage.getItem("user")).access_token,
+//     },
+//   });
+// }
+const defaultOptions = {
   baseURL: "http://192.168.11.252:8082/",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+
+let baseRout = axios.create(defaultOptions);
+
+baseRout.interceptors.request.use(function (config) {
+  const token = JSON.parse(localStorage.getItem("user")).access_token;
+  config.headers.Authorization = token ? `Bearer ${token}` : "";
+  return config;
 });
-var baseRoutGeneral = axios.create({
-  baseURL: "http://192.168.11.252:8081/",
-});
-if (localStorage.getItem("user") !== null) {
-  baseRout = axios.create({
-    baseURL: "http://192.168.11.252:8082/",
-    headers: {
-      Authorization:
-        "Bearer " + JSON.parse(localStorage.getItem("user")).access_token,
-    },
-  });
-  baseRoutGeneral = axios.create({
-    baseURL: "http://192.168.11.252:8082/",
-    headers: {
-      Authorization:
-        "Bearer " + JSON.parse(localStorage.getItem("user")).access_token,
-    },
-  });
-}
 
 export const getExcelFaculty = (facultyId, firstDate, secondDate) => {
   return (
@@ -169,6 +176,14 @@ export const getDiscipline = () => {
 
     .then((response) => {
       return response.data;
+    })
+    .catch((err) => {
+      err.toJSON().status === 401
+        ? localStorage.clear("user")
+        : console.log(err.toJSON().status);
+      err.toJSON().status === 401
+        ? window.location.reload()
+        : console.log(err.toJSON());
     });
 };
 export const getTypeClass = () => {
@@ -229,6 +244,9 @@ export const getTeachersManagements = () => {
     })
     .catch((err) => {
       if (err !== null) {
+        if (err.toJSON().status === 401) {
+          localStorage.clear("user");
+        }
         if (err.response) {
           window.location.reload();
         } else if (err.request) {
@@ -251,6 +269,14 @@ export const getTeacherProfile = (idFromSource) => {
       .get(`electronicjournal/teachers/search?q=idFromSource==${idFromSource}`)
       .then((response) => {
         return response.data;
+      })
+      .catch((err) => {
+        err.toJSON().status === 401
+          ? localStorage.clear("user")
+          : console.log(err.toJSON().status);
+        err.toJSON().status === 401
+          ? window.location.reload()
+          : console.log(err.toJSON());
       })
   );
 };
@@ -278,9 +304,9 @@ export const getTeacher = (surname, teacherId) => {
     });
 };
 export const patchJournalsite = async (bodyItems) => {
-  let itemNumber = 1;
+  let itemNumber = 0;
   await bodyItems.map((m) => {
-    let number = itemNumber++;
+    let number = ++itemNumber;
     let requestOptions = {
       method: "PATCH",
       // "Authorization": `Bearer + ${localStorage.getItem("user").access_token}`

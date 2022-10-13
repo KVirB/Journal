@@ -9,13 +9,16 @@ import que from "../../Que.png";
 import BurgerMenu from "./BurgerMenu";
 import BurgerModal from "./BurgerModal";
 import BurgerButtonMain from "./BurgerButtonMain";
+import { clearTeachersManagement } from "../../reducer/managementReducer";
+import { connect } from "react-redux";
 
-function MainHeader() {
+function MainHeader(props) {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
 
   const Logout = () => {
     localStorage.removeItem("user");
+    props.clearTeachersManagement();
     signOut(() => navigate("/electronicaljournal-view", { replace: true }));
   };
   var prevScrollpos = window.pageYOffset;
@@ -56,9 +59,15 @@ function MainHeader() {
           </Link>
         </h1>
       </div>
-      <div className="head" id="header">
+      <div
+        className={
+          localStorage.getItem("user") !== null
+            ? "head"
+            : "head head_notauthorized"
+        }
+        id="header"
+      >
         <div className="disp journal-name-block">
-          {/* <button className="burger_button"></button> */}
           <h1 className="journal-name">
             <Link className="j_name" to="/electronicaljournal-view">
               Электронный журнал преподавателя УО «ВГТУ»
@@ -68,11 +77,15 @@ function MainHeader() {
 
         <div className="disp bt_burger_modal">
           <div className="disp">
-            <div className="icons_col">
-              {/* <Link to="/electronicaljournal-view"> */}
-              <img src={col} alt="description"></img>
-              {/* </Link> */}
-            </div>
+            {localStorage.getItem("user") !== null ? (
+              <div className="icons_col">
+                {/* <Link to="/electronicaljournal-view"> */}
+                <img src={col} alt="description"></img>
+                {/* </Link> */}
+              </div>
+            ) : (
+              <></>
+            )}
 
             {user && (
               <div className="user-info__div">
@@ -114,4 +127,4 @@ function MainHeader() {
     </div>
   );
 }
-export default MainHeader;
+export default connect(null, { clearTeachersManagement })(MainHeader);

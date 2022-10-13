@@ -19,16 +19,15 @@
 .discipline-select {
   background: #ffffff;
   box-sizing: border-box;
-  box-shadow: 2px 8px 15px rgba(201, 201, 201, 0.1);
   border-radius: 4px;
   margin-left: 70px;
-  margin-top: 15px;
+  margin-top: 13px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 19px;
-  color: #212323;
+  color: #505050;
   /* min-height: 60px; */
   text-indent: 12px;
   width: 414px;
@@ -41,12 +40,12 @@
   display: none;
 }
 .discipline-name {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #c7c7c7;
   font-family: "Roboto", sans-serif;
   font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 135%;
-  color: #9a9c9c;
   margin-left: 95px;
   margin-top: 40px;
 }
@@ -345,6 +344,9 @@ input[type="submit"].button-header:disabled {
   justify-content: space-between;
   padding: 0 56px 0 56px;
 }
+.head_notauthorized {
+  justify-content: center;
+}
 .bth_exit {
   cursor: pointer;
   border: 1px;
@@ -433,22 +435,22 @@ input[type="submit"].button-header:disabled {
 .j_name {
   text-decoration: none;
   color: white;
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 120%;
-  text-align: center;
   color: #ffffff;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 27px;
+  text-align: center;
 }
 .j_name-600 {
   text-decoration: none;
   color: white;
-  font-family: "Roboto", sans-serif;
+  font-family: "Montserrat";
   font-style: normal;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 120%;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 27px;
   text-align: center;
   color: #ffffff;
 }
@@ -1340,18 +1342,23 @@ input[type="submit"].button-header:disabled {
 }
 
 .load_journal {
-  text-decoration: none;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  color: #ffffff;
+  color: white;
+  text-decoration: none;
   background: #434c63;
   border-radius: 7px;
   border: 0;
-  padding: 9.5px 52.5px;
+  padding: 17px 0 19px;
   margin-left: 30px;
+  box-shadow: 0px 17px 15px -11px rgba(67, 76, 99, 0.2);
+}
+.load_journal:hover {
+  background: #434c63;
+  color: #ffffff;
 }
 .block_name_contacts {
   height: 109px;
@@ -1672,6 +1679,12 @@ input[type="submit"].button-header:disabled {
 .block_for_page_num {
   height: 45px;
   width: 45px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .page-num {
   color: #495471;
@@ -1725,6 +1738,12 @@ input[type="submit"].button-header:disabled {
 }
 .break {
   pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .rotate_arrow_pading {
   transform: rotate(180deg);
@@ -1736,7 +1755,7 @@ input[type="submit"].button-header:disabled {
 .block_for_button {
   height: 130px;
   border-bottom: 1px solid #ebebeb;
-  width: calc(100vw - 168px);
+  width: calc(100vw - 163px);
 }
 .button_my_journal {
   background: #434c63;
@@ -1760,7 +1779,7 @@ input[type="submit"].button-header:disabled {
 .department_sort_block {
   height: 111px;
   border-bottom: 1px solid #ebebeb;
-  width: calc(100vw - 168px);
+  width: calc(100vw - 163px);
 }
 .teachers_name_for_sort_block {
   font-family: "Montserrat", sans-serif;
@@ -1836,4 +1855,10 @@ input[type="submit"].button-header:disabled {
   line-height: 19px;
   color: #434c63;
   text-decoration: none;
+}
+.pointerEvents {
+  pointer-events: none;
+  background: #ededed;
+  color: #808080;
+  font-weight: 400;
 }

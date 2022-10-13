@@ -380,12 +380,22 @@ class Header extends React.Component {
                 />
               </div>
               <div className="load_journal_block">
-                <Link
-                  className="load_journal"
-                  to="/electronicaljournal-view/journal"
-                >
-                  Загрузить журнал
-                </Link>
+                {console.log(this.props.journalsite.length + "kiss me")}
+                {this.props.journalsite.length === 0 ? (
+                  <Link
+                    className={"load_journal pointerEvents"}
+                    to="/electronicaljournal-view/journal"
+                  >
+                    Загрузить журнал
+                  </Link>
+                ) : (
+                  <Link
+                    className={"load_journal"}
+                    to="/electronicaljournal-view/journal"
+                  >
+                    Загрузить журнал
+                  </Link>
+                )}
               </div>
             </div>
           </div>

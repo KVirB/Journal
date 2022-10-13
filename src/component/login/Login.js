@@ -80,7 +80,7 @@ function Login(props) {
           <p className="form-error">Ошибка авторизации, попробуйте ещё раз</p>
         ) : null}
         <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-          <label className="login-form__input">Имя пользователя:</label>
+          {/* <label className="login-form__input">Имя пользователя:</label> */}
           <input
             className="form-input"
             {...register("username")}
@@ -88,7 +88,7 @@ function Login(props) {
             placeholder="Введите имя пользователя"
             required
           />
-          <label className="login-form__input">Пароль:</label>
+          {/* <label className="login-form__input">Пароль:</label> */}
           <input
             className="form-input"
             {...register("password")}

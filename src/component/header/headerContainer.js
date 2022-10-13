@@ -38,7 +38,7 @@ class headerContainer extends React.Component {
         discipline={this.props.discipline}
         group={this.props.group}
         typeClass={this.props.typeClass}
-        journalsite={this.props.group}
+        journalsite={this.props.journalsite}
         teacher={this.props.teacher}
         setJournalHeader={this.props.setJournalHeader}
         journalHeader={this.props.journalHeader}

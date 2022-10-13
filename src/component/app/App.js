@@ -26,7 +26,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/journal"
             element={
-              <RequireAuth role={["USER", "HEAD_OF_DEPARTMENT"]}>
+              <RequireAuth role={["USER", "HEAD_OF_DEPARTMENT", "RECTOR"]}>
                 <Combine />
               </RequireAuth>
             }
@@ -34,7 +34,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/main"
             element={
-              <RequireAuth role={["USER", "HEAD_OF_DEPARTMENT"]}>
+              <RequireAuth role={["USER", "HEAD_OF_DEPARTMENT", "RECTOR"]}>
                 <MainPageContainer />
               </RequireAuth>
             }
@@ -42,7 +42,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/statistics"
             element={
-              <RequireAuth role={["HEAD_OF_DEPARTMENT"]}>
+              <RequireAuth role={["HEAD_OF_DEPARTMENT", "RECTOR"]}>
                 <Statistics />
               </RequireAuth>
             }
@@ -50,7 +50,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/studentbydiscipline"
             element={
-              <RequireAuth role={["HEAD_OF_DEPARTMENT"]}>
+              <RequireAuth role={["HEAD_OF_DEPARTMENT", "RECTOR"]}>
                 <StudentByDiscipline />
               </RequireAuth>
             }
@@ -58,7 +58,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/studentstatistic"
             element={
-              <RequireAuth role={["HEAD_OF_DEPARTMENT"]}>
+              <RequireAuth role={["HEAD_OF_DEPARTMENT", "RECTOR"]}>
                 <StudentStatistic />
               </RequireAuth>
             }
@@ -66,7 +66,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/generalgroupstatistic"
             element={
-              <RequireAuth role={["HEAD_OF_DEPARTMENT"]}>
+              <RequireAuth role={["HEAD_OF_DEPARTMENT", "RECTOR"]}>
                 <GeneralGroupStatistic />
               </RequireAuth>
             }
@@ -74,7 +74,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/facultystatistic"
             element={
-              <RequireAuth role={["HEAD_OF_DEPARTMENT"]}>
+              <RequireAuth role={["HEAD_OF_DEPARTMENT", "RECTOR"]}>
                 <FacultyStatistic />
               </RequireAuth>
             }
@@ -82,7 +82,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/teacher_profile"
             element={
-              <RequireAuth role={["HEAD_OF_DEPARTMENT", "USER"]}>
+              <RequireAuth role={["HEAD_OF_DEPARTMENT", "USER", "RECTOR"]}>
                 <TeacherProfile></TeacherProfile>
               </RequireAuth>
             }
@@ -90,7 +90,7 @@ const App = () => {
           <Route
             path="/electronicaljournal-view/management_page"
             element={
-              <RequireAuth role={["HEAD_OF_DEPARTMENT"]}>
+              <RequireAuth role={["HEAD_OF_DEPARTMENT", "RECTOR"]}>
                 <ManagementPageContainer></ManagementPageContainer>
               </RequireAuth>
             }

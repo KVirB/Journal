@@ -7,11 +7,11 @@ import { ReactComponent as PictureProfile } from "../../teacher_pic.svg";
 import BurgerButtonMain from "../header/BurgerButtonMain";
 import TeacherCard from "./TeacherCard";
 import { Link } from "react-router-dom";
-
+import * as axios from "axios";
 const ManagementPage = (props) => {
   const { user } = useAuth();
 
-  const { teachers, getTeacherProfileThunk } = props;
+  const { teachers, getTeacherProfileThunk, getTeacherManagement } = props;
 
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);

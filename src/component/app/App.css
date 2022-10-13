@@ -145,7 +145,7 @@ hr {
   min-width: 81px;
 }
 .line-grade {
-  width: 81px;
+  width: 81.5px;
   height: 60px;
   border-right: 1px solid rgba(224, 224, 224, 1);
   border-bottom: 1px solid rgba(224, 224, 224, 1);
@@ -740,6 +740,7 @@ select {
   top: 0px;
   background-color: white;
   border-bottom: 1px solid rgba(224, 224, 224, 1);
+  border-right: 1px solid rgba(224, 224, 224, 1);
 }
 .sticky_left {
   position: sticky;
@@ -1771,3 +1772,35 @@ p.clip {
     width: 360px;
   }
 }
+.css-qc6sy-singleValue {
+  font-size: 16px;
+  padding: 18px 0 18px 0px;
+  color: hsl(0, 0%, 20%);
+  grid-area: 1/1/2/3;
+  margin-left: 2px;
+  margin-right: 2px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+  line-height: 19px;
+}
+.css-1pahdxg-control {
+  background: #ffffff;
+  border: 2px solid;
+  border-color: #ebebeb;
+  border-radius: 7px;
+  box-shadow: none;
+}
+.css-1pahdxg-control:hover {
+  border-color: #ebebeb;
+}
+.css-1s2u09g-control {
+  background: #ffffff;
+  border: 2px solid #ebebeb;
+  border-radius: 7px;
+}
+/* [id^="react-select-3-listbox"] {
+  margin-top: 30px;
+} */
