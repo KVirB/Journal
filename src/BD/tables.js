@@ -14,6 +14,21 @@ import { useAuth } from "../hooks/useAuth";
 //     },
 //   });
 // }
+const defaultOptionsGetImage = {
+  baseURL: "http://192.168.11.252:8084/",
+  headers: {
+    "Content-Type": false,
+  },
+};
+
+let baseRoutGetImage = axios.create(defaultOptionsGetImage);
+
+baseRoutGetImage.interceptors.request.use(function (config) {
+  const token = JSON.parse(localStorage.getItem("user")).access_token;
+  config.headers.Authorization = token ? `Bearer ${token}` : "";
+  return config;
+});
+
 const defaultOptions = {
   baseURL: "http://192.168.11.252:8082/",
   headers: {
@@ -332,4 +347,21 @@ export const patchJournalsite = async (bodyItems) => {
         }
       });
   });
+};
+export const postProfileImage = (image_name, image, idFromSource) => {
+  console.log(image);
+  return baseRoutGetImage
+    .post(
+      `/utils/upload?name=${image_name}&id_from_source=${idFromSource}`,
+      image
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error.response);
+      if (error.response.status === 400) {
+        alert("Вы превысили допустимый размер фото! Допустимый размер 131072");
+      }
+    });
 };
