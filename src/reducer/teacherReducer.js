@@ -1,4 +1,4 @@
-import { getTeacher } from "../BD/tables";
+import { getTeacher, postProfileImage } from "../BD/tables";
 
 const SET_TEACHER = "SET_TEACHER";
 const CLEAR_TEACHER = "CLEAR_TEACHER";
@@ -35,6 +35,12 @@ export const getTeacherThunk = (surname, id) => {
     getTeacher(surname, id).then((data) => {
       dispatch(setTeacher(data));
     });
+  };
+};
+
+export const setProfileImageThunk = (image_name, image, idFromSource) => {
+  return (dispatch) => {
+    postProfileImage(image_name, image, idFromSource);
   };
 };
 

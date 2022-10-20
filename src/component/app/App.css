@@ -844,7 +844,7 @@ p.clip {
     width: 100px;
   }
   .load_journal {
-    padding: 9.5px 20.5px;
+    padding: 17px 15.5px 0px 15.5px;
   }
 }
 @media (max-width: 1500px) {
@@ -1774,7 +1774,8 @@ p.clip {
 }
 .css-qc6sy-singleValue {
   font-size: 16px;
-  padding: 18px 0 18px 0px;
+  /* padding: 18px 0 18px 0px;
+  height: 55px; */
   color: hsl(0, 0%, 20%);
   grid-area: 1/1/2/3;
   margin-left: 2px;
@@ -1792,6 +1793,7 @@ p.clip {
   border-color: #ebebeb;
   border-radius: 7px;
   box-shadow: none;
+  height: 55px;
 }
 .css-1pahdxg-control:hover {
   border-color: #ebebeb;
@@ -1800,6 +1802,7 @@ p.clip {
   background: #ffffff;
   border: 2px solid #ebebeb;
   border-radius: 7px;
+  height: 55px;
 }
 /* [id^="react-select-3-listbox"] {
   margin-top: 30px;

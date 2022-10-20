@@ -7,6 +7,7 @@ import { ReactComponent as TeacherPicture480 } from "../../photo_480.svg";
 import Select from "react-select";
 import InputMask from "react-input-mask";
 import { Link } from "react-router-dom";
+import { render } from "@testing-library/react";
 
 export default class TeacherProfile extends React.Component {
   state = {
@@ -16,35 +17,9 @@ export default class TeacherProfile extends React.Component {
     group: "",
     type: "",
     subgroup: "",
+    url: null,
   };
-  // getValueDiscipline = (e) => {
-  //   (async () => {
-  //     await this.setState({
-  //       discipline: e,
-  //     });
-  //   })();
-  // };
-  // getGroup = (e) => {
-  //   (async () => {
-  //     await this.setState({
-  //       group: e,
-  //     });
-  //   })();
-  // };
-  // getTypeClass = (e, ) => {
-  //   (async () => {
-  //     await this.setState({
-  //       type: e,
-  //     });
-  //   })();
-  // };
-  // getSubGroup = (e) => {
-  //   (async () => {
-  //     await this.setState({
-  //       subgroup: e,
-  //     });
-  //   })();
-  // };
+
   componentDidMount() {
     if (localStorage.getItem("user") !== null) {
       if (localStorage.getItem("idSourse") !== null) {
@@ -61,7 +36,30 @@ export default class TeacherProfile extends React.Component {
       mobile: e.target.value,
     });
   };
-
+  handleFileSelect = (event) => {
+    var reader = new FileReader();
+    var formData = new FormData();
+    const files = event.target.files;
+    formData.append("file", files[0]);
+    if (formData !== null) {
+      this.props.setProfileImageThunk(
+        this.props.teacherProf[0].surname +
+          this.props.teacherProf[0].idFromSource +
+          files[0].name.slice(files[0].name.length - 4),
+        formData,
+        JSON.parse(localStorage.getItem("user")).id_from_source
+      );
+      console.log(files);
+    }
+    if (files[0].size <= 131072) {
+      reader.onloadend = () => {
+        this.setState({ url: reader.result });
+      };
+    }
+    if (files) {
+      reader.readAsDataURL(files[0]);
+    }
+  };
   render() {
     var date = new Date();
 
@@ -91,12 +89,38 @@ export default class TeacherProfile extends React.Component {
             <div className="left_block_teacher_profile">
               <div className="teacher_block disp">
                 <div className="teacher_photo_block disp">
-                  {/* <TeacherPicture className="teacher_photo"></TeacherPicture> */}
-                  <div className="teacher_photo"></div>
-                  {/* <img
-                    src="C:/data/files/images/123.jpg"
-                    alt="Grapefruit slice atop a pile of other slices"
-                  /> */}
+                  <div className="teacher_photo">
+                    <img
+                      className="teacher_photo_img"
+                      src={
+                        this.state.url !== null
+                          ? this.state.url
+                          : this.props.teacherProf[0] !== undefined
+                          ? "http://192.168.11.252:8008/images/" +
+                            this.props.teacherProf[0].imageName
+                          : "http://192.168.11.252:8008/images/none.jpg"
+                      }
+                      onError={({ currentTarget }) => {
+                        currentTarget.src =
+                          "http://192.168.11.252:8008/images/none.jpg";
+                      }}
+                    />
+
+                    <button
+                      className="teacher_photo_button"
+                      onClick={() => document.getElementById("file").click()}
+                    >
+                      Редактировать
+                    </button>
+                    <input
+                      className="input_for_photo_select"
+                      type="file"
+                      id="file"
+                      name="file"
+                      accept=".jpg, .png"
+                      onChange={this.handleFileSelect}
+                    />
+                  </div>
                 </div>
                 <div className="block_name_with_info">
                   {console.log(this.props.teacherProf + "name")}
@@ -137,7 +161,15 @@ export default class TeacherProfile extends React.Component {
                   {/* <div className="disp"> */}
                   <div>
                     <p className="department_name">Кафедра:</p>
-                    <p className="block_of_department_name">Кафедра</p>
+                    {this.props.teacherProf.map((teacher) => {
+                      return (
+                        <p className="block_of_department_name">
+                          {teacher.department !== null
+                            ? teacher.department.displayName
+                            : "Нет данных"}
+                        </p>
+                      );
+                    })}
                   </div>
                   <div>
                     <p className="email_name">Электронная почта:</p>

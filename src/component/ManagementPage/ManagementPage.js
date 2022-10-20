@@ -109,6 +109,10 @@ const ManagementPage = (props) => {
             activeLinkClassName="active"
             pageClassName="block_for_page_num"
           />
+          <div className="block_with_labels_for_length">
+            <label className="label_for_length_name">Всего записей:</label>
+            <label className="label_for_length">{teachers.length}</label>
+          </div>
         </div>
       </div>
     </div>
