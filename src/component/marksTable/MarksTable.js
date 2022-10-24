@@ -216,7 +216,12 @@ export default class MarksTable extends React.Component {
                                     : false || content.presence === null
                                     ? true
                                     : false ||
-                                      localStorage.getItem("idSourse") === null
+                                      localStorage.getItem("idSourse") ===
+                                        null ||
+                                      localStorage.getItem("idSourse") ===
+                                        JSON.parse(
+                                          localStorage.getItem("user")
+                                        ).id_from_source.toString()
                                     ? false
                                     : true
                                 }
@@ -291,7 +296,11 @@ export default class MarksTable extends React.Component {
                               <div className="checkbox">
                                 <input
                                   disabled={
-                                    localStorage.getItem("idSourse") === null
+                                    localStorage.getItem("idSourse") === null ||
+                                    localStorage.getItem("idSourse") ===
+                                      JSON.parse(
+                                        localStorage.getItem("user")
+                                      ).id_from_source.toString()
                                       ? false
                                       : true
                                   }
@@ -354,7 +363,11 @@ export default class MarksTable extends React.Component {
                                       ? true
                                       : false ||
                                         localStorage.getItem("idSourse") ===
-                                          null
+                                          null ||
+                                        localStorage.getItem("idSourse") ===
+                                          JSON.parse(
+                                            localStorage.getItem("user")
+                                          ).id_from_source.toString()
                                       ? false
                                       : true
                                   }

@@ -328,7 +328,9 @@ class Header extends React.Component {
                 />
               </div>
               <div>
-                <div className="view-name">Тип занятия</div>
+                <div className="view-name" title="Тип занятия">
+                  Тип занятия
+                </div>
                 <Select
                   className="view-input"
                   onChange={(e) => getTypeClass(e.value, e.label)}
@@ -360,7 +362,9 @@ class Header extends React.Component {
                 />
               </div>
               <div>
-                <div className="pgroup-name">Подгруппа</div>
+                <div className="pgroup-name" title="Подгруппа">
+                  Подгруппа
+                </div>
                 <Select
                   defaultValue={
                     localStorage.getItem("subgroupId") !== null

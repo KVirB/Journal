@@ -205,6 +205,10 @@
   font-style: normal;
   margin-left: 55px;
   margin-top: 40px;
+  white-space: nowrap;
+  width: 75px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .pgroup-select {
   background: #ffffff;
@@ -245,6 +249,10 @@
   font-style: normal;
   margin-left: 95px;
   margin-top: 40px;
+  white-space: nowrap;
+  width: 75px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .view-input {
   background: #ffffff;
@@ -1272,6 +1280,9 @@ input[type="submit"].button-header:disabled {
   background: #434c63;
   opacity: 0.9;
 }
+.teacher_photo_button:disabled {
+  display: none;
+}
 
 .teacher_name {
   margin-top: 40px;
@@ -1842,6 +1853,7 @@ input[type="submit"].button-header:disabled {
   flex-wrap: wrap;
 }
 .teacher_card_picture {
+  object-fit: cover;
   height: 260px;
   max-width: 205px;
   width: 205px;

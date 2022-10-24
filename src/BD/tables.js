@@ -18,6 +18,9 @@ const defaultOptionsGetImage = {
   baseURL: "http://192.168.11.252:8084/",
   headers: {
     "Content-Type": false,
+    // "Cache-Control": "no-cache, no-store, must-revalidate",
+    // Pragma: "no-cache",
+    // Expires: "0",
   },
 };
 
@@ -361,7 +364,7 @@ export const postProfileImage = (image_name, image, idFromSource) => {
     .catch((error) => {
       console.log(error.response);
       if (error.response.status === 400) {
-        alert("Вы превысили допустимый размер фото! Допустимый размер 131072");
+        alert("Вы превысили допустимый размер фото! Допустимый размер 130000");
       }
     });
 };

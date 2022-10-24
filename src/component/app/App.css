@@ -918,9 +918,6 @@ p.clip {
   .discipline-select {
     width: 260px;
   }
-  .load_journal {
-    padding: 9.5px 30.5px;
-  }
   .button-header {
     margin-left: 45px;
   }
@@ -945,9 +942,7 @@ p.clip {
   .journal_block {
     height: 370px;
   }
-  .load_journal {
-    padding: 9.5px 62.5px;
-  }
+
   .load_journal {
     margin-left: 45px;
   }
@@ -973,6 +968,15 @@ p.clip {
   }
 }
 @media (max-width: 1000px) {
+  .view-name {
+    width: auto;
+  }
+  .pgroup-name {
+    width: auto;
+  }
+  .pgroup-select {
+    width: 152px;
+  }
   .button-header {
     width: 227px;
   }
@@ -988,7 +992,6 @@ p.clip {
     margin-left: 30px;
   }
   .load_journal {
-    padding: 9.5px 30.5px;
     margin-left: 30px;
   }
   .block_link_prompt {
@@ -1000,9 +1003,6 @@ p.clip {
   }
   .name_prompt {
     margin-left: 30px;
-  }
-  .journal_name {
-    padding: 40px 30px;
   }
   .button_exit_teacher_profile_block {
     width: 180px;
@@ -1097,6 +1097,7 @@ p.clip {
     margin-left: 30px;
   }
   .journal-name {
+    padding: 25px 30px;
     max-width: 460px;
   }
   .profile_pic {
@@ -1132,8 +1133,8 @@ p.clip {
     width: 186px;
   }
   .journal-name {
-    padding: 24px 0;
-    max-width: 250px;
+    padding: 10px 0;
+    max-width: 280px;
   }
   .button-header {
     width: 213px;
@@ -1173,10 +1174,6 @@ p.clip {
   .button-header {
     margin-left: 30px;
   }
-  .journal-name {
-    padding: 24px 0;
-    max-width: 250px;
-  }
   .profile_pic {
     margin-top: 28px;
   }
@@ -1193,7 +1190,7 @@ p.clip {
 
 @media (max-width: 768px) {
   .journal_block {
-    height: 500px;
+    height: 520px;
   }
   .group-select {
     width: 182px;
@@ -1205,7 +1202,7 @@ p.clip {
     height: 420px;
   } */
   .load_journal {
-    padding: 9.5px 27.5px;
+    padding: 17px 38.5px 0px 38.5px;
   }
   .discipline-select {
     width: 364px;
@@ -1241,7 +1238,7 @@ p.clip {
     display: none;
   }
   .icons_col {
-    margin-right: 40px;
+    margin-right: 25px;
   }
   .icons_mech {
     display: none;
@@ -1249,10 +1246,7 @@ p.clip {
   .button-header {
     margin-left: 30px;
   }
-  .journal-name {
-    padding: 24px 0;
-    max-width: 250px;
-  }
+
   .profile_pic {
     margin-top: 28px;
   }
@@ -1270,10 +1264,15 @@ p.clip {
   /* .block_prompt {
     height: 460px;
   } */
+  .load_journal_block {
+    margin-top: 50px;
+  }
   .pgroup-select {
     width: 182px;
   }
-
+  .load_journal {
+    padding: 17px 138.5px 0px 138.5px;
+  }
   .special-select {
     width: 241px;
   }
@@ -1305,6 +1304,12 @@ p.clip {
   }
 }
 @media (max-width: 600px) {
+  .icons_col {
+    margin-right: 10px;
+  }
+  .load_journal_block {
+    margin-top: 30px;
+  }
   .subgr_margin {
     margin-left: 70px;
   }
@@ -1341,7 +1346,7 @@ p.clip {
     width: 300px;
   }
   .load_journal {
-    padding: 9.5px 82.5px;
+    padding: 17px 82.5px 0px 82.5px;
   }
   .journal_block {
     height: 735px;
@@ -1396,6 +1401,10 @@ p.clip {
   }
 }
 @media (max-width: 480px) {
+  .teacher_photo_button {
+    top: 727px;
+    width: 420px;
+  }
   .bt_guide {
     width: 100%;
   }
@@ -1423,7 +1432,7 @@ p.clip {
     width: 373px;
   }
   .load_journal {
-    padding: 9.5px 142.4px;
+    padding: 17px 142.4px 0px 142.4px;
   }
   .discipline-select {
     width: 420px;
@@ -1551,8 +1560,12 @@ p.clip {
   }
 }
 @media (max-width: 460px) {
+  .teacher_photo_button {
+    width: 380px;
+    top: 687px;
+  }
   .load_journal {
-    padding: 9.5px 117.4px;
+    padding: 17px 117.4px 0px 117.4px;
   }
   .discipline-select {
     width: 370px;
@@ -1596,6 +1609,10 @@ p.clip {
   }
 }
 @media (max-width: 420px) {
+  .teacher_photo_button {
+    width: 320px;
+    top: 677px;
+  }
   .button-header {
     width: 277px;
   }
@@ -1732,8 +1749,11 @@ p.clip {
   .pgroup-name {
     margin-left: 45px;
   }
+  .load_journal_block {
+    margin-top: 20px;
+  }
   .load_journal {
-    padding: 9.5px 92.4px;
+    padding: 17px 92.4px 0px 92.4px;
     margin-left: 20px;
   }
   .name_prompt {

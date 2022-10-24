@@ -72,7 +72,16 @@ const ManagementPage = (props) => {
             {currentItems.map((teacher) => {
               return (
                 <div className="teacher_card" key={teacher.id}>
-                  <PictureProfile className="teacher_card_picture"></PictureProfile>
+                  {/* <PictureProfile className="teacher_card_picture"></PictureProfile> */}
+                  <img
+                    className="teacher_card_picture"
+                    src={
+                      teacher !== undefined
+                        ? "http://192.168.11.252:8008/images/" +
+                          teacher.imageName
+                        : "http://192.168.11.252:8008/images/none.jpg"
+                    }
+                  />
                   <TeacherCard
                     teacher={teacher}
                     getTeacherProfileThunk={getTeacherProfileThunk}
