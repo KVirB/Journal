@@ -54,7 +54,7 @@ export default class BurgerButtonMain extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="burger_button_block">
         <button
           className="burger_button"
           onClick={() => {

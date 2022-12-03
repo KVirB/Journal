@@ -30,6 +30,11 @@ export default class TeacherProfile extends React.Component {
         );
       }
     }
+    if (localStorage.getItem("user") !== null) {
+      this.props.getTeacherIconThunk(
+        JSON.parse(localStorage.getItem("user")).id_from_source
+      );
+    }
   }
 
   getInputValue = (e) => {
@@ -56,7 +61,14 @@ export default class TeacherProfile extends React.Component {
         <div className="main_teacher_profile">
           <div className="disp header_main_teacher_profile">
             <div className="button_exit_teacher_profile_block">
-              <button className="button_exit_teacher_profile">Назад</button>
+              <button
+                className="button_exit_teacher_profile"
+                onClick={() => {
+                  window.history.back();
+                }}
+              >
+                Назад
+              </button>
             </div>
             <div className="data_teacher_profile_block">
               <p className="p_today">Сегодня</p>

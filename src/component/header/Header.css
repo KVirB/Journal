@@ -418,6 +418,7 @@ input[type="submit"].button-header:disabled {
   width: 45px;
   height: 45px;
   object-fit: cover;
+  border-radius: 23px;
 }
 .icons_mech {
   width: 20px;
@@ -604,6 +605,7 @@ input[type="submit"].button-header:disabled {
   border: 1px solid #ebebeb;
   border-radius: 7px;
   margin-top: 40px;
+  margin-left: 56px;
   /* margin-right: 58px; */
   background: white;
   cursor: pointer;
@@ -1110,13 +1112,14 @@ input[type="submit"].button-header:disabled {
   transition: 1s;
 }
 .burger_combine {
-  width: 110px;
-  border-right: 1px solid #ebebeb;
-  margin-left: 52px;
+  min-width: 167px;
+  /* margin-left: 52px; */
+  z-index: 10;
 }
 .burger_menu_main_container {
   /* min-width: 169px;
   overflow: scroll; */
+  margin-left: 56px;
 }
 .burger_modal_main_container {
   display: block;
@@ -1260,7 +1263,7 @@ input[type="submit"].button-header:disabled {
 .teacher_photo_button {
   display: block;
   position: absolute;
-  top: 548px;
+  top: 549px;
   background: rgba(255, 255, 255, 0.6);
   width: 255px;
   height: 49px;
@@ -1584,6 +1587,7 @@ input[type="submit"].button-header:disabled {
 }
 .main_teacher_profile {
   width: 91.25%;
+  border: 1px solid #ebebeb;
 }
 .header_main_teacher_profile {
   border-bottom: 1px solid #ebebeb;
@@ -1707,7 +1711,7 @@ input[type="submit"].button-header:disabled {
   display: flex;
   /* justify-content: center; */
   align-items: center;
-  margin-bottom: 5rem;
+  margin-bottom: 50px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -1792,12 +1796,16 @@ input[type="submit"].button-header:disabled {
 }
 .management_page_block {
   display: block;
-  height: 100vh;
+  /* height: calc(100vh - 100px); */
+  width: 100vw;
+  border-left: 1px solid #ebebeb;
 }
 .block_for_button {
   height: 130px;
   border-bottom: 1px solid #ebebeb;
-  width: calc(100vw - 163px);
+  display: flex;
+  justify-content: space-between;
+  /* width: calc(100vw - 163px); */
 }
 .button_my_journal {
   background: #434c63;
@@ -1821,7 +1829,9 @@ input[type="submit"].button-header:disabled {
 .department_sort_block {
   height: 111px;
   border-bottom: 1px solid #ebebeb;
-  width: calc(100vw - 163px);
+  display: flex;
+  justify-content: space-between;
+  /* width: calc(100vw - 163px); */
 }
 .teachers_name_for_sort_block {
   font-family: "Montserrat", sans-serif;
@@ -1836,7 +1846,11 @@ input[type="submit"].button-header:disabled {
 .teachers_block {
   margin-top: 5px;
   margin-left: 5px;
-  width: calc(100vw - 168px);
+  /* width: calc(100vw - 168px); */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 3;
 }
 .teacher_card {
   /* display: -webkit-inline-box; */
@@ -1858,6 +1872,8 @@ input[type="submit"].button-header:disabled {
   max-width: 205px;
   width: 205px;
   min-width: 205px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
 }
 .teacher_card_picture svg {
   width: 100%;
@@ -1907,7 +1923,7 @@ input[type="submit"].button-header:disabled {
   box-shadow: none;
 }
 .block_with_labels_for_length {
-  margin-right: 20px;
+  margin-right: 50px;
   margin-top: 12px;
 }
 .label_for_length_name {
@@ -1929,4 +1945,150 @@ input[type="submit"].button-header:disabled {
 }
 .input_for_photo_select {
   display: none;
+}
+.link_myjournal {
+  display: none;
+}
+.cmyNjn {
+  width: 400px !important;
+  margin-top: 40px !important;
+  margin-right: 56px !important;
+}
+.cmyNjn > .wrapper {
+  background: #ffffff !important;
+  border: none !important;
+  width: 400px !important;
+  border-radius: unset !important;
+  box-shadow: none !important;
+}
+.fDbOPw {
+  min-height: 49px !important;
+}
+.hCpHso .ellipsis {
+  cursor: pointer !important;
+}
+.eWFcRu {
+  height: 49px !important;
+  padding-right: 16px !important;
+  border-right: 1px solid #ebebeb !important;
+}
+.hCpHso > div.line {
+  border: none !important;
+  padding: 0 !important;
+}
+.hCpHso > ul > li {
+  padding: 0 !important;
+  cursor: pointer !important;
+  height: 51px;
+}
+.hCpHso > ul {
+  padding: 0 !important;
+}
+.hCpHso {
+  margin-top: 20px !important;
+  border: 1px solid #ebebeb !important;
+  border-radius: 7px !important;
+}
+.fDbOPw {
+  border: 1px solid #ebebeb !important;
+  border-radius: 7px !important;
+}
+.cmyNjn > .wrapper:hover {
+  box-shadow: none !important;
+}
+.content_management_page {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  flex-direction: column;
+}
+.hCpHso > ul > li > .eWFcRu {
+  display: none !important;
+}
+.fDbOPw > input {
+  height: 49px;
+}
+.burger_button_block {
+  position: fixed;
+}
+.wrapper {
+  z-index: auto !important;
+}
+.upper_div_dropdown_department {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: flex-start;
+}
+.div_dropdown_department {
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #505050;
+  justify-self: flex-start;
+}
+.select_dropdown_department {
+  width: 100px;
+}
+.dropdown_close {
+  display: none;
+}
+.dropdown_open {
+  display: block;
+}
+.select_items_department {
+  height: 200px;
+  background: white;
+  overflow-y: scroll;
+  border-radius: 7px;
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #ebebeb;
+  margin-left: 90px;
+  width: 220px;
+}
+.label_for_dropdown {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #c4c4c4;
+  margin-right: 10px;
+}
+.select_items_department::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+.select_item_department {
+  cursor: pointer;
+  min-height: 50px;
+}
+.select_item_department:hover {
+  background-color: #eee;
+}
+.select_item_department_info {
+  padding-left: 20px;
+  padding-top: 15px;
+}
+.select_item_department_color {
+  min-height: 50px;
+  background: #434c63;
+  color: white;
+  cursor: pointer;
+}
+.block_select_dropdown_department {
+  padding-right: 142px;
+  padding-top: 45px;
+}
+.icon_arrow_dropdown_sort {
+  height: auto;
+  margin-left: 10px;
+}
+.rotate_icon_arrow_dropdown_sort {
+  rotate: 180deg;
 }

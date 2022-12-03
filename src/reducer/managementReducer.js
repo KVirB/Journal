@@ -1,18 +1,30 @@
-import { letterSpacing } from "@mui/system";
-import { getTeachersManagements } from "../BD/tables";
+import {
+  getTeachersManagements,
+  getTeacherManagementById,
+  getTeacherManagementByDepartment,
+} from "../BD/tables";
 import { getTeacherProfile } from "../BD/tables";
 
 const SET_TEACHERS_MANAGEMENTS = "SET_TEACHERS_MANAGEMENTS";
 const CLEAR_TEACHERS_MANAGEMENTS = "CLEAR_TEACHERS_MANAGEMENTS";
 const SET_TEACHER_PROFILE = "SET_TEACHER_PROFILE";
+const SET_TEACHERS_SEARCH = "SET_TEACHERS_SEARCH";
+const SET_TEACHER_ICON = "SET_TEACHER_ICON";
 
 let initialState = {
   teachers: [],
   teacherProf: [],
+  teachersSearch: [],
+  teacherIcon: [],
 };
 
 const managementReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_TEACHERS_SEARCH:
+      return {
+        ...state,
+        teachersSearch: [...action.teachersSearch],
+      };
     case SET_TEACHERS_MANAGEMENTS:
       return {
         ...state,
@@ -29,6 +41,11 @@ const managementReducer = (state = initialState, action) => {
         ...state,
         teacherProf: [...action.teacherProf],
       };
+    case SET_TEACHER_ICON:
+      return {
+        ...state,
+        teacherIcon: [...action.teacherIcon],
+      };
     default:
       return state;
   }
@@ -37,6 +54,10 @@ const managementReducer = (state = initialState, action) => {
 export const setTeachersManagements = (teachers) => ({
   type: SET_TEACHERS_MANAGEMENTS,
   teachers: teachers,
+});
+export const setTeachersSearch = (teachersSearch) => ({
+  type: SET_TEACHERS_SEARCH,
+  teachersSearch: teachersSearch,
 });
 export const clearTeachersManagement = () => ({
   type: CLEAR_TEACHERS_MANAGEMENTS,
@@ -47,15 +68,46 @@ export const setTeacherProfile = (teacherProf) => ({
   teacherProf: teacherProf,
 });
 
+export const setIconProfile = (teacherIcon) => ({
+  type: SET_TEACHER_ICON,
+  teacherIcon: teacherIcon,
+});
+
 export const getTeacherProfileThunk = (idFromSource) => {
-  console.log(idFromSource + " reducer");
   return (dispatch) => {
     getTeacherProfile(idFromSource).then((data) => {
       dispatch(setTeacherProfile(data));
     });
   };
 };
-
+export const getTeacherIconThunk = (idFromSource) => {
+  return (dispatch) => {
+    getTeacherProfile(idFromSource).then((data) => {
+      dispatch(setIconProfile(data));
+    });
+  };
+};
+export const getTeacherManagementByIdThunk = (id) => {
+  return (dispatch) => {
+    getTeacherManagementById(id).then((data) => {
+      dispatch(setTeachersManagements(data));
+    });
+  };
+};
+export const getTeacherManagementByDepartmentThunk = (department_id) => {
+  return (dispatch) => {
+    getTeacherManagementByDepartment(department_id).then((data) => {
+      dispatch(setTeachersManagements(data));
+    });
+  };
+};
+export const getTeachersSearchThunk = () => {
+  return (dispatch) => {
+    getTeachersManagements().then((data) => {
+      dispatch(setTeachersSearch(data));
+    });
+  };
+};
 export const getTeacherManagement = () => {
   return (dispatch) => {
     getTeachersManagements().then((data) => {

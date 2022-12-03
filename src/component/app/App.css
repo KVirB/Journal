@@ -910,7 +910,12 @@ p.clip {
     width: 100%;
   }
   .burger_combine {
-    width: 72px;
+    min-width: 91px;
+  }
+  .burger_button {
+    margin-left: 20px;
+  }
+  .burger_menu_main_container {
     margin-left: 20px;
   }
 }
@@ -949,6 +954,21 @@ p.clip {
   /* .block_prompt {
     height: 370px;
   } */
+  .teacher_card_picture {
+    height: 270px;
+    max-width: 266px;
+    width: 266px;
+    min-width: 266px;
+  }
+  .teacher_card {
+    width: 266px;
+    height: 509px;
+    margin-left: 30px;
+    display: block;
+  }
+  .teachers_block {
+    margin: 0;
+  }
 }
 @media (max-width: 1080px) {
   .input_type_for_marksTable {

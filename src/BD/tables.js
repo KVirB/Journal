@@ -273,6 +273,47 @@ export const getTeachersManagements = () => {
       }
     });
 };
+export const getTeacherManagementByDepartment = (department_id) => {
+  return baseRout
+    .get(
+      `electronicjournal/teachers/search?q=department.idFromSource==${department_id}`
+    )
+    .then((response) => {
+      return response.data;
+    });
+  // .catch((err) => {
+  //   if (err !== null) {
+  //     if (err.toJSON().status === 401) {
+  //       localStorage.clear("user");
+  //     }
+  //     if (err.response) {
+  //       window.location.reload();
+  //     } else if (err.request) {
+  //       console.log(err.request);
+  //     }
+  //   }
+  // });
+};
+
+export const getTeacherManagementById = (id) => {
+  return baseRout
+    .get(`electronicjournal/teachers/search?q=idFromSource==${id}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      if (err !== null) {
+        if (err.toJSON().status === 401) {
+          localStorage.clear("user");
+        }
+        if (err.response) {
+          window.location.reload();
+        } else if (err.request) {
+          console.log(err.request);
+        }
+      }
+    });
+};
 
 export const getTeacherProfile = (idFromSource) => {
   return (

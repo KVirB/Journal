@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import profile from "../../profile.svg";
 import mech from "../../Vector.png";
@@ -11,11 +11,19 @@ import BurgerModal from "./BurgerModal";
 import BurgerButtonMain from "./BurgerButtonMain";
 import { clearTeachersManagement } from "../../reducer/managementReducer";
 import { connect } from "react-redux";
+import { getTeacherIconThunk } from "../../reducer/managementReducer";
 
 function MainHeader(props) {
+  const [url, setUrl] = useState(null);
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
-
+  useEffect(() => {
+    if (localStorage.getItem("user") !== null) {
+      props.getTeacherIconThunk(
+        JSON.parse(localStorage.getItem("user")).id_from_source
+      );
+    }
+  }, []);
   const Logout = () => {
     localStorage.removeItem("user");
     props.clearTeachersManagement();
@@ -92,7 +100,14 @@ function MainHeader(props) {
                 <div>
                   <img
                     className="profile_pic"
-                    src={profile}
+                    src={
+                      "http://192.168.11.252:8008/images/" +
+                      props.teacherIcon.map((teacher) => {
+                        return teacher.imageName;
+                      }) +
+                      "?v" +
+                      Math.floor(Math.random() * 101)
+                    }
                     alt="description"
                   ></img>
                 </div>
@@ -127,4 +142,12 @@ function MainHeader(props) {
     </div>
   );
 }
-export default connect(null, { clearTeachersManagement })(MainHeader);
+let mapStateToProps = (state) => {
+  return {
+    teacherIcon: state.managementPage.teacherIcon,
+  };
+};
+export default connect(mapStateToProps, {
+  clearTeachersManagement,
+  getTeacherIconThunk,
+})(MainHeader);
