@@ -11,10 +11,15 @@ import {
   setJH,
   setPresent,
   clearPresent,
+  getThemeHeaderThunk,
 } from "../../reducer/journalsiteReducer";
 import { clearTypeClass } from "../../reducer/headerReducer";
 import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
-import { setJournalHeader } from "../../reducer/journalsiteReducer";
+import {
+  setJournalHeader,
+  patchThemeHeaderThunk,
+  closeThemeHeader,
+} from "../../reducer/journalsiteReducer";
 import MarksTable from "../marksTable/MarksTable";
 
 class marksTableContainer extends React.Component {
@@ -48,6 +53,10 @@ class marksTableContainer extends React.Component {
           setCheckData={this.props.setCheckData}
           isLoading={this.props.isLoading}
           subGroup={this.props.subGroup}
+          patchThemeHeaderThunk={this.props.patchThemeHeaderThunk}
+          getThemeHeaderThunk={this.props.getThemeHeaderThunk}
+          themeHeader={this.props.themeHeader}
+          closeThemeHeader={this.props.closeThemeHeader}
         />
       </div>
     );
@@ -64,10 +73,14 @@ let mapStateToProps = (state) => {
     typeC: state.typePage.typeC,
     isLoading: state.disciplinePage.isLoading,
     subGroup: state.typeClassPage.subGroup,
+    themeHeader: state.journalsitePage.themeHeader,
   };
 };
 
 export default connect(mapStateToProps, {
+  closeThemeHeader,
+  getThemeHeaderThunk,
+  patchThemeHeaderThunk,
   setJournalsite,
   getJournalsiteThunk,
   toggleJournalSitePresence,

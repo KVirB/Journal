@@ -13,11 +13,14 @@ import TeacherPhoto from "./TeacherPhoto";
 export default class TeacherProfile extends React.Component {
   state = {
     date: "",
-    mobile: "",
+    mobile: null,
     discipline: "",
     group: "",
     type: "",
     subgroup: "",
+    internal: null,
+    email: null,
+    disabledButtonSave: false,
   };
 
   componentDidMount() {
@@ -37,10 +40,21 @@ export default class TeacherProfile extends React.Component {
     }
   }
 
-  getInputValue = (e) => {
+  getInputValueMobile = (e) => {
     this.setState({
       mobile: e.target.value,
     });
+    this.setState({ disabledButtonSave: false });
+  };
+  getInputValueInternal = (e) => {
+    this.setState({
+      internal: e.target.value,
+    });
+    this.setState({ disabledButtonSave: false });
+  };
+  getInputValueEmail = (e) => {
+    this.setState({ email: e.target.value });
+    this.setState({ disabledButtonSave: false });
   };
 
   render() {
@@ -54,7 +68,6 @@ export default class TeacherProfile extends React.Component {
 
     return (
       <div className="disp" key={this.state.key}>
-        {console.log(this.state.key + "key")}
         <div className="burger_combine">
           <BurgerButtonMain></BurgerButtonMain>
         </div>
@@ -102,12 +115,22 @@ export default class TeacherProfile extends React.Component {
                       ></input>
                     );
                   })}
+                  {console.log(this.props.teacherProf)}
                   <div className="teacher_info">
                     <textarea
                       className="input_teacher_info"
                       defaultValue="Разнообразный и богатый опыт говорит нам, что начало повседневной работы по формированию позиции способствует подготовке и реализации как самодостаточных, так и внешне зависимых концептуальных решений. Также как существующая теория предопределяет высокую востребованность своевременного выполнения сверхзадачи. Есть над чем задуматься : реплицированные с зарубежных источников, современные исследования будут заблокированы в рамках."
                     ></textarea>
-                    <button className="button_teacher_info_save">
+                    <button
+                      className="button_teacher_info_save"
+                      onClick={() =>
+                        this.props.patchTeacherContactsThunk(
+                          this.state.internal,
+                          this.state.mobile,
+                          this.state.email
+                        )
+                      }
+                    >
                       Сохранить
                     </button>
                     <button className="button_teacher_info_unsave">
@@ -136,34 +159,81 @@ export default class TeacherProfile extends React.Component {
                   </div>
                   <div>
                     <p className="email_name">Электронная почта:</p>
-                    <p className="block_of_email_name">E-mail</p>
+                    {this.props.teacherProf.map((teacher) => {
+                      return (
+                        <InputMask
+                          className="block_of_email_name"
+                          defaultValue={
+                            teacher.email !== null
+                              ? teacher.email
+                              : "Нет данных"
+                          }
+                          mask={null}
+                          maskChar={null}
+                          onChange={(e) => {
+                            this.getInputValueEmail(e);
+                          }}
+                        />
+                      );
+                    })}
                   </div>
                   {/* </div> */}
                   {/* <div className="disp"> */}
                   <div>
                     <p className="interior_tel">Внутр.тел.:</p>
-                    <InputMask
-                      defaultValue={"99-99"}
-                      className="block_of_interior_tel"
-                      mask="99-99"
-                      maskChar={null}
-                      onChange={(e) => {
-                        this.getInputValue(e);
-                      }}
-                    />
+                    {this.props.teacherProf.map((teacher) => {
+                      return (
+                        <InputMask
+                          defaultValue={
+                            teacher.internalPhoneNumber !== null
+                              ? teacher.internalPhoneNumber
+                              : "Нет данных"
+                          }
+                          className="block_of_interior_tel"
+                          mask="99-99"
+                          maskChar={null}
+                          onChange={(e) => {
+                            this.getInputValueInternal(e);
+                          }}
+                        />
+                      );
+                    })}
                   </div>
                   <div>
                     <p className="mobile_tel">Телефон:</p>
-                    <InputMask
-                      defaultValue={"+375-(99)-999-99-99"}
-                      className="block_of_mobile_tel"
-                      mask="+375-(99)-999-99-99"
-                      maskChar={null}
-                      onChange={(e) => {
-                        this.getInputValue(e);
-                      }}
-                    />
+                    {this.props.teacherProf.map((teacher) => {
+                      return (
+                        <InputMask
+                          defaultValue={
+                            teacher.phoneNumber !== null
+                              ? teacher.phoneNumber
+                              : "Нет данных"
+                          }
+                          className="block_of_mobile_tel"
+                          mask="+375-(99)-999-99-99"
+                          maskChar={null}
+                          onChange={(e) => {
+                            this.getInputValueMobile(e);
+                          }}
+                        />
+                      );
+                    })}
                   </div>
+                  <button
+                    disabled={this.state.disabledButtonSave}
+                    className="button_contacts_save"
+                    onClick={() => {
+                      this.props.patchTeacherContactsThunk(
+                        this.state.mobile,
+                        this.state.internal,
+                        this.state.email,
+                        JSON.parse(localStorage.getItem("user")).id_from_source
+                      );
+                      this.setState({ disabledButtonSave: true });
+                    }}
+                  >
+                    Сохранить
+                  </button>
                   {/* </div> */}
                 </div>
               </div>

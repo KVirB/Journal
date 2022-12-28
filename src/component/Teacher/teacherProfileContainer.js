@@ -5,6 +5,7 @@ import { getTeacherProfileThunk } from "../../reducer/managementReducer";
 import { setProfileImageThunk } from "../../reducer/teacherReducer";
 import TeacherProfile from "./TeacherProfile";
 import { getTeacherIconThunk } from "../../reducer/managementReducer";
+import { patchTeacherContactsThunk } from "../../reducer/teacherReducer";
 
 class teacherProfileContainer extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class teacherProfileContainer extends React.Component {
           getTeacherProfileThunk={this.props.getTeacherProfileThunk}
           setProfileImageThunk={this.props.setProfileImageThunk}
           getTeacherIconThunk={this.props.getTeacherIconThunk}
+          patchTeacherContactsThunk={this.props.patchTeacherContactsThunk}
         />
       </div>
     );
@@ -31,4 +33,5 @@ export default connect(mapStateToProps, {
   getTeacherProfileThunk,
   setProfileImageThunk,
   getTeacherIconThunk,
+  patchTeacherContactsThunk,
 })(teacherProfileContainer);

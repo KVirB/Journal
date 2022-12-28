@@ -10,6 +10,7 @@ const CLEAR_TEACHERS_MANAGEMENTS = "CLEAR_TEACHERS_MANAGEMENTS";
 const SET_TEACHER_PROFILE = "SET_TEACHER_PROFILE";
 const SET_TEACHERS_SEARCH = "SET_TEACHERS_SEARCH";
 const SET_TEACHER_ICON = "SET_TEACHER_ICON";
+const CLEAR_TEACHER_PROF = "CLEAR_TEACHER_PROF";
 
 let initialState = {
   teachers: [],
@@ -20,6 +21,8 @@ let initialState = {
 
 const managementReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CLEAR_TEACHER_PROF:
+      return { ...state, teacherProf: [] };
     case SET_TEACHERS_SEARCH:
       return {
         ...state,
@@ -50,6 +53,10 @@ const managementReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const clearTeacherProf = () => ({
+  type: CLEAR_TEACHER_PROF,
+});
 
 export const setTeachersManagements = (teachers) => ({
   type: SET_TEACHERS_MANAGEMENTS,

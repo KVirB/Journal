@@ -153,6 +153,7 @@ class Header extends React.Component {
     this.props.clearJournalsite();
     this.props.getTypeClassThunk();
     setTimeout(() => {
+      <div></div>;
       this.props.setPresent();
     }, 100);
   };
@@ -384,7 +385,6 @@ class Header extends React.Component {
                 />
               </div>
               <div className="load_journal_block">
-                {console.log(this.props.journalsite.length + "kiss me")}
                 {this.props.journalsite.length === 0 ? (
                   <Link
                     className={"load_journal pointerEvents"}

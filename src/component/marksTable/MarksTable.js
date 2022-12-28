@@ -5,9 +5,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import "../app/App.css";
 import PropTypes from "prop-types";
+import { ReactComponent as Edit } from "../../Edit.svg";
+import { ReactComponent as EditWhite } from "../../EditWhite.svg";
+import ModalEdit from "./ModalEdit";
 
 export default class MarksTable extends React.Component {
   state = {
+    idHeader: null,
+    modalIsOpen: false,
     widthData: null,
     presence: null,
     date: null,
@@ -89,13 +94,35 @@ export default class MarksTable extends React.Component {
       this.state.inputs = {};
     }
   }
-
+  openModal = () => {
+    this.setState({
+      modalIsOpen: true,
+    });
+  };
+  closeModal = () => {
+    this.setState({
+      modalIsOpen: false,
+    });
+    this.props.closeThemeHeader();
+  };
+  idHeaderEdit = (e) => {
+    this.setState({
+      idHeader: e,
+    });
+  };
   render() {
+    // eslint-disable-next-line no-lone-blocks
     {
       const { isLoading } = this.props;
-
       return (
         <div>
+          <ModalEdit
+            isOpen={this.state.modalIsOpen}
+            closeModal={this.closeModal}
+            patchThemeHeaderThunk={this.props.patchThemeHeaderThunk}
+            idHeader={this.state.idHeader}
+            themeHeader={this.props.themeHeader.discription}
+          ></ModalEdit>
           <div
             className="headHr"
             hidden={
@@ -106,8 +133,7 @@ export default class MarksTable extends React.Component {
             <table>
               <thead>
                 <tr className="sticky_top">
-                  {console.log(JSON.stringify(this.props.journalsite))}
-                  {this.props.journalsite.map((item, i) => {
+                  {this.props.journalsite.map((item) => {
                     return (
                       <tr>
                         <th
@@ -145,6 +171,17 @@ export default class MarksTable extends React.Component {
                                 {this.state.lessonHours[header.hoursCount]}
                               </p>
                             </div>
+                            <button
+                              className="edit_title"
+                              onClick={() => {
+                                this.openModal();
+                                this.idHeaderEdit(header.id);
+                                this.props.getThemeHeaderThunk(header.id);
+                              }}
+                            >
+                              <Edit className="Edit"></Edit>
+                              <EditWhite className="EditWhite"></EditWhite>
+                            </button>
                           </th>
                         ))}
                       </tr>
@@ -154,7 +191,7 @@ export default class MarksTable extends React.Component {
               </thead>
               <span className="disp">
                 <tbody className="students_name_tbody sticky_left">
-                  {this.props.journalsite.map((item, i) =>
+                  {this.props.journalsite.map((item) =>
                     item.journalHeaders.map((header, k) => {
                       if (k === 0) {
                         return header.journalContents.map((content, j) => (

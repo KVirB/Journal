@@ -1,4 +1,10 @@
-import { getJournalsite, patchJournalsite } from "../BD/tables";
+import { act } from "react-dom/test-utils";
+import {
+  getJournalsite,
+  patchJournalsite,
+  patchThemeHeader,
+  getThemeHeader,
+} from "../BD/tables";
 import { setLoaderTrue, setLoaderFalse } from "./headerReducer.js";
 
 const SET_JOURNALSITE = "SET_JOURNALSITE";
@@ -18,6 +24,8 @@ const CLEAR_SB = "CLEAR_SB";
 const SET_PRESENT = "SET_PRESENT";
 const CLEAR_PRESENT = "CLEAR_PRESENT";
 const SET_LATENESS = "SET_LATENESS";
+const SET_THEME_HEADER = "SET_THEME_HEADER";
+const CLOSE_THEME_HEADER = "CLOSE_THEME_HEADER";
 let initialState = {
   isLoadJournal: true,
   id: null,
@@ -51,6 +59,7 @@ let initialState = {
   ],
   sb: [],
   present: [],
+  themeHeader: {},
 };
 
 const journalsiteReducer = (state = initialState, action) => {
@@ -333,7 +342,11 @@ const journalsiteReducer = (state = initialState, action) => {
         journalsite: newJournalsitePresence,
       };
     // }
-
+    case SET_THEME_HEADER:
+      return {
+        ...state,
+        themeHeader: { ...action.themeHeader },
+      };
     case CLEAR_JOURNALSITE:
       return initialState;
     case CLEAR_JOURNALHEADER:
@@ -341,10 +354,24 @@ const journalsiteReducer = (state = initialState, action) => {
         ...state,
         journalHeader: [],
       };
+    case CLOSE_THEME_HEADER:
+      return {
+        ...state,
+        themeHeader: {},
+      };
     default:
       return state;
   }
 };
+
+export const setThemeHeader = (themeHeader) => ({
+  type: SET_THEME_HEADER,
+  themeHeader,
+});
+
+export const closeThemeHeader = () => ({
+  type: CLOSE_THEME_HEADER,
+});
 
 export const toggleJournalSitePresence = (lesson_id, line_id, grade) => ({
   type: TOGGLE_JOURNALSITE_PRESENCE,
@@ -428,9 +455,23 @@ export const getJournalsiteThunk = (
   };
 };
 
+export const getThemeHeaderThunk = (idHeader) => {
+  return (dispatch) => {
+    getThemeHeader(idHeader).then((data) => {
+      dispatch(setThemeHeader(data));
+    });
+  };
+};
+
 export const getJournalHeaderThunk = (journalHeader) => {
   return (dispatch) => {
     patchJournalsite(journalHeader);
+  };
+};
+
+export const patchThemeHeaderThunk = (idFromSource, theme) => {
+  return (dispatch) => {
+    patchThemeHeader(idFromSource, theme);
   };
 };
 

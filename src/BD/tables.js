@@ -95,7 +95,7 @@ export const getExcel = (groupsId, firstDate, secondDate) => {
     })
     .catch((error) => {
       if (error.response.status === 500) {
-        getExcel(groupsId);
+        getExcel(groupsId, firstDate, secondDate);
       } else {
         alert("Упс, что-то пошло не так :(");
       }
@@ -407,5 +407,42 @@ export const postProfileImage = (image_name, image, idFromSource) => {
       if (error.response.status === 400) {
         alert("Вы превысили допустимый размер фото! Допустимый размер 130000");
       }
+    });
+};
+
+export const patchTeacherContacts = (
+  mobile_phone_number,
+  iternal_number,
+  email,
+  idFromSource
+) => {
+  let body = {
+    email: email,
+    phoneNumber: mobile_phone_number,
+    internalPhoneNumber: iternal_number,
+  };
+  return baseRout
+    .patch(`electronicjournal/teachers/edit/${idFromSource}`, body)
+    .then((response) => {
+      return response.data;
+    });
+};
+
+export const patchThemeHeader = (idFromSource, theme) => {
+  let body = {
+    discription: theme,
+  };
+  return baseRout
+    .patch(`electronicjournal/journal-headers/${idFromSource}`, body)
+    .then((response) => {
+      return response.data;
+    });
+};
+
+export const getThemeHeader = (idHeader) => {
+  return baseRout
+    .get(`electronicjournal/journal-headers/${idHeader}`)
+    .then((response) => {
+      return response.data;
     });
 };

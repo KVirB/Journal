@@ -1,4 +1,8 @@
-import { getTeacher, postProfileImage } from "../BD/tables";
+import {
+  getTeacher,
+  postProfileImage,
+  patchTeacherContacts,
+} from "../BD/tables";
 
 const SET_TEACHER = "SET_TEACHER";
 const CLEAR_TEACHER = "CLEAR_TEACHER";
@@ -43,5 +47,19 @@ export const setProfileImageThunk = (image_name, image, idFromSource) => {
     postProfileImage(image_name, image, idFromSource);
   };
 };
-
+export const patchTeacherContactsThunk = (
+  mobile_phone_number,
+  iternal_number,
+  email,
+  idFromSource
+) => {
+  return (dispatch) => {
+    patchTeacherContacts(
+      mobile_phone_number,
+      iternal_number,
+      email,
+      idFromSource
+    );
+  };
+};
 export default teacherReducer;

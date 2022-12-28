@@ -11,7 +11,10 @@ import BurgerModal from "./BurgerModal";
 import BurgerButtonMain from "./BurgerButtonMain";
 import { clearTeachersManagement } from "../../reducer/managementReducer";
 import { connect } from "react-redux";
-import { getTeacherIconThunk } from "../../reducer/managementReducer";
+import {
+  getTeacherIconThunk,
+  clearTeacherProf,
+} from "../../reducer/managementReducer";
 
 function MainHeader(props) {
   const [url, setUrl] = useState(null);
@@ -27,6 +30,7 @@ function MainHeader(props) {
   const Logout = () => {
     localStorage.removeItem("user");
     props.clearTeachersManagement();
+    props.clearTeacherProf();
     signOut(() => navigate("/electronicaljournal-view", { replace: true }));
   };
   var prevScrollpos = window.pageYOffset;
@@ -104,9 +108,10 @@ function MainHeader(props) {
                       "http://192.168.11.252:8008/images/" +
                       props.teacherIcon.map((teacher) => {
                         return teacher.imageName;
-                      }) +
-                      "?v" +
-                      Math.floor(Math.random() * 101)
+                      })
+                      // +
+                      // "?v" +
+                      // Math.floor(Math.random() * 10001)
                     }
                     alt="description"
                   ></img>
@@ -150,4 +155,5 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   clearTeachersManagement,
   getTeacherIconThunk,
+  clearTeacherProf,
 })(MainHeader);

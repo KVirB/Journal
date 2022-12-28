@@ -177,12 +177,15 @@ const ManagementPage = (props) => {
                       src={
                         teacher !== undefined
                           ? "http://192.168.11.252:8008/images/" +
-                            teacher.imageName +
-                            "?v" +
-                            Math.floor(Math.random() * 101)
-                          : "http://192.168.11.252:8008/images/none.jpg" +
-                            "?v" +
-                            Math.floor(Math.random() * 101)
+                            teacher.imageName
+                          : // +
+                            // "?v" +
+                            // Math.floor(Math.random() * 10001)
+                            "http://192.168.11.252:8008/images/none.jpg"
+                        // +
+                        // "?v"
+                        // +
+                        // Math.floor(Math.random() * 10001)
                       }
                     />
                     <TeacherCard
