@@ -24,7 +24,7 @@ class teacherProfileContainer extends React.Component {
 }
 let mapStateToProps = (state) => {
   return {
-    teacherProf: state.managementPage.teacherProf,
+    teacherProf: state.managementPage.teacherProf[0],
     image: state.teacherPage.image,
   };
 };

@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 // import { useSelector } from 'react-redux';
 
-export default function RequireAuth({ children, role, getTeacherManagement }) {
+export default function RequireAuth({ children, role }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, signOut } = useAuth();

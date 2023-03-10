@@ -89,7 +89,7 @@ class StudentByDiscipline extends React.Component {
               type="submit"
               value="Назад"
               onClick={() => {
-                window.location.assign(`/electronicaljournal-view/journal`);
+                window.history.back();
               }}
             />
           </div>

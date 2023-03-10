@@ -20,7 +20,7 @@ export default class TeacherProfile extends React.Component {
     subgroup: "",
     internal: null,
     email: null,
-    disabledButtonSave: false,
+    disabledButtonSave: true,
   };
 
   componentDidMount() {
@@ -99,22 +99,23 @@ export default class TeacherProfile extends React.Component {
                   ></TeacherPhoto>
                 </div>
                 <div className="block_name_with_info">
-                  {console.log(this.props.teacherProf + "name")}
-                  {this.props.teacherProf.map((teacher) => {
-                    return (
-                      <input
-                        key={teacher.id}
-                        className="teacher_name"
-                        defaultValue={
-                          teacher.surname +
-                          " " +
-                          teacher.name +
-                          " " +
-                          teacher.patronymic
-                        }
-                      ></input>
-                    );
-                  })}
+                  {this.props.teacherProf !== undefined ? (
+                    <input
+                      disabled
+                      key={this.props.teacherProf.id}
+                      className="teacher_name"
+                      defaultValue={
+                        this.props.teacherProf.surname +
+                        " " +
+                        this.props.teacherProf.name +
+                        " " +
+                        this.props.teacherProf.patronymic.split("(")[0]
+                      }
+                    ></input>
+                  ) : (
+                    <></>
+                  )}
+
                   {console.log(this.props.teacherProf)}
                   <div className="teacher_info">
                     <textarea
@@ -147,77 +148,98 @@ export default class TeacherProfile extends React.Component {
                   {/* <div className="disp"> */}
                   <div>
                     <p className="department_name">Кафедра:</p>
-                    {this.props.teacherProf.map((teacher) => {
-                      return (
-                        <p className="block_of_department_name">
-                          {teacher.department !== null
-                            ? teacher.department.displayName
-                            : "Нет данных"}
-                        </p>
-                      );
-                    })}
+                    {this.props.teacherProf !== undefined ? (
+                      <p className="block_of_department_name">
+                        {this.props.teacherProf.department !== null
+                          ? this.props.teacherProf.department.displayName
+                          : "Нет данных"}
+                      </p>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   <div>
                     <p className="email_name">Электронная почта:</p>
-                    {this.props.teacherProf.map((teacher) => {
-                      return (
-                        <InputMask
-                          className="block_of_email_name"
-                          defaultValue={
-                            teacher.email !== null
-                              ? teacher.email
-                              : "Нет данных"
-                          }
-                          mask={null}
-                          maskChar={null}
-                          onChange={(e) => {
-                            this.getInputValueEmail(e);
-                          }}
-                        />
-                      );
-                    })}
+                    {this.props.teacherProf !== undefined ? (
+                      <InputMask
+                        disabled={
+                          this.props.teacherProf.idFromSource !==
+                          JSON.parse(localStorage.getItem("user"))
+                            .id_from_source
+                            ? true
+                            : false
+                        }
+                        className="block_of_email_name"
+                        defaultValue={
+                          this.props.teacherProf.email !== null
+                            ? this.props.teacherProf.email
+                            : "Нет данных"
+                        }
+                        mask={null}
+                        maskChar={null}
+                        onChange={(e) => {
+                          this.getInputValueEmail(e);
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   {/* </div> */}
                   {/* <div className="disp"> */}
                   <div>
                     <p className="interior_tel">Внутр.тел.:</p>
-                    {this.props.teacherProf.map((teacher) => {
-                      return (
-                        <InputMask
-                          defaultValue={
-                            teacher.internalPhoneNumber !== null
-                              ? teacher.internalPhoneNumber
-                              : "Нет данных"
-                          }
-                          className="block_of_interior_tel"
-                          mask="99-99"
-                          maskChar={null}
-                          onChange={(e) => {
-                            this.getInputValueInternal(e);
-                          }}
-                        />
-                      );
-                    })}
+                    {this.props.teacherProf !== undefined ? (
+                      <InputMask
+                        disabled={
+                          this.props.teacherProf.idFromSource !==
+                          JSON.parse(localStorage.getItem("user"))
+                            .id_from_source
+                            ? true
+                            : false
+                        }
+                        defaultValue={
+                          this.props.teacherProf.internalPhoneNumber !== null
+                            ? this.props.teacherProf.internalPhoneNumber
+                            : "99-99"
+                        }
+                        className="block_of_interior_tel"
+                        mask="99-99"
+                        maskChar={null}
+                        onChange={(e) => {
+                          this.getInputValueInternal(e);
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   <div>
                     <p className="mobile_tel">Телефон:</p>
-                    {this.props.teacherProf.map((teacher) => {
-                      return (
-                        <InputMask
-                          defaultValue={
-                            teacher.phoneNumber !== null
-                              ? teacher.phoneNumber
-                              : "Нет данных"
-                          }
-                          className="block_of_mobile_tel"
-                          mask="+375-(99)-999-99-99"
-                          maskChar={null}
-                          onChange={(e) => {
-                            this.getInputValueMobile(e);
-                          }}
-                        />
-                      );
-                    })}
+                    {this.props.teacherProf !== undefined ? (
+                      <InputMask
+                        disabled={
+                          this.props.teacherProf.idFromSource !==
+                          JSON.parse(localStorage.getItem("user"))
+                            .id_from_source
+                            ? true
+                            : false
+                        }
+                        defaultValue={
+                          this.props.teacherProf.phoneNumber !== null
+                            ? this.props.teacherProf.phoneNumber
+                            : "+375-(99)-999-99-99"
+                        }
+                        className="block_of_mobile_tel"
+                        mask="+375-(99)-999-99-99"
+                        maskChar={null}
+                        onChange={(e) => {
+                          this.getInputValueMobile(e);
+                        }}
+                      />
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   <button
                     disabled={this.state.disabledButtonSave}

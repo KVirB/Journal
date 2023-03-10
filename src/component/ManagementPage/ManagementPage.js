@@ -175,13 +175,10 @@ const ManagementPage = (props) => {
                       alt=""
                       className="teacher_card_picture"
                       src={
-                        teacher !== undefined
+                        teacher !== undefined && teacher.imageName !== null
                           ? "http://192.168.11.252:8008/images/" +
                             teacher.imageName
-                          : // +
-                            // "?v" +
-                            // Math.floor(Math.random() * 10001)
-                            "http://192.168.11.252:8008/images/none.jpg"
+                          : "http://192.168.11.252:8008/images/none.jpg"
                         // +
                         // "?v"
                         // +

@@ -13,6 +13,7 @@ import { setBtnTrue, setBtnFalse } from "../../reducer/btnReducer";
 
 export class marksTableHeader extends React.Component {
   render() {
+    // eslint-disable-next-line no-lone-blocks
     {
       return (
         <div>

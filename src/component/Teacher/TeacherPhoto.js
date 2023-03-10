@@ -40,9 +40,9 @@ const TeacherPhoto = (props) => {
           src={
             url !== null
               ? url
-              : props.teacherProf[0] !== undefined
+              : props.teacherProf !== undefined
               ? "http://192.168.11.252:8008/images/" +
-                props.teacherProf[0].imageName
+                props.teacherProf.imageName
               : // +
                 // "?v" +
                 // Math.floor(Math.random() * 10001)

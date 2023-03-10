@@ -337,9 +337,9 @@ export const getStudentsThunk = (groupsId) => {
   };
 };
 
-export const getGroupsThunk = () => {
+export const getGroupsThunk = (role) => {
   return (dispatch) => {
-    getGroups().then((data) => {
+    getGroups(role).then((data) => {
       dispatch(setGroups(data));
     });
   };
@@ -404,15 +404,18 @@ export const getGeneralGroupStatisticsThunk = (groupsId) => {
   };
 };
 
-export const getExcelThunk = (groupsId, firstDate, secondDate) => {
+export const getExcelThunk = (groupsId, firstDate, secondDate, role) => {
   return (dispatch) => {
-    getExcel(groupsId, firstDate, secondDate);
+    getExcel(groupsId, firstDate, secondDate, role);
   };
 };
 
 export const getExcelFacultyThunk = (facultyId, firstDate, secondDate) => {
   return (dispatch) => {
-    getExcelFaculty(facultyId, firstDate, secondDate);
+    dispatch(setLoaderTrue());
+    getExcelFaculty(facultyId, firstDate, secondDate).then((data) => {
+      dispatch(setLoaderFalse());
+    });
   };
 };
 

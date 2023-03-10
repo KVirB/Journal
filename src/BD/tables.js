@@ -70,16 +70,16 @@ export const getExcelFaculty = (facultyId, firstDate, secondDate) => {
         if (error.response.status === 500) {
           getExcel(facultyId);
         } else {
-          alert("Упс, что-то пошло не так :(");
+          alert("Упс, что-то пошло не так :(" + error.response.status);
         }
       })
   );
 };
 
-export const getExcel = (groupsId, firstDate, secondDate) => {
+export const getExcel = (groupsId, firstDate, secondDate, role) => {
   return baseRout
     .request({
-      url: `electronicjournal/utils/myExcel?groupName=${groupsId}&period=${firstDate}and${secondDate}`,
+      url: `electronicjournal/utils/myExcel?groupName=${groupsId}&period=${firstDate}and${secondDate}&role=${role}`,
       method: "GET",
       responseType: "blob",
     })
@@ -95,9 +95,9 @@ export const getExcel = (groupsId, firstDate, secondDate) => {
     })
     .catch((error) => {
       if (error.response.status === 500) {
-        getExcel(groupsId, firstDate, secondDate);
+        getExcel(groupsId, firstDate, secondDate, role);
       } else {
-        alert("Упс, что-то пошло не так :(");
+        alert("Упс, что-то пошло не так :(" + error.response.status);
       }
     });
 };
@@ -151,7 +151,7 @@ export const getGeneralGroupStatistics = (groupsId) => {
       return response.data;
     });
 };
-
+//Этот запрос ещё не готов! на бэке
 export const getDisciplineByStudentStatistic = (disciplineId, studentId) => {
   return baseRout
     .get(
@@ -238,10 +238,12 @@ export const getGroup = (disciplineId) => {
       return response.data;
     });
 };
-export const getGroups = () => {
-  return baseRout.get(`electronicjournal/groups/search?q=`).then((response) => {
-    return response.data;
-  });
+export const getGroups = (role) => {
+  return baseRout
+    .get(`electronicjournal/groups/search?role=${role}&q=`)
+    .then((response) => {
+      return response.data;
+    });
 };
 
 export const getDisciplinesStatistic = (groupsId) => {

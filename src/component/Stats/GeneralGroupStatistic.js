@@ -10,12 +10,11 @@ class GeneralGroupStatistic extends React.Component {
     passes: [],
     groupsId: 0,
     facultyId: 0,
+    role: null,
     firstDate: null,
     secondDate: null,
   };
-  componentDidMount() {
-    this.props.getGroupsThunk();
-  }
+  componentDidMount() {}
 
   getFirstDate = (e) => {
     (async () => {
@@ -46,14 +45,30 @@ class GeneralGroupStatistic extends React.Component {
       if (
         this.state.groupsId !== null &&
         this.state.firstDate !== null &&
-        this.state.secondDate !== null
+        this.state.secondDate !== null &&
+        this.state.roleId !== null
       ) {
         this.props.getGeneralGroupStatisticsThunk(this.state.groupsId);
       }
       this.props.setSecondDate(e);
     })();
   };
-
+  getRoles = (e) => {
+    (async () => {
+      await this.setState({
+        role: e,
+      });
+      this.props.getGroupsThunk(this.state.role);
+      if (
+        this.state.groupsId !== null &&
+        this.state.firstDate !== null &&
+        this.state.secondDate !== null &&
+        this.state.roleId !== null
+      ) {
+        this.props.getGeneralGroupStatisticsThunk(this.state.groupsId);
+      }
+    })();
+  };
   getGroups = (e) => {
     (async () => {
       await this.setState({
@@ -64,7 +79,8 @@ class GeneralGroupStatistic extends React.Component {
       if (
         this.state.groupsId !== null &&
         this.state.firstDate !== null &&
-        this.state.secondDate !== null
+        this.state.secondDate !== null &&
+        this.state.roleId !== null
       ) {
         this.props.getGeneralGroupStatisticsThunk(this.state.groupsId);
       }
@@ -72,7 +88,7 @@ class GeneralGroupStatistic extends React.Component {
   };
 
   render() {
-    const { getGroups } = this;
+    const { getGroups, getRoles } = this;
     const { isLoading } = this.props;
     return (
       <div>
@@ -84,9 +100,33 @@ class GeneralGroupStatistic extends React.Component {
                 type="submit"
                 value="Назад"
                 onClick={() => {
-                  window.location.assign(`/electronicaljournal-view/journal`);
+                  window.history.back();
                 }}
               />
+            </div>
+            <div>
+              <div className="role-name">Роль</div>
+              <div className="role-select-statistic">
+                <Select
+                  defaultValue={{ value: "role", label: "Роль" }}
+                  onChange={(e) => getRoles(e.value)}
+                  options={JSON.parse(localStorage.getItem("user")).roles.map(
+                    (m) => ({
+                      value: m,
+                      label:
+                        m === "HEAD_OF_DEPARTMENT"
+                          ? "Заведующий кафедрой"
+                          : m === "USER"
+                          ? "Преподаватель"
+                          : m === "RECTOR"
+                          ? "Ректор"
+                          : m === "DEAN"
+                          ? "Декан"
+                          : m,
+                    })
+                  )}
+                />
+              </div>
             </div>
             <div>
               <div className="group-name">Группа</div>
@@ -142,7 +182,8 @@ class GeneralGroupStatistic extends React.Component {
                 this.props.getExcelThunk(
                   this.state.groupsId,
                   this.state.firstDate,
-                  this.state.secondDate
+                  this.state.secondDate,
+                  this.state.role
                 );
               }}
             />
@@ -153,12 +194,13 @@ class GeneralGroupStatistic extends React.Component {
           <div></div>
           <div></div>
         </div>
-        <GeneralBar
+        {/* Сделать на бэке!!! */}
+        {/* <GeneralBar
           generalGroupStatistic={this.props.generalGroupStatistic}
           height={this.props.height}
           // students={this.props.students}
           isLoading={this.props.isLoading}
-        />
+        /> */}
       </div>
     );
   }
