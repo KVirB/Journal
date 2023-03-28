@@ -9,16 +9,18 @@ const TeacherPhoto = (props) => {
     var formData = new FormData();
     const files = event.target.files;
     formData.append("file", files[0]);
+
     if (formData !== null) {
       props.setProfileImageThunk(
-        props.teacherProf[0].surname +
-          props.teacherProf[0].idFromSource +
+        props.teacherProf.surname +
+          props.teacherProf.idFromSource +
           files[0].name.slice(files[0].name.length - 4),
         formData,
         JSON.parse(localStorage.getItem("user")).id_from_source
       );
       console.log(files);
     }
+
     if (files[0].size < 130000) {
       var reader = new FileReader();
       reader.onloadend = () => {

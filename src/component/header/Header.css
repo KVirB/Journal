@@ -480,7 +480,7 @@ input[type="submit"].button-header:disabled {
 .role-select-statistic {
   background: #ffffff;
   box-sizing: border-box;
-  width: 112px;
+  width: 162px;
   height: 38px;
   margin-left: 30px;
   margin-top: 14px;
@@ -1314,7 +1314,9 @@ input[type="submit"].button-header:disabled {
 .teacher_photo_button:disabled {
   display: none;
 }
-
+.teacher_name:disabled {
+  background: none;
+}
 .teacher_name {
   margin-top: 40px;
   margin-left: 55px;
@@ -1941,13 +1943,13 @@ input[type="submit"].button-header:disabled {
   color: #434c63;
   text-decoration: none;
 }
-.pointerEvents {
+/* .pointerEvents {
   pointer-events: none;
   background: #ededed;
   color: #808080;
   font-weight: 400;
   box-shadow: none;
-}
+} */
 .block_with_labels_for_length {
   margin-right: 50px;
   margin-top: 12px;

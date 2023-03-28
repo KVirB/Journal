@@ -116,11 +116,10 @@ export default class TeacherProfile extends React.Component {
                     <></>
                   )}
 
-                  {console.log(this.props.teacherProf)}
                   <div className="teacher_info">
                     <textarea
                       className="input_teacher_info"
-                      defaultValue="Разнообразный и богатый опыт говорит нам, что начало повседневной работы по формированию позиции способствует подготовке и реализации как самодостаточных, так и внешне зависимых концептуальных решений. Также как существующая теория предопределяет высокую востребованность своевременного выполнения сверхзадачи. Есть над чем задуматься : реплицированные с зарубежных источников, современные исследования будут заблокированы в рамках."
+                      defaultValue="Coming soon!!!"
                     ></textarea>
                     <button
                       className="button_teacher_info_save"

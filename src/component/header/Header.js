@@ -21,6 +21,7 @@ import Select from "react-select";
 import UnSaveDataModal from "./UnSaveDataModal.js";
 import BurgerModal from "./BurgerModal";
 import { Link } from "react-router-dom";
+import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers";
 
 class Header extends React.Component {
   state = {
@@ -220,6 +221,9 @@ class Header extends React.Component {
   };
 
   componentDidMount() {
+    this.props.clearTypeClass();
+    this.props.clearSubGroup();
+    this.props.clearGroup();
     this.props.getDisciplineThunk();
     if (localStorage.getItem("groupId") !== null) {
       this.props.getCourseSpecThunk(localStorage.getItem("groupId"));
@@ -312,6 +316,7 @@ class Header extends React.Component {
               <div>
                 <div className="group-name">Группа</div>
                 <Select
+                  isDisabled={this.props.group.length === 0 ? true : false}
                   className="group-select"
                   onChange={(e) => getGroup(e.value)}
                   defaultValue={
@@ -333,6 +338,7 @@ class Header extends React.Component {
                   Тип занятия
                 </div>
                 <Select
+                  isDisabled={this.props.typeClass.length === 0 ? true : false}
                   className="view-input"
                   onChange={(e) => getTypeClass(e.value, e.label)}
                   defaultValue={
@@ -367,6 +373,7 @@ class Header extends React.Component {
                   Подгруппа
                 </div>
                 <Select
+                  isDisabled={this.props.subGroup.length === 0 ? true : false}
                   defaultValue={
                     localStorage.getItem("subgroupId") !== null
                       ? {
@@ -385,21 +392,23 @@ class Header extends React.Component {
                 />
               </div>
               <div className="load_journal_block">
-                {this.props.journalsite.length === 0 ? (
-                  <Link
-                    className={"load_journal pointerEvents"}
-                    to="/electronicaljournal-view/journal"
-                  >
-                    Загрузить журнал
-                  </Link>
-                ) : (
-                  <Link
-                    className={"load_journal"}
-                    to="/electronicaljournal-view/journal"
-                  >
-                    Загрузить журнал
-                  </Link>
-                )}
+                <Link
+                  style={
+                    this.props.journalsite.length === 0
+                      ? {
+                          background: "#ededed",
+                          color: "#808080",
+                          pointerEvents: "none",
+                          fontWeight: "400",
+                          boxShadow: "none",
+                        }
+                      : {}
+                  }
+                  className="load_journal"
+                  to="/electronicaljournal-view/journal"
+                >
+                  Загрузить журнал
+                </Link>
               </div>
             </div>
           </div>

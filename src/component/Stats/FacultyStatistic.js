@@ -7,11 +7,10 @@ import GeneralBar from "./Chart/GeneralBar";
 
 class FacultyStatistic extends React.Component {
   state = {
-    passes: [],
-    groupsId: 0,
     facultyId: 0,
     firstDate: null,
     secondDate: null,
+    role: null,
   };
   componentDidMount() {
     this.props.getFacultyThunk();
@@ -38,13 +37,6 @@ class FacultyStatistic extends React.Component {
     })();
   };
 
-  getGroups = (e) => {
-    (async () => {
-      this.setState({
-        groupsId: e,
-      });
-    })();
-  };
   getFacultys = (e) => {
     (async () => {
       this.setState({
@@ -52,9 +44,15 @@ class FacultyStatistic extends React.Component {
       });
     })();
   };
-
+  getRoles = (e) => {
+    (async () => {
+      await this.setState({
+        role: e,
+      });
+    })();
+  };
   render() {
-    const { getFacultys } = this;
+    const { getFacultys, getRoles } = this;
     const { isLoading } = this.props;
     return (
       <div>
@@ -76,6 +74,30 @@ class FacultyStatistic extends React.Component {
                     window.history.back();
                   }}
                 />
+              </div>
+              <div>
+                <div className="role-name">Роль</div>
+                <div className="role-select-statistic">
+                  <Select
+                    defaultValue={{ value: "role", label: "Роль" }}
+                    onChange={(e) => getRoles(e.value)}
+                    options={JSON.parse(localStorage.getItem("user")).roles.map(
+                      (m) => ({
+                        value: m,
+                        label:
+                          m === "HEAD_OF_DEPARTMENT"
+                            ? "Заведующий кафедрой"
+                            : m === "USER"
+                            ? "Преподаватель"
+                            : m === "RECTOR"
+                            ? "Ректор"
+                            : m === "DEAN"
+                            ? "Декан"
+                            : m,
+                      })
+                    )}
+                  />
+                </div>
               </div>
               <div>
                 <div className="faculty-name">Кафедра</div>
@@ -132,7 +154,8 @@ class FacultyStatistic extends React.Component {
                   this.props.getExcelFacultyThunk(
                     this.state.facultyId,
                     this.state.firstDate,
-                    this.state.secondDate
+                    this.state.secondDate,
+                    this.state.role
                   );
                 }}
               />

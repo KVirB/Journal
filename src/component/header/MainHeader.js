@@ -66,9 +66,16 @@ function MainHeader(props) {
     <div className="main_header">
       <div className="journal_name_header" id="journal_name_header">
         <h1 className="journal-name-600">
-          <Link className="j_name-600" to="/electronicaljournal-view">
+          {/* <Link className="j_name-600" to="/electronicaljournal-view"> */}
+          <div
+            className="j_name-600"
+            onClick={() => {
+              window.location.href = "/electronicaljournal-view";
+            }}
+          >
             Электронный журнал преподавателя УО «ВГТУ»
-          </Link>
+          </div>
+          {/* </Link> */}
         </h1>
       </div>
       <div
@@ -81,9 +88,20 @@ function MainHeader(props) {
       >
         <div className="disp journal-name-block">
           <h1 className="journal-name">
-            <Link className="j_name" to="/electronicaljournal-view">
+            {/* <Link className="j_name" to="/electronicaljournal-view">
               Электронный журнал преподавателя УО «ВГТУ»
-            </Link>
+            </Link> */}
+            <div
+              className="j_name"
+              onClick={() => {
+                window.location.href = "/electronicaljournal-view";
+              }}
+            >
+              Электронный журнал преподавателя УО «ВГТУ»
+            </div>
+            {/* <a className="j_name" href="/electronicaljournal-view">
+              Электронный журнал преподавателя УО «ВГТУ»
+            </a> */}
           </h1>
         </div>
 
@@ -105,13 +123,11 @@ function MainHeader(props) {
                   <img
                     className="profile_pic"
                     src={
-                      "http://192.168.11.252:8008/images/" +
-                      props.teacherIcon.map((teacher) => {
-                        return teacher.imageName;
-                      })
-                      // +
-                      // "?v" +
-                      // Math.floor(Math.random() * 10001)
+                      props.teacherIcon !== undefined &&
+                      props.teacherIcon.imageName !== null
+                        ? "http://192.168.11.252:8008/images/" +
+                          props.teacherIcon.imageName
+                        : "http://192.168.11.252:8008/images/none.jpg"
                     }
                     alt="description"
                   ></img>
@@ -149,7 +165,7 @@ function MainHeader(props) {
 }
 let mapStateToProps = (state) => {
   return {
-    teacherIcon: state.managementPage.teacherIcon,
+    teacherIcon: state.managementPage.teacherIcon[0],
   };
 };
 export default connect(mapStateToProps, {

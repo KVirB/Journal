@@ -410,10 +410,15 @@ export const getExcelThunk = (groupsId, firstDate, secondDate, role) => {
   };
 };
 
-export const getExcelFacultyThunk = (facultyId, firstDate, secondDate) => {
+export const getExcelFacultyThunk = (
+  facultyId,
+  firstDate,
+  secondDate,
+  role
+) => {
   return (dispatch) => {
     dispatch(setLoaderTrue());
-    getExcelFaculty(facultyId, firstDate, secondDate).then((data) => {
+    getExcelFaculty(facultyId, firstDate, secondDate, role).then((data) => {
       dispatch(setLoaderFalse());
     });
   };

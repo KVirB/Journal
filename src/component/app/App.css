@@ -1844,6 +1844,9 @@ p.clip {
   border-radius: 7px;
   height: 55px;
 }
+.css-1insrsq-control {
+  height: 55px;
+}
 /* [id^="react-select-3-listbox"] {
   margin-top: 30px;
 } */

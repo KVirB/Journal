@@ -134,27 +134,31 @@ const journalsiteReducer = (state = initialState, action) => {
     case SET_JOURNALSITE:
       let jSites = [...state.journalsite];
       let jSite = [{ ...action.journalsite }];
+
       jSite.map((site, i) => {
-        site.journalHeaders
-          .sort((a, b) => a.id - b.id)
-          .map((header, i) => {
-            header.journalContents
-              .sort(function (a, b) {
-                if (
-                  a.student.surname.toLowerCase() <
-                  b.student.surname.toLowerCase()
-                )
-                  return -1;
-                if (
-                  a.student.surname.toLowerCase() >
-                  b.student.surname.toLowerCase()
-                )
-                  return 1;
-                return 0;
-              })
-              .map((content, i) => {});
-          });
-        jSites.push(site);
+        console.log(Object.keys(site).length, "test");
+        if (Object.keys(site).length !== 0) {
+          site.journalHeaders
+            .sort((a, b) => a.id - b.id)
+            .map((header, i) => {
+              header.journalContents
+                .sort(function (a, b) {
+                  if (
+                    a.student.surname.toLowerCase() <
+                    b.student.surname.toLowerCase()
+                  )
+                    return -1;
+                  if (
+                    a.student.surname.toLowerCase() >
+                    b.student.surname.toLowerCase()
+                  )
+                    return 1;
+                  return 0;
+                })
+                .map((content, i) => {});
+            });
+          jSites.push(site);
+        }
       });
       return {
         ...state,

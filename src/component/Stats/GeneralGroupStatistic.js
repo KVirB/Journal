@@ -7,7 +7,6 @@ import GeneralBar from "./Chart/GeneralBar";
 
 class GeneralGroupStatistic extends React.Component {
   state = {
-    passes: [],
     groupsId: 0,
     facultyId: 0,
     role: null,
@@ -28,7 +27,8 @@ class GeneralGroupStatistic extends React.Component {
       if (
         this.state.groupsId !== null &&
         this.state.firstDate !== null &&
-        this.state.secondDate !== null
+        this.state.secondDate !== null &&
+        this.state.role !== null
       ) {
         this.props.getGeneralGroupStatisticsThunk(this.state.groupsId);
       }
@@ -46,7 +46,7 @@ class GeneralGroupStatistic extends React.Component {
         this.state.groupsId !== null &&
         this.state.firstDate !== null &&
         this.state.secondDate !== null &&
-        this.state.roleId !== null
+        this.state.role !== null
       ) {
         this.props.getGeneralGroupStatisticsThunk(this.state.groupsId);
       }
@@ -63,7 +63,7 @@ class GeneralGroupStatistic extends React.Component {
         this.state.groupsId !== null &&
         this.state.firstDate !== null &&
         this.state.secondDate !== null &&
-        this.state.roleId !== null
+        this.state.role !== null
       ) {
         this.props.getGeneralGroupStatisticsThunk(this.state.groupsId);
       }
@@ -80,7 +80,7 @@ class GeneralGroupStatistic extends React.Component {
         this.state.groupsId !== null &&
         this.state.firstDate !== null &&
         this.state.secondDate !== null &&
-        this.state.roleId !== null
+        this.state.role !== null
       ) {
         this.props.getGeneralGroupStatisticsThunk(this.state.groupsId);
       }

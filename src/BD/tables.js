@@ -47,12 +47,12 @@ baseRout.interceptors.request.use(function (config) {
   return config;
 });
 
-export const getExcelFaculty = (facultyId, firstDate, secondDate) => {
+export const getExcelFaculty = (facultyId, firstDate, secondDate, role) => {
   return (
     baseRout
       // utils/myExcel?groupName=& period=2022-03-21and...
       .request({
-        url: `electronicjournal/utils/mySecondExcel?cathedraName=${facultyId}&period=${firstDate}and${secondDate}`,
+        url: `electronicjournal/utils/mySecondExcel?cathedraName=${facultyId}&period=${firstDate}and${secondDate}&role=${role}`,
         method: "GET",
         responseType: "blob",
       })
