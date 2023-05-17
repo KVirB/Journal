@@ -2226,3 +2226,74 @@ input[type="submit"].button-header:disabled {
   text-overflow: ellipsis;
   border: 1px solid #f5f5f5;
 }
+.selects_additional_grade {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.student_select_additional_grade {
+  width: 250px;
+  height: 51px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 135%;
+}
+.type_select_additional_grade {
+  width: 200px;
+  height: 51px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 135%;
+  margin-left: 20px;
+}
+.date_select_additional_grade {
+  padding: 0 5px 0 5px;
+  height: 51px;
+  border: 2px solid #ebebeb;
+  border-radius: 7px;
+  margin-left: 20px;
+}
+.theme_input_additional_grade {
+  border: 2px solid #ebebeb;
+  border-radius: 7px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 135%;
+  width: 250px;
+  margin-left: 20px;
+  padding-left: 10px;
+}
+.grade_select_additional_grade {
+  border: 2px solid #ebebeb;
+  border-radius: 7px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 135%;
+  width: 50px;
+  margin-left: 20px;
+}
+.add_button_additional_grade {
+  border: none;
+  border-radius: 7px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 135%;
+  background-color: #434c63;
+  color: white;
+  width: 120px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.add_button_additional_grade:hover {
+  background-color: #353f57;
+}

@@ -13,8 +13,8 @@ import GeneralGroupStatistic from "../Stats/generalGroupStatisticContainer";
 import MainPageContainer from "../Main/mainPageContainer";
 import FacultyStatistic from "../Stats/facultyStatisticContainer";
 import TeacherProfile from "../Teacher/teacherProfileContainer";
-import ManagementPage from "../ManagementPage/ManagementPage";
 import ManagementPageContainer from "../ManagementPage/managementPageContainer";
+import AdditionalGradeContainer from "../AdditionalGrade/AdditionalGradeContainer";
 
 const App = () => {
   return (
@@ -92,6 +92,14 @@ const App = () => {
             element={
               <RequireAuth role={["HEAD_OF_DEPARTMENT", "RECTOR"]}>
                 <ManagementPageContainer></ManagementPageContainer>
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/electronicaljournal-view/additional_grade"
+            element={
+              <RequireAuth role={["HEAD_OF_DEPARTMENT", "RECTOR", "USER"]}>
+                <AdditionalGradeContainer></AdditionalGradeContainer>
               </RequireAuth>
             }
           />

@@ -448,3 +448,61 @@ export const getThemeHeader = (idHeader) => {
       return response.data;
     });
 };
+
+export const getAdditionalGrade = (group, discipline_id) => {
+  return baseRout
+    .get(
+      `electronicjournal/student-contents/groupAndDiscipline?group=${group}&disciplineId=${discipline_id}`
+    )
+    .then((response) => {
+      return response.data;
+    });
+};
+
+export const getTypeGrade = () => {
+  return baseRout
+    .get(`/electronicjournal/type-grades/search?q=`)
+    .then((response) => {
+      return response.data;
+    });
+};
+export const postAdditionalGrade = (
+  student,
+  discipline,
+  typeGrade,
+  date,
+  theme,
+  grade
+) => {
+  let additionalGrade = {
+    studentId: student,
+    disciplineId: discipline,
+    typeGradeId: typeGrade,
+    dateOfLesson: date,
+    description: theme,
+    grade: grade,
+  };
+  return baseRout
+    .post(`electronicjournal/student-contents`, additionalGrade)
+    .then((response) => {
+      return response.data;
+    })
+    .finally(
+      getAdditionalGrade(
+        localStorage.getItem("groupName"),
+        localStorage.getItem("disciplineId")
+      )
+    );
+};
+
+export const patchAdditionalGrade = (id, field, value) => {
+  let editAdditional = {
+    [field]: value,
+  };
+  console.log(editAdditional);
+  return baseRout
+    .patch(`electronicjournal/student-contents/${id}`, editAdditional)
+    .then((response) => {
+      return response.data;
+    });
+};

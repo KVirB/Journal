@@ -167,7 +167,7 @@ export default class MarksTable extends React.Component {
                               onClick={() => {
                                 this.openModal();
                                 this.idHeaderEdit(header.id);
-                                this.props.getThemeHeaderThunk(header.id);
+                                // this.props.getThemeHeaderThunk(header.id);
                               }}
                             >
                               <Edit className="Edit"></Edit>
