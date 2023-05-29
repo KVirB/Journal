@@ -2229,7 +2229,7 @@ input[type="submit"].button-header:disabled {
 .selects_additional_grade {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding-left: 20px;
 }
 .student_select_additional_grade {
   width: 250px;
@@ -2268,6 +2268,7 @@ input[type="submit"].button-header:disabled {
   width: 250px;
   margin-left: 20px;
   padding-left: 10px;
+  height: 49px;
 }
 .grade_select_additional_grade {
   border: 2px solid #ebebeb;
@@ -2279,6 +2280,7 @@ input[type="submit"].button-header:disabled {
   line-height: 135%;
   width: 50px;
   margin-left: 20px;
+  height: 55px;
 }
 .add_button_additional_grade {
   border: none;
@@ -2293,7 +2295,85 @@ input[type="submit"].button-header:disabled {
   width: 120px;
   margin-left: 20px;
   cursor: pointer;
+  height: 55px;
 }
 .add_button_additional_grade:hover {
+  background-color: #353f57;
+}
+.selects_additional_grade_div {
+  display: flex;
+  justify-content: space-between;
+}
+.delete_button_additional_grade {
+  border: none;
+  border-radius: 7px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 135%;
+  background-color: #434c63;
+  color: white;
+  width: 120px;
+  cursor: pointer;
+  height: 55px;
+}
+.delete_button_additional_grade:hover {
+  background-color: #353f57;
+}
+.delete_button_additional_div {
+  padding: 0 20px 20px 0;
+}
+.sort_additional_grade_div {
+  display: flex;
+  padding: 0 0 20px 20px;
+}
+.p_sort {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #c7c7c7;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  padding-left: 55px;
+  padding-bottom: 10px;
+}
+.p_group {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #c7c7c7;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  padding: 20px 0 10px 55px;
+}
+.p_discipline {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #c7c7c7;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  padding: 20px 0 10px 55px;
+}
+.p_info_div {
+  display: flex;
+}
+.reset_sort_button {
+  border: none;
+  border-radius: 7px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 135%;
+  background-color: #434c63;
+  color: white;
+  width: 120px;
+  margin-left: 20px;
+  cursor: pointer;
+  height: 55px;
+}
+.reset_sort_button:hover {
   background-color: #353f57;
 }

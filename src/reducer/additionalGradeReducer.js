@@ -3,6 +3,7 @@ import {
   getTypeGrade,
   postAdditionalGrade,
   patchAdditionalGrade,
+  deleteAdditionalGrade,
 } from "../BD/tables";
 
 const SET_ADDITIONAL_GRADE = "SET_ADDITIONAL_GRADE";
@@ -19,9 +20,20 @@ let initialState = {
 const additionalGradeReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_ADDITIONAL_GRADE:
+      let newAdditionalGrades = [...action.additionalGrades];
+      let options = {
+        day: "numeric",
+        month: "numeric",
+        year: "numeric",
+      };
+      newAdditionalGrades.map((item) => {
+        let date = new Date(item.dateOfLesson);
+        item.dateOfLesson = date.toLocaleString("ru", options);
+      });
+
       return {
         ...state,
-        additionalGrades: [...action.additionalGrades],
+        additionalGrades: newAdditionalGrades,
       };
     case SET_TYPE_GRADE:
       return {
@@ -60,9 +72,14 @@ export const setTypeGrade = (typeGrades) => ({
   typeGrades: typeGrades,
 });
 
-export const getAdditionalGradeThunk = (group, discipline_id) => {
+export const getAdditionalGradeThunk = (
+  group,
+  discipline_id,
+  student_id,
+  date
+) => {
   return (dispatch) => {
-    getAdditionalGrade(group, discipline_id).then((data) => {
+    getAdditionalGrade(group, discipline_id, student_id, date).then((data) => {
       dispatch(setAdditionalGrade(data));
     });
   };
@@ -89,7 +106,9 @@ export const getAdditionalGradeAdd = (
     dispatch(
       getAdditionalGradeThunk(
         localStorage.getItem("groupName"),
-        localStorage.getItem("disciplineId")
+        localStorage.getItem("disciplineId"),
+        0,
+        null
       )
     );
   };
@@ -98,6 +117,12 @@ export const getAdditionalGradeAdd = (
 export const getAdditionalGradeEdit = (id, field, value) => {
   return (dispatch) => {
     patchAdditionalGrade(id, field, value);
+  };
+};
+
+export const getAdditionalGradeDelete = (id) => {
+  return (dispatch) => {
+    deleteAdditionalGrade(id);
   };
 };
 

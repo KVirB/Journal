@@ -11,6 +11,8 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@ag-grid-enterprise/all-modules": "^27.3.0",
+    "@ag-grid-enterprise/core": "^29.3.5",
     "@ag-grid-enterprise/menu": "^29.2.0",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
@@ -19,7 +21,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "ag-grid-community": "^29.2.0",
+    "ag-grid-community": "^29.3.5",
     "ag-grid-react": "^29.2.0",
     "axios": "^0.24.0",
     "bootstrap": "^5.1.3",

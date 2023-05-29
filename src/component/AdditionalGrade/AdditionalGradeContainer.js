@@ -6,6 +6,7 @@ import {
   getTypeGradeThunk,
   getAdditionalGradeAdd,
   getAdditionalGradeEdit,
+  getAdditionalGradeDelete,
 } from "../../reducer/additionalGradeReducer";
 import { getStudentsThunk } from "../../reducer/statisticsReducer";
 
@@ -13,7 +14,9 @@ class managementPageContainer extends React.Component {
   componentDidMount() {
     this.props.getAdditionalGradeThunk(
       localStorage.getItem("groupName"),
-      localStorage.getItem("disciplineId")
+      localStorage.getItem("disciplineId"),
+      0,
+      null
     );
     this.props.getStudentsThunk(localStorage.getItem("groupName"));
     this.props.getTypeGradeThunk();
@@ -32,6 +35,7 @@ class managementPageContainer extends React.Component {
           getAdditionalGradeAdd={this.props.getAdditionalGradeAdd}
           isLoad={this.props.isLoad}
           getAdditionalGradeEdit={this.props.getAdditionalGradeEdit}
+          getAdditionalGradeDelete={this.props.getAdditionalGradeDelete}
         />
       </div>
     );
@@ -52,4 +56,5 @@ export default connect(mapStateToProps, {
   getTypeGradeThunk,
   getAdditionalGradeAdd,
   getAdditionalGradeEdit,
+  getAdditionalGradeDelete,
 })(managementPageContainer);

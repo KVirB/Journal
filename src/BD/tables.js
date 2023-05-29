@@ -449,10 +449,10 @@ export const getThemeHeader = (idHeader) => {
     });
 };
 
-export const getAdditionalGrade = (group, discipline_id) => {
+export const getAdditionalGrade = (group, discipline_id, student_id, date) => {
   return baseRout
     .get(
-      `electronicjournal/student-contents/groupAndDiscipline?group=${group}&disciplineId=${discipline_id}`
+      `electronicjournal/student-contents/groupAndDiscipline?group=${group}&disciplineId=${discipline_id}&studentId=${student_id}&date=${date}`
     )
     .then((response) => {
       return response.data;
@@ -490,7 +490,9 @@ export const postAdditionalGrade = (
     .finally(
       getAdditionalGrade(
         localStorage.getItem("groupName"),
-        localStorage.getItem("disciplineId")
+        localStorage.getItem("disciplineId"),
+        0,
+        null
       )
     );
 };
@@ -502,6 +504,14 @@ export const patchAdditionalGrade = (id, field, value) => {
   console.log(editAdditional);
   return baseRout
     .patch(`electronicjournal/student-contents/${id}`, editAdditional)
+    .then((response) => {
+      return response.data;
+    });
+};
+
+export const deleteAdditionalGrade = (id) => {
+  return baseRout
+    .delete(`electronicjournal/student-contents/${id}`)
     .then((response) => {
       return response.data;
     });
