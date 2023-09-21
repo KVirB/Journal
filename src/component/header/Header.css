@@ -74,6 +74,7 @@
   padding: 25px 0;
   color: #ffffff;
   text-align: center;
+  cursor: pointer;
 }
 .special-name {
   font-family: "Roboto", sans-serif;
@@ -458,6 +459,7 @@ input[type="submit"].button-header:disabled {
   font-size: 22px;
   line-height: 27px;
   text-align: center;
+  cursor: pointer;
 }
 .j_name-600 {
   text-decoration: none;
@@ -2375,5 +2377,24 @@ input[type="submit"].button-header:disabled {
   height: 55px;
 }
 .reset_sort_button:hover {
+  background-color: #353f57;
+}
+.button_additional_grade {
+  cursor: pointer;
+  border: 1px;
+  background: #434c63;
+  border-radius: 7px;
+  width: 113px;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 18px;
+  color: #ffffff;
+  margin-top: 72px;
+  margin-left: 30px;
+  text-decoration: none;
+  padding: 10px;
+}
+.button_additional_grade:hover {
   background-color: #353f57;
 }

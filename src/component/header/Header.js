@@ -309,7 +309,7 @@ class Header extends React.Component {
                   defaultValue={{ value: "disciplines", label: "Дисциплина" }}
                   options={this.props.discipline.map((m, i) => ({
                     value: m.id,
-                    label: m.name,
+                    label: m.name + "(" + m.department.name + ")",
                   }))}
                 />
               </div>

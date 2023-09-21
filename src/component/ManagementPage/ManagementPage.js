@@ -64,6 +64,7 @@ const ManagementPage = (props) => {
 
   return (
     <div className="disp">
+      {console.log(teachers, "teach")}
       <div className="burger_combine">
         <BurgerButtonMain></BurgerButtonMain>
       </div>

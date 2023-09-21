@@ -416,12 +416,14 @@ export const patchTeacherContacts = (
   mobile_phone_number,
   iternal_number,
   email,
+  description,
   idFromSource
 ) => {
   let body = {
     email: email,
     phoneNumber: mobile_phone_number,
     internalPhoneNumber: iternal_number,
+    description: description,
   };
   return baseRout
     .patch(`electronicjournal/teachers/edit/${idFromSource}`, body)

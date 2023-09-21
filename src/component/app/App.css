@@ -1159,6 +1159,26 @@ p.clip {
   .button-header {
     width: 213px;
   }
+  .block_for_button {
+    flex-wrap: wrap;
+    justify-content: normal;
+  }
+  .cmyNjn {
+    margin-left: 45px !important;
+    width: 300px !important;
+  }
+  .cmyNjn > .wrapper {
+    width: 300px !important;
+  }
+}
+@media (max-width: 806px) {
+  .block_for_button {
+    height: 164px;
+    display: block;
+  }
+  .cmyNjn {
+    margin-top: 10px !important;
+  }
 }
 @media (max-width: 800px) {
   .input_subgroup_for_marksTable {
@@ -1205,6 +1225,14 @@ p.clip {
   }
   .all-content {
     padding-left: 30px;
+  }
+  .department_sort_block {
+    justify-content: normal;
+    flex-wrap: wrap;
+  }
+  .block_select_dropdown_department {
+    padding-right: 0;
+    padding-left: 20px;
   }
 }
 
@@ -1307,6 +1335,22 @@ p.clip {
   }
   .combine_main {
     width: calc(100%-92px);
+  }
+  .block_with_labels_for_length {
+    display: none;
+  }
+}
+@media (max-width: 684px) {
+  .block_select_dropdown_department {
+    padding-top: 20px;
+    padding-left: 45px;
+  }
+  .department_sort_block {
+    display: block;
+    height: 120px;
+  }
+  .teachers_name_for_sort_block {
+    padding-top: 20px;
   }
 }
 @media (max-width: 630px) {
@@ -1421,6 +1465,15 @@ p.clip {
   }
 }
 @media (max-width: 480px) {
+  .department_sort_block {
+    width: 100vw;
+  }
+  .block_for_button {
+    width: 100vw;
+  }
+  .management_page_block {
+    margin-top: 170px;
+  }
   .teacher_photo_button {
     top: 727px;
     width: 420px;
@@ -1799,6 +1852,12 @@ p.clip {
   }
 }
 @media (max-width: 360px) {
+  .pagination {
+    gap: 6px;
+  }
+  .pagination_block {
+    margin-left: 15px;
+  }
   .special-select {
     width: 180px;
   }

@@ -21,6 +21,7 @@ export default class TeacherProfile extends React.Component {
     internal: null,
     email: null,
     disabledButtonSave: true,
+    description: null,
   };
 
   componentDidMount() {
@@ -39,7 +40,9 @@ export default class TeacherProfile extends React.Component {
       );
     }
   }
-
+  getInputValueDescription = (e) => {
+    this.setState({ description: e.target.value });
+  };
   getInputValueMobile = (e) => {
     this.setState({
       mobile: e.target.value,
@@ -90,16 +93,23 @@ export default class TeacherProfile extends React.Component {
           </div>
           <div className="disp all_blocks_teacher_profile">
             <div className="left_block_teacher_profile">
-              <div className="teacher_block disp">
-                <div className="teacher_photo_block disp">
-                  <TeacherPhoto
-                    teacherProf={this.props.teacherProf}
-                    getTeacherProfileThunk={this.props.getTeacherProfileThunk}
-                    setProfileImageThunk={this.props.setProfileImageThunk}
-                  ></TeacherPhoto>
+              {this.props.teacherProf === undefined ? (
+                <div className="lds-ellipsis">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
                 </div>
-                <div className="block_name_with_info">
-                  {this.props.teacherProf !== undefined ? (
+              ) : (
+                <div className="teacher_block disp">
+                  <div className="teacher_photo_block disp">
+                    <TeacherPhoto
+                      teacherProf={this.props.teacherProf}
+                      getTeacherProfileThunk={this.props.getTeacherProfileThunk}
+                      setProfileImageThunk={this.props.setProfileImageThunk}
+                    ></TeacherPhoto>
+                  </div>
+                  <div className="block_name_with_info">
                     <input
                       disabled
                       key={this.props.teacherProf.id}
@@ -112,54 +122,83 @@ export default class TeacherProfile extends React.Component {
                         this.props.teacherProf.patronymic.split("(")[0]
                       }
                     ></input>
-                  ) : (
-                    <></>
-                  )}
 
-                  <div className="teacher_info">
-                    <textarea
-                      className="input_teacher_info"
-                      defaultValue="Coming soon!!!"
-                    ></textarea>
-                    <button
-                      className="button_teacher_info_save"
-                      onClick={() =>
-                        this.props.patchTeacherContactsThunk(
-                          this.state.internal,
-                          this.state.mobile,
-                          this.state.email
-                        )
-                      }
-                    >
-                      Сохранить
-                    </button>
-                    <button className="button_teacher_info_unsave">
-                      Отмена
-                    </button>
+                    <div className="teacher_info">
+                      <textarea
+                        className="input_teacher_info"
+                        defaultValue={
+                          this.state.description === "Поле для заметок"
+                            ? this.state.description
+                            : this.props.teacherProf.description
+                        }
+                        onChange={(e) => {
+                          this.getInputValueDescription(e);
+                        }}
+                      ></textarea>
+                      <button
+                        className="button_teacher_info_save"
+                        onClick={() =>
+                          this.props.patchTeacherContactsThunk(
+                            this.state.internal,
+                            this.state.mobile,
+                            this.state.email,
+                            this.state.description,
+                            JSON.parse(localStorage.getItem("user"))
+                              .id_from_source
+                          )
+                        }
+                      >
+                        Сохранить
+                      </button>
+                      <button
+                        className="button_teacher_info_unsave"
+                        onClick={() => {
+                          this.props.patchTeacherContactsThunk(
+                            this.state.internal,
+                            this.state.mobile,
+                            this.state.email,
+                            "",
+                            JSON.parse(localStorage.getItem("user"))
+                              .id_from_source
+                          );
+                          window.location.reload();
+                        }}
+                      >
+                        Удалить
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
               <div className="contacts_block">
                 <div className="block_name_contacts">
                   <p className="name_contacts">Контакты преподавателя</p>
                 </div>
-                <div className="block_of_contacts disp">
-                  {/* <div className="disp"> */}
-                  <div>
-                    <p className="department_name">Кафедра:</p>
-                    {this.props.teacherProf !== undefined ? (
-                      <p className="block_of_department_name">
-                        {this.props.teacherProf.department !== null
-                          ? this.props.teacherProf.department.displayName
-                          : "Нет данных"}
-                      </p>
-                    ) : (
-                      <></>
-                    )}
+                {this.props.teacherProf === undefined ? (
+                  <div className="lds-ellipsis">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                   </div>
-                  <div>
-                    <p className="email_name">Электронная почта:</p>
-                    {this.props.teacherProf !== undefined ? (
+                ) : (
+                  <div className="block_of_contacts disp">
+                    <div>
+                      <p className="department_name">Кафедра:</p>
+                      {this.props.teacherProf !== undefined ? (
+                        <p className="block_of_department_name">
+                          {this.props.teacherProf.department !== null
+                            ? this.props.teacherProf.department.displayName
+                            : "Нет данных"}
+                        </p>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+
+                    <div>
+                      <p className="email_name">Электронная почта:</p>
+
                       <InputMask
                         disabled={
                           this.props.teacherProf.idFromSource !==
@@ -180,15 +219,10 @@ export default class TeacherProfile extends React.Component {
                           this.getInputValueEmail(e);
                         }}
                       />
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                  {/* </div> */}
-                  {/* <div className="disp"> */}
-                  <div>
-                    <p className="interior_tel">Внутр.тел.:</p>
-                    {this.props.teacherProf !== undefined ? (
+                    </div>
+                    <div>
+                      <p className="interior_tel">Внутр.тел.:</p>
+
                       <InputMask
                         disabled={
                           this.props.teacherProf.idFromSource !==
@@ -209,13 +243,10 @@ export default class TeacherProfile extends React.Component {
                           this.getInputValueInternal(e);
                         }}
                       />
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                  <div>
-                    <p className="mobile_tel">Телефон:</p>
-                    {this.props.teacherProf !== undefined ? (
+                    </div>
+                    <div>
+                      <p className="mobile_tel">Телефон:</p>
+
                       <InputMask
                         disabled={
                           this.props.teacherProf.idFromSource !==
@@ -236,27 +267,26 @@ export default class TeacherProfile extends React.Component {
                           this.getInputValueMobile(e);
                         }}
                       />
-                    ) : (
-                      <></>
-                    )}
+                    </div>
+                    <button
+                      disabled={this.state.disabledButtonSave}
+                      className="button_contacts_save"
+                      onClick={() => {
+                        this.props.patchTeacherContactsThunk(
+                          this.state.mobile,
+                          this.state.internal,
+                          this.state.email,
+                          this.state.description,
+                          JSON.parse(localStorage.getItem("user"))
+                            .id_from_source
+                        );
+                        this.setState({ disabledButtonSave: true });
+                      }}
+                    >
+                      Сохранить
+                    </button>
                   </div>
-                  <button
-                    disabled={this.state.disabledButtonSave}
-                    className="button_contacts_save"
-                    onClick={() => {
-                      this.props.patchTeacherContactsThunk(
-                        this.state.mobile,
-                        this.state.internal,
-                        this.state.email,
-                        JSON.parse(localStorage.getItem("user")).id_from_source
-                      );
-                      this.setState({ disabledButtonSave: true });
-                    }}
-                  >
-                    Сохранить
-                  </button>
-                  {/* </div> */}
-                </div>
+                )}
               </div>
             </div>
             <div className="right_block_teacher_profile">
