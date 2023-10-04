@@ -96,7 +96,11 @@ export class marksTableHeader extends React.Component {
               <Link
                 id="link_additional"
                 className="button_additional_grade"
+<<<<<<< HEAD
                 to="/additional_grade"
+=======
+                to="/electronicaljournal-view/additional_grade"
+>>>>>>> 1e094d9ce7bfce3f43b1f12ad8ae59fe72d2b84e
               >
                 Дополнительно
               </Link>
