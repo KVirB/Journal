@@ -238,7 +238,7 @@ class Header extends React.Component {
   };
 
   Logout = () => {
-    window.location.assign("/electronicaljournal-view");
+    window.location.assign("/");
   };
   openModal = () => {
     this.setState({
@@ -309,7 +309,7 @@ class Header extends React.Component {
                   defaultValue={{ value: "disciplines", label: "Дисциплина" }}
                   options={this.props.discipline.map((m, i) => ({
                     value: m.id,
-                    label: m.name,
+                    label: m.name + "(" + m.department.name + ")",
                   }))}
                 />
               </div>
@@ -405,7 +405,7 @@ class Header extends React.Component {
                       : {}
                   }
                   className="load_journal"
-                  to="/electronicaljournal-view/journal"
+                  to="/journal"
                 >
                   Загрузить журнал
                 </Link>

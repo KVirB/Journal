@@ -89,13 +89,18 @@ export class marksTableHeader extends React.Component {
                 })();
               }}
             />
-            <Link
-              id="link_additional"
-              className="button-header bt_color"
-              to="/electronicaljournal-view/additional_grade"
-            >
-              Дополнительно
-            </Link>
+
+            {JSON.parse(localStorage.getItem("idSourse")) !== null ? (
+              <></>
+            ) : (
+              <Link
+                id="link_additional"
+                className="button_additional_grade"
+                to="/additional_grade"
+              >
+                Дополнительно
+              </Link>
+            )}
           </div>
         </div>
       );

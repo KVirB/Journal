@@ -31,13 +31,13 @@ function Login(props) {
           ? navigate(
               location.state
                 ? location.state?.from
-                : `/electronicaljournal-view/teacher_profile`,
+                : `/teacher_profile`,
               { replace: true }
             )
           : navigate(
               location.state
                 ? location.state?.from
-                : `/electronicaljournal-view/management_page`,
+                : `/management_page`,
               { replace: true }
             )
       );
@@ -59,7 +59,7 @@ function Login(props) {
         localStorage.setItem("user", JSON.stringify(data));
         reset();
         signIn(data, () =>
-          navigate(`/electronicaljournal-view`, {
+          navigate(`/`, {
             replace: true,
           })
         );

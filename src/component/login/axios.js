@@ -1,7 +1,7 @@
 import { create } from "axios";
 
 const http = create({
-  baseURL: "http://192.168.11.252:8082/authorization",
+  baseURL: "https://ebook.vstu.by/authorization",
   headers: {
     Authorization:
       "Basic VlNUVV9FTEVDVFJPTklDSk9VUk5BTF9DTElFTlQ6VlNUVV9FTEVDVFJPTklDSk9VUk5BTF9DTElFTlQ=",

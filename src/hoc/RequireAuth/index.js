@@ -17,14 +17,14 @@ export default function RequireAuth({ children, role }) {
     }
     if (user) {
       if (stateRole === 0) {
-        navigate("/electronicaljournal-view/teacher_profile");
+        navigate("/teacher_profile");
       }
     }
   });
   if (!user) {
     return (
       <Navigate
-        to="/electronicaljournal-view"
+        to="/"
         state={{ from: location }}
         replace
       />
@@ -34,7 +34,7 @@ export default function RequireAuth({ children, role }) {
   // if (user) {
   //   user.roles.forEach((element) => {
   //     if (!role.some(() => checkRole(element, role))) {
-  //       navigate("/electronicaljournal-view/teacher_profile");
+  //       navigate("/teacher_profile");
   //       console.log(role.indexOf(element), element);
   //     }
   //   });

@@ -42,7 +42,7 @@ class UnSaveDataModal extends React.Component {
               // disabled={this.props.disabled}
               className="bt_savechanges_modal_unsave"
               onClick={() => {
-                window.location.assign(`/electronicaljournal-view/journal`);
+                window.location.assign(`/journal`);
               }}
             >
               Вернуться к изменениям

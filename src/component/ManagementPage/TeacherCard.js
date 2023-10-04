@@ -18,7 +18,7 @@ export default function TeacherCard({ teacher, getTeacherProfileThunk }) {
       <div className="teacher_card_info_link_block">
         <Link
           className="teacher_card_info_link"
-          to="/electronicaljournal-view/teacher_profile"
+          to="/teacher_profile"
           //   onClick={() => localStorage.setItem("idSourse", teacher.idFromSource)}
           onClick={() => {
             localStorage.setItem("idSourse", teacher.idFromSource);

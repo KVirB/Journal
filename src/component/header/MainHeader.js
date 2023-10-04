@@ -31,7 +31,7 @@ function MainHeader(props) {
     localStorage.removeItem("user");
     props.clearTeachersManagement();
     props.clearTeacherProf();
-    signOut(() => navigate("/electronicaljournal-view", { replace: true }));
+    signOut(() => navigate("/", { replace: true }));
   };
   var prevScrollpos = window.pageYOffset;
   window.onscroll = function () {
@@ -66,11 +66,11 @@ function MainHeader(props) {
     <div className="main_header">
       <div className="journal_name_header" id="journal_name_header">
         <h1 className="journal-name-600">
-          {/* <Link className="j_name-600" to="/electronicaljournal-view"> */}
+          {/* <Link className="j_name-600" to="/"> */}
           <div
             className="j_name-600"
             onClick={() => {
-              window.location.href = "/electronicaljournal-view";
+              window.location.href = "/";
             }}
           >
             Электронный журнал преподавателя УО «ВГТУ»
@@ -88,18 +88,18 @@ function MainHeader(props) {
       >
         <div className="disp journal-name-block">
           <h1 className="journal-name">
-            {/* <Link className="j_name" to="/electronicaljournal-view">
+            {/* <Link className="j_name" to="/">
               Электронный журнал преподавателя УО «ВГТУ»
             </Link> */}
             <div
               className="j_name"
               onClick={() => {
-                window.location.href = "/electronicaljournal-view";
+                window.location.href = "/";
               }}
             >
               Электронный журнал преподавателя УО «ВГТУ»
             </div>
-            {/* <a className="j_name" href="/electronicaljournal-view">
+            {/* <a className="j_name" href="/">
               Электронный журнал преподавателя УО «ВГТУ»
             </a> */}
           </h1>
@@ -109,7 +109,7 @@ function MainHeader(props) {
           <div className="disp">
             {localStorage.getItem("user") !== null ? (
               <div className="icons_col">
-                {/* <Link to="/electronicaljournal-view"> */}
+                {/* <Link to="/"> */}
                 <img src={col} alt="description"></img>
                 {/* </Link> */}
               </div>
@@ -125,9 +125,9 @@ function MainHeader(props) {
                     src={
                       props.teacherIcon !== undefined &&
                       props.teacherIcon.imageName !== null
-                        ? "http://192.168.11.252:8008/images/" +
+                        ? "/images/" +
                           props.teacherIcon.imageName
-                        : "http://192.168.11.252:8008/images/none.jpg"
+                        : "/images/none.jpg"
                     }
                     alt="description"
                   ></img>

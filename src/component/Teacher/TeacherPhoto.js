@@ -43,18 +43,18 @@ const TeacherPhoto = (props) => {
             url !== null
               ? url
               : props.teacherProf !== undefined
-              ? "http://192.168.11.252:8008/images/" +
+              ? "/images/" +
                 props.teacherProf.imageName
               : // +
                 // "?v" +
                 // Math.floor(Math.random() * 10001)
-                "http://192.168.11.252:8008/images/none.jpg"
+                "/images/none.jpg"
             // ?v
             // +
             //   Math.floor(Math.random() * 10001)
           }
           onError={({ currentTarget }) => {
-            currentTarget.src = "http://192.168.11.252:8008/images/none.jpg";
+            currentTarget.src = "/images/none.jpg";
             // ?v
             // +
             // Math.floor(Math.random() * 10001);

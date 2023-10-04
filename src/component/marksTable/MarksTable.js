@@ -140,41 +140,50 @@ export default class MarksTable extends React.Component {
                           <label className="dzs wrap_selects">Дата</label>
                           <label className="fios">ФИО</label>
                         </th>
-                        {item.journalHeaders.map((header, i) => (
-                          <th className="line-data container_with_date" key={i}>
-                            <div className="">
-                              <p className="day_mount">
-                                {header.dateOfLesson !== null
-                                  ? header.dateOfLesson.split("-")[2]
-                                  : "No date"}
-                                .
-                                {header.dateOfLesson !== null
-                                  ? header.dateOfLesson.split("-")[1]
-                                  : false}
-                                <br />
-                              </p>
-                              <p className="year">
-                                {header.dateOfLesson !== null
-                                  ? header.dateOfLesson.split("-")[0]
-                                  : false}
-                              </p>
-                              <p className="day_mount">
-                                {this.state.lessonHours[header.hoursCount]}
-                              </p>
-                            </div>
-                            <button
-                              className="edit_title"
-                              onClick={() => {
-                                this.openModal();
-                                this.idHeaderEdit(header.id);
-                                // this.props.getThemeHeaderThunk(header.id);
-                              }}
+                        {item.journalHeaders
+                          .sort(
+                            (a, b) =>
+                              new Date(a.dateOfLesson) -
+                              new Date(b.dateOfLesson)
+                          )
+                          .map((header, i) => (
+                            <th
+                              className="line-data container_with_date"
+                              key={i}
                             >
-                              <Edit className="Edit"></Edit>
-                              <EditWhite className="EditWhite"></EditWhite>
-                            </button>
-                          </th>
-                        ))}
+                              <div className="">
+                                <p className="day_mount">
+                                  {header.dateOfLesson !== null
+                                    ? header.dateOfLesson.split("-")[2]
+                                    : "No date"}
+                                  .
+                                  {header.dateOfLesson !== null
+                                    ? header.dateOfLesson.split("-")[1]
+                                    : false}
+                                  <br />
+                                </p>
+                                <p className="year">
+                                  {header.dateOfLesson !== null
+                                    ? header.dateOfLesson.split("-")[0]
+                                    : false}
+                                </p>
+                                <p className="day_mount">
+                                  {this.state.lessonHours[header.hoursCount]}
+                                </p>
+                              </div>
+                              <button
+                                className="edit_title"
+                                onClick={() => {
+                                  this.openModal();
+                                  this.idHeaderEdit(header.id);
+                                  // this.props.getThemeHeaderThunk(header.id);
+                                }}
+                              >
+                                <Edit className="Edit"></Edit>
+                                <EditWhite className="EditWhite"></EditWhite>
+                              </button>
+                            </th>
+                          ))}
                       </tr>
                     );
                   })}

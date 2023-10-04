@@ -74,6 +74,7 @@
   padding: 25px 0;
   color: #ffffff;
   text-align: center;
+  cursor: pointer;
 }
 .special-name {
   font-family: "Roboto", sans-serif;
@@ -458,6 +459,7 @@ input[type="submit"].button-header:disabled {
   font-size: 22px;
   line-height: 27px;
   text-align: center;
+  cursor: pointer;
 }
 .j_name-600 {
   text-decoration: none;
@@ -1977,7 +1979,7 @@ input[type="submit"].button-header:disabled {
 .link_myjournal {
   display: none;
 }
-.cmyNjn {
+/* .cmyNjn {
   width: 400px !important;
   margin-top: 40px !important;
   margin-right: 56px !important;
@@ -2025,23 +2027,58 @@ input[type="submit"].button-header:disabled {
 }
 .cmyNjn > .wrapper:hover {
   box-shadow: none !important;
-}
+} */
 .content_management_page {
   min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
 }
-.hCpHso > ul > li > .eWFcRu {
+/* .hCpHso > ul > li > .eWFcRu {
   display: none !important;
 }
 .fDbOPw > input {
   height: 49px;
 }
+.wrapper {
+  z-index: auto !important;
+} */
+
 .burger_button_block {
   position: fixed;
 }
-.wrapper {
-  z-index: auto !important;
+.reactSearchDiv ul {
+  padding: 0 !important;
+  background-color: white;
+  border: 1px solid #ebebeb;
+  border-radius: 7px;
+  margin-top: 20px !important;
+}
+.reactSearchDiv div.line {
+  border: none !important;
+  padding: 0 !important;
+}
+.reactSearchDiv svg ul > li {
+  display: none;
+}
+.reactSearchDiv {
+  width: 400px;
+  margin-top: 40px;
+  margin-right: 56px;
+  border: 1px solid #ebebeb;
+  height: 49px;
+  border-radius: 7px;
+}
+.reactSearchDiv ul > li {
+  padding: 0 !important;
+  cursor: pointer !important;
+  height: 51px;
+}
+.reactSearchDiv ul > li > svg {
+  display: none;
+}
+.reactSearchDiv > div .wrapper {
+  border: none;
+  background: none;
 }
 .upper_div_dropdown_department {
   width: 200px;
@@ -2375,5 +2412,24 @@ input[type="submit"].button-header:disabled {
   height: 55px;
 }
 .reset_sort_button:hover {
+  background-color: #353f57;
+}
+.button_additional_grade {
+  cursor: pointer;
+  border: 1px;
+  background: #434c63;
+  border-radius: 7px;
+  width: 113px;
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 18px;
+  color: #ffffff;
+  margin-top: 72px;
+  margin-left: 30px;
+  text-decoration: none;
+  padding: 10px;
+}
+.button_additional_grade:hover {
   background-color: #353f57;
 }

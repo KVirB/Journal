@@ -15,7 +15,8 @@ import { useAuth } from "../hooks/useAuth";
 //   });
 // }
 const defaultOptionsGetImage = {
-  baseURL: "http://192.168.11.252:8084/",
+  //  baseURL: "http://192.168.11.252:8084/",
+  baseURL: "https://ebook.vstu.by/journal/api/",
   headers: {
     "Content-Type": false,
     // "Cache-Control": "no-cache, no-store, must-revalidate",
@@ -33,7 +34,8 @@ baseRoutGetImage.interceptors.request.use(function (config) {
 });
 
 const defaultOptions = {
-  baseURL: "http://192.168.11.252:8082/",
+  //  baseURL: "http://192.168.11.252:8082/",
+  baseURL: "https://ebook.vstu.by/journal/api/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -52,7 +54,7 @@ export const getExcelFaculty = (facultyId, firstDate, secondDate, role) => {
     baseRout
       // utils/myExcel?groupName=& period=2022-03-21and...
       .request({
-        url: `electronicjournal/utils/mySecondExcel?cathedraName=${facultyId}&period=${firstDate}and${secondDate}&role=${role}`,
+        url: `utils/mySecondExcel?cathedraName=${facultyId}&period=${firstDate}and${secondDate}&role=${role}`,
         method: "GET",
         responseType: "blob",
       })
@@ -68,7 +70,7 @@ export const getExcelFaculty = (facultyId, firstDate, secondDate, role) => {
       })
       .catch((error) => {
         if (error.response.status === 500) {
-          getExcel(facultyId);
+          getExcel(facultyId, firstDate, secondDate, role);
         } else {
           alert("Упс, что-то пошло не так :(" + error.response.status);
         }
@@ -79,7 +81,7 @@ export const getExcelFaculty = (facultyId, firstDate, secondDate, role) => {
 export const getExcel = (groupsId, firstDate, secondDate, role) => {
   return baseRout
     .request({
-      url: `electronicjournal/utils/myExcel?groupName=${groupsId}&period=${firstDate}and${secondDate}&role=${role}`,
+      url: `utils/myExcel?groupName=${groupsId}&period=${firstDate}and${secondDate}&role=${role}`,
       method: "GET",
       responseType: "blob",
     })
@@ -103,11 +105,9 @@ export const getExcel = (groupsId, firstDate, secondDate, role) => {
 };
 
 export const getFacultys = () => {
-  return baseRout
-    .get(`electronicjournal/departments/search?q=`)
-    .then((response) => {
-      return response.data;
-    });
+  return baseRout.get(`departments/search?q=`).then((response) => {
+    return response.data;
+  });
 };
 
 export const getStudentsStatisticByPeriod = (
@@ -117,7 +117,7 @@ export const getStudentsStatisticByPeriod = (
 ) => {
   return baseRout
     .get(
-      `electronicjournal/journal-headers/getAcademicPerformance?q=student.id==${studentId};dateOfLesson==${firstDate}and${secondDate}`
+      `journal-headers/getAcademicPerformance?q=student.id==${studentId};dateOfLesson==${firstDate}and${secondDate}`
     )
     .then((response) => {
       return response.data;
@@ -126,7 +126,7 @@ export const getStudentsStatisticByPeriod = (
 
 export const getStudents = (groupsId) => {
   return baseRout
-    .get(`electronicjournal/students/searchByGroup?q=group.name==${groupsId}`)
+    .get(`students/searchByGroup?q=group.name==${groupsId}`)
     .then((response) => {
       return response.data;
     });
@@ -135,7 +135,7 @@ export const getStudents = (groupsId) => {
 export const getGeneralStatistics = (groupsId, disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/getAcademicPerformanceByGroupAndDicsipline?q=discipline.id==${disciplineId};group.name==${groupsId}`
+      `journal-sites/getAcademicPerformanceByGroupAndDicsipline?q=discipline.id==${disciplineId};group.name==${groupsId}`
     )
     .then((response) => {
       return response.data;
@@ -145,7 +145,7 @@ export const getGeneralStatistics = (groupsId, disciplineId) => {
 export const getGeneralGroupStatistics = (groupsId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/getAcademicPerformanceByGroupAndDicsipline?q=group.name==${groupsId}`
+      `journal-sites/getAcademicPerformanceByGroupAndDicsipline?q=group.name==${groupsId}`
     )
     .then((response) => {
       return response.data;
@@ -155,7 +155,7 @@ export const getGeneralGroupStatistics = (groupsId) => {
 export const getDisciplineByStudentStatistic = (disciplineId, studentId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/getAcademicPerformanceByDisciplineAndStudent?q=discipline.id==${disciplineId};student.id==${studentId}`
+      `journal-sites/getAcademicPerformanceByDisciplineAndStudent?q=discipline.id==${disciplineId};student.id==${studentId}`
     )
     .then((response) => {
       return response.data;
@@ -163,29 +163,25 @@ export const getDisciplineByStudentStatistic = (disciplineId, studentId) => {
 };
 
 export const getMarks = () => {
-  return baseRout.get("electronicjournal/marks").then((response) => {
+  return baseRout.get("marks").then((response) => {
     return response.data;
   });
 };
 export const getDataLesson = () => {
-  return baseRout
-    .get("electronicjournal/journal-headers/search?q")
-    .then((response) => {
-      return response.data;
-    });
+  return baseRout.get("journal-headers/search?q").then((response) => {
+    return response.data;
+  });
 };
 export const getFio = () => {
-  return baseRout
-    .get("electronicjournal/students/search?q")
-    .then((response) => {
-      return response.data;
-    });
+  return baseRout.get("students/search?q").then((response) => {
+    return response.data;
+  });
 };
 
 export const getDiscipline = () => {
   return baseRout
     .get(
-      `electronicjournal/disciplines/searchDisciplinesByTeacher?q=teacher.idFromSource==${
+      `disciplines/searchDisciplinesByTeacher?q=teacher.idFromSource==${
         localStorage.getItem("idSourse") === null
           ? JSON.parse(localStorage.getItem("user")).id_from_source
           : localStorage.getItem("idSourse")
@@ -205,11 +201,9 @@ export const getDiscipline = () => {
     });
 };
 export const getTypeClass = () => {
-  return baseRout
-    .get("electronicjournal/type-classes/search?q")
-    .then((response) => {
-      return response.data;
-    });
+  return baseRout.get("type-classes/search?q").then((response) => {
+    return response.data;
+  });
 };
 export const getCourseSpec = (groupId) => {
   return baseRout
@@ -219,16 +213,14 @@ export const getCourseSpec = (groupId) => {
     });
 };
 export const getSubGroup = () => {
-  return baseRout
-    .get(`electronicjournal/sub_groups/search?q=`)
-    .then((response) => {
-      return response.data;
-    });
+  return baseRout.get(`sub_groups/search?q=`).then((response) => {
+    return response.data;
+  });
 };
 export const getGroup = (disciplineId) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/searchByTeacherAndDiscipline?q=discipline.id==${disciplineId};teacher.idFromSource==${
+      `journal-sites/searchByTeacherAndDiscipline?q=discipline.id==${disciplineId};teacher.idFromSource==${
         localStorage.getItem("idSourse") === null
           ? JSON.parse(localStorage.getItem("user")).id_from_source
           : localStorage.getItem("idSourse")
@@ -239,18 +231,14 @@ export const getGroup = (disciplineId) => {
     });
 };
 export const getGroups = (role) => {
-  return baseRout
-    .get(`electronicjournal/groups/search?role=${role}&q=`)
-    .then((response) => {
-      return response.data;
-    });
+  return baseRout.get(`groups/search?role=${role}&q=`).then((response) => {
+    return response.data;
+  });
 };
 
 export const getDisciplinesStatistic = (groupsId) => {
   return baseRout
-    .get(
-      `electronicjournal/disciplines/searchDisciplinesByTeacher?q=group.name==${groupsId}`
-    )
+    .get(`disciplines/searchDisciplinesByTeacher?q=group.name==${groupsId}`)
     .then((response) => {
       return response.data;
     });
@@ -258,7 +246,7 @@ export const getDisciplinesStatistic = (groupsId) => {
 
 export const getTeachersManagements = () => {
   return baseRout
-    .get(`electronicjournal/teachers/search?q=`)
+    .get(`teachers/search?q=`)
     .then((response) => {
       return response.data;
     })
@@ -277,9 +265,7 @@ export const getTeachersManagements = () => {
 };
 export const getTeacherManagementByDepartment = (department_id) => {
   return baseRout
-    .get(
-      `electronicjournal/teachers/search?q=department.idFromSource==${department_id}`
-    )
+    .get(`teachers/search?q=department.idFromSource==${department_id}`)
     .then((response) => {
       return response.data;
     });
@@ -299,7 +285,7 @@ export const getTeacherManagementByDepartment = (department_id) => {
 
 export const getTeacherManagementById = (id) => {
   return baseRout
-    .get(`electronicjournal/teachers/search?q=idFromSource==${id}`)
+    .get(`teachers/search?q=idFromSource==${id}`)
     .then((response) => {
       return response.data;
     })
@@ -321,13 +307,13 @@ export const getTeacherProfile = (idFromSource) => {
   return (
     baseRout
       // .get(
-      //   `electronicjournal/teachers/search?q=idFromSource==${
+      //   `teachers/search?q=idFromSource==${
       //     localStorage.getItem("idSourse") === null
       //       ? JSON.parse(localStorage.getItem("user")).id_from_source
       //       : localStorage.getItem("idSourse")
       //   }`
       // )
-      .get(`electronicjournal/teachers/search?q=idFromSource==${idFromSource}`)
+      .get(`teachers/search?q=idFromSource==${idFromSource}`)
       .then((response) => {
         return response.data;
       })
@@ -345,7 +331,7 @@ export const getTeacherProfile = (idFromSource) => {
 export const getJournalsite = (disciplineId, groupId, typeClass, subGroup) => {
   return baseRout
     .get(
-      `electronicjournal/journal-sites/filter?teacher_idFromSource=${
+      `journal-sites/filter?teacher_idFromSource=${
         localStorage.getItem("idSourse") === null
           ? JSON.parse(localStorage.getItem("user")).id_from_source
           : localStorage.getItem("idSourse")
@@ -357,9 +343,7 @@ export const getJournalsite = (disciplineId, groupId, typeClass, subGroup) => {
 };
 export const getTeacher = (surname, teacherId) => {
   return baseRout
-    .get(
-      `electronicjournal/teachers/search?q=surname==${surname};id==${teacherId}`
-    )
+    .get(`teachers/search?q=surname==${surname};id==${teacherId}`)
     .then((response) => {
       return response.data;
     });
@@ -375,7 +359,7 @@ export const patchJournalsite = async (bodyItems) => {
     };
     return baseRout
       .patch(
-        `electronicjournal/journal-headers/${m.id}/content`,
+        `journal-headers/${m.id}/content`,
         JSON.stringify(m.content),
         requestOptions
       )
@@ -389,7 +373,7 @@ export const patchJournalsite = async (bodyItems) => {
         console.log(number, "resp");
         console.log(bodyItems.length, "leng");
         if (bodyItems.length === number) {
-          window.location.href = "/electronicaljournal-view/teacher_profile";
+          window.location.href = "/teacher_profile";
         }
       });
   });
@@ -416,15 +400,17 @@ export const patchTeacherContacts = (
   mobile_phone_number,
   iternal_number,
   email,
+  description,
   idFromSource
 ) => {
   let body = {
     email: email,
     phoneNumber: mobile_phone_number,
     internalPhoneNumber: iternal_number,
+    description: description,
   };
   return baseRout
-    .patch(`electronicjournal/teachers/edit/${idFromSource}`, body)
+    .patch(`teachers/edit/${idFromSource}`, body)
     .then((response) => {
       return response.data;
     });
@@ -435,24 +421,22 @@ export const patchThemeHeader = (idFromSource, theme) => {
     discription: theme,
   };
   return baseRout
-    .patch(`electronicjournal/journal-headers/${idFromSource}`, body)
+    .patch(`journal-headers/${idFromSource}`, body)
     .then((response) => {
       return response.data;
     });
 };
 
 export const getThemeHeader = (idHeader) => {
-  return baseRout
-    .get(`electronicjournal/journal-headers/${idHeader}`)
-    .then((response) => {
-      return response.data;
-    });
+  return baseRout.get(`journal-headers/${idHeader}`).then((response) => {
+    return response.data;
+  });
 };
 
 export const getAdditionalGrade = (group, discipline_id, student_id, date) => {
   return baseRout
     .get(
-      `electronicjournal/student-contents/groupAndDiscipline?group=${group}&disciplineId=${discipline_id}&studentId=${student_id}&date=${date}`
+      `student-contents/groupAndDiscipline?group=${group}&disciplineId=${discipline_id}&studentId=${student_id}&date=${date}`
     )
     .then((response) => {
       return response.data;
@@ -460,11 +444,9 @@ export const getAdditionalGrade = (group, discipline_id, student_id, date) => {
 };
 
 export const getTypeGrade = () => {
-  return baseRout
-    .get(`/electronicjournal/type-grades/search?q=`)
-    .then((response) => {
-      return response.data;
-    });
+  return baseRout.get(`/type-grades/search?q=`).then((response) => {
+    return response.data;
+  });
 };
 export const postAdditionalGrade = (
   student,
@@ -483,7 +465,7 @@ export const postAdditionalGrade = (
     grade: grade,
   };
   return baseRout
-    .post(`electronicjournal/student-contents`, additionalGrade)
+    .post(`student-contents`, additionalGrade)
     .then((response) => {
       return response.data;
     })
@@ -503,16 +485,14 @@ export const patchAdditionalGrade = (id, field, value) => {
   };
   console.log(editAdditional);
   return baseRout
-    .patch(`electronicjournal/student-contents/${id}`, editAdditional)
+    .patch(`student-contents/${id}`, editAdditional)
     .then((response) => {
       return response.data;
     });
 };
 
 export const deleteAdditionalGrade = (id) => {
-  return baseRout
-    .delete(`electronicjournal/student-contents/${id}`)
-    .then((response) => {
-      return response.data;
-    });
+  return baseRout.delete(`student-contents/${id}`).then((response) => {
+    return response.data;
+  });
 };

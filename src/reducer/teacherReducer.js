@@ -3,6 +3,7 @@ import {
   postProfileImage,
   patchTeacherContacts,
 } from "../BD/tables";
+import { getTeacherProfileThunk } from "./managementReducer";
 
 const SET_TEACHER = "SET_TEACHER";
 const CLEAR_TEACHER = "CLEAR_TEACHER";
@@ -51,6 +52,7 @@ export const patchTeacherContactsThunk = (
   mobile_phone_number,
   iternal_number,
   email,
+  description,
   idFromSource
 ) => {
   return (dispatch) => {
@@ -58,6 +60,7 @@ export const patchTeacherContactsThunk = (
       mobile_phone_number,
       iternal_number,
       email,
+      description,
       idFromSource
     );
   };

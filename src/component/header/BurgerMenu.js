@@ -94,7 +94,7 @@ export default class BurgerMenu extends React.Component {
                 </div>
                 <Link
                   className="home_item"
-                  to="/electronicaljournal-view/journal"
+                  to="/journal"
                 >
                   Главная
                 </Link>
@@ -155,7 +155,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/statistics"
+                    to="/statistics"
                   >
                     Группы по дисциплине
                   </Link>
@@ -163,7 +163,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/studentbydiscipline"
+                    to="/studentbydiscipline"
                   >
                     Студента по дисциплине
                   </Link>
@@ -171,7 +171,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/studentstatistic"
+                    to="/studentstatistic"
                   >
                     Студента по периоду
                   </Link>
@@ -179,7 +179,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/generalgroupstatistic"
+                    to="/generalgroupstatistic"
                   >
                     Общая статистика по группе
                   </Link>
@@ -187,7 +187,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
+                    to="/facultystatistic"
                   >
                     Статистика по факультету
                   </Link>
@@ -195,7 +195,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/statistics"
+                    to="/statistics"
                   >
                     Группы по дисциплине
                   </Link>
@@ -203,7 +203,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/studentbydiscipline"
+                    to="/studentbydiscipline"
                   >
                     Студента по дисциплине
                   </Link>
@@ -211,7 +211,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/studentstatistic"
+                    to="/studentstatistic"
                   >
                     Студента по периоду
                   </Link>
@@ -219,7 +219,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/generalgroupstatistic"
+                    to="/generalgroupstatistic"
                   >
                     Общая статистика по группе
                   </Link>
@@ -227,7 +227,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
+                    to="/facultystatistic"
                   >
                     Статистика по факультету
                   </Link>
@@ -235,7 +235,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/statistics"
+                    to="/statistics"
                   >
                     Группы по дисциплине
                   </Link>
@@ -243,7 +243,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/studentbydiscipline"
+                    to="/studentbydiscipline"
                   >
                     Студента по дисциплине
                   </Link>
@@ -251,7 +251,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/studentstatistic"
+                    to="/studentstatistic"
                   >
                     Студента по периоду
                   </Link>
@@ -259,7 +259,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/generalgroupstatistic"
+                    to="/generalgroupstatistic"
                   >
                     Общая статистика по группе
                   </Link>
@@ -267,7 +267,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
+                    to="/facultystatistic"
                   >
                     Статистика по факультету
                   </Link>
@@ -275,7 +275,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
+                    to="/facultystatistic"
                   >
                     Статистика по факультету
                   </Link>
@@ -283,7 +283,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
+                    to="/facultystatistic"
                   >
                     Статистика по факультету
                   </Link>
@@ -291,7 +291,7 @@ export default class BurgerMenu extends React.Component {
                 <div className="menu_container" hidden={this.state.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
+                    to="/facultystatistic"
                   >
                     RK
                   </Link>

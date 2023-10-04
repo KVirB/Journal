@@ -39,7 +39,7 @@ export default class BurgerMenuMain extends React.Component {
                     className="bt_main_page"
                     // onClick={() => {
                     //   window.location.href =
-                    //     "/electronicaljournal-view/teacher_profile";
+                    //     "/teacher_profile";
                     // }}
                     onClick={() => {
                       document.getElementById("home_item").click();
@@ -52,7 +52,7 @@ export default class BurgerMenuMain extends React.Component {
                 <Link
                   id="home_item"
                   className="home_item"
-                  to="/electronicaljournal-view"
+                  to="/"
                 >
                   Главная
                 </Link>
@@ -113,7 +113,7 @@ export default class BurgerMenuMain extends React.Component {
                 <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/statistics"
+                    to="/statistics"
                   >
                     Группы по дисциплине
                   </Link>
@@ -121,7 +121,7 @@ export default class BurgerMenuMain extends React.Component {
                 <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/studentbydiscipline"
+                    to="/studentbydiscipline"
                   >
                     Студента по дисциплине
                   </Link>
@@ -129,7 +129,7 @@ export default class BurgerMenuMain extends React.Component {
                 <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/studentstatistic"
+                    to="/studentstatistic"
                   >
                     Студента по периоду
                   </Link>
@@ -137,7 +137,7 @@ export default class BurgerMenuMain extends React.Component {
                 <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/generalgroupstatistic"
+                    to="/generalgroupstatistic"
                   >
                     Общая статистика по группе
                   </Link>
@@ -145,7 +145,7 @@ export default class BurgerMenuMain extends React.Component {
                 <div className="menu_container" hidden={this.props.stats}>
                   <Link
                     className="item_stat"
-                    to="/electronicaljournal-view/facultystatistic"
+                    to="/facultystatistic"
                   >
                     Статистика по кафедре
                   </Link>
@@ -162,7 +162,7 @@ export default class BurgerMenuMain extends React.Component {
                   <Guide className="guide_white"></Guide>
                 </button>
               </div>
-              <Link className="guide_item" to="/electronicaljournal-view/guide">
+              <Link className="guide_item" to="/guide">
                 Руководство пользователя
               </Link>
             </div>

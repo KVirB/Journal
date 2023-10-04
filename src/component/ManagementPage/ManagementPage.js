@@ -64,6 +64,7 @@ const ManagementPage = (props) => {
 
   return (
     <div className="disp">
+      {console.log(teachers, "teach")}
       <div className="burger_combine">
         <BurgerButtonMain></BurgerButtonMain>
       </div>
@@ -87,7 +88,7 @@ const ManagementPage = (props) => {
             <Link
               id="link_myjournal"
               className="link_myjournal"
-              to="/electronicaljournal-view/teacher_profile"
+              to="/teacher_profile"
             >
               Мои журналы
             </Link>
@@ -176,9 +177,9 @@ const ManagementPage = (props) => {
                       className="teacher_card_picture"
                       src={
                         teacher !== undefined && teacher.imageName !== null
-                          ? "http://192.168.11.252:8008/images/" +
+                          ? "/images/" +
                             teacher.imageName
-                          : "http://192.168.11.252:8008/images/none.jpg"
+                          : "/images/none.jpg"
                         // +
                         // "?v"
                         // +
