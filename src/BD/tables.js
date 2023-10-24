@@ -418,7 +418,7 @@ export const patchTeacherContacts = (
 
 export const patchThemeHeader = (idFromSource, theme) => {
   let body = {
-    discription: theme,
+    classTopic: theme,
   };
   return baseRout
     .patch(`journal-headers/${idFromSource}`, body)

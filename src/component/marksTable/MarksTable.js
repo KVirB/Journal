@@ -121,7 +121,7 @@ export default class MarksTable extends React.Component {
             closeModal={this.closeModal}
             patchThemeHeaderThunk={this.props.patchThemeHeaderThunk}
             idHeader={this.state.idHeader}
-            themeHeader={this.props.themeHeader.discription}
+            themeHeader={this.props.themeHeader.classTopic}
           ></ModalEdit>
           <div
             className="headHr"
@@ -176,7 +176,7 @@ export default class MarksTable extends React.Component {
                                 onClick={() => {
                                   this.openModal();
                                   this.idHeaderEdit(header.id);
-                                  // this.props.getThemeHeaderThunk(header.id);
+                                  this.props.getThemeHeaderThunk(header.id);
                                 }}
                               >
                                 <Edit className="Edit"></Edit>
