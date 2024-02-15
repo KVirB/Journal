@@ -318,10 +318,7 @@ export default class TeacherProfile extends React.Component {
                     </p>
                   </div>
                   <div className="block_link_prompt">
-                    <Link
-                      className="link_prompt"
-                      to="/prompt_user"
-                    >
+                    <Link className="link_prompt" to="/prompt_user">
                       Руководство пользователя
                     </Link>
                   </div>

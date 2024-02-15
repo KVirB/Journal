@@ -35,6 +35,7 @@ const TeacherPhoto = (props) => {
   return (
     <>
       <div className="teacher_photo">
+        {console.log(props.teacherProf, "img")}
         <img
           key={key}
           alt="teacher_photo"
@@ -42,7 +43,8 @@ const TeacherPhoto = (props) => {
           src={
             url !== null
               ? url
-              : props.teacherProf !== undefined
+              : props.teacherProf !== undefined &&
+                props.teacherProf.imageName !== null
               ? "/images/" + props.teacherProf.imageName
               : // +
                 // "?v" +

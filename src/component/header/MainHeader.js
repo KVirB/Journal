@@ -122,13 +122,12 @@ function MainHeader(props) {
                 <div>
                   <img
                     className="profile_pic"
-                    // src={
-                    //   props.teacherIcon !== undefined &&
-                    //   props.teacherIcon.imageName !== null
-                    //     ? "/images/" +
-                    //       props.teacherIcon.imageName
-                    //     : "/images/none.jpg"
-                    // }
+                    src={
+                      props.teacherIcon !== undefined &&
+                      props.teacherIcon.imageName !== null
+                        ? "/images/" + props.teacherIcon.imageName
+                        : "/images/none.jpg"
+                    }
                     alt="description"
                   ></img>
                 </div>
