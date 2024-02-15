@@ -175,16 +175,16 @@ const ManagementPage = (props) => {
                     <img
                       alt=""
                       className="teacher_card_picture"
-                      src={
-                        teacher !== undefined && teacher.imageName !== null
-                          ? "/images/" +
-                            teacher.imageName
-                          : "/images/none.jpg"
-                        // +
-                        // "?v"
-                        // +
-                        // Math.floor(Math.random() * 10001)
-                      }
+                      // src={
+                      //   teacher !== undefined && teacher.imageName !== null
+                      //     ? "/images/" +
+                      //       teacher.imageName
+                      //     : "/images/none.jpg"
+                      //   // +
+                      //   // "?v"
+                      //   // +
+                      //   // Math.floor(Math.random() * 10001)
+                      // }
                     />
                     <TeacherCard
                       teacher={teacher}

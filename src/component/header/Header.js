@@ -64,7 +64,7 @@ class Header extends React.Component {
           this.openModal();
         }
         this.props.clearJournalsite();
-        this.props.getCourseSpecThunk(this.state.groupId);
+        // this.props.getCourseSpecThunk(this.state.groupId);
         this.props.clearTypeClass();
       })();
     }
@@ -226,7 +226,7 @@ class Header extends React.Component {
     this.props.clearGroup();
     this.props.getDisciplineThunk();
     if (localStorage.getItem("groupId") !== null) {
-      this.props.getCourseSpecThunk(localStorage.getItem("groupId"));
+      // this.props.getCourseSpecThunk(localStorage.getItem("groupId"));
     }
     if (localStorage.getItem("journalsite") !== null) {
       this.openModal();
@@ -303,13 +303,18 @@ class Header extends React.Component {
             <div className="wrap_selects">
               <div>
                 <div className="discipline-name">Название дисциплины</div>
+                {console.log(this.props.discipline)}
                 <Select
                   className="discipline-select"
                   onChange={(e) => getValueDiscipline(e.value, e.label)}
                   defaultValue={{ value: "disciplines", label: "Дисциплина" }}
                   options={this.props.discipline.map((m, i) => ({
                     value: m.id,
-                    label: m.name + "(" + m.department.name + ")",
+                    label:
+                      m.name +
+                      (m.department === null
+                        ? ""
+                        : " (" + m.department.name + ")"),
                   }))}
                 />
               </div>

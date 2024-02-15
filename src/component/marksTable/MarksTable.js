@@ -193,7 +193,7 @@ export default class MarksTable extends React.Component {
                 <tbody className="students_name_tbody sticky_left">
                   {this.props.journalsite.map((item) =>
                     item.journalHeaders.map((header, k) => {
-                      if (k === 0) {
+                      if (k === item.journalHeaders.length - 1) {
                         return header.journalContents.map((content, j) => (
                           <tr key={j} className="container_student">
                             <th

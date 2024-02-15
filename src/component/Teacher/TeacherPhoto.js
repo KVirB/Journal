@@ -43,8 +43,7 @@ const TeacherPhoto = (props) => {
             url !== null
               ? url
               : props.teacherProf !== undefined
-              ? "/images/" +
-                props.teacherProf.imageName
+              ? "/images/" + props.teacherProf.imageName
               : // +
                 // "?v" +
                 // Math.floor(Math.random() * 10001)
@@ -54,7 +53,7 @@ const TeacherPhoto = (props) => {
             //   Math.floor(Math.random() * 10001)
           }
           onError={({ currentTarget }) => {
-            currentTarget.src = "/images/none.jpg";
+            // currentTarget.src = "/images/none.jpg";
             // ?v
             // +
             // Math.floor(Math.random() * 10001);
